@@ -15,5 +15,9 @@
   "dependencies": {
     "request": "2.40.0",
     "deep-extend": "0.2.11"
-  }
+  },
+  "license": [{
+    "type": "MIT",
+    "url": "https://github.com/benweier/battlenet-api/blob/master/LICENSE"
+  }]
 }
