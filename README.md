@@ -37,7 +37,9 @@ Each API method will take `region` as one of its required parameters. The possib
 ##### Achievement
 
 **Required Parameters**
+
 `region` the region of the achievment.
+
 `id` the unique achievement ID.
 
 **Example Usage**
@@ -50,8 +52,11 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 ##### Profile
 
 **Required Parameters**
+
 `region` the region of the character.
+
 `realm` the slugified realm of the character. See Realm Status for more info.
+
 `name` the name of the character.
 
 **Example Usage**
