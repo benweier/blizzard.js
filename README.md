@@ -297,3 +297,17 @@ bnet.wow.character.audit({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
     console.log(body);
 });
 ```
+
+#### Aggregate
+
+Returns the specified character fields aggregated in a single request.
+
+*Parameters*
+`fields` an array of one or more character fields.
+
+*Usage*
+```javascript
+bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, function(err, resp, body) {
+    console.log(body);
+});
+```
