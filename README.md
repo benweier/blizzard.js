@@ -303,6 +303,7 @@ bnet.wow.character.audit({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
 Returns the specified character fields aggregated in a single request.
 
 *Parameters*
+
 `fields` an array of one or more character fields.
 
 *Usage*
