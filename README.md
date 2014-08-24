@@ -1,10 +1,23 @@
-#battlenet-api
+# Battle.net API
 
 A Node JS wrapper for the Battle.net API
 
+# Install
+
+Add `battlenet-api` to your application's `package.json` file and run:
+
+```
+npm install
+```
+
+Alternatively:
+```
+npm install battlenet-api --save
+```
+
 # How to use
 
-Simply `require()` the Battle.net API in your application:
+Simply `require()` the Battle.net API within your application:
 
 ```javascript
 var bnet = require('battlenet-api');
@@ -30,17 +43,17 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-Each API method will take `region` as one of its required parameters. The possible values are `us`, `eu`, `kr`, `tw`.
+Each API method will take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`.
 
 ### Achievement
 
-**Required Parameters**
+**Parameters**
 
 `region` the region of the achievment.
 
 `id` the unique achievement ID.
 
-**Example Usage**
+**Usage**
 ```javascript
 bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
     console.log(body);
@@ -51,7 +64,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 
 #### Profile
 
-**Required Parameters**
+**Parameters**
 
 `region` the region of the character.
 
@@ -59,7 +72,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 
 `name` the name of the character.
 
-**Example Usage**
+**Usage**
 ```javascript
 bnet.wow.character.profile({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
     console.log(body);
