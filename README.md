@@ -37,10 +37,45 @@ Each API method receives a parameters object for the request, and a callback fun
 
 ## Overview
 
-World of Warcraft | Starcraft 2 | Diablo 3
------------------ | ----------- | ----------
-Achievement
-Character | Coming Soon | Coming Soon
+### World of Warcraft
+
+* Achievement
+* Auction
+* Battle Pet
+  * Ability
+  * Species
+  * Stats
+* Challenge
+  * Realm Leaderboard
+  * Region Leaderboard
+* Character
+  * Profile
+  * Achievements
+  * Appearance
+  * Guild
+  * Hunter Pets
+  * Items
+  * Mounts
+  * Pets
+  * Pet Slots
+  * Progression
+  * PVP
+  * Quests
+  * Reputation
+  * Stats
+  * Talents
+  * Titles
+  * Audit
+* Guild
+* Item
+  * Item
+  * Item Set
+* PVP
+  * Leaderboard
+* Quest
+* Realm Status
+* Recipe
+* Spell
 
 ## World of Warcraft
 
@@ -54,13 +89,12 @@ Each API method will take `region` as one of its parameters. The possible values
 
 ### Achievement
 
-**Parameters**
-
+*Parameters*
 `region` the region of the achievment.
 
 `id` the unique achievement ID.
 
-**Usage**
+*Usage*
 ```javascript
 bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
     console.log(body);
@@ -69,19 +103,197 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 
 ### Character
 
-#### Profile
-
-**Parameters**
+All character requests require the following parameters:
 
 `region` the region of the character.
 
-`realm` the slugified realm of the character. See Realm Status for more info.
+`realm` the slugified realm of the character.
 
 `name` the name of the character.
 
-**Usage**
+#### Profile
+
+Returns basic profile data about the character.
+
+*Usage*
 ```javascript
 bnet.wow.character.profile({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Achievements
+
+Returns the achievement data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.achievements({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Appearance
+
+Returns the appearance data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.appearance({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Guild
+
+Returns the guild data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.guild({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Hunter Pets
+
+Returns the hunter pet data of the character (where applicable).
+
+*Usage*
+```javascript
+bnet.wow.character.hunterPets({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Items
+
+Returns the item data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.items({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Mounts
+
+Returns the mount data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.mounts({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Pets
+
+Returns the pet data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.pets({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Pet Slots
+
+Returns the pet slots data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.petSlots({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Progression
+
+Returns the progression data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.progression({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### PVP
+
+Returns the PVP data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.pvp({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Quests
+
+Returns the quest data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.quests({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Reputation
+
+Returns the reputation data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.reputation({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Stats
+
+Returns the statistics data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.stats({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Talents
+
+Returns the talent data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.talents({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Titles
+
+Returns the title data of the character.
+
+*Usage*
+```javascript
+bnet.wow.character.titles({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+#### Audit
+
+Returns an audit of the character's equipment.
+
+*Usage*
+```javascript
+bnet.wow.character.audit({region: 'us', realm: 'proudmoore', name: 'charni'}, function(err, resp, body) {
     console.log(body);
 });
 ```
