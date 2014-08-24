@@ -2,7 +2,7 @@
 
 A Node JS wrapper for the Battle.net API
 
-## How to use
+# How to use
 
 Simply `require()` the Battle.net API in your application:
 
@@ -16,13 +16,13 @@ And then access the API methods to request data:
 bnet.wow.character.profile(obj, callback);
 ```
 
-## Documentation
+# Documentation
 
 Each API method receives a parameters object for the request, and a callback function to execute once the request has completed. The available request parameters are explained for each method below.
 
 `callback` takes three arguments: `error`, `response`, and `body`.
 
-### World of Warcraft
+## World of Warcraft
 
 The World of Warcraft API methods are available through the `wow` object of the Battle.net API.
 
@@ -32,9 +32,7 @@ var wow = bnet.wow;
 
 Each API method will take `region` as one of its required parameters. The possible values are `us`, `eu`, `kr`, `tw`.
 
-#### Character
-
-##### Achievement
+### Achievement
 
 **Required Parameters**
 
@@ -49,7 +47,9 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 });
 ```
 
-##### Profile
+### Character
+
+#### Profile
 
 **Required Parameters**
 
