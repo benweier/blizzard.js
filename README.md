@@ -86,13 +86,13 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-Each API method will take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`.
+Each API method will take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
 
 <a name="achievement"></a>
 ### Achievement
 
 *Parameters*
-`region` the region of the achievment.
+`region` [`us`, `eu`, `kr`, `tw`]
 
 `id` the unique achievement ID.
 
@@ -103,12 +103,27 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 });
 ```
 
+<a name="achievement"></a>
+### Auction
+
+*Parameters*
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`realm` the slugified realm name.
+
+*Usage*
+```javascript
+bnet.wow.auction({region: 'us', realm: 'proudmoore'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
 <a name="character"></a>
 ### Character
 
 All character requests require the following parameters:
 
-`region` the region of the character.
+`region` [`us`, `eu`, `kr`, `tw`].
 
 `realm` the slugified realm of the character.
 
