@@ -40,7 +40,7 @@ Each API method receives a parameters object for the request, and a callback fun
 ### World of Warcraft
 
 * [Achievement](#achievement)
-* Auction
+* [Auction](#auction)
 * Battle Pet
   * Ability
   * Species
@@ -86,7 +86,7 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-Each API method will take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
+**ALL** API methods take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
 
 <a name="achievement"></a>
 ### Achievement
@@ -103,7 +103,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 });
 ```
 
-<a name="achievement"></a>
+<a name="auction"></a>
 ### Auction
 
 *Parameters*
@@ -114,6 +114,56 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 *Usage*
 ```javascript
 bnet.wow.auction({region: 'us', realm: 'proudmoore'}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+<a name="battlepet"></a>
+### Battle Pet
+
+<a name="battlepet-abilities"></a>
+#### Abilities
+
+*Parameters*
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique ID of the battle pet ability.
+
+*Usage*
+```javascript
+bnet.wow.battlepet.ability({region: 'us', id: 6}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+<a name="battlepet-species"></a>
+#### Species
+
+*Parameters*
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique ID of the battle pet species.
+
+*Usage*
+```javascript
+bnet.wow.battlepet.species({region: 'us', id: 6}, function(err, resp, body) {
+    console.log(body);
+});
+```
+
+<a name="battlepet-stats"></a>
+#### Stats
+
+*Parameters*
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique ID of the battle pet species.
+
+`fields` an object containing the battle pet's `level`, `breedId`, and `qualityId`
+
+*Usage*
+```javascript
+bnet.wow.battlepet.stats({ region: 'us', id: 6, fields: { level: 25, breedId: 5, qualityId: 4 } }, function(err, resp, body) {
     console.log(body);
 });
 ```
