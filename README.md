@@ -37,10 +37,10 @@ Each API method receives a parameters object for the request, and a callback fun
 
 ## Overview
 
-World of Warcraft | Starcraft 2 | Diablo III
+World of Warcraft | Starcraft 2 | Diablo 3
 ----------------- | ----------- | ----------
-* `Achievement` | Coming Soon | Coming Soon
-* `Character` |  |
+Achievement
+Character | Coming Soon | Coming Soon
 
 ## World of Warcraft
 
