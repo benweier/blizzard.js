@@ -39,7 +39,7 @@ Each API method receives a parameters object for the request, and a callback fun
 
 ### World of Warcraft
 
-* Achievement
+* [Achievement](#achievement)
 * Auction
 * Battle Pet
   * Ability
@@ -48,24 +48,25 @@ Each API method receives a parameters object for the request, and a callback fun
 * Challenge
   * Realm Leaderboard
   * Region Leaderboard
-* Character
-  * Profile
-  * Achievements
-  * Appearance
-  * Guild
-  * Hunter Pets
-  * Items
-  * Mounts
-  * Pets
-  * Pet Slots
-  * Progression
-  * PVP
-  * Quests
-  * Reputation
-  * Stats
-  * Talents
-  * Titles
-  * Audit
+* [Character](#character)
+  * [Profile](#character-profile)
+  * [Achievements](#character-achievements)
+  * [Appearance](#character-appearance)
+  * [Guild](#character-guild)
+  * [Hunter Pets](#character-hunterpets)
+  * [Items](#character-items)
+  * [Mounts](#character-mounts)
+  * [Pets](#character-pets)
+  * [Pet Slots](#character-petslots)
+  * [Progression](#character-progression)
+  * [PVP](#character-pvp)
+  * [Quests](#character-quests)
+  * [Reputation](#character-reputation)
+  * [Stats](#character-stats)
+  * [Talents](#character-talents)
+  * [Titles](#character-titles)
+  * [Audit](#character-audit)
+  * [Aggregate](@character-aggregate)
 * Guild
 * Item
   * Item
@@ -87,6 +88,7 @@ var wow = bnet.wow;
 
 Each API method will take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`.
 
+<a name="achievement"></a>
 ### Achievement
 
 *Parameters*
@@ -101,6 +103,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, function(err, resp, body) {
 });
 ```
 
+<a name="character"></a>
 ### Character
 
 All character requests require the following parameters:
@@ -111,6 +114,7 @@ All character requests require the following parameters:
 
 `name` the name of the character.
 
+<a name="character-profile"></a>
 #### Profile
 
 Returns basic profile data about the character.
@@ -122,6 +126,7 @@ bnet.wow.character.profile({region: 'us', realm: 'proudmoore', name: 'charni'}, 
 });
 ```
 
+<a name="character-achievements"></a>
 #### Achievements
 
 Returns the achievement data of the character.
@@ -133,6 +138,7 @@ bnet.wow.character.achievements({region: 'us', realm: 'proudmoore', name: 'charn
 });
 ```
 
+<a name="character-appearance"></a>
 #### Appearance
 
 Returns the appearance data of the character.
@@ -144,6 +150,7 @@ bnet.wow.character.appearance({region: 'us', realm: 'proudmoore', name: 'charni'
 });
 ```
 
+<a name="character-guild"></a>
 #### Guild
 
 Returns the guild data of the character.
@@ -155,6 +162,7 @@ bnet.wow.character.guild({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
 });
 ```
 
+<a name="character-hunterpets"></a>
 #### Hunter Pets
 
 Returns the hunter pet data of the character (where applicable).
@@ -166,6 +174,7 @@ bnet.wow.character.hunterPets({region: 'us', realm: 'proudmoore', name: 'charni'
 });
 ```
 
+<a name="character-items"></a>
 #### Items
 
 Returns the item data of the character.
@@ -177,6 +186,7 @@ bnet.wow.character.items({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
 });
 ```
 
+<a name="character-mounts"></a>
 #### Mounts
 
 Returns the mount data of the character.
@@ -188,6 +198,7 @@ bnet.wow.character.mounts({region: 'us', realm: 'proudmoore', name: 'charni'}, f
 });
 ```
 
+<a name="character-pets"></a>
 #### Pets
 
 Returns the pet data of the character.
@@ -199,6 +210,7 @@ bnet.wow.character.pets({region: 'us', realm: 'proudmoore', name: 'charni'}, fun
 });
 ```
 
+<a name="character-petslots"></a>
 #### Pet Slots
 
 Returns the pet slots data of the character.
@@ -210,6 +222,7 @@ bnet.wow.character.petSlots({region: 'us', realm: 'proudmoore', name: 'charni'},
 });
 ```
 
+<a name="character-progression"></a>
 #### Progression
 
 Returns the progression data of the character.
@@ -221,6 +234,7 @@ bnet.wow.character.progression({region: 'us', realm: 'proudmoore', name: 'charni
 });
 ```
 
+<a name="character-pvp"></a>
 #### PVP
 
 Returns the PVP data of the character.
@@ -232,6 +246,7 @@ bnet.wow.character.pvp({region: 'us', realm: 'proudmoore', name: 'charni'}, func
 });
 ```
 
+<a name="character-quests"></a>
 #### Quests
 
 Returns the quest data of the character.
@@ -243,6 +258,7 @@ bnet.wow.character.quests({region: 'us', realm: 'proudmoore', name: 'charni'}, f
 });
 ```
 
+<a name="character-reputation"></a>
 #### Reputation
 
 Returns the reputation data of the character.
@@ -254,6 +270,7 @@ bnet.wow.character.reputation({region: 'us', realm: 'proudmoore', name: 'charni'
 });
 ```
 
+<a name="character-stats"></a>
 #### Stats
 
 Returns the statistics data of the character.
@@ -265,6 +282,7 @@ bnet.wow.character.stats({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
 });
 ```
 
+<a name="character-talents"></a>
 #### Talents
 
 Returns the talent data of the character.
@@ -276,6 +294,7 @@ bnet.wow.character.talents({region: 'us', realm: 'proudmoore', name: 'charni'}, 
 });
 ```
 
+<a name="character-titles"></a>
 #### Titles
 
 Returns the title data of the character.
@@ -287,6 +306,7 @@ bnet.wow.character.titles({region: 'us', realm: 'proudmoore', name: 'charni'}, f
 });
 ```
 
+<a name="character-audit"></a>
 #### Audit
 
 Returns an audit of the character's equipment.
@@ -298,6 +318,7 @@ bnet.wow.character.audit({region: 'us', realm: 'proudmoore', name: 'charni'}, fu
 });
 ```
 
+<a name="character-aggregate"></a>
 #### Aggregate
 
 Returns the specified character fields aggregated in a single request.
