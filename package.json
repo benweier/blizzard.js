@@ -1,9 +1,10 @@
 {
-  "author": "Ben Weier <ben.weier@gmail.com>",
+  "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
   "name": "battlenet-api",
   "description": "A Node JS wrapper for the Battle.net API",
   "version": "0.1.0",
   "homepage": "https://github.com/benweier/battlenet-api",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/benweier/battlenet-api.git"
@@ -15,9 +16,5 @@
   "dependencies": {
     "request": "2.40.0",
     "deep-extend": "0.2.11"
-  },
-  "license": [{
-    "type": "MIT",
-    "url": "https://github.com/benweier/battlenet-api/blob/master/LICENSE"
-  }]
+  }
 }
