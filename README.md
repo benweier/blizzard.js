@@ -578,16 +578,18 @@ bnet.wow.quest({region: 'us', quest: 13146}, callback);
 
 `region` [`us`, `eu`, `kr`, `tw`].
 
-`fields` [optional] an array of one or more realms to limit
+`fields` [optional] an array of one or more realms to limit.
 
 *Usage*
 
 All realms
+
 ```javascript
 bnet.wow.realmstatus({region: 'us']}, callback);
 ```
 
 Selected realms
+
 ```javascript
 bnet.wow.realmstatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
 ```
@@ -599,9 +601,33 @@ bnet.wow.realmstatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 <a name="recipe"></a>
 ### Recipe
 
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique recipe id.
+
+*Usage*
+
+All realms
+```javascript
+bnet.wow.recipe({region: 'us', id: 33994]}, callback);
+```
+
 ---
 
 <a name="spell"></a>
 ### Spell
 
----
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique spell id.
+
+*Usage*
+
+All realms
+```javascript
+bnet.wow.spell({region: 'us', id: 8056]}, callback);
+```
