@@ -596,8 +596,6 @@ bnet.wow.realmstatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 
 ---
 
-#### Status
-
 <a name="recipe"></a>
 ### Recipe
 
