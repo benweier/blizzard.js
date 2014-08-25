@@ -96,10 +96,10 @@ var wow = bnet.wow;
 
 **ALL** API methods take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
 
+---
+
 <a name="achievement"></a>
 ### Achievement
-
----
 
 *Parameters*
 
@@ -113,10 +113,10 @@ var wow = bnet.wow;
 bnet.wow.achievement({region: 'us', id: 2144}, callback);
 ```
 
+---
+
 <a name="auction"></a>
 ### Auction
-
----
 
 *Parameters*
 
@@ -130,10 +130,10 @@ bnet.wow.achievement({region: 'us', id: 2144}, callback);
 bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 ```
 
+---
+
 <a name="battle-pet"></a>
 ### Battle Pet
-
----
 
 <a name="battle-pet-abilities"></a>
 #### Abilities
@@ -182,10 +182,10 @@ bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
 bnet.wow.battlepet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
 ```
 
+---
+
 <a name="challenge"></a>
 ### Challenge
-
----
 
 #### Realm Leaderboards
 
@@ -213,10 +213,10 @@ bnet.wow.challenge.realmLeaderboard({region: 'us', realm: 'proudmoore'}, callbac
 bnet.wow.challenge.regionLeaderboard({region: 'us'}, callback);
 ```
 
+---
+
 <a name="character"></a>
 ### Character
-
----
 
 All character requests require the following parameters:
 
@@ -428,16 +428,18 @@ Returns the specified character fields aggregated in a single request.
 bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
 ```
 
+---
+
 <a name="item"></a>
 ### Item
-
----
 
 #### Item
 
 Returns the item data of the specified item id.
 
 *Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique item id.
 
@@ -453,6 +455,8 @@ Returns the item set data of the specified set id.
 
 *Parameters*
 
+`region` [`us`, `eu`, `kr`, `tw`].
+
 `id` the unique item set id.
 
 *Usage*
@@ -460,3 +464,102 @@ Returns the item set data of the specified set id.
 ```javascript
 bnet.wow.item.item({region: 'us', id: 1060}, callback);
 ```
+
+---
+
+<a name="guild"></a>
+### Guild
+
+All guild requests require the following parameters:
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`realm` the slugified realm of the guild.
+
+`name` the name of the guild.
+
+<a name="guild-profile"></a>
+#### Profile
+
+Returns basic profile data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.profile({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+<a name="guild-members"></a>
+#### Members
+
+Returns the members data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.members({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+<a name="guild-achievements"></a>
+#### Achievements
+
+Returns the achievement data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.achievements({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+<a name="guild-news"></a>
+#### News
+
+Returns the news data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.news({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+<a name="guild-challenge"></a>
+#### Challenge
+
+Returns the challenge data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.challenge({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+---
+
+<a name="pvp"></a>
+### PVP
+
+#### Leaderboards
+
+---
+
+<a name="quest"></a>
+### Quest
+
+---
+
+<a name="realm-status"></a>
+### Realm Status
+
+---
+
+#### Status
+
+<a name="recipe"></a>
+### Recipe
+
+---
+
+<a name="spell"></a>
+### Spell
+
+---
