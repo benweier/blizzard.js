@@ -49,13 +49,13 @@ Each API method receives a parameters object for the request, and a callback fun
 
 * [Achievement](#achievement)
 * [Auction](#auction)
-* Battle Pet
-  * Ability
-  * Species
-  * Stats
-* Challenge
-  * Realm Leaderboard
-  * Region Leaderboard
+* [Battle Pet](#battle-pet)
+  * [Ability](#battle-pet-ability)
+  * [Species](#battle-pet-species)
+  * [Stats](#battle-pet-stats)
+* [Challenge](#challenge)
+  * [Realm Leaderboard](#challenge-realm-leaderboard)
+  * [Region Leaderboard](#challenge-region-leaderboard)
 * [Character](#character)
   * [Profile](#character-profile)
   * [Achievements](#character-achievements)
@@ -75,16 +75,16 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Titles](#character-titles)
   * [Audit](#character-audit)
   * [Aggregate](@character-aggregate)
-* Guild
-* Item
-  * Item
-  * Item Set
-* PVP
-  * Leaderboard
-* Quest
-* Realm Status
-* Recipe
-* Spell
+* [Guild](#guild)
+* [Item](#item)
+  * [Item](#item-item)
+  * [Item Set](#item-item-set)
+* [PVP](#pvp)
+  * [Leaderboard](#pvp-leaderboard)
+* [Quest](#quest)
+* [Realm Status](#realm-status)
+* [Recipe](#recipe)
+* [Spell](#spell)
 
 ## World of Warcraft
 
