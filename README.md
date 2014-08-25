@@ -540,15 +540,57 @@ bnet.wow.guild.challenge({region: 'us', realm: 'proudmoore', name: 'black wolf m
 
 #### Leaderboards
 
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`bracket` [`2v2`, `3v3`, `5v5`, `rbg`]
+
+*Usage*
+
+```javascript
+bnet.wow.pvp({region: 'us', bracket: '2v2'}, callback);
+```
+
 ---
 
 <a name="quest"></a>
 ### Quest
 
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`id` the unique quest id.
+
+*Usage*
+
+```javascript
+bnet.wow.quest({region: 'us', quest: 13146}, callback);
+```
+
 ---
 
 <a name="realm-status"></a>
 ### Realm Status
+
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`fields` [optional] an array of one or more realms to limit
+
+*Usage*
+
+All realms
+```javascript
+bnet.wow.realmstatus({region: 'us']}, callback);
+```
+
+Selected realms
+```javascript
+bnet.wow.realmstatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
+```
 
 ---
 
