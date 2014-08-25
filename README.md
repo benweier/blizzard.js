@@ -99,6 +99,8 @@ var wow = bnet.wow;
 <a name="achievement"></a>
 ### Achievement
 
+---
+
 *Parameters*
 
 `region` [`us`, `eu`, `kr`, `tw`]
@@ -114,6 +116,8 @@ bnet.wow.achievement({region: 'us', id: 2144}, callback);
 <a name="auction"></a>
 ### Auction
 
+---
+
 *Parameters*
 
 `region` [`us`, `eu`, `kr`, `tw`].
@@ -128,6 +132,8 @@ bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 
 <a name="battle-pet"></a>
 ### Battle Pet
+
+---
 
 <a name="battle-pet-abilities"></a>
 #### Abilities
@@ -179,6 +185,8 @@ bnet.wow.battlepet.stats({ region: 'us', id: 258, fields: { level: 25, breedId: 
 <a name="challenge"></a>
 ### Challenge
 
+---
+
 #### Realm Leaderboards
 
 *Parameters*
@@ -207,6 +215,8 @@ bnet.wow.challenge.regionLeaderboard({ region: 'us' }, callback);
 
 <a name="character"></a>
 ### Character
+
+---
 
 All character requests require the following parameters:
 
@@ -417,4 +427,3 @@ Returns the specified character fields aggregated in a single request.
 ```javascript
 bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
 ```
-
