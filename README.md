@@ -176,6 +176,35 @@ bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
 bnet.wow.battlepet.stats({ region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 } }, callback);
 ```
 
+<a name="challenge"></a>
+### Challenge
+
+#### Realm Leaderboards
+
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+`realm` the slugified realm name.
+
+*Usage*
+
+```javascript
+bnet.wow.challenge.realmLeaderboard({ region: 'us', realm: 'proudmoore' }, callback);
+```
+
+#### Region Leaderboards
+
+*Parameters*
+
+`region` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.challenge.regionLeaderboard({ region: 'us' }, callback);
+```
+
 <a name="character"></a>
 ### Character
 
