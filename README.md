@@ -126,10 +126,10 @@ bnet.wow.achievement({region: 'us', id: 2144}, callback);
 bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 ```
 
-<a name="battlepet"></a>
+<a name="battle-pet"></a>
 ### Battle Pet
 
-<a name="battlepet-abilities"></a>
+<a name="battle-pet-abilities"></a>
 #### Abilities
 
 *Parameters*
@@ -141,10 +141,10 @@ bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.ability({region: 'us', id: 6}, callback);
+bnet.wow.battlepet.ability({region: 'us', id: 640}, callback);
 ```
 
-<a name="battlepet-species"></a>
+<a name="battle-pet-species"></a>
 #### Species
 
 *Parameters*
@@ -156,10 +156,10 @@ bnet.wow.battlepet.ability({region: 'us', id: 6}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.species({region: 'us', id: 6}, callback);
+bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
 ```
 
-<a name="battlepet-stats"></a>
+<a name="battle-pet-stats"></a>
 #### Stats
 
 *Parameters*
@@ -173,7 +173,7 @@ bnet.wow.battlepet.species({region: 'us', id: 6}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.stats({ region: 'us', id: 6, fields: { level: 25, breedId: 5, qualityId: 4 } }, callback);
+bnet.wow.battlepet.stats({ region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 } }, callback);
 ```
 
 <a name="character"></a>
@@ -388,3 +388,4 @@ Returns the specified character fields aggregated in a single request.
 ```javascript
 bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
 ```
+
