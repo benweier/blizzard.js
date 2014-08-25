@@ -179,7 +179,7 @@ bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.stats({ region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 } }, callback);
+bnet.wow.battlepet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
 ```
 
 <a name="challenge"></a>
@@ -198,7 +198,7 @@ bnet.wow.battlepet.stats({ region: 'us', id: 258, fields: { level: 25, breedId: 
 *Usage*
 
 ```javascript
-bnet.wow.challenge.realmLeaderboard({ region: 'us', realm: 'proudmoore' }, callback);
+bnet.wow.challenge.realmLeaderboard({region: 'us', realm: 'proudmoore'}, callback);
 ```
 
 #### Region Leaderboards
@@ -210,7 +210,7 @@ bnet.wow.challenge.realmLeaderboard({ region: 'us', realm: 'proudmoore' }, callb
 *Usage*
 
 ```javascript
-bnet.wow.challenge.regionLeaderboard({ region: 'us' }, callback);
+bnet.wow.challenge.regionLeaderboard({region: 'us'}, callback);
 ```
 
 <a name="character"></a>
@@ -426,4 +426,37 @@ Returns the specified character fields aggregated in a single request.
 
 ```javascript
 bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
+```
+
+<a name="item"></a>
+### Item
+
+---
+
+#### Item
+
+Returns the item data of the specified item id.
+
+*Parameters*
+
+`id` the unique item id.
+
+*Usage*
+
+```javascript
+bnet.wow.item.item({region: 'us', id: 18803}, callback);
+```
+
+#### Item Set
+
+Returns the item set data of the specified set id.
+
+*Parameters*
+
+`id` the unique item set id.
+
+*Usage*
+
+```javascript
+bnet.wow.item.item({region: 'us', id: 1060}, callback);
 ```
