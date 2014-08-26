@@ -443,13 +443,13 @@ bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni',
 
 #### Item
 
-Returns the item data of the specified item id.
+Returns the item data of the specified item ID.
 
 *Parameters*
 
 `origin` [`us`, `eu`, `kr`, `tw`].
 
-`id` the unique item id.
+`id` the unique item ID.
 
 *Usage*
 
@@ -465,7 +465,7 @@ Returns the item set data of the specified set id.
 
 `origin` [`us`, `eu`, `kr`, `tw`].
 
-`id` the unique item set id.
+`id` the unique item set ID.
 
 *Usage*
 
@@ -569,7 +569,7 @@ bnet.wow.pvp({origin: 'us', bracket: '2v2'}, callback);
 
 `origin` [`us`, `eu`, `kr`, `tw`].
 
-`id` the unique quest id.
+`id` the unique quest ID.
 
 *Usage*
 
@@ -611,11 +611,10 @@ bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 
 `origin` [`us`, `eu`, `kr`, `tw`].
 
-`id` the unique recipe id.
+`id` the unique recipe ID.
 
 *Usage*
 
-All realms
 ```javascript
 bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
 ```
@@ -629,11 +628,10 @@ bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
 
 `origin` [`us`, `eu`, `kr`, `tw`].
 
-`id` the unique spell id.
+`id` the unique spell ID.
 
 *Usage*
 
-All realms
 ```javascript
 bnet.wow.spell({origin: 'us', id: 8056]}, callback);
 ```
@@ -652,3 +650,46 @@ var sc2 = bnet.sc2;
 **ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `sea`, `kr`, `tw`.
 
 ---
+
+<a name="spell"></a>
+### Profile
+
+All profile requests require the following parameters.
+
+`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
+
+`id` the unique player ID.
+
+`region` the player's region ID.
+
+`name` the player's profile name.
+
+#### Profile
+
+Returns basic profile data for the specified player.
+
+*Usage*
+
+```javascript
+bnet.sc2.profile.profile({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+```
+
+#### Ladders
+
+Returns ladder data for the specified player.
+
+*Usage*
+
+```javascript
+bnet.sc2.profile.ladders({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+```
+
+#### Match history
+
+Returns match history data for the specified player.
+
+*Usage*
+
+```javascript
+bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+```
