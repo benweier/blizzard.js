@@ -459,7 +459,7 @@ bnet.wow.item.item({origin: 'us', id: 18803}, callback);
 
 #### Item Set
 
-Returns the item set data of the specified set id.
+Returns the item set data of the specified set ID.
 
 *Parameters*
 
@@ -470,7 +470,7 @@ Returns the item set data of the specified set id.
 *Usage*
 
 ```javascript
-bnet.wow.item.item({origin: 'us', id: 1060}, callback);
+bnet.wow.item.set({origin: 'us', id: 1060}, callback);
 ```
 
 ---
