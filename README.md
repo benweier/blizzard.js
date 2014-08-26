@@ -147,7 +147,7 @@ bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.ability({region: 'us', id: 640}, callback);
+bnet.wow.battlePet.ability({region: 'us', id: 640}, callback);
 ```
 
 <a name="battle-pet-species"></a>
@@ -162,7 +162,7 @@ bnet.wow.battlepet.ability({region: 'us', id: 640}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
+bnet.wow.battlePet.species({region: 'us', id: 258}, callback);
 ```
 
 <a name="battle-pet-stats"></a>
@@ -179,7 +179,7 @@ bnet.wow.battlepet.species({region: 'us', id: 258}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlepet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
+bnet.wow.battlePet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
 ```
 
 ---
@@ -585,13 +585,13 @@ bnet.wow.quest({region: 'us', quest: 13146}, callback);
 All realms
 
 ```javascript
-bnet.wow.realmstatus({region: 'us']}, callback);
+bnet.wow.realmStatus({region: 'us']}, callback);
 ```
 
 Selected realms
 
 ```javascript
-bnet.wow.realmstatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
+bnet.wow.realmStatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
 ```
 
 ---
