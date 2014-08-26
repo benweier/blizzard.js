@@ -94,7 +94,7 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-**ALL** API methods take `region` as one of its parameters. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
+**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
 
 ---
 
@@ -103,7 +103,7 @@ var wow = bnet.wow;
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`]
+`origin` [`us`, `eu`, `kr`, `tw`]
 
 `id` the unique achievement ID.
 
@@ -120,7 +120,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `realm` the slugified realm name.
 
@@ -140,7 +140,7 @@ bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique ID of the battle pet ability.
 
@@ -155,7 +155,7 @@ bnet.wow.battlePet.ability({region: 'us', id: 640}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique ID of the battle pet species.
 
@@ -170,7 +170,7 @@ bnet.wow.battlePet.species({region: 'us', id: 258}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique ID of the battle pet species.
 
@@ -191,7 +191,7 @@ bnet.wow.battlePet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `realm` the slugified realm name.
 
@@ -205,7 +205,7 @@ bnet.wow.challenge.realmLeaderboard({region: 'us', realm: 'proudmoore'}, callbac
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -220,7 +220,7 @@ bnet.wow.challenge.regionLeaderboard({region: 'us'}, callback);
 
 All character requests require the following parameters:
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `realm` the slugified realm of the character.
 
@@ -439,7 +439,7 @@ Returns the item data of the specified item id.
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique item id.
 
@@ -455,7 +455,7 @@ Returns the item set data of the specified set id.
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique item set id.
 
@@ -472,7 +472,7 @@ bnet.wow.item.item({region: 'us', id: 1060}, callback);
 
 All guild requests require the following parameters:
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `realm` the slugified realm of the guild.
 
@@ -542,7 +542,7 @@ bnet.wow.guild.challenge({region: 'us', realm: 'proudmoore', name: 'black wolf m
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `bracket` [`2v2`, `3v3`, `5v5`, `rbg`]
 
@@ -559,7 +559,7 @@ bnet.wow.pvp({region: 'us', bracket: '2v2'}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique quest id.
 
@@ -576,7 +576,7 @@ bnet.wow.quest({region: 'us', quest: 13146}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `fields` [optional] an array of one or more realms to limit.
 
@@ -601,7 +601,7 @@ bnet.wow.realmStatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique recipe id.
 
@@ -619,7 +619,7 @@ bnet.wow.recipe({region: 'us', id: 33994]}, callback);
 
 *Parameters*
 
-`region` [`us`, `eu`, `kr`, `tw`].
+`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique spell id.
 
