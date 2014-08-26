@@ -110,7 +110,7 @@ var wow = bnet.wow;
 *Usage*
 
 ```javascript
-bnet.wow.achievement({region: 'us', id: 2144}, callback);
+bnet.wow.achievement({origin: 'us', id: 2144}, callback);
 ```
 
 ---
@@ -127,7 +127,7 @@ bnet.wow.achievement({region: 'us', id: 2144}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
+bnet.wow.auction({origin: 'us', realm: 'proudmoore'}, callback);
 ```
 
 ---
@@ -147,7 +147,7 @@ bnet.wow.auction({region: 'us', realm: 'proudmoore'}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlePet.ability({region: 'us', id: 640}, callback);
+bnet.wow.battlePet.ability({origin: 'us', id: 640}, callback);
 ```
 
 <a name="battle-pet-species"></a>
@@ -162,7 +162,7 @@ bnet.wow.battlePet.ability({region: 'us', id: 640}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlePet.species({region: 'us', id: 258}, callback);
+bnet.wow.battlePet.species({origin: 'us', id: 258}, callback);
 ```
 
 <a name="battle-pet-stats"></a>
@@ -179,7 +179,7 @@ bnet.wow.battlePet.species({region: 'us', id: 258}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.battlePet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
+bnet.wow.battlePet.stats({origin: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
 ```
 
 ---
@@ -198,7 +198,7 @@ bnet.wow.battlePet.stats({region: 'us', id: 258, fields: { level: 25, breedId: 5
 *Usage*
 
 ```javascript
-bnet.wow.challenge.realmLeaderboard({region: 'us', realm: 'proudmoore'}, callback);
+bnet.wow.challenge.realmLeaderboard({origin: 'us', realm: 'proudmoore'}, callback);
 ```
 
 #### Region Leaderboards
@@ -210,7 +210,7 @@ bnet.wow.challenge.realmLeaderboard({region: 'us', realm: 'proudmoore'}, callbac
 *Usage*
 
 ```javascript
-bnet.wow.challenge.regionLeaderboard({region: 'us'}, callback);
+bnet.wow.challenge.regionLeaderboard({origin: 'us'}, callback);
 ```
 
 ---
@@ -234,7 +234,7 @@ Returns basic profile data about the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.profile({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.profile({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-achievements"></a>
@@ -245,7 +245,7 @@ Returns the achievement data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.achievements({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.achievements({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-appearance"></a>
@@ -256,7 +256,7 @@ Returns the appearance data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.appearance({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.appearance({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-guild"></a>
@@ -267,7 +267,7 @@ Returns the guild data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.guild({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.guild({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-hunterpets"></a>
@@ -278,7 +278,7 @@ Returns the hunter pet data of the character (where applicable).
 *Usage*
 
 ```javascript
-bnet.wow.character.hunterPets({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.hunterPets({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-items"></a>
@@ -289,7 +289,7 @@ Returns the item data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.items({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.items({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-mounts"></a>
@@ -300,7 +300,7 @@ Returns the mount data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.mounts({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.mounts({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-pets"></a>
@@ -311,7 +311,7 @@ Returns the pet data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.pets({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.pets({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-petslots"></a>
@@ -322,7 +322,7 @@ Returns the pet slots data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.petSlots({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.petSlots({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-progression"></a>
@@ -333,7 +333,7 @@ Returns the progression data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.progression({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.progression({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-pvp"></a>
@@ -344,7 +344,7 @@ Returns the PVP data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.pvp({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.pvp({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-quests"></a>
@@ -355,7 +355,7 @@ Returns the quest data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.quests({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.quests({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-reputation"></a>
@@ -366,7 +366,7 @@ Returns the reputation data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.reputation({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.reputation({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-stats"></a>
@@ -377,7 +377,7 @@ Returns the statistics data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.stats({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.stats({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-talents"></a>
@@ -388,7 +388,7 @@ Returns the talent data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.talents({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.talents({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-titles"></a>
@@ -399,7 +399,7 @@ Returns the title data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.titles({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.titles({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-audit"></a>
@@ -410,7 +410,7 @@ Returns an audit of the character's equipment.
 *Usage*
 
 ```javascript
-bnet.wow.character.audit({region: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.audit({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="character-aggregate"></a>
@@ -425,7 +425,7 @@ Returns the specified character fields aggregated in a single request.
 *Usage*
 
 ```javascript
-bnet.wow.character.aggregate({region: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
+bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
 ```
 
 ---
@@ -446,7 +446,7 @@ Returns the item data of the specified item id.
 *Usage*
 
 ```javascript
-bnet.wow.item.item({region: 'us', id: 18803}, callback);
+bnet.wow.item.item({origin: 'us', id: 18803}, callback);
 ```
 
 #### Item Set
@@ -462,7 +462,7 @@ Returns the item set data of the specified set id.
 *Usage*
 
 ```javascript
-bnet.wow.item.item({region: 'us', id: 1060}, callback);
+bnet.wow.item.item({origin: 'us', id: 1060}, callback);
 ```
 
 ---
@@ -486,7 +486,7 @@ Returns basic profile data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.profile({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 <a name="guild-members"></a>
@@ -497,7 +497,7 @@ Returns the members data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.members({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.members({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 <a name="guild-achievements"></a>
@@ -508,7 +508,7 @@ Returns the achievement data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.achievements({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.achievements({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 <a name="guild-news"></a>
@@ -519,7 +519,7 @@ Returns the news data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.news({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.news({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 <a name="guild-challenge"></a>
@@ -530,7 +530,7 @@ Returns the challenge data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.challenge({region: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.challenge({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 ---
@@ -549,7 +549,7 @@ bnet.wow.guild.challenge({region: 'us', realm: 'proudmoore', name: 'black wolf m
 *Usage*
 
 ```javascript
-bnet.wow.pvp({region: 'us', bracket: '2v2'}, callback);
+bnet.wow.pvp({origin: 'us', bracket: '2v2'}, callback);
 ```
 
 ---
@@ -566,7 +566,7 @@ bnet.wow.pvp({region: 'us', bracket: '2v2'}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.quest({region: 'us', quest: 13146}, callback);
+bnet.wow.quest({origin: 'us', quest: 13146}, callback);
 ```
 
 ---
@@ -585,13 +585,13 @@ bnet.wow.quest({region: 'us', quest: 13146}, callback);
 All realms
 
 ```javascript
-bnet.wow.realmStatus({region: 'us']}, callback);
+bnet.wow.realmStatus({origin: 'us']}, callback);
 ```
 
 Selected realms
 
 ```javascript
-bnet.wow.realmStatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
+bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
 ```
 
 ---
@@ -609,7 +609,7 @@ bnet.wow.realmStatus({region: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 
 All realms
 ```javascript
-bnet.wow.recipe({region: 'us', id: 33994]}, callback);
+bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
 ```
 
 ---
@@ -627,5 +627,5 @@ bnet.wow.recipe({region: 'us', id: 33994]}, callback);
 
 All realms
 ```javascript
-bnet.wow.spell({region: 'us', id: 8056]}, callback);
+bnet.wow.spell({origin: 'us', id: 8056]}, callback);
 ```
