@@ -45,7 +45,7 @@ Each API method receives a parameters object for the request, and a callback fun
 
 ## Overview
 
-### World of Warcraft
+### [World of Warcraft](#world-of-warcraft)
 
 * [Achievement](#achievement)
 * [Auction](#auction)
@@ -86,6 +86,14 @@ Each API method receives a parameters object for the request, and a callback fun
 * [Recipe](#recipe)
 * [Spell](#spell)
 
+### [Starcraft 2](#starcraft-2)
+
+* [Ladder](#ladder)
+* [Profile](#profile)
+
+---
+
+<a name="world-of-warcraft"></a>
 ## World of Warcraft
 
 The World of Warcraft API methods are available through the `wow` object of the Battle.net API.
@@ -629,3 +637,18 @@ All realms
 ```javascript
 bnet.wow.spell({origin: 'us', id: 8056]}, callback);
 ```
+
+---
+
+<a name="starcraft-2"></a>
+## Starcraft 2
+
+The Starcraft 2 API methods are available through the `sc2` object of the Battle.net API.
+
+```javascript
+var sc2 = bnet.sc2;
+```
+
+**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `sea`, `kr`, `tw`.
+
+---
