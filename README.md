@@ -76,16 +76,16 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Audit](#wow-character-audit)
   * [Aggregate](#character-aggregate)
 * [Data](#wow-data)
-  * [Battlegroupds](#wow-data-battlegroups)
-  * [Character Races](#wow-data-character-races)
-  * [Character Classes](#wow-data-character-classes)
+  * [Battlegroups](#wow-data-battlegroups)
   * [Character Achievements](#wow-data-character-achievements)
-  * [Guild Rewards](#wow-data-guild-rewards)
-  * [Guild Perks](#wow-data-guild-perks)
+  * [Character Classes](#wow-data-character-classes)
+  * [Character Races](#wow-data-character-races)
   * [Guild Achievements](#wow-data-guild-achievements)
+  * [Guild Perks](#wow-data-guild-perks)
+  * [Guild Rewards](#wow-data-guild-rewards)
   * [Item Classes](#wow-data-item-classes)
-  * [Talents](#wow-data-talents)
   * [Pet Types](#wow-data-pet-types)
+  * [Talents](#wow-data-talents)
 * [Guild](#wow-guild)
 * [Item](#wow-item)
   * [Item](#wow-item-item)
@@ -512,19 +512,6 @@ bnet.wow.data.characterClasses({origin: 'us'}, callback);
 bnet.wow.data.characterRaces({origin: 'us'}, callback);
 ```
 
-<a name="wow-data-item-classes"></a>
-#### Item Classes
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
-*Usage*
-
-```javascript
-bnet.wow.data.itemClasses({origin: 'us'}, callback);
-```
-
 <a name="wow-data-guild-achievements"></a>
 #### Guild Achievements
 
@@ -562,6 +549,19 @@ bnet.wow.data.guildPerks({origin: 'us'}, callback);
 
 ```javascript
 bnet.wow.data.guildRewards({origin: 'us'}, callback);
+```
+
+<a name="wow-data-item-classes"></a>
+#### Item Classes
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.itemClasses({origin: 'us'}, callback);
 ```
 
 <a name="wow-data-pet-types"></a>
