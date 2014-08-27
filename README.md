@@ -57,15 +57,17 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Realm Leaderboard](#wow-challenge-realm-leaderboard)
   * [Region Leaderboard](#wow-challenge-region-leaderboard)
 * [Character](#wow-character)
-  * [Profile](#wow-character-profile)
+  * [Aggregate](#character-aggregate)
   * [Achievements](#wow-character-achievements)
   * [Appearance](#wow-character-appearance)
+  * [Audit](#wow-character-audit)
   * [Guild](#wow-character-guild)
   * [Hunter Pets](#wow-character-hunter-pets)
   * [Items](#wow-character-items)
   * [Mounts](#wow-character-mounts)
   * [Pets](#wow-character-pets)
   * [Pet Slots](#wow-character-pet-slots)
+  * [Profile](#wow-character-profile)
   * [Progression](#wow-character-progression)
   * [PVP](#wow-character-pvp)
   * [Quests](#wow-character-quests)
@@ -73,8 +75,6 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Stats](#wow-character-stats)
   * [Talents](#wow-character-talents)
   * [Titles](#wow-character-titles)
-  * [Audit](#wow-character-audit)
-  * [Aggregate](#character-aggregate)
 * [Data Resources](#wow-data)
   * [Battlegroups](#wow-data-battlegroups)
   * [Character Achievements](#wow-data-character-achievements)
@@ -87,6 +87,12 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Pet Types](#wow-data-pet-types)
   * [Talents](#wow-data-talents)
 * [Guild](#wow-guild)
+  * [Aggregate](#wow-guild-aggregate)
+  * [Achievements](#wow-guild-achievements)
+  * [Challenge](#wow-guild-challenge)
+  * [Members](#wow-guild-members)
+  * [News](#wow-guild-news)
+  * [Profile](#wow-guild-profile)
 * [Item](#wow-item)
   * [Item](#wow-item-item)
   * [Item Set](#wow-item-item-set)
@@ -642,26 +648,19 @@ All guild requests require the following parameters:
 
 `name` the name of the guild.
 
-<a name="wow-guild-profile"></a>
-#### Profile
+<a name="wow-character-aggregate"></a>
+#### Aggregate
 
-Returns basic profile data of the guild.
+Returns the specified guild fields aggregated in a single request.
 
-*Usage*
+*Parameters*
 
-```javascript
-bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
-```
-
-<a name="wow-guild-members"></a>
-#### Members
-
-Returns the members data of the guild.
+`fields` an array of one or more guild fields.
 
 *Usage*
 
 ```javascript
-bnet.wow.guild.members({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.aggregate({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries', fields: ['members', achievements]}, callback);
 ```
 
 <a name="wow-guild-achievements"></a>
@@ -675,6 +674,28 @@ Returns the achievement data of the guild.
 bnet.wow.guild.achievements({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
+<a name="wow-guild-challenge"></a>
+#### Challenge
+
+Returns the challenge data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.challenge({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
+<a name="wow-guild-members"></a>
+#### Members
+
+Returns the members data of the guild.
+
+*Usage*
+
+```javascript
+bnet.wow.guild.members({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+```
+
 <a name="wow-guild-news"></a>
 #### News
 
@@ -686,15 +707,15 @@ Returns the news data of the guild.
 bnet.wow.guild.news({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
-<a name="wow-guild-challenge"></a>
-#### Challenge
+<a name="wow-guild-profile"></a>
+#### Profile
 
-Returns the challenge data of the guild.
+Returns basic profile data of the guild.
 
 *Usage*
 
 ```javascript
-bnet.wow.guild.challenge({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
 ```
 
 ---
