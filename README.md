@@ -924,3 +924,98 @@ bnet.sc2.data.rewards({origin: 'us'}, callback);
 ```
 
 ---
+
+<a name="d3"></a>
+## Diablo 3
+
+The Diablo 3 API methods are available through the `d3` object of the Battle.net API.
+
+```javascript
+var d3 = bnet.d3;
+```
+
+**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `kr`, `tw`.
+
+---
+
+<a name="d3-data"></a>
+### Data Resources
+
+<a name="d3-data-artisan"></a>
+#### Artisan
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+`artisan` the name of the artisan [`blacksmith`, `jeweller`, `mystic`]
+
+*Usage*
+
+```javascript
+bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
+```
+
+<a name="d3-data-follower"></a>
+#### Follower
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+`artisan` the name of the follower [`templar`, `enchantress`, `scoundrel`]
+
+*Usage*
+
+```javascript
+bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
+```
+
+<a name="d3-data-item"></a>
+#### Item
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+`item` the item data string.
+
+*Usage*
+
+```javascript
+bnet.d3.data.item({origin: 'us', item: ''} callback);
+```
+
+---
+<a name="d3-profile"></a>
+### Profile
+
+<a name="d3-profile-career"></a>
+#### Career
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+`tag` the player's battle tag.
+
+```javascript
+bnet.d3.profile.career({region: 'us', tag: 'skt-1884'}, callback);
+```
+
+<a name="d3-profile-hero"></a>
+#### Hero
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+`tag` the player battle tag.
+
+`hero` the hero ID.
+
+```javascript
+bnet.d3.profile.hero({region: 'us', tag: 'skt-1884', hero: ''}, callback);
+```
+
+---
