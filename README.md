@@ -86,10 +86,16 @@ Each API method receives a parameters object for the request, and a callback fun
 * [Recipe](#recipe)
 * [Spell](#spell)
 
-### [Starcraft 2](#starcraft-2)
+### [Starcraft 2](#sc2)
 
-* [Ladder](#ladder)
-* [Profile](#profile)
+* [Data](#sc2-data)
+  * [Achievements](#sc2-data-achievements)
+  * [Rewards](#sc2-data-rewards)
+* [Ladder](#sc2-ladder)
+* [Profile](#sc2-profile)
+  * [Profile](#sc2-profile-profile)
+  * [Ladders](#sc2-profile-ladders)
+  * [Match History](#sc2-profile-match-history)
 
 ---
 
@@ -638,7 +644,7 @@ bnet.wow.spell({origin: 'us', id: 8056]}, callback);
 
 ---
 
-<a name="starcraft-2"></a>
+<a name="sc2"></a>
 ## Starcraft 2
 
 The Starcraft 2 API methods are available through the `sc2` object of the Battle.net API.
@@ -651,7 +657,7 @@ var sc2 = bnet.sc2;
 
 ---
 
-<a name="spell"></a>
+<a name="sc2-profile"></a>
 ### Profile
 
 All profile requests require the following parameters.
@@ -664,6 +670,7 @@ All profile requests require the following parameters.
 
 `name` the player's profile name.
 
+<a name="sc2-profile-profile"></a>
 #### Profile
 
 Returns basic profile data for the specified player.
@@ -674,6 +681,7 @@ Returns basic profile data for the specified player.
 bnet.sc2.profile.profile({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
 ```
 
+<a name="sc2-profile-ladders"></a>
 #### Ladders
 
 Returns ladder data for the specified player.
@@ -684,6 +692,7 @@ Returns ladder data for the specified player.
 bnet.sc2.profile.ladders({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
 ```
 
+<a name="sc2-profile-match-history"></a>
 #### Match history
 
 Returns match history data for the specified player.
@@ -693,3 +702,53 @@ Returns match history data for the specified player.
 ```javascript
 bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
 ```
+
+---
+
+<a name="sc2-ladder"></a>
+### Ladder
+
+*Parameters*
+
+`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
+
+`id` the unique ladder ID.
+
+*Usage*
+
+```javascript
+bnet.sc2.ladder({origin: 'us', id: 655]}, callback);
+```
+
+---
+
+<a name="sc2-data"></a>
+### Data Resources
+
+<a name="sc2-data-achievements"></a>
+#### Achievements
+
+*Paramters*
+
+`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.sc2.data.achievements({origin: 'us'}, callback);
+```
+
+<a name="sc2-data-rewards"></a>
+#### Rewards
+
+*Parameters*
+
+`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.sc2.data.rewards({origin: 'us'}, callback);
+```
+
+---
