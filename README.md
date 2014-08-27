@@ -74,7 +74,18 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Talents](#wow-character-talents)
   * [Titles](#wow-character-titles)
   * [Audit](#wow-character-audit)
-  * [Aggregate](@character-aggregate)
+  * [Aggregate](#character-aggregate)
+* [Data](#wow-data)
+  * [Battlegroupds](#wow-data-battlegroups)
+  * [Character Races](#wow-data-character-races)
+  * [Character Classes](#wow-data-character-classes)
+  * [Character Achievements](#wow-data-character-achievements)
+  * [Guild Rewards](#wow-data-guild-rewards)
+  * [Guild Perks](#wow-data-guild-perks)
+  * [Guild Achievements](#wow-data-guild-achievements)
+  * [Item Classes](#wow-data-item-classes)
+  * [Talents](#wow-data-talents)
+  * [Pet Types](#wow-data-pet-types)
 * [Guild](#wow-guild)
 * [Item](#wow-item)
   * [Item](#wow-item-item)
@@ -442,6 +453,141 @@ Returns the specified character fields aggregated in a single request.
 
 ```javascript
 bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
+```
+
+---
+
+<a name="wow-data"></a>
+### Data
+
+<a name="wow-data-battlegroups"></a>
+#### Battlegroups
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.battlegroups({origin: 'us'}, callback);
+```
+
+<a name="wow-data-character-achievements"></a>
+#### Character Achievements
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.characterAchievements({origin: 'us'}, callback);
+```
+
+<a name="wow-data-character-classes"></a>
+#### Character Classes
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.characterClasses({origin: 'us'}, callback);
+```
+
+<a name="wow-data-character-races"></a>
+#### Character Races
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.characterRaces({origin: 'us'}, callback);
+```
+
+<a name="wow-data-item-classes"></a>
+#### Item Classes
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.itemClasses({origin: 'us'}, callback);
+```
+
+<a name="wow-data-guild-achievements"></a>
+#### Guild Achievements
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.guildAchievements({origin: 'us'}, callback);
+```
+
+<a name="wow-data-guild-perks"></a>
+#### Guild Perks
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.guildPerks({origin: 'us'}, callback);
+```
+
+<a name="wow-data-guild-rewards"></a>
+#### Guild Rewards
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.guildRewards({origin: 'us'}, callback);
+```
+
+<a name="wow-data-pet-types"></a>
+#### Pet Types
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.petTypes({origin: 'us'}, callback);
+```
+
+<a name="wow-data-talents"></a>
+#### Talents
+
+*Parameters*
+
+`origin` [`us`, `eu`, `kr`, `tw`].
+
+*Usage*
+
+```javascript
+bnet.wow.data.talents({origin: 'us'}, callback);
 ```
 
 ---
