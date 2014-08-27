@@ -75,7 +75,7 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Titles](#wow-character-titles)
   * [Audit](#wow-character-audit)
   * [Aggregate](#character-aggregate)
-* [Data](#wow-data)
+* [Data Resources](#wow-data)
   * [Battlegroups](#wow-data-battlegroups)
   * [Character Achievements](#wow-data-character-achievements)
   * [Character Classes](#wow-data-character-classes)
@@ -99,7 +99,7 @@ Each API method receives a parameters object for the request, and a callback fun
 
 ### [Starcraft 2](#sc2)
 
-* [Data](#sc2-data)
+* [Data Resources](#sc2-data)
   * [Achievements](#sc2-data-achievements)
   * [Rewards](#sc2-data-rewards)
 * [Ladder](#sc2-ladder)
@@ -458,7 +458,7 @@ bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni',
 ---
 
 <a name="wow-data"></a>
-### Data
+### Data Resources
 
 <a name="wow-data-battlegroups"></a>
 #### Battlegroups
