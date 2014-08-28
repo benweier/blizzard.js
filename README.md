@@ -114,6 +114,16 @@ Each API method receives a parameters object for the request, and a callback fun
   * [Ladders](#sc2-profile-ladders)
   * [Match History](#sc2-profile-match-history)
 
+### [Diablo 3](#d3)
+
+* [Data Resources](#d3-data)
+  * [Artisan](#d3-data-artisan)
+  * [Follower](#d3-data-follower)
+  * [Item](#d3-data-item)
+* [Profile](#d3-profile)
+  * [Career](#d3-profile-career)
+  * [Hero](#d3-profile-hero)
+
 ---
 
 <a name="wow"></a>
