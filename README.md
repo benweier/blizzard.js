@@ -1000,7 +1000,7 @@ bnet.d3.data.item({origin: 'us', item: ''} callback);
 `tag` the player's battle tag.
 
 ```javascript
-bnet.d3.profile.career({region: 'us', tag: 'skt-1884'}, callback);
+bnet.d3.profile.career({origin: 'us', tag: 'skt-1884'}, callback);
 ```
 
 <a name="d3-profile-hero"></a>
@@ -1015,7 +1015,7 @@ bnet.d3.profile.career({region: 'us', tag: 'skt-1884'}, callback);
 `hero` the hero ID.
 
 ```javascript
-bnet.d3.profile.hero({region: 'us', tag: 'skt-1884', hero: ''}, callback);
+bnet.d3.profile.hero({origin: 'us', tag: 'skt-1884', hero: 287801}, callback);
 ```
 
 ---
