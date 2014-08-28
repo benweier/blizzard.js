@@ -983,7 +983,7 @@ bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
 *Usage*
 
 ```javascript
-bnet.d3.data.item({origin: 'us', item: ''} callback);
+bnet.d3.data.item({origin: 'us', item: 'CrABCL-oudQGEgcIBBWZWjYNHWU61OAdyg3pEx07J28kHevi5AUd8dNq1TCLAjj_AkAAUBJYBGD_AmorCgwIABDX3bKmiICA4DESGwi5u5abChIHCAQVIpaumDCPAjgAQAFYBJABAGorCgwIABCl3rKmiICA4DESGwiR9M-gAhIHCAQVIpaumDCLAjgAQAFYBJABAIABRqUBOydvJK0Bj5DKULUBAXBvArgB9aCdsg7AAQEYsuqy0wFQAFgC'} callback);
 ```
 
 ---
