@@ -41,8 +41,6 @@ $ sudo BATTLENET_API_KEY=[your_api_key] node server.js
 
 Each API method receives a parameters object for the request, and a callback function to execute once the request has completed. The available request parameters are explained for each method below.
 
-### `callback`
-
 Each `callback` function receives two arguments: `error` and `response`.
 
 `error` applicable when there's an issue with the request connection.
