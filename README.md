@@ -31,7 +31,7 @@ bnet.wow.character.profile(obj, callback);
 
 ## Battle.net API Key
 
-Your private Battle.net API key is input with the `BATTLENET_API_KEY` environment variable. This must be present in order to get a proper response. There are a variety of ways to set this variable but the easiest is to run your node server with the variable from the command line.
+Your private Battle.net API key is input with the `BATTLENET_API_KEY` environment variable. This must be present in order to get a valid Battle.net API response. There are several ways to set this variable but the easiest is to run your node server with the variable from the command line.
 
 ```
 $ sudo BATTLENET_API_KEY=[your_api_key] node server.js
@@ -41,7 +41,13 @@ $ sudo BATTLENET_API_KEY=[your_api_key] node server.js
 
 Each API method receives a parameters object for the request, and a callback function to execute once the request has completed. The available request parameters are explained for each method below.
 
-`callback` takes three arguments: `error`, `response`, and `body`.
+### `callback`
+
+Each `callback` function receives two arguments: `error` and `response`.
+
+`error` applicable when there's an issue with the request connection.
+
+`response` is the request response body parsed as JSON.
 
 ## Overview
 
