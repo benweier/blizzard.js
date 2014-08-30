@@ -2,13 +2,19 @@
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
   "name": "battlenet-api",
   "description": "A wrapper for the Battle.net API",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/benweier/battlenet-api",
   "license": "MIT",
   "keywords": [
     "battlenet",
     "battle.net",
-    "api"
+    "api",
+    "world of warcraft",
+    "starcraft 2",
+    "diablo 3",
+    "wow",
+    "sc2",
+    "d3"
   ],
   "repository": {
     "type": "git",
@@ -19,7 +25,7 @@
   },
   "main": "./lib/battlenet-api.js",
   "dependencies": {
-    "request": "2.40.0",
-    "deep-extend": "0.2.11"
+    "request": "~2.40.0",
+    "deep-extend": "~0.2.11"
   }
 }
