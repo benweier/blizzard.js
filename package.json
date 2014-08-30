@@ -2,7 +2,7 @@
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
   "name": "battlenet-api",
   "description": "A wrapper for the Battle.net API",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "homepage": "https://github.com/benweier/battlenet-api",
   "license": "MIT",
   "keywords": [
