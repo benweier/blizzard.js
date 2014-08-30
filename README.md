@@ -139,7 +139,18 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `kr`, `tw`. The China API is unavailable at this time.
+**ALL** World of Warcraft API methods take the following parameters.
+
+`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `kr`, `tw`.
+
+`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+
+Origin | Locales
+------ | -------
+`us` | `en_US`, `es_MX`, `pt_BR`
+`eu` | `en_GB`, `es_ES`, `fr_FR`, `ru_RU`, `de_DE`, `pl_PL`, `pt_PT`, `it_IT`
+`kr` | `ko_KR`
+`tw` | `zh_TW`
 
 ---
 
@@ -839,7 +850,19 @@ The Starcraft 2 API methods are available through the `sc2` object of the Battle
 var sc2 = bnet.sc2;
 ```
 
-**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `sea`, `kr`, `tw`.
+**ALL** Starcraft 2 API methods take the following parameters.
+
+`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `sea`, `kr`, `tw`.
+
+`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+
+Origin | Locales
+------ | -------
+`us` | `en_US`, `es_MX`, `pt_BR`
+`eu` | `en_GB`, `es_ES`, `fr_FR`, `ru_RU`, `de_DE`, `pl_PL`, `pt_PT`, `it_IT`
+`sea` | `en_US`
+`kr` | `ko_KR`
+`tw` | `zh_TW`
 
 ---
 
@@ -948,7 +971,18 @@ The Diablo 3 API methods are available through the `d3` object of the Battle.net
 var d3 = bnet.d3;
 ```
 
-**ALL** API methods take `origin` as one of the parameters. This indicates which regional API endpoint to use. The possible values are `us`, `eu`, `kr`, `tw`.
+**ALL** Diablo 3 API methods take the following parameters.
+
+`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `kr`, `tw`.
+
+`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+
+Origin | Locales
+------ | -------
+`us` | `en_US`, `es_MX`, `pt_BR`
+`eu` | `en_GB`, `es_ES`, `fr_FR`, `ru_RU`, `de_DE`, `pl_PL`, `pt_PT`, `it_IT`
+`kr` | `ko_KR`
+`tw` | `zh_TW`
 
 ---
 
