@@ -760,7 +760,7 @@ bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mer
 *Usage*
 
 ```javascript
-bnet.wow.pvp({origin: 'us', bracket: '2v2'}, callback);
+bnet.wow.pvp.leaderboards({origin: 'us', bracket: '2v2'}, callback);
 ```
 
 ---
