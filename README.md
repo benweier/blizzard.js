@@ -402,7 +402,7 @@ Returns the PVP data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.pvp({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.pvp.leaderboards({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-quests"></a>
