@@ -5,49 +5,86 @@ A Node JS wrapper for the Battle.net API
 
 # Install
 
-Add `battlenet-api` to your application's `package.json` file and run:
+Add `battlenet-api` to your `package.json` file and install with:
 
 ```
 npm install
 ```
 
-Alternatively:
+Or add and install it in a single step:
 ```
 npm install battlenet-api --save
 ```
 
 # How to use
 
-Simply `require()` the Battle.net API within your application:
+Step 1: `require()` the Battle.net API within your application:
 
 ```javascript
-var bnet = require('battlenet-api');
+var bnet = require('battlenet-api')();
 ```
 
-And then access the API methods to request data:
+Step 2: Call the API methods to request data:
 
 ```javascript
-bnet.wow.character.profile(obj, callback);
+bnet.wow.character.profile(parameters, [config,] callback);
 ```
+
+Step 3: ???
+
+Step 4: Profit.
 
 ## Battle.net API Key
 
-Your private Battle.net API key is input with the `BATTLENET_API_KEY` environment variable. This must be present in order to get a valid Battle.net API response. There are several ways to set this variable but the easiest is to run your node server with the variable from the command line.
+Your private Battle.net API key must be present in order to get a valid Battle.net API response. There are several ways to include it in the request:
 
+**As an optional parameter with each method**
+```javascript
+bnet.wow.character.profile(parameters, {apikey: your_api_key}, callback);
+```
+
+**As an optional parameter with require**
+```javascript
+var bnet = require('battlenet-api')(your_api_key);
+```
+
+**As a system environment variable**
 ```
 $ sudo BATTLENET_API_KEY=[your_api_key] node server.js
 ```
 
+While all three ways of using the API key can be used together, the Method usage will override the Require usage which will override the Environment Variable usage. Use the most appropriate way of setting the API key that suits your needs. Please see the documentation at the [Blizzard Developer Portal](https://dev.battle.net) to obtain your own Battle.net API key.
+
 # Documentation
 
-Each API method receives a parameters object for the request, and a callback function to execute once the request has completed. The available request parameters are explained for each method below.
+Each API method receives a parameters object, an _optional_ configuration object, and a callback function to execute once the request has completed. The available request parameters for each method are explained in the [Overview](#overview).
 
-Each `callback` function receives two arguments: `error` and `response`.
+```javascript
+bnet.wow.character.profile(parameters, [config,] callback);
+```
 
-`error` applicable when there's an issue with the request connection.
+**`parameters`**: _Required_. The individual per-method parameters can be found in the overview. **ALL** API methods will accept an `origin` and `locale`.
+* `origin` _Required_. This indicates which regional API endpoint to use and will match the region in which the user plays. The supported origins depends on the game you are requesting data for.
+* `locale` _Optional_. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is supplied the Battle.net API will default to the primary language of that region.
 
-`response` is the request response body parsed as JSON.
+`config`: _Optional_. Accepts the following configuration options.
+* `apikey` _Optional_. Your Battle.net API key is set here if not supplied by the Require or Environment Variable.
+* `timeout` _Optional_. Defaults to 10000.
+* `gzip` _Optional_. Defaults to true.
+* `maxRedirects` _Optional_. Defaults to 10.
 
+**`callback`** _Required_. The callback function receives two arguments `error` and `response`.
+* `error` is only applicable when there's an issue with the request connection. Otherwise `null`.
+* `response` will contain the request response body parsed as JSON.
+
+A fully-formed request will look something like this:
+```javascript
+bnet.wow.character.guild({ origin: 'us', realm: 'amanthul', name: 'charni' }, { apikey: BATTLENET_API_KEY }, function(err, resp) {
+  console.log(resp);
+});
+```
+
+<a name="overview"></a>
 ## Overview
 
 ### [World of Warcraft](#wow)
@@ -140,11 +177,7 @@ The World of Warcraft API methods are available through the `wow` object of the 
 var wow = bnet.wow;
 ```
 
-**ALL** World of Warcraft API methods take the following parameters.
-
-`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `kr`, `tw`.
-
-`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+The supported origins and locales for the World of Warcraft API are:
 
 Origin | Locales
 ------ | -------
@@ -159,8 +192,6 @@ Origin | Locales
 ### Achievement
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`]
 
 `id` the unique achievement ID.
 
@@ -177,14 +208,12 @@ bnet.wow.achievement({origin: 'us', id: 2144}, callback);
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `realm` the slugified realm name.
 
 *Usage*
 
 ```javascript
-bnet.wow.auction({origin: 'us', realm: 'proudmoore'}, callback);
+bnet.wow.auction({origin: 'us', realm: 'amanthul'}, callback);
 ```
 
 ---
@@ -196,8 +225,6 @@ bnet.wow.auction({origin: 'us', realm: 'proudmoore'}, callback);
 #### Abilities
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique ID of the battle pet ability.
 
@@ -212,8 +239,6 @@ bnet.wow.battlePet.ability({origin: 'us', id: 640}, callback);
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `id` the unique ID of the battle pet species.
 
 *Usage*
@@ -226,8 +251,6 @@ bnet.wow.battlePet.species({origin: 'us', id: 258}, callback);
 #### Stats
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique ID of the battle pet species.
 
@@ -249,22 +272,16 @@ bnet.wow.battlePet.stats({origin: 'us', id: 258, fields: { level: 25, breedId: 5
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `realm` the slugified realm name.
 
 *Usage*
 
 ```javascript
-bnet.wow.challenge.realmLeaderboard({origin: 'us', realm: 'proudmoore'}, callback);
+bnet.wow.challenge.realmLeaderboard({origin: 'us', realm: 'amanthul'}, callback);
 ```
 
 <a name="wow-challenge-region-leaderboard"></a>
 #### Region Leaderboard
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -277,9 +294,7 @@ bnet.wow.challenge.regionLeaderboard({origin: 'us'}, callback);
 <a name="wow-character"></a>
 ### Character
 
-All character requests require the following parameters:
-
-`origin` [`us`, `eu`, `kr`, `tw`].
+All World of Warcraft character requests require the following parameters:
 
 `realm` the slugified realm of the character.
 
@@ -293,7 +308,7 @@ Returns basic profile data about the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.profile({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.profile({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-achievements"></a>
@@ -304,7 +319,7 @@ Returns the achievement data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.achievements({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.achievements({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-appearance"></a>
@@ -315,7 +330,7 @@ Returns the appearance data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.appearance({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.appearance({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-guild"></a>
@@ -326,7 +341,7 @@ Returns the guild data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.guild({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.guild({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-hunter-pets"></a>
@@ -337,7 +352,7 @@ Returns the hunter pet data of the character (where applicable).
 *Usage*
 
 ```javascript
-bnet.wow.character.hunterPets({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.hunterPets({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-items"></a>
@@ -348,7 +363,7 @@ Returns the item data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.items({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.items({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-mounts"></a>
@@ -359,7 +374,7 @@ Returns the mount data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.mounts({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.mounts({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-pets"></a>
@@ -370,7 +385,7 @@ Returns the pet data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.pets({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.pets({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-pet-slots"></a>
@@ -381,7 +396,7 @@ Returns the pet slots data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.petSlots({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.petSlots({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-progression"></a>
@@ -392,7 +407,7 @@ Returns the progression data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.progression({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.progression({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-pvp"></a>
@@ -403,7 +418,7 @@ Returns the PVP data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.pvp({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.pvp({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-quests"></a>
@@ -414,7 +429,7 @@ Returns the quest data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.quests({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.quests({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-reputation"></a>
@@ -425,7 +440,7 @@ Returns the reputation data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.reputation({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.reputation({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-stats"></a>
@@ -436,7 +451,7 @@ Returns the statistics data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.stats({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.stats({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-talents"></a>
@@ -447,7 +462,7 @@ Returns the talent data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.talents({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.talents({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-titles"></a>
@@ -458,7 +473,7 @@ Returns the title data of the character.
 *Usage*
 
 ```javascript
-bnet.wow.character.titles({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.titles({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-audit"></a>
@@ -469,7 +484,7 @@ Returns an audit of the character's equipment.
 *Usage*
 
 ```javascript
-bnet.wow.character.audit({origin: 'us', realm: 'proudmoore', name: 'charni'}, callback);
+bnet.wow.character.audit({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-aggregate"></a>
@@ -484,7 +499,7 @@ Returns the specified character fields aggregated in a single request.
 *Usage*
 
 ```javascript
-bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni', fields: ['pets', 'petSlots']}, callback);
+bnet.wow.character.aggregate({origin: 'us', realm: 'amanthul', name: 'charni', fields: ['pets', 'petSlots']}, callback);
 ```
 
 ---
@@ -495,10 +510,6 @@ bnet.wow.character.aggregate({origin: 'us', realm: 'proudmoore', name: 'charni',
 <a name="wow-data-battlegroups"></a>
 #### Battlegroups
 
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -507,10 +518,6 @@ bnet.wow.data.battlegroups({origin: 'us'}, callback);
 
 <a name="wow-data-character-achievements"></a>
 #### Character Achievements
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -521,10 +528,6 @@ bnet.wow.data.characterAchievements({origin: 'us'}, callback);
 <a name="wow-data-character-classes"></a>
 #### Character Classes
 
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -533,10 +536,6 @@ bnet.wow.data.characterClasses({origin: 'us'}, callback);
 
 <a name="wow-data-character-races"></a>
 #### Character Races
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -547,10 +546,6 @@ bnet.wow.data.characterRaces({origin: 'us'}, callback);
 <a name="wow-data-guild-achievements"></a>
 #### Guild Achievements
 
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -559,10 +554,6 @@ bnet.wow.data.guildAchievements({origin: 'us'}, callback);
 
 <a name="wow-data-guild-perks"></a>
 #### Guild Perks
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -573,10 +564,6 @@ bnet.wow.data.guildPerks({origin: 'us'}, callback);
 <a name="wow-data-guild-rewards"></a>
 #### Guild Rewards
 
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -585,10 +572,6 @@ bnet.wow.data.guildRewards({origin: 'us'}, callback);
 
 <a name="wow-data-item-classes"></a>
 #### Item Classes
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -599,10 +582,6 @@ bnet.wow.data.itemClasses({origin: 'us'}, callback);
 <a name="wow-data-pet-types"></a>
 #### Pet Types
 
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -611,10 +590,6 @@ bnet.wow.data.petTypes({origin: 'us'}, callback);
 
 <a name="wow-data-talents"></a>
 #### Talents
-
-*Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 *Usage*
 
@@ -634,8 +609,6 @@ Returns the item data of the specified item ID.
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `id` the unique item ID.
 
 *Usage*
@@ -651,8 +624,6 @@ Returns the item set data of the specified set ID.
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `id` the unique item set ID.
 
 *Usage*
@@ -666,9 +637,7 @@ bnet.wow.item.set({origin: 'us', id: 1060}, callback);
 <a name="wow-guild"></a>
 ### Guild
 
-All guild requests require the following parameters:
-
-`origin` [`us`, `eu`, `kr`, `tw`].
+All World of Warcraft guild requests require the following parameters:
 
 `realm` the slugified realm of the guild.
 
@@ -686,7 +655,7 @@ Returns the specified guild fields aggregated in a single request.
 *Usage*
 
 ```javascript
-bnet.wow.guild.aggregate({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries', fields: ['members', achievements]}, callback);
+bnet.wow.guild.aggregate({origin: 'us', realm: 'amanthul', name: 'blackwolf', fields: ['members', 'achievements']}, callback);
 ```
 
 <a name="wow-guild-achievements"></a>
@@ -697,7 +666,7 @@ Returns the achievement data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.achievements({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.achievements({origin: 'us', realm: 'amanthul', name: 'blackwolf'}, callback);
 ```
 
 <a name="wow-guild-challenge"></a>
@@ -708,7 +677,7 @@ Returns the challenge data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.challenge({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.challenge({origin: 'us', realm: 'amanthul', name: 'blackwolf'}, callback);
 ```
 
 <a name="wow-guild-members"></a>
@@ -719,7 +688,7 @@ Returns the members data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.members({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.members({origin: 'us', realm: 'amanthul', name: 'blackwolf'}, callback);
 ```
 
 <a name="wow-guild-news"></a>
@@ -730,7 +699,7 @@ Returns the news data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.news({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.news({origin: 'us', realm: 'amanthul', name: 'blackwolf'}, callback);
 ```
 
 <a name="wow-guild-profile"></a>
@@ -741,7 +710,7 @@ Returns basic profile data of the guild.
 *Usage*
 
 ```javascript
-bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mercenaries'}, callback);
+bnet.wow.guild.profile({origin: 'us', realm: 'amanthul', name: 'blackwolf'}, callback);
 ```
 
 ---
@@ -753,8 +722,6 @@ bnet.wow.guild.profile({origin: 'us', realm: 'proudmoore', name: 'black wolf mer
 #### Leaderboards
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `bracket` [`2v2`, `3v3`, `5v5`, `rbg`]
 
@@ -771,8 +738,6 @@ bnet.wow.pvp.leaderboards({origin: 'us', bracket: '2v2'}, callback);
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `id` the unique quest ID.
 
 *Usage*
@@ -788,8 +753,6 @@ bnet.wow.quest({origin: 'us', quest: 13146}, callback);
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `fields` [optional] an array of one or more realms to limit.
 
 *Usage*
@@ -803,7 +766,7 @@ bnet.wow.realmStatus({origin: 'us']}, callback);
 Selected realms
 
 ```javascript
-bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock', 'frostmourne']]}, callback);
+bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock']]}, callback);
 ```
 
 ---
@@ -812,8 +775,6 @@ bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock', 'frostmo
 ### Recipe
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique recipe ID.
 
@@ -829,8 +790,6 @@ bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
 ### Spell
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `id` the unique spell ID.
 
@@ -851,11 +810,7 @@ The Starcraft 2 API methods are available through the `sc2` object of the Battle
 var sc2 = bnet.sc2;
 ```
 
-**ALL** Starcraft 2 API methods take the following parameters.
-
-`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `sea`, `kr`, `tw`.
-
-`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+The supported origins and locales for the Starcraft 2 API are:
 
 Origin | Locales
 ------ | -------
@@ -870,9 +825,7 @@ Origin | Locales
 <a name="sc2-profile"></a>
 ### Profile
 
-All profile requests require the following parameters.
-
-`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
+All Starcraft 2 profile requests require the following parameters.
 
 `id` the unique player ID.
 
@@ -920,8 +873,6 @@ bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt'
 
 *Parameters*
 
-`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
-
 `id` the unique ladder ID.
 
 *Usage*
@@ -938,10 +889,6 @@ bnet.sc2.ladder({origin: 'us', id: 655]}, callback);
 <a name="sc2-data-achievements"></a>
 #### Achievements
 
-*Paramters*
-
-`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
-
 *Usage*
 
 ```javascript
@@ -950,10 +897,6 @@ bnet.sc2.data.achievements({origin: 'us'}, callback);
 
 <a name="sc2-data-rewards"></a>
 #### Rewards
-
-*Parameters*
-
-`origin` [`us`, `eu`, `sea`, `kr`, `tw`].
 
 *Usage*
 
@@ -972,11 +915,7 @@ The Diablo 3 API methods are available through the `d3` object of the Battle.net
 var d3 = bnet.d3;
 ```
 
-**ALL** Diablo 3 API methods take the following parameters.
-
-`origin`: *required*. This indicates which regional API endpoint to use, and will match the region in which the user plays. The supported origins are `us`, `eu`, `kr`, `tw`.
-
-`locale`: *optional*. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is set the Battle.net API will default to the first value.
+The supported origins and locales for the Diablo 3 API are:
 
 Origin | Locales
 ------ | -------
@@ -995,8 +934,6 @@ Origin | Locales
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `artisan` the name of the artisan [`blacksmith`, `jeweller`, `mystic`]
 
 *Usage*
@@ -1010,8 +947,6 @@ bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `artisan` the name of the follower [`templar`, `enchantress`, `scoundrel`]
 
 *Usage*
@@ -1024,8 +959,6 @@ bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
 #### Item
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `item` the item data string.
 
@@ -1044,8 +977,6 @@ bnet.d3.data.item({origin: 'us', item: 'CrABCL-oudQGEgcIBBWZWjYNHWU61OAdyg3pEx07
 
 *Parameters*
 
-`origin` [`us`, `eu`, `kr`, `tw`].
-
 `tag` the player's battle tag.
 
 ```javascript
@@ -1056,8 +987,6 @@ bnet.d3.profile.career({origin: 'us', tag: 'skt-1884'}, callback);
 #### Hero
 
 *Parameters*
-
-`origin` [`us`, `eu`, `kr`, `tw`].
 
 `tag` the player battle tag.
 
