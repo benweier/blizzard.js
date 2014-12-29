@@ -63,7 +63,7 @@ Each API method receives a parameters object, an _optional_ configuration object
 bnet.wow.character.profile(parameters, [config,] callback);
 ```
 
-**`parameters`**: _Required_. The individual per-method parameters can be found in the overview. **ALL** API methods will accept an `origin` and `locale`.
+`parameters`: _Required_. The individual per-method parameters can be found in the overview. **ALL** API methods will accept an `origin` and `locale`.
 * `origin` _Required_. This indicates which regional API endpoint to use and will match the region in which the user plays. The supported origins depends on the game you are requesting data for.
 * `locale` _Optional_. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is supplied the Battle.net API will default to the primary language of that region.
 
@@ -73,7 +73,7 @@ bnet.wow.character.profile(parameters, [config,] callback);
 * `gzip` _Optional_. Defaults to true.
 * `maxRedirects` _Optional_. Defaults to 10.
 
-**`callback`** _Required_. The callback function receives two arguments `error` and `response`.
+`callback` _Required_. The callback function receives two arguments `error` and `response`.
 * `error` is only applicable when there's an issue with the request connection. Otherwise `null`.
 * `response` will contain the request response body parsed as JSON.
 
@@ -643,7 +643,7 @@ All World of Warcraft guild requests require the following parameters:
 
 `name` the name of the guild.
 
-<a name="wow-character-aggregate"></a>
+<a name="wow-guild-aggregate"></a>
 #### Aggregate
 
 Returns the specified guild fields aggregated in a single request.
@@ -760,13 +760,13 @@ bnet.wow.quest({origin: 'us', quest: 13146}, callback);
 All realms
 
 ```javascript
-bnet.wow.realmStatus({origin: 'us']}, callback);
+bnet.wow.realmStatus({origin: 'us'}, callback);
 ```
 
 Selected realms
 
 ```javascript
-bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock']]}, callback);
+bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock']}, callback);
 ```
 
 ---
@@ -781,7 +781,7 @@ bnet.wow.realmStatus({origin: 'us', realms: ['proudmoore', 'blackrock']]}, callb
 *Usage*
 
 ```javascript
-bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
+bnet.wow.recipe({origin: 'us', id: 33994}, callback);
 ```
 
 ---
@@ -796,7 +796,7 @@ bnet.wow.recipe({origin: 'us', id: 33994]}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.spell({origin: 'us', id: 8056]}, callback);
+bnet.wow.spell({origin: 'us', id: 8056}, callback);
 ```
 
 ---
@@ -841,7 +841,7 @@ Returns basic profile data for the specified player.
 *Usage*
 
 ```javascript
-bnet.sc2.profile.profile({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+bnet.sc2.profile.profile({origin: 'us', id: 2137104, region: 1, name: 'skt'}, callback);
 ```
 
 <a name="sc2-profile-ladders"></a>
@@ -852,7 +852,7 @@ Returns ladder data for the specified player.
 *Usage*
 
 ```javascript
-bnet.sc2.profile.ladders({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+bnet.sc2.profile.ladders({origin: 'us', id: 2137104, region: 1, name: 'skt'}, callback);
 ```
 
 <a name="sc2-profile-match-history"></a>
@@ -863,7 +863,7 @@ Returns match history data for the specified player.
 *Usage*
 
 ```javascript
-bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt']}, callback);
+bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt'}, callback);
 ```
 
 ---
@@ -878,7 +878,7 @@ bnet.sc2.profile.matchHistory({origin: 'us', id: 2137104, region: 1, name: 'skt'
 *Usage*
 
 ```javascript
-bnet.sc2.ladder({origin: 'us', id: 655]}, callback);
+bnet.sc2.ladder({origin: 'us', id: 655}, callback);
 ```
 
 ---
@@ -947,12 +947,12 @@ bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
 
 *Parameters*
 
-`artisan` the name of the follower [`templar`, `enchantress`, `scoundrel`]
+`follower` the name of the follower [`templar`, `enchantress`, `scoundrel`]
 
 *Usage*
 
 ```javascript
-bnet.d3.data.artisan({origin: 'us', artisan: 'blacksmith'}, callback);
+bnet.d3.data.follower({origin: 'us', follower: 'blacksmith'}, callback);
 ```
 
 <a name="d3-data-item"></a>
