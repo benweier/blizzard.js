@@ -212,6 +212,30 @@ bnet.account.battletag({accessToken: users_access_token}, callback);
 
 ---
 
+### World of Warcraft OAuth Profile
+
+Returns data for an authenticated user's World of Warcraft Profile.
+
+*Usage*
+
+```javascript
+bnet.account.wow({accessToken: users_access_token}, callback);
+```
+
+---
+
+### Starcraft II OAuth Profile
+
+Returns data for an authenticated user's Starcraft III Profile.
+
+*Usage*
+
+```javascript
+bnet.account.sc2({accessToken: users_access_token}, callback);
+```
+
+---
+
 <a name="wow"></a>
 ## World of Warcraft
 
