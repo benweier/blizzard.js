@@ -93,6 +93,8 @@ bnet.wow.character.guild({ origin: 'us', realm: 'amanthul', name: 'charni' }, { 
 
 * [ID](#account-id)
 * [BattleTag](#account-battletag)
+* [World of Warcraft OAuth Profile](#account-wow)
+* [Starcraft II OAuth Profile](#account-sc2)
 
 ### [World of Warcraft](#wow)
 
@@ -212,6 +214,7 @@ bnet.account.battletag({accessToken: users_access_token}, callback);
 
 ---
 
+<a name="account-wow"></a>
 ### World of Warcraft OAuth Profile
 
 Returns data for an authenticated user's World of Warcraft Profile.
@@ -224,6 +227,7 @@ bnet.account.wow({accessToken: users_access_token}, callback);
 
 ---
 
+<a name="account-sc2"></a>
 ### Starcraft II OAuth Profile
 
 Returns data for an authenticated user's Starcraft III Profile.
