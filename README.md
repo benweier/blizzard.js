@@ -825,7 +825,7 @@ bnet.wow.quest({origin: 'us', quest: 13146}, callback);
 
 *Parameters*
 
-`fields` [optional] an array of one or more realms to limit.
+`realms` [optional] an array of one or more realms to limit.
 
 *Usage*
 
