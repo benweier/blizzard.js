@@ -52,7 +52,7 @@ var bnet = require('battlenet-api')(your_api_key);
 
 **As a system environment variable**
 ```
-$ sudo BATTLENET_API_KEY=[your_api_key] node server.js
+$ sudo BNET_ID=[your_api_key] node server.js
 ```
 
 While all three ways of using the API key can be used together, the Method usage will override the Require usage which will override the Environment Variable usage. Use the most appropriate way of setting the API key that suits your needs. Please see the documentation at the [Blizzard Developer Portal](https://dev.battle.net) to obtain your own Battle.net API key.
