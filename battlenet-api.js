@@ -38,8 +38,8 @@ module.exports = function(options) {
       profile: require('./lib/sc2/profile')(battlenet)
     },
     d3: {
-      data: require('./d3/data')(battlenet),
-      profile: require('./d3/profile')(battlenet)
+      data: require('./lib/d3/data')(battlenet),
+      profile: require('./lib/d3/profile')(battlenet)
     }
   };
 };
