@@ -59,7 +59,7 @@ While all three ways of using the API key can be used together, the Method usage
 
 # Documentation
 
-Each API method receives a parameters object, an _optional_ configuration object, and a callback function to execute once the request has completed. The available request parameters for each method are explained in the [Overview](#overview).
+Each API method accepts a parameters object, an _optional_ configuration object, and a callback function to execute once the request has completed. The available request parameters for each method are explained in the [Overview](#overview).
 
 ```javascript
 bnet.wow.character.profile(parameters, [config,] callback);
@@ -69,19 +69,30 @@ bnet.wow.character.profile(parameters, [config,] callback);
 * `origin` _Required_. This indicates which regional API endpoint to use and will match the region in which the user plays. The supported origins depends on the game you are requesting data for.
 * `locale` _Optional_. This localizes the returned results to the specified language. The supported locales depend on which `origin` is used, and when no `locale` is supplied the Battle.net API will default to the primary language of that region.
 
-`config`: _Optional_. Accepts the following configuration options.
-* `apikey` _Optional_. Your Battle.net API key is set here if not supplied by the Require or Environment Variable.
-* `timeout` _Optional_. Defaults to 10000.
-* `gzip` _Optional_. Defaults to true.
-* `maxRedirects` _Optional_. Defaults to 10.
+`config`: _Optional_. Compatible with the [request](https://www.npmjs.com/package/request) module. Accepts the following configuration options:
+* `apikey` Your Battle.net API key is set here if not supplied by the Require or Environment Variable.
+* `timeout` Defaults to 10000.
+* `gzip` Defaults to true.
+* `maxRedirects` Defaults to 10.
+* `followRedirect` Defaults to true.
+* `tunnel`
+* `proxy`
+* `proxyHeaderWhiteList`
+* `proxyHeaderExclusiveList`
 
-`callback` _Required_. The callback function receives two arguments `error` and `response`.
-* `error` is only applicable when there's an issue with the request connection. Otherwise `null`.
-* `response` will contain the request response body parsed as JSON.
+`callback` _Required_. The callback function accepts two arguments `error` and `response`.
+* `error` is only applicable when there's a connection issue to the API. Otherwise `null`.
+* `response` will contain the request response body parsed as JSON. If a request is successful this value can still return API errors such as 'Character not found' or 'Account forbidden'.
 
 A fully-formed request will look something like this:
 ```javascript
-bnet.wow.character.guild({ origin: 'us', realm: 'amanthul', name: 'charni' }, { apikey: BATTLENET_API_KEY }, function(err, resp) {
+bnet.wow.character.guild({
+  origin: 'us',
+  realm: 'amanthul',
+  name: 'charni'
+}, {
+  apikey: BNET_ID
+}, function(err, resp) {
   console.log(resp);
 });
 ```
@@ -182,7 +193,7 @@ bnet.wow.character.guild({ origin: 'us', realm: 'amanthul', name: 'charni' }, { 
 
 The User Account API methods are available via the `account` object of _battlenet-api_.
 
-All User Account requests take `accessToken` as a request parameter. Access tokens are generated with OAuth 2.0 and are valid for 30 days. How you implement OAuth is up to you, although I recommend checking out Blizzard's own [passport-bnet](https://www.npmjs.com/package/passport-bnet) package and reading the [Using OAuth](https://dev.battle.net/docs/read/oauth) article for more details.
+All User Account requests take `access_token` as a request parameter. Access tokens are generated with OAuth 2.0 and are valid for 30 days. How you implement OAuth is up to you, although I recommend checking out Blizzard's own [passport-bnet](https://www.npmjs.com/package/passport-bnet) package and reading the [Using OAuth](https://dev.battle.net/docs/read/oauth) article for more details.
 
 The supported origins for the Account API are: `us`, `eu`, `kr`, and `tw`.
 
@@ -196,7 +207,7 @@ Returns the authenticated user's account ID.
 *Usage*
 
 ```javascript
-bnet.account.id({origin: 'us', accessToken: users_access_token}, callback);
+bnet.account.id({origin: 'us', access_token: users_access_token}, callback);
 ```
 
 ---
@@ -209,7 +220,7 @@ Returns the authenticated user's BattleTag
 *Usage*
 
 ```javascript
-bnet.account.battletag({origin: 'us', accessToken: users_access_token}, callback);
+bnet.account.battletag({origin: 'us', access_token: users_access_token}, callback);
 ```
 
 ---
@@ -222,7 +233,7 @@ Returns data for an authenticated user's World of Warcraft Profile.
 *Usage*
 
 ```javascript
-bnet.account.wow({origin: 'us', accessToken: users_access_token}, callback);
+bnet.account.wow({origin: 'us', access_token: users_access_token}, callback);
 ```
 
 ---
@@ -235,7 +246,7 @@ Returns data for an authenticated user's Starcraft III Profile.
 *Usage*
 
 ```javascript
-bnet.account.sc2({origin: 'us', accessToken: users_access_token}, callback);
+bnet.account.sc2({origin: 'us', access_token: users_access_token}, callback);
 ```
 
 ---
