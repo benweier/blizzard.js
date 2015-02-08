@@ -4,16 +4,16 @@
 var request = require('request'),
     extend = require('extend');
 
-module.exports = function(params) {
+module.exports = function(options) {
   'use strict';
 
-  var settings = {};
-
-  if (typeof params !== 'object') {
-    settings.BNET_ID = params || false;
+  if (typeof options !== 'object') {
+    options = {
+      BNET_ID: options || false
+    };
   }
 
-  var battlenet = require('./common/battleNetApiRequest')(request, extend, settings);
+  var battlenet = require('./core')(request, extend, options);
 
   return {
     account: require('./account/user')(battlenet),
