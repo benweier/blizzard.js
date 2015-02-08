@@ -2,7 +2,7 @@
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
   "name": "battlenet-api",
   "description": "A Node.JS library for the Battle.net Community Platform API",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "homepage": "https://github.com/benweier/battlenet-api",
   "license": "MIT",
   "keywords": [
@@ -11,10 +11,11 @@
     "bnet",
     "api",
     "world of warcraft",
-    "starcraft 2",
-    "diablo 3",
+    "warcraft",
     "wow",
+    "starcraft",
     "sc2",
+    "diablo",
     "d3"
   ],
   "repository": {
@@ -24,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/benweier/battlenet-api/issues"
   },
-  "main": "lib/battlenet-api.js",
+  "main": "battlenet-api.js",
   "dependencies": {
     "request": "^2.40.0",
     "extend": "^2.0.0"
