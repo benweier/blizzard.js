@@ -13,7 +13,7 @@ module.exports = function(options) {
     };
   }
 
-  var battlenet = require('./core')(request, extend, options);
+  var battlenet = require('./lib/core')(request, extend, options);
 
   return {
     account: require('./account/user')(battlenet),
