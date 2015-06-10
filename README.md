@@ -3,7 +3,7 @@
 
 A Node.JS library for the Battle.net Community Platform API.
 
-_battlenet-api_ is my attempt to provide a simple, easy-to-use interface that is up-to-date and well-documented for access to all available Battle.net Community Platform API methods. You are free to use it where and how you like - I make no assumptions nor judgements about your use of the Battle.net API. The library doesn't perform any content checking, rate limiting, or Terms of Service enforcement. This is your responsibility as a developer to understand and Blizzard's responsibility to police.
+_battlenet-api_ is my attempt to provide a simple, easy-to-use interface that is up-to-date and well-documented for access to all available Battle.net Community Platform API methods. You are free to use it where and how you like as the library doesn't perform any content checking, rate limiting, or Terms of Service enforcement.
 
 # Install
 
@@ -195,7 +195,7 @@ The User Account API methods are available via the `account` object of _battlene
 
 All User Account requests take `access_token` as a request parameter. Access tokens are generated with OAuth 2.0 and are valid for 30 days. How you implement OAuth is up to you, although I recommend checking out Blizzard's own [passport-bnet](https://www.npmjs.com/package/passport-bnet) package and reading the [Using OAuth](https://dev.battle.net/docs/read/oauth) article for more details.
 
-The supported origins for the Account API are: `us`, `eu`, `kr`, and `tw`.
+The supported origins for the Account API are: `us`, `eu`, `kr`, `tw`, and `cn`.
 
 ---
 
@@ -268,6 +268,7 @@ Origin | Locales
 `eu` | `en_GB`, `es_ES`, `fr_FR`, `ru_RU`, `de_DE`, `pl_PL`, `pt_PT`, `it_IT`
 `kr` | `ko_KR`
 `tw` | `zh_TW`
+`cn` | `zh_CN`
 
 ---
 
@@ -902,6 +903,7 @@ Origin | Locales
 `sea` | `en_US`
 `kr` | `ko_KR`
 `tw` | `zh_TW`
+`cn` | `zh_CN`
 
 ---
 
@@ -1006,6 +1008,7 @@ Origin | Locales
 `eu` | `en_GB`, `es_ES`, `fr_FR`, `ru_RU`, `de_DE`, `pl_PL`, `pt_PT`, `it_IT`
 `kr` | `ko_KR`
 `tw` | `zh_TW`
+`cn` | `zh_CN`
 
 ---
 
