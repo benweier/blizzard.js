@@ -135,6 +135,7 @@ bnet.wow.character.guild({
   * [Quests](#wow-character-quests)
   * [Reputation](#wow-character-reputation)
   * [Stats](#wow-character-stats)
+  * [Statistics](#wow-character-statistics)
   * [Talents](#wow-character-talents)
   * [Titles](#wow-character-titles)
 * [Data Resources](#wow-data)
@@ -530,12 +531,23 @@ bnet.wow.character.reputation({origin: 'us', realm: 'amanthul', name: 'charni'},
 <a name="wow-character-stats"></a>
 #### Stats
 
-Returns the statistics data of the character.
+Returns the stats data of the character.
 
 *Usage*
 
 ```javascript
 bnet.wow.character.stats({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
+```
+
+<a name="wow-character-statistics"></a>
+#### Statistics
+
+Returns the statistics data of the character.
+
+*Usage*
+
+```javascript
+bnet.wow.character.statistics({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-talents"></a>
