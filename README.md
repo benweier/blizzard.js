@@ -82,7 +82,8 @@ bnet.wow.character.profile(parameters, [config,] callback);
 
 `callback` _Required_. The callback function accepts two arguments `error` and `response`.
 * `error` is only applicable when there's a connection issue to the API. Otherwise `null`.
-* `response` will contain the request response body parsed as JSON. If a request is successful this value can still return API errors such as 'Character not found' or 'Account forbidden'.
+* `body` is the request response body parsed as JSON. If a request is successful this value can still return API errors such as 'Character not found' or 'Account forbidden'.
+* `res` is the response information such as `headers` and `statusCode`.
 
 A fully-formed request will look something like this:
 ```javascript
@@ -92,8 +93,8 @@ bnet.wow.character.guild({
   name: 'charni'
 }, {
   apikey: BNET_ID
-}, function(err, resp) {
-  console.log(resp);
+}, function(err, body, res) {
+  console.log(body);
 });
 ```
 
@@ -531,7 +532,7 @@ bnet.wow.character.reputation({origin: 'us', realm: 'amanthul', name: 'charni'},
 <a name="wow-character-stats"></a>
 #### Stats
 
-Returns the stats data of the character.
+Returns the character sheet stats of the character like Strength and Agility. Note the difference between the `stats` and `statistics` methods.
 
 *Usage*
 
@@ -542,7 +543,7 @@ bnet.wow.character.stats({origin: 'us', realm: 'amanthul', name: 'charni'}, call
 <a name="wow-character-statistics"></a>
 #### Statistics
 
-Returns the statistics data of the character.
+Returns the gameplay statistics of the character like 'Used X bandages' etc. Note the difference between the `stats` and `statistics` methods.
 
 *Usage*
 
