@@ -103,7 +103,7 @@ bnet.wow.character.guild({
 
 ### [User Account](#account)
 
-* [ID](#account-id)
+* [ID](#account-user)
 * [BattleTag](#account-battletag)
 * [World of Warcraft OAuth Profile](#account-wow)
 * [Starcraft II OAuth Profile](#account-sc2)
@@ -201,28 +201,15 @@ The supported origins for the Account API are: `us`, `eu`, `kr`, `tw`, and `cn`.
 
 ---
 
-<a name="account-id"></a>
+<a name="account-user"></a>
 ### User ID
 
-Returns the authenticated user's account ID.
+Returns the authenticated user's account ID and BattleTag.
 
 *Usage*
 
 ```javascript
-bnet.account.id({origin: 'us', access_token: users_access_token}, callback);
-```
-
----
-
-<a name="account-battletag"></a>
-### BattleTag
-
-Returns the authenticated user's BattleTag
-
-*Usage*
-
-```javascript
-bnet.account.battletag({origin: 'us', access_token: users_access_token}, callback);
+bnet.account.user({origin: 'us', access_token: users_access_token}, callback);
 ```
 
 ---
