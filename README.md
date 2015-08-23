@@ -124,6 +124,7 @@ bnet.wow.character.guild({
   * [Achievements](#wow-character-achievements)
   * [Appearance](#wow-character-appearance)
   * [Audit](#wow-character-audit)
+  * [Feed](#wow-character-feed)
   * [Guild](#wow-character-guild)
   * [Hunter Pets](#wow-character-hunter-pets)
   * [Items](#wow-character-items)
@@ -404,6 +405,17 @@ Returns the appearance data of the character.
 
 ```javascript
 bnet.wow.character.appearance({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
+```
+
+<a name="wow-character-feed"></a>
+#### Feed
+
+Returns the character activity feed.
+
+*Usage*
+
+```javascript
+bnet.wow.character.feed({origin: 'us', realm: 'amanthul', name: 'charni'}, callback);
 ```
 
 <a name="wow-character-guild"></a>
