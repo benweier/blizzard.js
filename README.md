@@ -695,6 +695,8 @@ Returns the item data of the specified item ID.
 
 `id` the unique item ID.
 
+`context` _optional_ the context used to select a specific version of an item.
+
 *Usage*
 
 ```javascript
