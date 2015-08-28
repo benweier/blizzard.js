@@ -709,6 +709,8 @@ Returns the item data of the specified item ID.
 
 `context` _optional_ the context used to select a specific version of an item.
 
+`bonusList` _optional_ an array of bonus list of IDs applied to the item.
+
 *Usage*
 
 ```javascript
