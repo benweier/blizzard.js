@@ -38,6 +38,7 @@ module.exports = function(options) {
       profile: require('./lib/sc2/profile')(battlenet)
     },
     d3: {
+      season: require('./lib/d3/season')(battlenet),
       data: require('./lib/d3/data')(battlenet),
       profile: require('./lib/d3/profile')(battlenet)
     }
