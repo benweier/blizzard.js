@@ -185,6 +185,10 @@ bnet.wow.character.guild({
   * [Index](#d3-season-index)
   * [Season](#d3-season-season)
   * [Leaderboard](#d3-season-leaderboard)
+  * [Eras](#d3-era)
+    * [Index](#d3-era-index)
+    * [Era](#d3-era-era)
+    * [Leaderboard](#d3-era-leaderboard)
 * [Data Resources](#d3-data)
   * [Artisan](#d3-data-artisan)
   * [Follower](#d3-data-follower)
@@ -1076,6 +1080,54 @@ Returns a leaderboard.
 
 ```javascript
 bnet.d3.season.leaderboard({origin: 'us', season: 1, leaderboard: 'achievement-points'}, callback);
+```
+
+---
+
+<a name="d3-era"></a>
+### Season
+
+<a name="d3-era-index"></a>
+#### Index
+
+Returns base information about available eras.
+
+*Usage*
+
+```javascript
+bnet.d3.era.index({origin: 'us'}, callback);
+```
+
+<a name="d3-era-era"></a>
+#### Era
+
+Returns a leaderboard list for a particular era.
+
+*Parameters*
+
+`era` the era ID.
+
+*Usage*
+
+```javascript
+bnet.d3.era.era({origin: 'us', season: 1}, callback);
+```
+
+<a name="d3-era-leaderboard"></a>
+#### Leaderboard
+
+Returns a leaderboard.
+
+*Parameters*
+
+`era` the era ID.
+
+`leaderboard` the leaderboard to lookup, found in the Era API call.
+
+*Usage*
+
+```javascript
+bnet.d3.era.leaderboard({origin: 'us', season: 1, leaderboard: 'rift-barbarian'}, callback);
 ```
 
 ---
