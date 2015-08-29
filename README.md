@@ -181,6 +181,10 @@ bnet.wow.character.guild({
 
 ### [Diablo 3](#d3)
 
+* [Seasons](#d3-season)
+  * [Index](#d3-season-index)
+  * [Season](#d3-season-season)
+  * [Leaderboard](#d3-season-leaderboard)
 * [Data Resources](#d3-data)
   * [Artisan](#d3-data-artisan)
   * [Follower](#d3-data-follower)
@@ -1028,6 +1032,54 @@ Origin | Locales
 
 ---
 
+<a name="d3-season"></a>
+### Season
+
+<a name="d3-season-index"></a>
+#### Index
+
+Returns base information about available seasons.
+
+*Usage*
+
+```javascript
+bnet.d3.season.index({origin: 'us'}, callback);
+```
+
+<a name="d3-season-season"></a>
+#### Season
+
+Returns a leaderboard list for a particular season.
+
+*Parameters*
+
+`season` the season ID.
+
+*Usage*
+
+```javascript
+bnet.d3.season.season({origin: 'us', season: 1}, callback);
+```
+
+<a name="d3-season-leaderboard"></a>
+#### Leaderboard
+
+Returns a leaderboard.
+
+*Parameters*
+
+`season` the season ID.
+
+`leaderboard` the leaderboard to lookup, found in the Season API call.
+
+*Usage*
+
+```javascript
+bnet.d3.season.leaderboard({origin: 'us', season: 1, leaderboard: 'achievement-points'}, callback);
+```
+
+---
+
 <a name="d3-data"></a>
 ### Data Resources
 
@@ -1071,6 +1123,7 @@ bnet.d3.data.item({origin: 'us', item: 'CrABCL-oudQGEgcIBBWZWjYNHWU61OAdyg3pEx07
 ```
 
 ---
+
 <a name="d3-profile"></a>
 ### Profile
 
