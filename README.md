@@ -98,6 +98,10 @@ bnet.wow.character.guild({
 });
 ```
 
+### Encoding
+
+All parameters should be first URL encoded before passed to the API methods, as automatic parameter encoding is **not** performed. This means character names like "Légōlâs" should be passed through `encodeURIComponent()` to produce URL-safe "L%C3%A9g%C5%8Dl%C3%A2s".
+
 <a name="overview"></a>
 ## Overview
 
