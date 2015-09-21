@@ -855,7 +855,7 @@ bnet.wow.pvp.leaderboards({origin: 'us', bracket: '2v2'}, callback);
 *Usage*
 
 ```javascript
-bnet.wow.quest({origin: 'us', quest: 13146}, callback);
+bnet.wow.quest({origin: 'us', id: 13146}, callback);
 ```
 
 ---
