@@ -29,5 +29,8 @@
   "dependencies": {
     "request": "^2.40.0",
     "extend": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   }
 }
