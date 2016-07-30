@@ -26,6 +26,7 @@ module.exports = function(options) {
       data: require('./lib/wow/data')(battlenet),
       guild: require('./lib/wow/guild')(battlenet),
       item: require('./lib/wow/item')(battlenet),
+      mount: require('./lib/wow/mount')(battlenet),
       pvp: require('./lib/wow/pvp')(battlenet),
       quest: require('./lib/wow/quest')(battlenet),
       realmStatus: require('./lib/wow/realm')(battlenet),
