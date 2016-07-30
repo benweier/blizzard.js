@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/benweier/battlenet-api/issues"
   },
-  "main": "battlenet-api.js",
+  "main": "index.js",
   "dependencies": {
     "request": "^2.40.0",
     "extend": "^2.0.0"
