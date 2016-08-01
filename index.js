@@ -1,11 +1,12 @@
+'use strict';
+
 /**
  * Battle.net API Wrapper.
  */
-var request = require('request'),
-    extend = require('extend');
+const request = require('request');
+const extend = require('extend');
 
 module.exports = function(options) {
-  'use strict';
 
   if (typeof options !== 'object') {
     options = {
@@ -13,7 +14,7 @@ module.exports = function(options) {
     };
   }
 
-  var battlenet = require('./lib/battlenet-api')(request, extend, options);
+  const battlenet = require('./lib/battlenet-api')(request, extend, options);
 
   return {
     account: require('./lib/account/user')(battlenet),
@@ -45,4 +46,5 @@ module.exports = function(options) {
       season: require('./lib/d3/season')(battlenet)
     }
   };
+
 };
