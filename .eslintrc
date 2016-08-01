@@ -1,0 +1,20 @@
+ecmaFeatures:
+  arrowFunctions: true
+  blockBindings: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  templateStrings: true
+env:
+  node: true
+rules:
+  key-spacing: 1
+  no-mixed-spaces-and-tabs: 1
+  no-undefined: 2
+  no-unused-vars: 1
+  quotes:
+    - 2
+    - "single"
+  semi:
+    - 2
+    - "always"
+  strict: 0
