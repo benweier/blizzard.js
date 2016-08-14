@@ -21,6 +21,7 @@ module.exports = function(options) {
       achievement: require('./lib/wow/achievement')(battlenet),
       auction: require('./lib/wow/auction')(battlenet),
       battlePet: require('./lib/wow/battlepet')(battlenet),
+      boss: require('./lib/wow/boss')(battlenet),
       challenge: require('./lib/wow/challenge')(battlenet),
       character: require('./lib/wow/character')(battlenet),
       data: require('./lib/wow/data')(battlenet),
