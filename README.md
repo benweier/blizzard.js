@@ -100,7 +100,8 @@ bnet.wow.character.guild({
 
 ### Encoding
 
-All parameters should be first URL encoded before passed to the API methods, as automatic parameter encoding is **not** performed. This means character names like "Légōlâs" should be passed through `encodeURIComponent()` to produce URL-safe "L%C3%A9g%C5%8Dl%C3%A2s".
+All API paths are passed through `encodeURI()` to product URL-safe values. e.g. Character names like "Légōlâs" result in "L%C3%A9g%C5%8Dl%C3%A2s".
+Note that WoW realm slugs should contain no special characters requiring encoding. e.g. "Aman'thul" is slugified to "amanthul". Use the Realm Status API to fetch the full realm list and their associated slugs.
 
 <a name="overview"></a>
 ## Overview
@@ -120,6 +121,9 @@ All parameters should be first URL encoded before passed to the API methods, as 
   * [Ability](#wow-battle-pet-ability)
   * [Species](#wow-battle-pet-species)
   * [Stats](#wow-battle-pet-stats)
+* [Boss](#wow-boss)
+  * [Master List](#wow-boss-master-list)
+  * [Boss](#wow-boss-boss)
 * [Challenge](#wow-challenge)
   * [Realm Leaderboard](#wow-challenge-realm-leaderboard)
   * [Region Leaderboard](#wow-challenge-region-leaderboard)
@@ -165,6 +169,7 @@ All parameters should be first URL encoded before passed to the API methods, as 
 * [Item](#wow-item)
   * [Item](#wow-item-item)
   * [Item Set](#wow-item-item-set)
+* [Mount](#wow-mount)
 * [PVP](#wow-pvp)
   * [Leaderboards](#wow-pvp-leaderboards)
 * [Quest](#wow-quest)
@@ -346,6 +351,37 @@ bnet.wow.battlePet.species({origin: 'us', id: 258}, callback);
 
 ```javascript
 bnet.wow.battlePet.stats({origin: 'us', id: 258, fields: { level: 25, breedId: 5, qualityId: 4 }}, callback);
+```
+
+---
+
+<a name="wow-boss"></a>
+### Boss
+
+<a name="wow-boss-master-list"></a>
+#### Master List
+
+Return the Boss master list.
+
+*Usage*
+
+```javascript
+bnet.wow.boss.masterList({origin: 'us'}, callback);
+```
+
+<a name="wow-boss-boss"></a>
+#### Boss
+
+Returns an individual Boss specified by id.
+
+*Parameters*
+
+`id` The boss id.
+
+*Usage*
+
+```javascript
+bnet.wow.boss.boss({origin: 'us', id: 24723}, callback);
 ```
 
 ---
@@ -742,6 +778,19 @@ Returns the item set data of the specified set ID.
 
 ```javascript
 bnet.wow.item.set({origin: 'us', id: 1060}, callback);
+```
+
+---
+
+<a name="wow-mount"></a>
+### Mount
+
+Returns the Mount master list.
+
+*Usage*
+
+```javascript
+bnet.wow.mount({origin: 'us'}, callback);
 ```
 
 ---
