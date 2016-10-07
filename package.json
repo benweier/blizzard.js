@@ -1,11 +1,12 @@
 {
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
-  "name": "battlenet-api",
-  "description": "A Node.JS library for the Battle.net Community Platform API",
-  "version": "0.13.0",
+  "name": "Blizzard.js",
+  "description": "A Node.JS library for the Blizzard Battle.net Community Platform API",
+  "version": "1.0.0",
   "homepage": "https://github.com/benweier/battlenet-api",
   "license": "MIT",
   "keywords": [
+    "blizzard",
     "battlenet",
     "battle.net",
     "bnet",
@@ -27,10 +28,29 @@
   },
   "main": "index.js",
   "dependencies": {
-    "request": "^2.40.0",
-    "extend": "^2.0.0"
+    "axios": "^0.13.1"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "codeclimate-test-reporter": "~0.4.0",
+    "codecov": "~1.0.1",
+    "dotenv": "~2.0.0",
+    "eslint": "~3.6.0",
+    "istanbul": "~0.4.5",
+    "jsdoc": "~3.4.1",
+    "mocha": "~3.1.0",
+    "mocha-eslint": "~3.0.1",
+    "mocha-lcov-reporter": "~1.2.0"
   },
   "engines": {
     "node": ">=4.0.0"
+  },
+  "scripts": {
+    "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
+    "lint": "./node_modules/.bin/eslint --ignore-path ./.eslintignore ./**.js",
+    "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
+    "codecov": "./node_modules/.bin/codecov",
+    "codeclimate": "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info",
+    "test": "./node_modules/.bin/mocha ./test/test.js"
   }
 }
