@@ -1,0 +1,19 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "index.js"
+  - lib/
+exclude_paths:
+- coverage/
+- docs/
+- node_modules/
+- test/
