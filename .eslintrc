@@ -77,7 +77,7 @@
       "prefer": {
         "arg": "param",
         "argument": "param",
-        "constructor": "class",
+        "class": "constructor",
         "property": "prop",
         "returns": "return"
       }
