@@ -1,0 +1,24 @@
+{
+  "tags": {
+    "allowUnknownTags": false,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": [
+      "index.js",
+      "./lib/blizzard.js",
+      "./lib/endpoints.js",
+      "./lib/wow.js"
+    ]
+  },
+  "opts": {
+    "destination": "./docs/",
+    "encoding": "utf8",
+    "readme": "./README.md",
+    "template": "./node_modules/minami"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}
