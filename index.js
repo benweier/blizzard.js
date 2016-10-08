@@ -1,51 +1,26 @@
+/**
+ * @file Blizzard.js
+ * @description A Node.js wrapper for the Blizzard Battle.net Community Platform API
+ * @copyright Copyright(c) 2016 Ben Weier <ben.weier@gmail.com>
+ * @license MIT
+ * @version 1.0.0
+ * @module
+ */
 'use strict';
 
+const Blizzard = require('./lib/blizzard');
+
 /**
- * Battle.net API Wrapper.
+ * Initialize the Blizzard.js instance.
+ *
+ * @param  {Object} args Blizzard.js configuration options
+ * @return {Object}      An instance of Blizzard.js
  */
-const request = require('request');
-const extend = require('extend');
+const initialize = function initialize (args) {
+  // TODO Filter args by whitelisted configuration keys
+  const config = args;
 
-module.exports = function(options) {
-
-  if (typeof options !== 'object') {
-    options = {
-      BNET_ID: options || false
-    };
-  }
-
-  const battlenet = require('./lib/battlenet-api')(request, extend, options);
-
-  return {
-    account: require('./lib/account/user')(battlenet),
-    wow: {
-      achievement: require('./lib/wow/achievement')(battlenet),
-      auction: require('./lib/wow/auction')(battlenet),
-      battlePet: require('./lib/wow/battlepet')(battlenet),
-      boss: require('./lib/wow/boss')(battlenet),
-      challenge: require('./lib/wow/challenge')(battlenet),
-      character: require('./lib/wow/character')(battlenet),
-      data: require('./lib/wow/data')(battlenet),
-      guild: require('./lib/wow/guild')(battlenet),
-      item: require('./lib/wow/item')(battlenet),
-      mount: require('./lib/wow/mount')(battlenet),
-      pvp: require('./lib/wow/pvp')(battlenet),
-      quest: require('./lib/wow/quest')(battlenet),
-      realmStatus: require('./lib/wow/realm')(battlenet),
-      recipe: require('./lib/wow/recipe')(battlenet),
-      spell: require('./lib/wow/spell')(battlenet)
-    },
-    sc2: {
-      data: require('./lib/sc2/data')(battlenet),
-      ladder: require('./lib/sc2/ladder')(battlenet),
-      profile: require('./lib/sc2/profile')(battlenet)
-    },
-    d3: {
-      data: require('./lib/d3/data')(battlenet),
-      era: require('./lib/d3/era')(battlenet),
-      profile: require('./lib/d3/profile')(battlenet),
-      season: require('./lib/d3/season')(battlenet)
-    }
-  };
-
+  return new Blizzard(config);
 };
+
+exports.initialize = initialize;
