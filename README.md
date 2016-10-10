@@ -1,5 +1,4 @@
 # Battle.net API
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/benweier/battlenet-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A Node.JS library for the Battle.net Community Platform API.
 
