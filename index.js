@@ -4,7 +4,8 @@
  * @copyright Copyright(c) 2016 Ben Weier <ben.weier@gmail.com>
  * @license MIT
  * @version 1.0.0
- * @module
+ * @module index
+ * @requires lib/blizzard
  */
 'use strict';
 
@@ -15,6 +16,8 @@ const Blizzard = require('./lib/blizzard');
  *
  * @param  {Object} args Blizzard.js configuration options
  * @return {Object}      An instance of Blizzard.js
+ * @example
+ * const blizzard = require('blizzard.js').initialize({api_key: process.env.BATTLENET_API_KEY});
  */
 const initialize = function initialize (args) {
   // TODO Filter args by whitelisted configuration keys
