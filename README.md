@@ -1,5 +1,9 @@
 # Blizzard.js
 
+[![Travis](https://img.shields.io/travis/benweier/blizzard.js.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/benweier/blizzard.js)
+[![Codecov](https://img.shields.io/codecov/c/github/benweier/blizzard.js.svg?maxAge=2592000&style=flat-square)](https://codecov.io/gh/benweier/blizzard.js)
+[![Code Climate](https://img.shields.io/codeclimate/github/benweier/blizzard.js.svg?maxAge=2592000&style=flat-square)](https://codeclimate.com/github/benweier/blizzard.js)
+
 Blizzard.js is a promise-based Node.JS library for the Blizzard Battle.net Community Platform API.
 
 ## Install
