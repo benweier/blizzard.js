@@ -8,6 +8,9 @@
       "index.js",
       "./lib/blizzard.js",
       "./lib/endpoints.js",
+      "./lib/account.js",
+      "./lib/d3.js",
+      "./lib/sc2.js",
       "./lib/wow.js"
     ]
   },
@@ -15,7 +18,7 @@
     "destination": "./docs/",
     "encoding": "utf8",
     "readme": "./README.md",
-    "template": "./node_modules/minami"
+    "template": "./node_modules/docdash"
   },
   "templates": {
     "cleverLinks": false,
