@@ -28,7 +28,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.13.1"
+    "axios": "^0.14.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
@@ -36,10 +36,10 @@
     "codecov": "~1.0.1",
     "docdash": "~0.4.0",
     "dotenv": "~2.0.0",
-    "eslint": "~3.6.0",
+    "eslint": "~3.7.1",
     "istanbul": "~0.4.5",
-    "jsdoc": "~3.4.1",
-    "mocha": "~3.1.0",
+    "jsdoc": "~3.4.2",
+    "mocha": "~3.1.1",
     "mocha-eslint": "~3.0.1",
     "mocha-lcov-reporter": "~1.2.0"
   },
