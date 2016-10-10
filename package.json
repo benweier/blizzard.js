@@ -1,6 +1,6 @@
 {
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
-  "name": "Blizzard.js",
+  "name": "blizzard.js",
   "description": "A Node.JS library for the Blizzard Battle.net Community Platform API",
   "version": "1.0.0",
   "homepage": "https://github.com/benweier/blizzard.js",
