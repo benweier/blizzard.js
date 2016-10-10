@@ -3,7 +3,7 @@
   "name": "Blizzard.js",
   "description": "A Node.JS library for the Blizzard Battle.net Community Platform API",
   "version": "1.0.0",
-  "homepage": "https://github.com/benweier/battlenet-api",
+  "homepage": "https://github.com/benweier/blizzard.js",
   "license": "MIT",
   "keywords": [
     "blizzard",
@@ -21,10 +21,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/benweier/battlenet-api.git"
+    "url": "git://github.com/benweier/blizzard.js.git"
   },
   "bugs": {
-    "url": "https://github.com/benweier/battlenet-api/issues"
+    "url": "https://github.com/benweier/blizzard.js/issues"
   },
   "main": "index.js",
   "dependencies": {
