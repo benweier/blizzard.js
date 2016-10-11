@@ -7,7 +7,7 @@ const endpoints = require(path.normalize(`${__dirname}/../lib/endpoints`));
 
 describe('lib/endpoints.js', function () {
 
-  it('should have a method `getEndpoint`', function (done) {
+  it('should have a method "getEndpoint"', function (done) {
     chai.assert.isFunction(endpoints.getEndpoint);
     done();
   });
@@ -15,24 +15,34 @@ describe('lib/endpoints.js', function () {
   context('.getEndpoint()', function () {
     const endpoint = endpoints.getEndpoint();
 
-    it('should return the default endpoint', function (done) {
+    it('should return the US endpoint', function (done) {
       chai.assert.deepEqual(endpoint, {
         hostname: 'https://us.api.battle.net',
-        defaultLocale: 'en_US',
-        locales: ['en_US', 'es_MX', 'pt_BR']
+        locale: 'en_US'
       });
       done();
     });
   });
 
-  context('.getEndpoint(`eu`)', function () {
-    const endpoint = endpoints.getEndpoint('eu');
+  context('.getEndpoint("sea")', function () {
+    const endpoint = endpoints.getEndpoint('sea');
 
-    it('should return the requested endpoint', function (done) {
+    it('should return the SEA endpoint', function (done) {
+      chai.assert.deepEqual(endpoint, {
+        hostname: 'https://sea.api.battle.net',
+        locale: 'en_US'
+      });
+      done();
+    });
+  });
+
+  context('.getEndpoint("eu", "es_ES")', function () {
+    const endpoint = endpoints.getEndpoint('eu', 'es_ES');
+
+    it('should return the EU endpoint', function (done) {
       chai.assert.deepEqual(endpoint, {
         hostname: 'https://eu.api.battle.net',
-        defaultLocale: 'en_GB',
-        locales: ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT']
+        locale: 'es_ES'
       });
       done();
     });
