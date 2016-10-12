@@ -9,21 +9,32 @@
  */
 'use strict';
 
+/**
+ * @typedef {Object} Blizzard
+ * @prop    {Object} account  Account API methods
+ * @prop    {Object} d3       D3 API methods
+ * @prop    {Object} sc2      Sc2 API methods
+ * @prop    {Object} wow      WoW API methods
+ * @prop    {Function} params Filter an objects keys from an array of keys
+ * @prop    {Function} get    Perform a single request to the Blizzard API
+ * @prop    {Function} all    Perform multiple requests to the Blizzard API
+ */
 const Blizzard = require('./lib/blizzard');
 
 /**
  * Initialize the Blizzard.js instance.
  *
- * @param  {Object} args Blizzard.js configuration options
- * @return {Object}      An instance of Blizzard.js
+ * @param  {Object} args  Blizzard.js configuration options
+ * @param  {Object} axios An instance config object compatible with [axios]{@link https://github.com/mzabriskie/axios}
+ * @return {Blizzard}     An instance of Blizzard.js
  * @example
- * const blizzard = require('blizzard.js').initialize({api_key: process.env.BATTLENET_API_KEY});
+ * const blizzard = require('blizzard.js').initialize({apikey: process.env.BATTLENET_API_KEY});
  */
-const initialize = function initialize (args) {
-  // TODO Filter args by whitelisted configuration keys
-  const config = args;
+const initialize = function initialize (args, axios) {
+  const config = Object.assign({}, args);
+  const instance = Object.assign({}, axios);
 
-  return new Blizzard(config);
+  return new Blizzard(config, instance);
 };
 
 exports.initialize = initialize;
