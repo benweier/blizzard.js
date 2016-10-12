@@ -28,7 +28,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.14.0"
+    "axios": "^0.15.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
