@@ -1,37 +1,24 @@
 /* global describe, context, it */
 'use strict';
 
+require('dotenv').config({ silent: true });
+
 const path = require('path');
 const chai = require('chai');
-const blizzard = require(path.normalize(`${__dirname}/../index.js`)).initialize();
+const blizzard = require(path.normalize(`${__dirname}/../index.js`)).initialize({
+  apikey: process.env.BATTLENET_API_KEY
+});
 
 describe('lib/blizzard.js', function () {
 
-  context('.account', function () {
-    it('should have property: account', function (done) {
-      chai.assert.property(blizzard, 'account');
-      done();
-    });
-  });
+  context('API interfaces', function () {
+    const tests = ['account', 'd3', 'sc2', 'wow'];
 
-  context('.wow', function () {
-    it('should have a wow property', function (done) {
-      chai.expect(blizzard).to.have.property('wow');
-      done();
-    });
-  });
-
-  context('.sc2', function () {
-    it('should have a sc2 property', function (done) {
-      chai.expect(blizzard).to.have.property('sc2');
-      done();
-    });
-  });
-
-  context('.d3', function () {
-    it('should have a d3 property', function (done) {
-      chai.expect(blizzard).to.have.property('d3');
-      done();
+    tests.forEach(function (test) {
+      it(`should have property: ${test}`, function (done) {
+        chai.assert.property(blizzard, test);
+        done();
+      });
     });
   });
 
