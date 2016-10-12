@@ -13,7 +13,6 @@ const blizzard = require(path.normalize(`${__dirname}/../index.js`)).initialize(
 chai.use(chaiAsPromised);
 
 describe('lib/blizzard.js', function () {
-  this.slow(5000);
 
   context('API interfaces', function () {
     const tests = ['account', 'd3', 'sc2', 'wow'];
@@ -40,9 +39,10 @@ describe('lib/blizzard.js', function () {
   });
 
   context('.get()', function () {
+    this.timeout(5000);
 
-    it('should eventually be fulfilled', function (done) {
-      const request = blizzard.get('/wow/character/amanthul/charni', { realm: 'amanthul', name: 'charni' });
+    it('should eventually be fulfilled', function () {
+      const request = blizzard.get('/wow/character/amanthul/charni');
 
       return chai.assert.isFulfilled(request);
     });
