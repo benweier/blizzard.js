@@ -1,0 +1,15 @@
+coverage:
+  precision: 2
+  round: down
+  range: "80...100"
+
+comment:
+  layout: "header, diff, tree"
+  behavior: new
+
+coverage:
+  notify:
+    gitter:
+      default:
+        url: "https://webhooks.gitter.im/e/2e7cfc6d5cf9d8165b77"
+        threshold: 1%
