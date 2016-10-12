@@ -18,15 +18,15 @@ Install `blizzard.js` and save to your `package.json` dependencies with one easy
 Step 1: `require()` and `initialize()` Blizzard.js within your application:
 
 ```javascript
-const blizzard = require('blizzard.js').initialize({ api_key: BATTLENET_API_KEY });
+const blizzard = require('blizzard.js').initialize({ apikey: BATTLENET_API_KEY });
 ```
 
 Step 2: Call the API methods to request data:
 
 ```javascript
 blizzard.wow.character(['profile'], { origin: 'us', realm: 'amathul', name: 'charni' })
-  .then(data => {
-    console.log(data);
+  .then(response => {
+    console.log(response.data);
   });
 ```
 
