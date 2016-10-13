@@ -50,4 +50,26 @@ describe('lib/blizzard.js', function () {
     });
   });
 
+  context('.all()', function () {
+    this.timeout(5000);
+
+    it('should eventually be fulfilled', function () {
+      const character = blizzard.get('/wow/character/amanthul/charni');
+      const guild = blizzard.get('/wow/guild/amanthul/blackwolf');
+
+      const requests = blizzard.all([character, guild]);
+
+      return chai.assert.isFulfilled(requests);
+    });
+
+    it('should eventually be rejected', function () {
+      const character = blizzard.get('/wow/character/amanthul/lolthisdoesnotexist');
+      const guild = blizzard.get('/wow/guild/amanthul/lolneitherdoesthis');
+
+      const requests = blizzard.all([character, guild]);
+
+      return chai.assert.isRejected(requests);
+    });
+  });
+
 });
