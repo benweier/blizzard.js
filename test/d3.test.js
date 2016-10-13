@@ -70,4 +70,18 @@ describe('lib/d3.js', function () {
     });
   });
 
+  context('.profile()', function () {
+    it('should eventually return the career profile', function () {
+      const profile = blizzard.d3.profile({ tag: 'skt#1884' });
+
+      return chai.assert.eventually.deepProperty(profile, 'data.battleTag');
+    });
+
+    it('should eventually return the hero profile', function () {
+      const profile = blizzard.d3.profile({ tag: 'skt#1884', hero: 287801 });
+
+      return chai.assert.eventually.deepProperty(profile, 'data.name');
+    });
+  });
+
 });
