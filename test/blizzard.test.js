@@ -21,6 +21,14 @@ describe('lib/blizzard.js', function () {
     });
   });
 
+  context('.battletag()', function () {
+    it('should return a safe battletag', function (done) {
+      const tag = blizzard.battletag('skt#1884');
+      chai.assert.equal(tag, 'skt-1884');
+      done();
+    });
+  });
+
   context('.params()', function () {
     const obj = { one: 1, two: 2, three: 3, four: 4 };
     const filtered = blizzard.params(['one', 'three'], obj);
