@@ -1,14 +1,10 @@
 /* global describe, context, it */
 'use strict';
 
-require('dotenv').config({ silent: true });
-
-const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const blizzard = require(path.normalize(`${__dirname}/../index.js`)).initialize({
-  apikey: process.env.BATTLENET_API_KEY
-});
+
+const blizzard = require('./initialize');
 
 chai.use(chaiAsPromised);
 
