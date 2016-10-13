@@ -23,7 +23,6 @@ describe('lib/d3.js', function () {
   });
 
   context('.data()', function () {
-
     it('should have the correct API path', function () {
       const templar = blizzard.d3.data('follower', { id: 'templar' });
 
@@ -32,7 +31,6 @@ describe('lib/d3.js', function () {
   });
 
   context('.era()', function () {
-
     it('should eventually return the current era', function () {
       const era = blizzard.d3.era();
 
@@ -49,6 +47,26 @@ describe('lib/d3.js', function () {
       const era = blizzard.d3.era({ id: 5 });
 
       return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
+    });
+  });
+
+  context('.season()', function () {
+    it('should eventually return the current season', function () {
+      const season = blizzard.d3.season();
+
+      return chai.assert.eventually.deepProperty(season, 'data.current_season');
+    });
+
+    it('should eventually return the requested season', function () {
+      const season = blizzard.d3.season({ id: 3 });
+
+      return chai.assert.eventually.deepProperty(season, 'data.leaderboard');
+    });
+
+    it('should eventually return a requested season leaderboard', function () {
+      const season = blizzard.d3.season({ id: 5 });
+
+      return chai.assert.eventually.deepProperty(season, 'data.leaderboard');
     });
   });
 
