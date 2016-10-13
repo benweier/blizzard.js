@@ -10,12 +10,12 @@ chai.use(chaiAsPromised);
 
 describe('lib/blizzard.js', function () {
 
-  context('API interfaces', function () {
+  context('API objects', function () {
     const tests = ['account', 'd3', 'sc2', 'wow'];
 
     tests.forEach(function (test) {
-      it(`should have property: ${test}`, function (done) {
-        chai.assert.property(blizzard, test);
+      it(`should have a property "${test}"`, function (done) {
+        chai.assert.isObject(blizzard[test]);
         done();
       });
     });
