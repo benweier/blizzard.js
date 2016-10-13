@@ -9,6 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/d3.js', function () {
+  this.timeout(5000);
 
   context('API methods', function () {
     const tests = ['data', 'era', 'profile', 'season'];
@@ -18,6 +19,15 @@ describe('lib/d3.js', function () {
         chai.assert.isFunction(blizzard.d3[test]);
         done();
       });
+    });
+  });
+
+  context('.data()', function () {
+
+    it('should have the correct API path', function () {
+      const templar = blizzard.d3.data('follower', { id: 'templar' });
+
+      return chai.assert.eventually.deepPropertyVal(templar, 'config.url', 'https://us.api.battle.net/d3/data/follower/templar');
     });
   });
 
