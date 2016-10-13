@@ -31,4 +31,25 @@ describe('lib/d3.js', function () {
     });
   });
 
+  context('.era()', function () {
+
+    it('should eventually return the current era', function () {
+      const era = blizzard.d3.era();
+
+      return chai.assert.eventually.deepProperty(era, 'data.current_era');
+    });
+
+    it('should eventually return the requested era', function () {
+      const era = blizzard.d3.era({ id: 3 });
+
+      return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
+    });
+
+    it('should eventually return a requested era leaderboard', function () {
+      const era = blizzard.d3.era({ id: 5 });
+
+      return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
+    });
+  });
+
 });
