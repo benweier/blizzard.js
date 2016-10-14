@@ -42,4 +42,18 @@ describe('lib/sc2.js', function () {
     });
   });
 
+  context('.data()', function () {
+    it('should eventually return a list of achievements', function () {
+      const data = blizzard.sc2.data('achievements');
+
+      return chai.assert.eventually.deepProperty(data, 'data.achievements');
+    });
+
+    it('should eventually return a list of rewards', function () {
+      const data = blizzard.sc2.data('rewards');
+
+      return chai.assert.eventually.deepProperty(data, 'data.portraits');
+    });
+  });
+
 });
