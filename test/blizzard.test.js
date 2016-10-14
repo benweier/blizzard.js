@@ -9,6 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/blizzard.js', function () {
+  this.timeout(10000);
 
   context('API objects', function () {
     const tests = ['account', 'd3', 'sc2', 'wow'];
@@ -43,8 +44,6 @@ describe('lib/blizzard.js', function () {
   });
 
   context('.get()', function () {
-    this.timeout(5000);
-
     it('should eventually be fulfilled', function () {
       const request = blizzard.get('/wow/character/amanthul/charni');
 
@@ -59,8 +58,6 @@ describe('lib/blizzard.js', function () {
   });
 
   context('.all()', function () {
-    this.timeout(5000);
-
     it('should eventually be fulfilled', function () {
       const character = blizzard.get('/wow/character/amanthul/charni');
       const guild = blizzard.get('/wow/guild/amanthul/blackwolf');
