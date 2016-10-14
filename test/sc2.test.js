@@ -28,6 +28,18 @@ describe('lib/sc2.js', function () {
 
       return chai.assert.eventually.deepProperty(profile, 'data.id');
     });
+
+    it('should eventually return ladder placements', function () {
+      const profile = blizzard.sc2.profile('ladders', { id: 2137104, name: 'skt' });
+
+      return chai.assert.eventually.deepProperty(profile, 'data.currentSeason');
+    });
+
+    it('should eventually return match history', function () {
+      const profile = blizzard.sc2.profile('matches', { id: 2137104, name: 'skt' });
+
+      return chai.assert.eventually.deepProperty(profile, 'data.matches');
+    });
   });
 
 });
