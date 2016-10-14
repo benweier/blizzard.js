@@ -9,6 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/account.js', function () {
+  this.timeout(10000);
 
   context('API methods', function () {
     const tests = ['user', 'wow', 'sc2'];
@@ -18,6 +19,14 @@ describe('lib/account.js', function () {
         chai.assert.isFunction(blizzard.account[test]);
         done();
       });
+    });
+  });
+
+  context('.user()', function () {
+    it('should eventually return a user account profile', function () {
+      const user = blizzard.account.user();
+
+      return chai.assert.eventually.deepProperty(user, 'data.battletag');
     });
   });
 
