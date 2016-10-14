@@ -56,4 +56,12 @@ describe('lib/sc2.js', function () {
     });
   });
 
+  context('.ladder()', function () {
+    it('should eventually return a ladder', function () {
+      const ladder = blizzard.sc2.ladder({ id: 194163 });
+
+      return chai.assert.eventually.deepProperty(ladder, 'data.ladderMembers');
+    });
+  });
+
 });
