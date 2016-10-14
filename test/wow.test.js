@@ -9,7 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/wow.js', function () {
-  this.timeout(10000);
+  this.timeout(30000);
 
   context('API methods', function () {
     const tests = ['achievement', 'auction', 'battlepet', 'boss', 'challenge', 'character', 'data', 'guild', 'item', 'mount', 'pet', 'pvp', 'quest', 'realms', 'recipe', 'spell', 'zone'];

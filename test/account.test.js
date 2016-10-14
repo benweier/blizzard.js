@@ -9,7 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/account.js', function () {
-  this.timeout(10000);
+  this.timeout(30000);
 
   context('API methods', function () {
     const tests = ['user', 'wow', 'sc2'];
