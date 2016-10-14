@@ -38,4 +38,12 @@ describe('lib/account.js', function () {
     });
   });
 
+  context('.sc2()', function () {
+    it('should eventually return a SC2 profile', function () {
+      const user = blizzard.account.sc2();
+
+      return chai.assert.eventually.deepProperty(user, 'data.characters');
+    });
+  });
+
 });
