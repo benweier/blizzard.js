@@ -30,4 +30,12 @@ describe('lib/account.js', function () {
     });
   });
 
+  context('.wow()', function () {
+    it('should eventually return a list of WoW characters', function () {
+      const user = blizzard.account.wow();
+
+      return chai.assert.eventually.deepProperty(user, 'data.characters');
+    });
+  });
+
 });
