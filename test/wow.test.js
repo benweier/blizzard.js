@@ -9,7 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/wow.js', function () {
-  this.timeout(30000);
+  this.timeout(10000);
 
   context('API methods', function () {
     const tests = ['achievement', 'auction', 'battlepet', 'boss', 'challenge', 'character', 'data', 'guild', 'item', 'mount', 'pet', 'pvp', 'quest', 'realms', 'recipe', 'spell', 'zone'];
@@ -53,6 +53,8 @@ describe('lib/wow.js', function () {
   });
 
   context('.challenge()', function () {
+    this.timeout(30000);
+
     it('should eventually return challenge data for a region', function () {
       const challenge = blizzard.wow.challenge();
 
@@ -131,6 +133,8 @@ describe('lib/wow.js', function () {
   });
 
   context('.pvp()', function () {
+    this.timeout(180000);
+
     it('should eventually return a pvp leaderboard', function () {
       const pvp = blizzard.wow.pvp({ bracket: '3v3' });
 

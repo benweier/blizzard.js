@@ -9,7 +9,7 @@ const blizzard = require('./initialize');
 chai.use(chaiAsPromised);
 
 describe('lib/d3.js', function () {
-  this.timeout(30000);
+  this.timeout(10000);
 
   context('API methods', function () {
     const tests = ['data', 'era', 'profile', 'season'];
