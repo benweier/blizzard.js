@@ -38,15 +38,15 @@ describe('lib/d3.js', function () {
     });
 
     it('should eventually return the requested era', function () {
-      const era = blizzard.d3.era({ id: 3 });
+      const era = blizzard.d3.era({ id: 5 });
 
       return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
     });
 
     it('should eventually return a requested era leaderboard', function () {
-      const era = blizzard.d3.era({ id: 5 });
+      const era = blizzard.d3.era({ id: 7, leaderboard: 'rift-barbarian' });
 
-      return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
+      return chai.assert.eventually.deepProperty(era, 'data.title');
     });
   });
 
@@ -58,15 +58,15 @@ describe('lib/d3.js', function () {
     });
 
     it('should eventually return the requested season', function () {
-      const season = blizzard.d3.season({ id: 3 });
+      const season = blizzard.d3.season({ id: 5 });
 
       return chai.assert.eventually.deepProperty(season, 'data.leaderboard');
     });
 
     it('should eventually return a requested season leaderboard', function () {
-      const season = blizzard.d3.season({ id: 5 });
+      const season = blizzard.d3.season({ id: 7, leaderboard: 'rift-barbarian' });
 
-      return chai.assert.eventually.deepProperty(season, 'data.leaderboard');
+      return chai.assert.eventually.deepProperty(season, 'data.title');
     });
   });
 
