@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/endpoints.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-lib_account-Account.html">Account</a><ul class='methods'><li data-type='method'><a href="module-lib_account-Account.html#sc2">sc2</a></li><li data-type='method'><a href="module-lib_account-Account.html#user">user</a></li><li data-type='method'><a href="module-lib_account-Account.html#wow">wow</a></li></ul></li><li><a href="module-lib_blizzard-Blizzard.html">Blizzard</a><ul class='methods'><li data-type='method'><a href="module-lib_blizzard-Blizzard.html#all">all</a></li><li data-type='method'><a href="module-lib_blizzard-Blizzard.html#battletag">battletag</a></li><li data-type='method'><a href="module-lib_blizzard-Blizzard.html#get">get</a></li><li data-type='method'><a href="module-lib_blizzard-Blizzard.html#params">params</a></li></ul></li><li><a href="module-lib_d3-D3.html">D3</a><ul class='methods'><li data-type='method'><a href="module-lib_d3-D3.html#data">data</a></li><li data-type='method'><a href="module-lib_d3-D3.html#era">era</a></li><li data-type='method'><a href="module-lib_d3-D3.html#profile">profile</a></li><li data-type='method'><a href="module-lib_d3-D3.html#season">season</a></li></ul></li><li><a href="module-lib_sc2-SC2.html">SC2</a><ul class='methods'><li data-type='method'><a href="module-lib_sc2-SC2.html#data">data</a></li><li data-type='method'><a href="module-lib_sc2-SC2.html#ladder">ladder</a></li><li data-type='method'><a href="module-lib_sc2-SC2.html#profile">profile</a></li></ul></li><li><a href="module-lib_wow-WoW.html">WoW</a><ul class='methods'><li data-type='method'><a href="module-lib_wow-WoW.html#achievement">achievement</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#auction">auction</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#boss">boss</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#challenge">challenge</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#character">character</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#data">data</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#guild">guild</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#item">item</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#mount">mount</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#pet">pet</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#pvp">pvp</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#quest">quest</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#realms">realms</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#recipe">recipe</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#spell">spell</a></li><li data-type='method'><a href="module-lib_wow-WoW.html#zone">zone</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#~initialize">initialize</a></li></ul></li><li><a href="module-lib_account.html">lib/account</a></li><li><a href="module-lib_blizzard.html">lib/blizzard</a></li><li><a href="module-lib_d3.html">lib/d3</a></li><li><a href="module-lib_endpoints.html">lib/endpoints</a><ul class='methods'><li data-type='method'><a href="module-lib_endpoints.html#.getEndpoint">getEndpoint</a></li></ul></li><li><a href="module-lib_sc2.html">lib/sc2</a></li><li><a href="module-lib_wow.html">lib/wow</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib/endpoints.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Exports Blizzard API regional endpoints.
+ * @module lib/endpoints
+ */
+'use strict';
+
+/**
+ * Blizzard API regional endpoints.
+ *
+ * @typedef {Object} Endpoint
+ * @prop    {String} hostname The regional hostname
+ * @prop    {String} locale   A regional locale
+ */
+const endpoints = {
+  us: {
+    hostname: 'https://us.api.battle.net',
+    defaultLocale: 'en_US',
+    locales: ['en_US', 'es_MX', 'pt_BR']
+  },
+  eu: {
+    hostname: 'https://eu.api.battle.net',
+    defaultLocale: 'en_GB',
+    locales: ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT']
+  },
+  sea: {
+    hostname: 'https://sea.api.battle.net',
+    defaultLocale: 'en_US',
+    locales: ['en_US']
+  },
+  kr: {
+    hostname: 'https://kr.api.battle.net',
+    defaultLocale: 'ko_KR',
+    locales: ['ko_KR']
+  },
+  tw: {
+    hostname: 'https://tw.api.battle.net',
+    defaultLocale: 'zh_TW',
+    locales: ['zh_TW']
+  },
+  cn: {
+    hostname: 'https://api.battlenet.com.cn',
+    defaultLocale: 'zh_CN',
+    locales: ['zh_CN']
+  }
+};
+
+/**
+ * Get the endpoint for a given region.
+ *
+ * @param  {String} [key=us] A regional key
+ * @param  {String} [locale] An endpoint locale
+ * @return {Endpoint}        The endpoint data object
+ */
+exports.getEndpoint = function getEndpoint (key, locale) {
+  const endpoint = endpoints[key] || endpoints.us;
+
+  return Object.assign(
+    {},
+    { hostname: endpoint.hostname },
+    { locale: endpoint.locales.find(item => item === locale) || endpoint.defaultLocale }
+  );
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Sat Oct 15 2016 18:36:11 GMT+1000 (AEST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
