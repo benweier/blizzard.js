@@ -47,6 +47,12 @@
   "engines": {
     "node": ">=4.0.0"
   },
+  "files": [
+    "lib/",
+    "README.md",
+    "LICENSE",
+    "index.js"
+  ],
   "scripts": {
     "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
     "lint": "./node_modules/.bin/eslint -c ./.eslintrc --ignore-path ./.eslintignore . --fix",
