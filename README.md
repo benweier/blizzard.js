@@ -24,7 +24,7 @@ const blizzard = require('blizzard.js').initialize({ apikey: BATTLENET_API_KEY }
 Step 2: Call the API methods to request data:
 
 ```javascript
-blizzard.wow.character(['profile'], { origin: 'us', realm: 'amathul', name: 'charni' })
+blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'charni' })
   .then(response => {
     console.log(response.data);
   });
