@@ -44,6 +44,12 @@ describe('lib/blizzard.js', function () {
   });
 
   context('.get()', function () {
+    it('should request the correct URL', function () {
+      const request = blizzard.get('/wow/character/proudmoore/kailee');
+
+      return chai.assert.eventually.deepPropertyVal(request, 'config.url', 'https://us.api.battle.net/wow/character/proudmoore/kailee');
+    });
+
     it('should eventually be fulfilled', function () {
       const request = blizzard.get('/wow/character/amanthul/charni');
 
