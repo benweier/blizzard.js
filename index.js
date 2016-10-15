@@ -24,9 +24,13 @@ const Blizzard = require('./lib/blizzard');
 /**
  * Initialize the Blizzard.js instance.
  *
- * @param  {Object} args  Blizzard.js configuration options
- * @param  {Object} axios An instance config object compatible with [axios]{@link https://github.com/mzabriskie/axios}
- * @return {Blizzard}     An instance of Blizzard.js
+ * @param  {Object} args          Blizzard.js configuration options
+ * @param  {String} args.apikey   Your private Blizzard API key
+ * @param  {String} [args.token]  A default user access token
+ * @param  {String} [args.origin] The default API region
+ * @param  {String} [args.locale] The default API locale
+ * @param  {Object} axios         An instance config object compatible with [axios](https://github.com/mzabriskie/axios)
+ * @return {Blizzard}             An instance of Blizzard.js
  * @example
  * const blizzard = require('blizzard.js').initialize({apikey: process.env.BATTLENET_API_KEY});
  */
