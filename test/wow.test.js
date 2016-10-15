@@ -12,7 +12,7 @@ describe('lib/wow.js', function () {
   this.timeout(10000);
 
   context('API methods', function () {
-    const tests = ['achievement', 'auction', 'battlepet', 'boss', 'challenge', 'character', 'data', 'guild', 'item', 'mount', 'pet', 'pvp', 'quest', 'realms', 'recipe', 'spell', 'zone'];
+    const tests = ['achievement', 'auction', 'boss', 'challenge', 'character', 'data', 'guild', 'item', 'mount', 'pet', 'pvp', 'quest', 'realms', 'recipe', 'spell', 'zone'];
 
     tests.forEach(function (test) {
       it(`should have a method "${test}"`, function (done) {
@@ -77,7 +77,7 @@ describe('lib/wow.js', function () {
   });
 
   context('.data()', function () {
-    it('should eventually return battlegroups data', function () {
+    it('should eventually return battlegroups', function () {
       const data = blizzard.wow.data('battlegroups');
 
       return chai.assert.eventually.deepProperty(data, 'data.battlegroups');
