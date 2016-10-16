@@ -49,6 +49,7 @@
   },
   "files": [
     "lib/",
+    "API.md",
     "README.md",
     "LICENSE",
     "index.js"
