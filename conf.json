@@ -20,6 +20,7 @@
     "readme": "./README.md",
     "template": "./node_modules/docdash"
   },
+  "plugins": ["plugins/markdown"],
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false
