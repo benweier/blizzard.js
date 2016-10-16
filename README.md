@@ -5,7 +5,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/benweier/blizzard.js.svg?maxAge=2592000&style=flat-square)](https://codeclimate.com/github/benweier/blizzard.js)
 [![Gitter](https://img.shields.io/gitter/room/benweier/blizzard.js.svg?maxAge=2592000&style=flat-square)](https://gitter.im/benweier/blizzard.js)
 
-Blizzard.js is a promise-based Node.JS library for the Blizzard Battle.net Community Platform API.
+Blizzard.js is a promise-based Node.js library for the Blizzard Battle.net Community Platform API.
 
 ## Install
 
