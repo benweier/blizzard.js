@@ -84,43 +84,43 @@ describe('lib/wow.js', function () {
     });
 
     it('should eventually return character races', function () {
-      const data = blizzard.wow.data('character/races');
+      const data = blizzard.wow.data('character-races');
 
       return chai.assert.eventually.deepProperty(data, 'data.races');
     });
 
     it('should eventually return character classes', function () {
-      const data = blizzard.wow.data('character/classes');
+      const data = blizzard.wow.data('character-classes');
 
       return chai.assert.eventually.deepProperty(data, 'data.classes');
     });
 
     it('should eventually return character achievements', function () {
-      const data = blizzard.wow.data('character/achievements');
+      const data = blizzard.wow.data('character-achievements');
 
       return chai.assert.eventually.deepProperty(data, 'data.achievements');
     });
 
     it('should eventually return guild rewards', function () {
-      const data = blizzard.wow.data('guild/rewards');
+      const data = blizzard.wow.data('guild-rewards');
 
       return chai.assert.eventually.deepProperty(data, 'data.rewards');
     });
 
     it('should eventually return guild perks', function () {
-      const data = blizzard.wow.data('guild/perks');
+      const data = blizzard.wow.data('guild-perks');
 
       return chai.assert.eventually.deepProperty(data, 'data.perks');
     });
 
     it('should eventually return guild achievements', function () {
-      const data = blizzard.wow.data('guild/achievements');
+      const data = blizzard.wow.data('guild-achievements');
 
       return chai.assert.eventually.deepProperty(data, 'data.achievements');
     });
 
     it('should eventually return item classes', function () {
-      const data = blizzard.wow.data('item/classes');
+      const data = blizzard.wow.data('item-classes');
 
       return chai.assert.eventually.deepProperty(data, 'data.classes');
     });
@@ -132,7 +132,7 @@ describe('lib/wow.js', function () {
     });
 
     it('should eventually return pet types', function () {
-      const data = blizzard.wow.data('pet/types');
+      const data = blizzard.wow.data('pet-types');
 
       return chai.assert.eventually.deepProperty(data, 'data.petTypes');
     });
