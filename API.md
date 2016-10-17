@@ -401,6 +401,22 @@ Fetch challenge data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.challenge({ origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.challenge({ realm: 'medivh', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.character()`
 
 Fetch character data.
@@ -415,6 +431,22 @@ Fetch character data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.character(['profile', 'achievements'], { realm: 'proudmoore', name: 'kailee', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.character(['pets', 'petSlots'], { realm: 'amanthul', name: 'charni', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.data()`
 
 Fetch a WoW data resource.
@@ -426,6 +458,22 @@ Fetch a WoW data resource.
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.wow.data('character-races', { origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.data('character-classes', { origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
 
 ### `.wow.guild()`
 
@@ -441,6 +489,15 @@ Fetch guild data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.guild(['profile', 'members'], { realm: 'amanthul', name: 'blackwolf', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.item()`
 
 Fetch item data.
@@ -455,6 +512,15 @@ Fetch item data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.item({ id: 18803, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.mount()`
 
 Fetch mount data.
@@ -465,6 +531,15 @@ Fetch mount data.
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.wow.mount({ origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
 
 ### `.wow.pet()`
 
@@ -479,6 +554,29 @@ Fetch pet data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.pet('list', { origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.pet('ability', { id: 640, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.pet('species', { id: 258, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.pvp()`
 
 Fetch pvp data.
@@ -486,10 +584,19 @@ Fetch pvp data.
 **Parameters**
 
 -   `args` Object
-    -   `args.bracket` String - The pvp bracket ID
+    -   `args.bracket` String - The pvp bracket key
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.wow.pvp({ bracket: '3v3', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
 
 ### `.wow.quest()`
 
@@ -503,6 +610,15 @@ Fetch quest data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.quest({ id: 13146, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.realms()`
 
 Fetch realm data.
@@ -510,10 +626,26 @@ Fetch realm data.
 **Parameters**
 
 -   `args` Object
-    -   `args.realms` [Array] - A list of slugified realm names
+    -   `args.realms` [String|Array] - One or more slugified realm names
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.wow.realms({ origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.realms({ realms: ['blackrock', 'proudmoore'], origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
 
 ### `.wow.recipe()`
 
@@ -527,6 +659,15 @@ Fetch recipe data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.recipe({ id: 33994, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.spell()`
 
 Fetch spell data.
@@ -539,6 +680,15 @@ Fetch spell data.
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
 
+**Example**
+
+```javascript
+blizzard.wow.spell({ id: 8056, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.wow.zone()`
 
 Fetch zone data.
@@ -550,3 +700,19 @@ Fetch zone data.
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.wow.zone({ origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.wow.zone({ id: 4131, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
