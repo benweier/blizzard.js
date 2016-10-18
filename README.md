@@ -8,6 +8,7 @@
 Blizzard.js is a promise-based Node.js library for the Blizzard Battle.net Community Platform API.
 
 - [API](https://github.com/benweier/blizzard.js/blob/master/API.md)
+- [Example App](https://github.com/benweier/blizzard.js/tree/master/example)
 
 ## Install
 
