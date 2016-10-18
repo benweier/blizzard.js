@@ -1,0 +1,6 @@
+{
+  "name": "Blizzard.js Example App",
+  "description": "An example app demonstrating the Blizzard.js API",
+  "repository": "https://github.com/benweier/blizzard.js/tree/master/example",
+  "keywords": ["node", "blizzard.js", "battle.net", "api"]
+}
