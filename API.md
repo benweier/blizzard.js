@@ -423,7 +423,7 @@ Fetch character data.
 
 **Parameters**
 
--   `keys` String|Array - One or more character resource keys
+-   `keys` String|Array - One or more character resource keys: `profile`, `achievements`, `appearance`, `feed`, `guild`, `hunterPets`, `items`, `mounts`, `professions`, `progression`, `pvp`, `quests`, `reputation`, `statistics`, `stats`, `talents`, `titles`, `audit`
 -   `args` Object
     -   `args.name` String - The character name
     -   `args.realm` String - The slugified realm name
@@ -453,7 +453,7 @@ Fetch a WoW data resource.
 
 **Parameters**
 
--   `key` String - The data resource key
+-   `key` String - The data resource key: `battlegroups`, `character-achievements`, `character-classes`, `character-races`, `guild-achievements`, `guild-perks`, `guild-rewards`, `item-classes, `pet-types`, `talents`
 -   `args` Object
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
@@ -481,7 +481,7 @@ Fetch guild data.
 
 **Parameters**
 
--   `keys` String|Array - One or more guild resource keys
+-   `keys` String|Array - One or more guild resource keys: `profile`, `achievements`, `challenge`, `members`, `news`
 -   `args` Object
     -   `args.name` String - The guild name
     -   `args.realm` String - The slugified realm name
@@ -547,7 +547,7 @@ Fetch pet data.
 
 **Parameters**
 
--   `key` String - The pet resource key
+-   `key` String - The pet resource key: `list`, `ability`, `species`, `stats`
 -   `args` Object
     -   `args.id` [String] - The pet resource ID
     -   `args.origin` [String] - The region key
