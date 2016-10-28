@@ -18,7 +18,7 @@ describe('lib/endpoints.js', function () {
     it('should return the US endpoint', function (done) {
       chai.assert.deepEqual(endpoint, {
         hostname: 'https://us.api.battle.net',
-        locale: 'en_US'
+        locale: 'en_US',
       });
       done();
     });
@@ -30,7 +30,7 @@ describe('lib/endpoints.js', function () {
     it('should return the SEA endpoint', function (done) {
       chai.assert.deepEqual(endpoint, {
         hostname: 'https://sea.api.battle.net',
-        locale: 'en_US'
+        locale: 'en_US',
       });
       done();
     });
@@ -42,7 +42,7 @@ describe('lib/endpoints.js', function () {
     it('should return the EU endpoint', function (done) {
       chai.assert.deepEqual(endpoint, {
         hostname: 'https://eu.api.battle.net',
-        locale: 'es_ES'
+        locale: 'es_ES',
       });
       done();
     });
