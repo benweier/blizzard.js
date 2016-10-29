@@ -74,6 +74,18 @@ describe('lib/wow.js', function () {
 
       return chai.assert.eventually.deepProperty(character, 'data.name');
     });
+
+    it('should eventually return character achievements', function () {
+      const character = blizzard.wow.character(['profile', 'achievements'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+
+      return chai.assert.eventually.deepProperty(character, 'data.achievements');
+    });
+
+    it('should eventually return character pets', function () {
+      const character = blizzard.wow.character(['pets'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+
+      return chai.assert.eventually.deepProperty(character, 'data.pets');
+    });
   });
 
   context('.data()', function () {
@@ -143,6 +155,12 @@ describe('lib/wow.js', function () {
       const guild = blizzard.wow.guild(['profile'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
 
       return chai.assert.eventually.deepProperty(guild, 'data.name');
+    });
+
+    it('should eventually return guild achievements', function () {
+      const guild = blizzard.wow.guild(['profile', 'achievements'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
+
+      return chai.assert.eventually.deepProperty(guild, 'data.achievements');
     });
   });
 
