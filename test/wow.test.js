@@ -237,10 +237,10 @@ describe('lib/wow.js', function () {
       return chai.assert.eventually.deepProperty(realms, 'data.realms');
     });
 
-    it('should eventually return realm status for a list of realms', function () {
+    it('should eventually return a list of realms', function () {
       const realms = blizzard.wow.realms({ realms: ['blackrock', 'proudmoore'] });
 
-      return chai.assert.eventually.deepProperty(realms, 'data.realms');
+      return chai.expect(realms).to.eventually.have.deep.property('data.realms').and.have.lengthOf(2);
     });
   });
 
