@@ -18,7 +18,7 @@ Blizzard.js uses [axios](https://github.com/mzabriskie/axios) internally and req
 
 -   `args` Object
     -   `args.apikey` String - Your private Blizzard API key
-    -   `args.token` [String] - A default user access token
+    -   `args.access_token` [String] - A default user access token
     -   `args.origin` [String] - The default API region
     -   `args.locale` [String] - The default API locale
 -   `instance` [Object] - An axios instance configuration object
@@ -38,7 +38,7 @@ Fetch an authenticated user's account `id` and `battletag`.
 **Parameters**
 
 -   `args` Object
-    -   `args.token` String - The user access token
+    -   `args.access_token` String - The user access token
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
@@ -59,7 +59,7 @@ Fetch an authenticated user's World of Warcraft character list.
 **Parameters**
 
 -   `args` Object
-    -   `args.token` String - The user access token
+    -   `args.access_token` String - The user access token
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
@@ -80,7 +80,7 @@ Fetch an authenticated user's Starcraft 2 profile.
 **Parameters**
 
 -   `args` Object
-    -   `args.token` String - The user access token
+    -   `args.access_token` String - The user access token
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
@@ -133,7 +133,7 @@ Fetch a Diablo 3 era.
 
 -   `args` Object
     -   `args.id` [Number] - The era ID
-    -   `args.token` [String] - A user access token
+    -   `args.access_token` [String] - A user access token
     -   `args.leaderboard` [String] - The era leaderboard key
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
@@ -200,7 +200,7 @@ Fetch a Diablo 3 season.
 -   `args` Object
     -   `args.id` [String] - The season ID
     -   `args.leaderboard` [String] - The season leaderboard key
-    -   `args.token` [String] - A user access token
+    -   `args.access_token` [String] - A user access token
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
