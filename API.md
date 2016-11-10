@@ -46,7 +46,7 @@ Fetch an authenticated user's account `id` and `battletag`.
 **Example**
 
 ```javascript
-blizzard.account.user({ token: USER_ACCESS_TOKEN, origin: 'us' })
+blizzard.account.user({ access_token: USER_ACCESS_TOKEN, origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
@@ -67,7 +67,7 @@ Fetch an authenticated user's World of Warcraft character list.
 **Example**
 
 ```javascript
-blizzard.account.wow({ token: USER_ACCESS_TOKEN, origin: 'us' })
+blizzard.account.wow({ access_token: USER_ACCESS_TOKEN, origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
@@ -88,7 +88,7 @@ Fetch an authenticated user's Starcraft 2 profile.
 **Example**
 
 ```javascript
-blizzard.account.sc2({ token: USER_ACCESS_TOKEN, origin: 'us' })
+blizzard.account.sc2({ access_token: USER_ACCESS_TOKEN, origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
