@@ -1,11 +1,10 @@
 # Blizzard.js
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/benweier/blizzard.js.svg)](https://greenkeeper.io/)
-
 [![Travis](https://img.shields.io/travis/benweier/blizzard.js.svg?style=flat-square)](https://travis-ci.org/benweier/blizzard.js)
 [![Codecov](https://img.shields.io/codecov/c/github/benweier/blizzard.js.svg?style=flat-square)](https://codecov.io/gh/benweier/blizzard.js)
 [![Code Climate](https://img.shields.io/codeclimate/github/benweier/blizzard.js.svg?style=flat-square)](https://codeclimate.com/github/benweier/blizzard.js)
 [![Gitter](https://img.shields.io/gitter/room/benweier/blizzard.js.svg?style=flat-square)](https://gitter.im/benweier/blizzard.js)
+[![Greenkeeper badge](https://img.shields.io/badge/greenkeeper-enabled-brightgreen.svg?style=flat-square)](https://greenkeeper.io)
 
 Blizzard.js is a promise-based Node.js library for the Blizzard Battle.net Community Platform API.
 
