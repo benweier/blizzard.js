@@ -1,5 +1,7 @@
 # Blizzard.js
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/benweier/blizzard.js.svg)](https://greenkeeper.io/)
+
 [![Travis](https://img.shields.io/travis/benweier/blizzard.js.svg?style=flat-square)](https://travis-ci.org/benweier/blizzard.js)
 [![Codecov](https://img.shields.io/codecov/c/github/benweier/blizzard.js.svg?style=flat-square)](https://codecov.io/gh/benweier/blizzard.js)
 [![Code Climate](https://img.shields.io/codeclimate/github/benweier/blizzard.js.svg?style=flat-square)](https://codeclimate.com/github/benweier/blizzard.js)
