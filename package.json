@@ -2,7 +2,7 @@
   "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
   "name": "blizzard.js",
   "description": "A Node.JS library for the Blizzard Battle.net Community Platform API",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "homepage": "https://github.com/benweier/blizzard.js",
   "license": "MIT",
   "keywords": [

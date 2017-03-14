@@ -1,9 +1,9 @@
 /**
  * @file Blizzard.js
  * @description A Node.js wrapper for the Blizzard Battle.net Community Platform API
- * @copyright Copyright(c) 2016 Ben Weier <ben.weier@gmail.com>
+ * @copyright Copyright(c) 2017 Ben Weier <ben.weier@gmail.com>
  * @license MIT
- * @version 1.6.0
+ * @version 1.6.1
  * @module index
  * @requires lib/blizzard
  */
