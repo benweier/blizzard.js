@@ -1,6 +1,4 @@
 /* global describe, context, it */
-'use strict';
-
 const path = require('path');
 const chai = require('chai');
 const endpoints = require(path.normalize(`${__dirname}/../lib/endpoints`));

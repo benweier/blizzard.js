@@ -1,6 +1,4 @@
 /* global describe, it, context */
-'use strict';
-
 const path = require('path');
 const chai = require('chai');
 const blizzard = require('./initialize');

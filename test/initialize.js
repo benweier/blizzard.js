@@ -1,5 +1,3 @@
-'use strict';
-
 require('dotenv').config({ silent: true });
 
 const path = require('path');

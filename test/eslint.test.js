@@ -1,6 +1,4 @@
 /* global describe */
-'use strict';
-
 const lint = require('mocha-eslint');
 
 describe('Code Standards', function () {
