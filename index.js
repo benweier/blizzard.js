@@ -7,7 +7,6 @@
  * @module index
  * @requires lib/blizzard
  */
-'use strict';
 
 /**
  * @typedef {Object} Blizzard
