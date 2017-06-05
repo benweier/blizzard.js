@@ -31,7 +31,7 @@
     "axios": "^0.16.0"
   },
   "devDependencies": {
-    "chai": "~3.5.0",
+    "chai": "~4.0.2",
     "chai-as-promised": "~6.0.0",
     "codeclimate-test-reporter": "~0.4.1",
     "codecov": "~2.2.0",
