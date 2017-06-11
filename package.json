@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "chai": "~3.5.0",
-    "chai-as-promised": "~6.0.0",
+    "chai-as-promised": "~7.0.0",
     "codeclimate-test-reporter": "~0.4.1",
     "codecov": "~2.2.0",
     "docdash": "~0.4.0",
