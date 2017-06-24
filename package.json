@@ -37,7 +37,7 @@
     "codecov": "~2.2.0",
     "docdash": "~0.4.0",
     "dotenv": "~4.0.0",
-    "eslint": "~3.19.0",
+    "eslint": "~4.1.0",
     "istanbul": "~0.4.5",
     "jsdoc": "~3.4.2",
     "mocha": "~3.4.1",
