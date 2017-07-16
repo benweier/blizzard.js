@@ -38,7 +38,9 @@
     "docdash": "~0.4.0",
     "dotenv": "~4.0.0",
     "eslint": "~4.2.0",
+    "eslint-plugin-jest": "^20.0.3",
     "istanbul": "~0.4.5",
+    "jest": "^20.0.4",
     "jsdoc": "~3.5.0",
     "mocha": "~3.4.1",
     "mocha-eslint": "~4.0.0",
@@ -60,6 +62,6 @@
     "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "codecov": "./node_modules/.bin/codecov",
     "codeclimate": "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info",
-    "test": "./node_modules/.bin/mocha ./test/*.test.js"
+    "test": "./node_modules/.bin/jest"
   }
 }
