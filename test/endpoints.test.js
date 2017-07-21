@@ -1,49 +1,35 @@
-/* global describe, context, it */
-const path = require('path');
-const chai = require('chai');
-const endpoints = require(path.normalize(`${__dirname}/../lib/endpoints`));
+const endpoints = require('../lib/endpoints');
 
-describe('lib/endpoints.js', function () {
+describe('lib/endpoints.js', () => {
 
-  it('should have a method "getEndpoint"', function (done) {
-    chai.assert.isFunction(endpoints.getEndpoint);
-    done();
+  test('should export functions', () => {
+    expect(endpoints).toEqual(expect.objectContaining({
+      getEndpoint: expect.any(Function),
+    }));
   });
 
-  context('.getEndpoint()', function () {
-    const endpoint = endpoints.getEndpoint();
+  describe('#getEndpoint()', () => {
 
-    it('should return the US endpoint', function (done) {
-      chai.assert.deepEqual(endpoint, {
-        hostname: 'https://us.api.battle.net',
-        locale: 'en_US',
-      });
-      done();
+    test('with no parameters should return the default endpoint', () => {
+      const endpoint = endpoints.getEndpoint();
+      expect(endpoint).toMatchSnapshot();
     });
-  });
 
-  context('.getEndpoint("sea")', function () {
-    const endpoint = endpoints.getEndpoint('sea');
-
-    it('should return the SEA endpoint', function (done) {
-      chai.assert.deepEqual(endpoint, {
-        hostname: 'https://sea.api.battle.net',
-        locale: 'en_US',
-      });
-      done();
+    test('with invalid parameters should return the default endpoint', () => {
+      const endpoint = endpoints.getEndpoint('foo');
+      expect(endpoint).toMatchSnapshot();
     });
-  });
 
-  context('.getEndpoint("eu", "es_ES")', function () {
-    const endpoint = endpoints.getEndpoint('eu', 'es_ES');
-
-    it('should return the EU endpoint', function (done) {
-      chai.assert.deepEqual(endpoint, {
-        hostname: 'https://eu.api.battle.net',
-        locale: 'es_ES',
-      });
-      done();
+    test('with valid parameters should return the SEA endpoint', () => {
+      const endpoint = endpoints.getEndpoint('sea');
+      expect(endpoint).toMatchSnapshot();
     });
+
+    test('with valid parameters should return the EU es_ES endpoint', () => {
+      const endpoint = endpoints.getEndpoint('eu', 'es_ES');
+      expect(endpoint).toMatchSnapshot();
+    });
+
   });
 
 });
