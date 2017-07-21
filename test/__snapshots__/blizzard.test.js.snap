@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lib/blizzard.js #params() should return object keys 1`] = `
+Object {
+  "foo": "foo",
+}
+`;

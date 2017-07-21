@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lib/endpoints.js #getEndpoint() with invalid parameters should return the default endpoint 1`] = `
+Object {
+  "hostname": "https://us.api.battle.net",
+  "locale": "en_US",
+}
+`;
+
+exports[`lib/endpoints.js #getEndpoint() with no parameters should return the default endpoint 1`] = `
+Object {
+  "hostname": "https://us.api.battle.net",
+  "locale": "en_US",
+}
+`;
+
+exports[`lib/endpoints.js #getEndpoint() with valid parameters should return the EU es_ES endpoint 1`] = `
+Object {
+  "hostname": "https://eu.api.battle.net",
+  "locale": "es_ES",
+}
+`;
+
+exports[`lib/endpoints.js #getEndpoint() with valid parameters should return the SEA endpoint 1`] = `
+Object {
+  "hostname": "https://sea.api.battle.net",
+  "locale": "en_US",
+}
+`;
