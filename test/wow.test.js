@@ -97,7 +97,7 @@ describe('lib/wow.js', () => {
 
   describe('#character()', () => {
     test('should request a character profile', () => {
-      blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+      blizzard.wow.character([], { origin: 'us', realm: 'amanthul', name: 'charni' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -173,7 +173,7 @@ describe('lib/wow.js', () => {
 
   describe('#guild()', () => {
     test('should request a guild profile', () => {
-      blizzard.wow.guild(['profile'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
+      blizzard.wow.guild([], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -202,7 +202,7 @@ describe('lib/wow.js', () => {
   });
 
   describe('#item()', () => {
-    test('should request a single item by id', () => {
+    test('should request an item by id', () => {
       blizzard.wow.item({ id: 18803 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
