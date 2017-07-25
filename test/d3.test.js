@@ -49,7 +49,7 @@ describe('lib/d3.js', () => {
 
   describe('#era()', () => {
     test('should request the current era', () => {
-      blizzard.d3.era();
+      blizzard.d3.era({ access_token: 'test' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -81,7 +81,7 @@ describe('lib/d3.js', () => {
 
   describe('#season()', () => {
     test('should request the current season', () => {
-      blizzard.d3.season();
+      blizzard.d3.season({ access_token: 'test' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
