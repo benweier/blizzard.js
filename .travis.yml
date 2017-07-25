@@ -4,10 +4,10 @@ node_js:
 - "5"
 - "6"
 - "7"
+- "8"
 script:
-- npm run istanbul
+- npm test
 - npm run codecov
-- npm run codeclimate
 addons:
   apt:
     sources:
