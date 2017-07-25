@@ -212,6 +212,16 @@ describe('lib/wow.js', () => {
       );
     });
 
+    test('should request an item with bonuses', () => {
+      blizzard.wow.item({ id: 18803, bonuses: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/item/18803',
+        expect.any(Object)
+      );
+    });
+
     test('should request an item set by id', () => {
       blizzard.wow.item({ set: true, id: 1060 });
 
