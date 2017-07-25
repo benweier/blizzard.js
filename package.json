@@ -33,12 +33,10 @@
   "devDependencies": {
     "codecov": "~2.2.0",
     "docdash": "~0.4.0",
-    "dotenv": "~4.0.0",
     "eslint": "^4.3.0",
     "eslint-plugin-jest": "^20.0.3",
     "jest": "^20.0.4",
-    "jsdoc": "~3.5.0",
-    "mocha-eslint": "~4.0.0"
+    "jsdoc": "~3.5.0"
   },
   "engines": {
     "node": ">=4.0.0"
