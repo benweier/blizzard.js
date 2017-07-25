@@ -31,7 +31,6 @@
     "axios": "^0.16.2"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.5.0",
     "codecov": "~2.2.0",
     "docdash": "~0.4.0",
     "dotenv": "~4.0.0",
