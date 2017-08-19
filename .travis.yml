@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-- "4"
-- "6"
-- "8"
+  - "4"
+  - "6"
+  - "8"
 script:
-- npm test
-- npm run codecov
+  - npm test
+  - npm run codecov
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
+      - g++-4.8
 env:
   matrix:
-  - CXX=g++-4.8
+    - CXX=g++-4.8
 notifications:
   webhooks:
     urls:
