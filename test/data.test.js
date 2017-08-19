@@ -8,12 +8,26 @@ describe('lib/data.js', () => {
 
   test('should have the correct API methods', () => {
     expect(blizzard.data).toEqual(expect.objectContaining({
+      credentials: expect.any(Function),
       connectedRealm: expect.any(Function),
       mythicLeaderboard: expect.any(Function),
       realm: expect.any(Function),
       region: expect.any(Function),
       token: expect.any(Function),
     }));
+  });
+
+  describe('#credentials()', () => {
+    test('should request an application access token', () => {
+      blizzard.data.credentials();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/oauth/token',
+        expect.any(Object)
+      );
+    });
+
   });
 
   describe('#connectedRealm()', () => {
