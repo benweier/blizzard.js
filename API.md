@@ -1,18 +1,18 @@
 # Blizzard.js API Reference
 
-A promise-based Node.JS library for the Blizzard Battle.net Community Platform API.
+A promise-based Node.js library for the Blizzard Community Platform API.
 
 ### `.initialize()`
 
-Return an initialized Blizzard.js instance with default options.
+Return an initialized *Blizzard.js* instance with default options.
 
-Your Battle.net API key is required for all API calls so it must be passed to Blizzard.js with `.initialize()` or with each request.
+Your Battle.net API key is required for all API calls so it must be passed to *Blizzard.js* with `.initialize()` or with each request.
 
 A user access token is only required for account level requests. A default access token can be passed to `.initialize()` (for a browser environment working with a single user account), or to each request (for a server environment working with multiple user accounts).
 
 Other parameters include `origin` and `locale`. When passed to `initialize()` they are no longer required with each request unless you want to override the default (e.g. when setting US as the default region but you want to request from the EU region instead).
 
-Blizzard.js uses [axios](https://github.com/mzabriskie/axios) internally and requests return fetch promises from axios. The `instance` argument is an axios-compatible default configuration object.
+*Blizzard.js* uses [axios](https://github.com/mzabriskie/axios) internally and requests return fetch promises from axios. The `instance` argument is an axios-compatible default configuration object.
 
 **Parameters**
 

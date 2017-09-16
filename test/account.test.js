@@ -1,46 +1,52 @@
-/* global describe, context, it */
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-
 const blizzard = require('./initialize');
 
-chai.use(chaiAsPromised);
+describe('lib/account.js', () => {
 
-describe('lib/account.js', function () {
-  this.timeout(10000);
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
+  });
 
-  context('API methods', function () {
-    const tests = ['user', 'wow', 'sc2'];
+  test('should have a API methods', () => {
+    expect(blizzard.account).toEqual(expect.objectContaining({
+      user: expect.any(Function),
+      wow: expect.any(Function),
+      sc2: expect.any(Function),
+    }));
+  });
 
-    tests.forEach(function (test) {
-      it(`should have a method "${test}"`, function (done) {
-        chai.assert.isFunction(blizzard.account[test]);
-        done();
-      });
+  describe('#user()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.account.user();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/account/user',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.user()', function () {
-    it('should eventually return a user account profile', function () {
-      const user = blizzard.account.user();
+  describe('#wow()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.account.wow();
 
-      return chai.assert.eventually.deepProperty(user, 'data.battletag');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/user/characters',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.wow()', function () {
-    it('should eventually return a list of WoW characters', function () {
-      const user = blizzard.account.wow();
+  describe('#sc2()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.account.sc2();
 
-      return chai.assert.eventually.deepProperty(user, 'data.characters');
-    });
-  });
-
-  context('.sc2()', function () {
-    it('should eventually return a SC2 profile', function () {
-      const user = blizzard.account.sc2();
-
-      return chai.assert.eventually.deepProperty(user, 'data.characters');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/profile/user',
+        expect.any(Object)
+      );
     });
   });
 

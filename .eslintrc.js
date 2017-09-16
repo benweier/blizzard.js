@@ -3,8 +3,10 @@ module.exports = {
   'env': {
     'es6': true,
     'node': true,
-    'browser': false
+    'browser': false,
+    'jest': true,
   },
+  'plugins': ['jest'],
   'rules': {
     'array-bracket-spacing': [2, 'never'],
     'block-scoped-var': 2,

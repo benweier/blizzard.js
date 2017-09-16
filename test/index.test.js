@@ -1,15 +1,16 @@
-/* global describe, it, context */
-const path = require('path');
-const chai = require('chai');
+const axios = require('axios');
 const blizzard = require('./initialize');
-const prototype = require(path.normalize(`${__dirname}/../lib/blizzard.js`));
+const prototype = require('../lib/blizzard.js');
 
-describe('index.js', function () {
+describe('index.js', () => {
 
-  context('.initialize()', function () {
-    it('should return an instance of blizzard.js', function (done) {
-      chai.assert.instanceOf(blizzard, prototype, 'blizzard is an instance of blizzard.js');
-      done();
+  describe('#initialize()', () => {
+    test('should return an instance of blizzard.js', () => {
+      expect(blizzard).toBeInstanceOf(prototype);
+    });
+
+    test('should create an instance of axios', () => {
+      expect(axios.create).toHaveBeenCalledTimes(1);
     });
   });
 

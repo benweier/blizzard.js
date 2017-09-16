@@ -1,84 +1,135 @@
-/* global describe, context, it */
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-
 const blizzard = require('./initialize');
 
-chai.use(chaiAsPromised);
+describe('lib/d3.js', () => {
 
-describe('lib/d3.js', function () {
-  this.timeout(10000);
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
+  });
 
-  context('API methods', function () {
-    const tests = ['data', 'era', 'profile', 'season'];
+  test('should have the correct API methods', () => {
+    expect(blizzard.d3).toEqual(expect.objectContaining({
+      data: expect.any(Function),
+      era: expect.any(Function),
+      profile: expect.any(Function),
+      season: expect.any(Function),
+    }));
+  });
 
-    tests.forEach(function (test) {
-      it(`should have a method "${test}"`, function (done) {
-        chai.assert.isFunction(blizzard.d3[test]);
-        done();
-      });
+  describe('#data()', () => {
+    test('should request the correct item', () => {
+      blizzard.d3.data('item', { id: 'item/1234567890' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/data/item/1234567890',
+        expect.any(Object)
+      );
+    });
+
+    test('should request the correct follower', () => {
+      blizzard.d3.data('follower', { id: 'templar' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/data/follower/templar',
+        expect.any(Object)
+      );
+    });
+
+    test('should request the correct artisan', () => {
+      blizzard.d3.data('artisan', { id: 'blacksmith' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/data/artisan/blacksmith',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.data()', function () {
-    it('should have the correct API path', function () {
-      const templar = blizzard.d3.data('follower', { id: 'templar' });
+  describe('#era()', () => {
+    test('should request the current era', () => {
+      blizzard.d3.era({ access_token: 'test' });
 
-      return chai.assert.eventually.deepPropertyVal(templar, 'config.url', 'https://us.api.battle.net/d3/data/follower/templar');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/era/',
+        expect.any(Object)
+      );
+    });
+
+    test('should request the correct id', () => {
+      blizzard.d3.era({ id: 5 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/era/5',
+        expect.any(Object)
+      );
+    });
+
+    test('should request the correct id and leaderboard', () => {
+      blizzard.d3.era({ id: 7, leaderboard: 'rift-barbarian' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/era/7/leaderboard/rift-barbarian',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.era()', function () {
-    it('should eventually return the current era', function () {
-      const era = blizzard.d3.era();
+  describe('#season()', () => {
+    test('should request the current season', () => {
+      blizzard.d3.season({ access_token: 'test' });
 
-      return chai.assert.eventually.deepProperty(era, 'data.current_era');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/season/',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return the requested era', function () {
-      const era = blizzard.d3.era({ id: 5 });
+    test('should request the correct season id', () => {
+      blizzard.d3.season({ id: 5 });
 
-      return chai.assert.eventually.deepProperty(era, 'data.leaderboard');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/season/5',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return a requested era leaderboard', function () {
-      const era = blizzard.d3.era({ id: 7, leaderboard: 'rift-barbarian' });
+    test('should request the correct seaseon id and leaderboard', () => {
+      blizzard.d3.season({ id: 7, leaderboard: 'rift-barbarian' });
 
-      return chai.assert.eventually.deepProperty(era, 'data.title');
-    });
-  });
-
-  context('.season()', function () {
-    it('should eventually return the current season', function () {
-      const season = blizzard.d3.season();
-
-      return chai.assert.eventually.deepProperty(season, 'data.current_season');
-    });
-
-    it('should eventually return the requested season', function () {
-      const season = blizzard.d3.season({ id: 5 });
-
-      return chai.assert.eventually.deepProperty(season, 'data.leaderboard');
-    });
-
-    it('should eventually return a requested season leaderboard', function () {
-      const season = blizzard.d3.season({ id: 7, leaderboard: 'rift-barbarian' });
-
-      return chai.assert.eventually.deepProperty(season, 'data.title');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/d3/season/7/leaderboard/rift-barbarian',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.profile()', function () {
-    it('should eventually return the career profile', function () {
-      const profile = blizzard.d3.profile({ tag: 'skt#1884' });
+  describe('#profile()', () => {
+    test('should request the correct player profile', () => {
+      blizzard.d3.profile({ tag: 'skt#1884' });
 
-      return chai.assert.eventually.deepProperty(profile, 'data.battleTag');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/profile/skt-1884/',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return the hero profile', function () {
-      const profile = blizzard.d3.profile({ tag: 'skt#1884', hero: 287801 });
+    test('should request the correct hero profile', () => {
+      blizzard.d3.profile({ tag: 'skt#1884', hero: 287801 });
 
-      return chai.assert.eventually.deepProperty(profile, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801',
+        expect.any(Object)
+      );
     });
   });
 
