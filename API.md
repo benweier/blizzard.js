@@ -94,6 +94,184 @@ blizzard.account.sc2({ access_token: USER_ACCESS_TOKEN, origin: 'us' })
   });
 ```
 
+## Data
+
+The Blizzard World of Warcraft Game Data APIs provide access to the following resources:
+
+- Connected Realm API
+- Realm API
+- Region API
+- Mythic Keystone Leaderboard API
+- WoW Token API
+
+These APIs require a valid application access token which is obtained through the `.credentials()` method.
+
+### `.data.credentials()`
+
+Fetch an application access token.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.id` String - Your application client ID
+    -   `args.secret` String - Your application client secret
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.credentials({id: process.env.BLIZZARD_API_ID, secret: process.env.BLIZZARD_API_SECRET, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.connectedRealm()`
+
+Fetch the index of connected realms or a single connected realm by ID.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.realm` [Number] - The connected realm ID for a single realm
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.connectedRealm({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.data.connectedRealm({ access_token, namespace: 'dynamic-us', realm: 11, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.mythicLeaderboard()`
+
+Get an index of Mythic Keystone Leaderboards for a connected realm or weekly Mythic Keystone Leaderboard by period.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.realm` [Number] - The realm ID
+    -   `args.dungeon` [Number] - The dungeon ID
+    -   `args.period` [Number] - The mythic leaderboard period
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.mythicLeaderboard({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.data.mythicLeaderboard({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', relam: 11, dungeon: 197, period: 602 origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.realm()`
+
+Get an index of realms or a single realm by slug or ID.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.realm` [String|Number] - The connected realm slug or ID
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.realm({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.data.realm({ access_token, namespace: 'dynamic-us', realm: 11, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.region()`
+
+Get an index of regions or a single region by ID.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.region` [Number] - The region ID
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.region({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+```javascript
+blizzard.data.region({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', region: 1, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.token()`
+
+Get the World of Warcraft token index.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.token({ access_token, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ## Diablo 3
 
 ### `.d3.data()`
