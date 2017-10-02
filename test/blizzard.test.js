@@ -6,6 +6,10 @@ const WorldOfWarcraft = require('../lib/wow');
 
 describe('lib/blizzard.js', () => {
 
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
+  });
+
   test('should have API properties', () => {
     expect(blizzard).toEqual(expect.objectContaining({
       account: expect.any(Account),
@@ -16,6 +20,8 @@ describe('lib/blizzard.js', () => {
       params: expect.any(Function),
       get: expect.any(Function),
       all: expect.any(Function),
+      fetchToken: expect.any(Function),
+      checkToken: expect.any(Function),
     }));
   });
 
@@ -58,6 +64,30 @@ describe('lib/blizzard.js', () => {
       expect(blizzard.axios.all).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.all).toHaveBeenCalledWith(
         expect.arrayContaining([expect.any(Promise)])
+      );
+    });
+  });
+
+  describe('#fetchToken()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.fetchToken('us', {});
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/oauth/token',
+        expect.any(Object)
+      );
+    });
+  });
+
+  describe('#checkToken()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.checkToken('us', {});
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/oauth/check_token',
+        expect.any(Object)
       );
     });
   });
