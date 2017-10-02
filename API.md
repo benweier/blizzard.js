@@ -104,7 +104,7 @@ The Blizzard World of Warcraft Game Data APIs provide access to the following re
 - Mythic Keystone Leaderboard API
 - WoW Token API
 
-These APIs require a valid application access token which is obtained through the `.credentials()` method.
+These APIs require a valid application access token which is obtained through the `.credentials()` method, while an issued access token can be checked through the `.validate()` method.
 
 ### `.data.credentials()`
 
@@ -115,14 +115,31 @@ Fetch an application access token.
 -   `args` Object
     -   `args.id` String - Your application client ID
     -   `args.secret` String - Your application client secret
-    -   `args.origin` [String] - The region key
-    -   `args.locale` [String] - A locale code for this region
--   `instance` [Object] - An axios instance configuration object
+    -   `args.origin` String - The region key
 
 **Example**
 
 ```javascript
 blizzard.data.credentials({id: process.env.BLIZZARD_API_ID, secret: process.env.BLIZZARD_API_SECRET, origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
+### `.data.validate()`
+
+Check the details of an application access token.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.origin` String - The region key
+    -   `args.token` String - The access token to be checked
+
+**Example**
+
+```javascript
+blizzard.data.validate({ origin: 'us', token: APPLICATION_ACCESS_TOKEN })
   .then(response => {
     console.log(response.data);
   });
