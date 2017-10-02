@@ -9,6 +9,7 @@ describe('lib/data.js', () => {
   test('should have the correct API methods', () => {
     expect(blizzard.data).toEqual(expect.objectContaining({
       credentials: expect.any(Function),
+      validate: expect.any(Function),
       connectedRealm: expect.any(Function),
       mythicLeaderboard: expect.any(Function),
       realm: expect.any(Function),
@@ -19,15 +20,38 @@ describe('lib/data.js', () => {
 
   describe('#credentials()', () => {
     test('should request an application access token', () => {
-      blizzard.data.credentials();
+      blizzard.data.credentials({
+        origin: 'us',
+        id: 'id',
+        secret: 'secret',
+      });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/oauth/token',
-        expect.any(Object)
+        'https://us.battle.net/oauth/token',
+        expect.objectContaining({
+          params: {
+            grant_type: 'client_credentials',
+            client_id: 'id',
+            client_secret: 'secret',
+          },
+        })
       );
     });
+  });
 
+  describe('#validate()', () => {
+    test('should check an application access token', () => {
+      blizzard.data.validate({ origin: 'us', token: 'test' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/oauth/check_token',
+        expect.objectContaining({
+          params: { token: 'test' },
+        })
+      );
+    });
   });
 
   describe('#connectedRealm()', () => {
