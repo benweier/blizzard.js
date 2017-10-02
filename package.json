@@ -50,7 +50,7 @@
   ],
   "scripts": {
     "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
-    "lint": "./node_modules/.bin/eslint -c ./.eslintrc --ignore-path ./.eslintignore . --fix",
+    "lint": "./node_modules/.bin/eslint -c ./.eslintrc.js --ignore-path ./.eslintignore . --fix",
     "codecov": "./node_modules/.bin/codecov",
     "test": "./node_modules/.bin/jest"
   },
