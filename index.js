@@ -3,7 +3,7 @@
  * @description A Node.js wrapper for the Blizzard Community Platform API
  * @copyright Copyright(c) 2017 Ben Weier <ben.weier@gmail.com>
  * @license MIT
- * @version 2.0.0
+ * @version 2.0.1
  * @module index
  * @requires lib/blizzard
  */
