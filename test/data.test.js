@@ -144,7 +144,7 @@ describe('lib/data.js', () => {
 
   describe('#token()', () => {
     test('should request token data', () => {
-      blizzard.data.token();
+      blizzard.data.token({ origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
