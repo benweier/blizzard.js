@@ -56,7 +56,7 @@ describe('lib/data.js', () => {
 
   describe('#connectedRealm()', () => {
     test('should request the connected realm index', () => {
-      blizzard.data.connectedRealm();
+      blizzard.data.connectedRealm({ origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -66,7 +66,7 @@ describe('lib/data.js', () => {
     });
 
     test('should request a single connected realm', () => {
-      blizzard.data.connectedRealm({ realm: 11 });
+      blizzard.data.connectedRealm({ realm: 11, origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -78,7 +78,7 @@ describe('lib/data.js', () => {
 
   describe('#mythicLeaderboard()', () => {
     test('should request the mythic leaderboard index', () => {
-      blizzard.data.mythicLeaderboard({ realm: 11 });
+      blizzard.data.mythicLeaderboard({ realm: 11, origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -88,7 +88,7 @@ describe('lib/data.js', () => {
     });
 
     test('should request a mythic leaderboard period', () => {
-      blizzard.data.mythicLeaderboard({ realm: 11, dungeon: 200, period: 606 });
+      blizzard.data.mythicLeaderboard({ realm: 11, dungeon: 200, period: 606, origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -100,7 +100,7 @@ describe('lib/data.js', () => {
 
   describe('#realm()', () => {
     test('should request the realm index', () => {
-      blizzard.data.realm();
+      blizzard.data.realm({ origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -110,7 +110,7 @@ describe('lib/data.js', () => {
     });
 
     test('should request a single realm', () => {
-      blizzard.data.realm({ realm: 11 });
+      blizzard.data.realm({ realm: 11, origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -122,7 +122,7 @@ describe('lib/data.js', () => {
 
   describe('#region()', () => {
     test('should request the region index', () => {
-      blizzard.data.region();
+      blizzard.data.region({ origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -132,7 +132,7 @@ describe('lib/data.js', () => {
     });
 
     test('should request a single region', () => {
-      blizzard.data.region({ region: 1 });
+      blizzard.data.region({ region: 1, origin: 'us' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
