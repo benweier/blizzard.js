@@ -31,7 +31,7 @@
     "axios": "^0.16.2"
   },
   "devDependencies": {
-    "codecov": "^2.3.0",
+    "codecov": "^3.0.0",
     "docdash": "~0.4.0",
     "eslint": "^4.7.0",
     "eslint-plugin-jest": "^21.1.0",
