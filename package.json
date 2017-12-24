@@ -55,6 +55,7 @@
     "test": "./node_modules/.bin/jest"
   },
   "jest": {
-    "collectCoverage": true
+    "collectCoverage": true,
+    "testEnvironment": "node"
   }
 }
