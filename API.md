@@ -207,6 +207,28 @@ blizzard.data.mythicLeaderboard({ access_token: APPLICATION_ACCESS_TOKEN, namesp
   });
 ```
 
+### `.data.mythicChallengeMode()`
+
+Get current period information about the Mythic Challenge Mode relevant to Mythic Keystone Leaderboards.
+
+**Parameters**
+
+-   `args` Object
+    -   `args.access_token` String - The application access token
+    -   `args.namespace` String - The game data namespace
+    -   `args.origin` [String] - The region key
+    -   `args.locale` [String] - A locale code for this region
+-   `instance` [Object] - An axios instance configuration object
+
+**Example**
+
+```javascript
+blizzard.data.mythicChallengeMode({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
+  .then(response => {
+    console.log(response.data);
+  });
+```
+
 ### `.data.realm()`
 
 Get an index of realms or a single realm by slug or ID.
