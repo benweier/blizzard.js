@@ -98,6 +98,18 @@ describe('lib/data.js', () => {
     });
   });
 
+  describe('#mythicChallengeMode()', () => {
+    test('should request the mythic challenge mode index', () => {
+      blizzard.data.mythicChallengeMode({ realm: 11, origin: 'us' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/data/wow/mythic-challenge-mode/',
+        expect.any(Object)
+      );
+    });
+  });
+
   describe('#realm()', () => {
     test('should request the realm index', () => {
       blizzard.data.realm({ origin: 'us' });
