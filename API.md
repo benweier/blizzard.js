@@ -169,7 +169,7 @@ blizzard.data.connectedRealm({ access_token: APPLICATION_ACCESS_TOKEN, namespace
 ```
 
 ```javascript
-blizzard.data.connectedRealm({ access_token, namespace: 'dynamic-us', realm: 11, origin: 'us' })
+blizzard.data.connectedRealm({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', realm: 11, origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
@@ -253,7 +253,7 @@ blizzard.data.realm({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynami
 ```
 
 ```javascript
-blizzard.data.realm({ access_token, namespace: 'dynamic-us', realm: 11, origin: 'us' })
+blizzard.data.realm({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', realm: 11, origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
@@ -305,7 +305,7 @@ Get the World of Warcraft token index.
 **Example**
 
 ```javascript
-blizzard.data.token({ access_token, namespace: 'dynamic-us', origin: 'us' })
+blizzard.data.token({ access_token: APPLICATION_ACCESS_TOKEN, namespace: 'dynamic-us', origin: 'us' })
   .then(response => {
     console.log(response.data);
   });
