@@ -131,6 +131,25 @@ describe('lib/d3.js', () => {
         expect.any(Object)
       );
     });
-  });
 
+    test('should request the correct hero profile with items', () => {
+      blizzard.d3.profile({ tag: 'skt#1884', hero: 287801, itemTypes: 'items' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801/items',
+        expect.any(Object)
+      );
+    });
+
+    test('should request the correct hero profile with follower-items', () => {
+      blizzard.d3.profile({ tag: 'skt#1884', hero: 287801, itemTypes: 'follower-items' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801/follower-items',
+        expect.any(Object)
+      );
+    });
+  });
 });
