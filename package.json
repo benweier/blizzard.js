@@ -28,7 +28,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.17.1"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "codecov": "^3.0.0",
