@@ -384,10 +384,11 @@ blizzard.d3.era({ id: 5, leaderboard: 'rift-barbarian', origin: 'us' })
 Fetch a Diablo 3 profile.
 
 **Parameters**
-
+ * @param  {String} [args.itemTypes]    
 -   `args` Object
     -   `args.tag` String - The user battletag
     -   `args.hero` [Number] - The hero ID
+    -   `args.itemTypes` [String] - The hero items to fetch: `items`, `follower-items`
     -   `args.origin` [String] - The region key
     -   `args.locale` [String] - A locale code for this region
 -   `instance` [Object] - An axios instance configuration object
