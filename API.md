@@ -384,7 +384,7 @@ blizzard.d3.era({ id: 5, leaderboard: 'rift-barbarian', origin: 'us' })
 Fetch a Diablo 3 profile.
 
 **Parameters**
- * @param  {String} [args.itemTypes]    
+
 -   `args` Object
     -   `args.tag` String - The user battletag
     -   `args.hero` [Number] - The hero ID
