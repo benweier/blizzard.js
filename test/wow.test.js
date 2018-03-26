@@ -1,276 +1,391 @@
-/* global describe, context, it */
-'use strict';
-
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-
 const blizzard = require('./initialize');
 
-chai.use(chaiAsPromised);
+describe('lib/wow.js', () => {
 
-describe('lib/wow.js', function () {
-  this.timeout(10000);
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
+  });
 
-  context('API methods', function () {
-    const tests = ['achievement', 'auction', 'boss', 'challenge', 'character', 'data', 'guild', 'item', 'mount', 'pet', 'pvp', 'quest', 'realms', 'recipe', 'spell', 'zone'];
+  test('should have the correct API methods', () => {
+    expect(blizzard.wow).toEqual(expect.objectContaining({
+      achievement: expect.any(Function),
+      auction: expect.any(Function),
+      boss: expect.any(Function),
+      challenge: expect.any(Function),
+      character: expect.any(Function),
+      data: expect.any(Function),
+      guild: expect.any(Function),
+      item: expect.any(Function),
+      mount: expect.any(Function),
+      pet: expect.any(Function),
+      pvp: expect.any(Function),
+      quest: expect.any(Function),
+      realms: expect.any(Function),
+      recipe: expect.any(Function),
+      spell: expect.any(Function),
+      zone: expect.any(Function),
+    }));
+  });
 
-    tests.forEach(function (test) {
-      it(`should have a method "${test}"`, function (done) {
-        chai.assert.isFunction(blizzard.wow[test]);
-        done();
-      });
+  describe('#achievement()', () => {
+    test('should request an achievement by id', () => {
+      blizzard.wow.achievement({ id: 2144 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/achievement/2144',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.achievement()', function () {
-    it('should eventually return an achievement', function () {
-      const achievement = blizzard.wow.achievement({ id: 2144 });
+  describe('#auction()', () => {
+    test('should request auction data by realm', () => {
+      blizzard.wow.auction({ realm: 'medivh' });
 
-      return chai.assert.eventually.deepProperty(achievement, 'data.title');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/auction/data/medivh',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.auction()', function () {
-    it('should eventually return auction data', function () {
-      const auction = blizzard.wow.auction({ realm: 'medivh' });
+  describe('#boss()', () => {
+    test('should request the boss index', () => {
+      blizzard.wow.boss();
 
-      return chai.assert.eventually.deepProperty(auction, 'data.files');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/boss/',
+        expect.any(Object)
+      );
+    });
+
+    test('should request a single boss by id', () => {
+      blizzard.wow.boss({ id: 24664 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/boss/24664',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.boss()', function () {
-    it('should eventually return the boss index', function () {
-      const boss = blizzard.wow.boss();
+  describe('#challenge()', () => {
+    test('should request challenge data', () => {
+      blizzard.wow.challenge();
 
-      return chai.assert.eventually.deepProperty(boss, 'data.bosses');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/challenge/region',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return a single boss', function () {
-      const boss = blizzard.wow.boss({ id: 24664 });
+    test('should request challenge data by realm', () => {
+      blizzard.wow.challenge({ realm: 'medivh' });
 
-      return chai.assert.eventually.deepProperty(boss, 'data.name');
-    });
-  });
-
-  context('.challenge()', function () {
-    this.timeout(30000);
-
-    it('should eventually return challenge data for a region', function () {
-      const challenge = blizzard.wow.challenge();
-
-      return chai.assert.eventually.deepProperty(challenge, 'data.challenge');
-    });
-
-    it('should eventually return challenge data for a realm', function () {
-      const challenge = blizzard.wow.challenge({ realm: 'medivh' });
-
-      return chai.assert.eventually.deepProperty(challenge, 'data.challenge');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/challenge/medivh',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.character()', function () {
-    it('should eventually return a character profile', function () {
-      const character = blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+  describe('#character()', () => {
+    test('should request a character profile', () => {
+      blizzard.wow.character([], { origin: 'us', realm: 'amanthul', name: 'charni' });
 
-      return chai.assert.eventually.deepProperty(character, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/character/amanthul/charni',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            fields: 'profile',
+          }),
+        })
+      );
     });
 
-    it('should eventually return character achievements', function () {
-      const character = blizzard.wow.character(['profile', 'achievements'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+    test('should request character achievements', () => {
+      blizzard.wow.character(['achievements'], { origin: 'us', realm: 'amanthul', name: 'charni' });
 
-      return chai.assert.eventually.deepProperty(character, 'data.achievements');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/character/amanthul/charni',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            fields: 'achievements',
+          }),
+        })
+      );
     });
 
-    it('should eventually return character pets', function () {
-      const character = blizzard.wow.character(['pets'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+    test('should request character pets and petSlots', () => {
+      blizzard.wow.character(['pets', 'petSlots'], { origin: 'us', realm: 'amanthul', name: 'charni' });
 
-      return chai.assert.eventually.deepProperty(character, 'data.pets');
-    });
-  });
-
-  context('.data()', function () {
-    it('should eventually return battlegroups', function () {
-      const data = blizzard.wow.data('battlegroups');
-
-      return chai.assert.eventually.deepProperty(data, 'data.battlegroups');
-    });
-
-    it('should eventually return character races', function () {
-      const data = blizzard.wow.data('character-races');
-
-      return chai.assert.eventually.deepProperty(data, 'data.races');
-    });
-
-    it('should eventually return character classes', function () {
-      const data = blizzard.wow.data('character-classes');
-
-      return chai.assert.eventually.deepProperty(data, 'data.classes');
-    });
-
-    it('should eventually return character achievements', function () {
-      const data = blizzard.wow.data('character-achievements');
-
-      return chai.assert.eventually.deepProperty(data, 'data.achievements');
-    });
-
-    it('should eventually return guild rewards', function () {
-      const data = blizzard.wow.data('guild-rewards');
-
-      return chai.assert.eventually.deepProperty(data, 'data.rewards');
-    });
-
-    it('should eventually return guild perks', function () {
-      const data = blizzard.wow.data('guild-perks');
-
-      return chai.assert.eventually.deepProperty(data, 'data.perks');
-    });
-
-    it('should eventually return guild achievements', function () {
-      const data = blizzard.wow.data('guild-achievements');
-
-      return chai.assert.eventually.deepProperty(data, 'data.achievements');
-    });
-
-    it('should eventually return item classes', function () {
-      const data = blizzard.wow.data('item-classes');
-
-      return chai.assert.eventually.deepProperty(data, 'data.classes');
-    });
-
-    it('should eventually return talents', function () {
-      const data = blizzard.wow.data('talents');
-
-      return chai.assert.eventually.deepProperty(data, 'data.1.talents');
-    });
-
-    it('should eventually return pet types', function () {
-      const data = blizzard.wow.data('pet-types');
-
-      return chai.assert.eventually.deepProperty(data, 'data.petTypes');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/character/amanthul/charni',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            fields: 'pets,petSlots',
+          }),
+        })
+      );
     });
   });
 
-  context('.guild()', function () {
-    it('should eventually return a guild profile', function () {
-      const guild = blizzard.wow.guild(['profile'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
+  describe('#data()', () => {
+    test('should request battlegroups', () => {
+      blizzard.wow.data('battlegroups');
 
-      return chai.assert.eventually.deepProperty(guild, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/data/battlegroups/',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return guild achievements', function () {
-      const guild = blizzard.wow.guild(['profile', 'achievements'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
+    test('should request character achievements', () => {
+      blizzard.wow.data('character-achievements');
 
-      return chai.assert.eventually.deepProperty(guild, 'data.achievements');
-    });
-  });
-
-  context('.item()', function () {
-    it('should eventually return a single item', function () {
-      const item = blizzard.wow.item({ id: 18803 });
-
-      return chai.assert.eventually.deepProperty(item, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/data/character/achievements',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return an item set', function () {
-      const item = blizzard.wow.item({ set: true, id: 1060 });
+    test('should request guild achievements', () => {
+      blizzard.wow.data('guild-achievements');
 
-      return chai.assert.eventually.deepProperty(item, 'data.name');
-    });
-  });
-
-  context('.mount()', function () {
-    it('should eventually return a list of mounts', function () {
-      const mount = blizzard.wow.mount();
-
-      return chai.assert.eventually.deepProperty(mount, 'data.mounts');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/data/guild/achievements',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.pet()', function () {
-    it('should eventually return a list of pets', function () {
-      const pet = blizzard.wow.pet('list');
+  describe('#guild()', () => {
+    test('should request a guild profile', () => {
+      blizzard.wow.guild([], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
 
-      return chai.assert.eventually.deepProperty(pet, 'data.pets');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/guild/amanthul/blackwolf',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            fields: 'profile',
+          }),
+        })
+      );
     });
 
-    it('should eventually return a pet ability', function () {
-      const pet = blizzard.wow.pet('ability', { id: 640 });
+    test('should request guild achievements and members', () => {
+      blizzard.wow.guild(['achievements', 'members'], { origin: 'us', realm: 'amanthul', name: 'blackwolf' });
 
-      return chai.assert.eventually.deepProperty(pet, 'data.name');
-    });
-
-    it('should eventually return a pet species', function () {
-      const pet = blizzard.wow.pet('species', { id: 258 });
-
-      return chai.assert.eventually.deepProperty(pet, 'data.name');
-    });
-
-    it('should eventually return pet stats', function () {
-      const pet = blizzard.wow.pet('stats', { id: 258, level: 25, breedId: 4, qualityId: 4 });
-
-      return chai.assert.eventually.deepProperty(pet, 'data.health');
-    });
-  });
-
-  context('.pvp()', function () {
-    this.timeout(180000);
-
-    it('should eventually return a pvp leaderboard', function () {
-      const pvp = blizzard.wow.pvp({ bracket: '3v3' });
-
-      return chai.assert.eventually.deepProperty(pvp, 'data.rows');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/guild/amanthul/blackwolf',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            fields: 'achievements,members',
+          }),
+        })
+      );
     });
   });
 
-  context('.quest()', function () {
-    it('should eventually return a quest', function () {
-      const quest = blizzard.wow.quest({ id: 13146 });
+  describe('#item()', () => {
+    test('should request an item by id', () => {
+      blizzard.wow.item({ id: 18803 });
 
-      return chai.assert.eventually.deepProperty(quest, 'data.title');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/item/18803',
+        expect.any(Object)
+      );
+    });
+
+    test('should request an item with bonuses', () => {
+      blizzard.wow.item({ id: 18803, bonuses: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/item/18803',
+        expect.any(Object)
+      );
+    });
+
+    test('should request an item set by id', () => {
+      blizzard.wow.item({ set: true, id: 1060 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/item/set/1060',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.realms()', function () {
-    it('should eventually return all realm status', function () {
-      const realms = blizzard.wow.realms();
+  describe('#mount()', () => {
+    test('should request the mount index', () => {
+      blizzard.wow.mount();
 
-      return chai.assert.eventually.deepProperty(realms, 'data.realms');
-    });
-
-    it('should eventually return a list of realms', function () {
-      const realms = blizzard.wow.realms({ realms: ['blackrock', 'proudmoore'] });
-
-      return chai.expect(realms).to.eventually.have.deep.property('data.realms').and.have.lengthOf(2);
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/mount/',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.recipe()', function () {
-    it('should eventually return a recipe', function () {
-      const recipe = blizzard.wow.recipe({ id: 33994 });
+  describe('#pet()', () => {
+    test('should request the pet index', () => {
+      blizzard.wow.pet('list');
 
-      return chai.assert.eventually.deepProperty(recipe, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/pet/',
+        expect.any(Object)
+      );
+    });
+
+    test('should request a pet ability by id', () => {
+      blizzard.wow.pet('ability', { id: 640 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/pet/ability/640',
+        expect.any(Object)
+      );
+    });
+
+    test('should request a pet species by id', () => {
+      blizzard.wow.pet('species', { id: 258 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/pet/species/258',
+        expect.any(Object)
+      );
+    });
+
+    test('should request pet stats', () => {
+      blizzard.wow.pet('stats', { id: 258, level: 25, breedId: 4, qualityId: 4 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/pet/stats/258',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            breedId: expect.any(Number),
+            level: expect.any(Number),
+            qualityId: expect.any(Number),
+          }),
+        })
+      );
     });
   });
 
-  context('.spell()', function () {
-    it('should eventually return a spell', function () {
-      const spell = blizzard.wow.spell({ id: 8056 });
+  describe('#pvp()', () => {
+    test('should request a pvp leaderboard by bracket', () => {
+      blizzard.wow.pvp({ bracket: '3v3' });
 
-      return chai.assert.eventually.deepProperty(spell, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/leaderboard/3v3',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.zone()', function () {
-    it('should eventually return a list of zones', function () {
-      const zone = blizzard.wow.zone();
+  describe('#quest()', () => {
+    test('should request a quest by id', () => {
+      blizzard.wow.quest({ id: 13146 });
 
-      return chai.assert.eventually.deepProperty(zone, 'data.zones');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/quest/13146',
+        expect.any(Object)
+      );
+    });
+  });
+
+  describe('#realms()', () => {
+    test('should request realm status', () => {
+      blizzard.wow.realms();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/realm/status',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return a zone', function () {
-      const zone = blizzard.wow.zone({ id: 4131 });
+    test('should request a multiple realms status by slug', () => {
+      blizzard.wow.realms({ realms: ['blackrock', 'proudmoore'] });
 
-      return chai.assert.eventually.deepProperty(zone, 'data.name');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/realm/status',
+        expect.objectContaining({
+          params: expect.objectContaining({
+            realms: 'blackrock,proudmoore',
+          }),
+        })
+      );
+    });
+  });
+
+  describe('#recipe()', () => {
+    test('should request a recipe by id', () => {
+      blizzard.wow.recipe({ id: 33994 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/recipe/33994',
+        expect.any(Object)
+      );
+    });
+  });
+
+  describe('#spell()', () => {
+    test('should request a spell by id', () => {
+      blizzard.wow.spell({ id: 8056 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/spell/8056',
+        expect.any(Object)
+      );
+    });
+  });
+
+  describe('#zone()', () => {
+    test('should request the zone index', () => {
+      blizzard.wow.zone();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/zone/',
+        expect.any(Object)
+      );
+    });
+
+    test('should request a zone by id', () => {
+      blizzard.wow.zone({ id: 4131 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/zone/4131',
+        expect.any(Object)
+      );
     });
   });
 

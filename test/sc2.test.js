@@ -1,66 +1,82 @@
-/* global describe, context, it */
-'use strict';
-
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-
 const blizzard = require('./initialize');
 
-chai.use(chaiAsPromised);
+describe('lib/sc2.js', () => {
 
-describe('lib/sc2.js', function () {
-  this.timeout(10000);
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
+  });
 
-  context('API methods', function () {
-    const tests = ['data', 'ladder', 'profile'];
+  test('should have the correct API methods', () => {
+    expect(blizzard.sc2).toEqual(expect.objectContaining({
+      data: expect.any(Function),
+      ladder: expect.any(Function),
+      profile: expect.any(Function),
+    }));
+  });
 
-    tests.forEach(function (test) {
-      it(`should have a method "${test}"`, function (done) {
-        chai.assert.isFunction(blizzard.sc2[test]);
-        done();
-      });
+  describe('#data()', () => {
+    test('should request achievements data', () => {
+      blizzard.sc2.data('achievements');
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/data/achievements',
+        expect.any(Object)
+      );
+    });
+
+    test('should request rewards data', () => {
+      blizzard.sc2.data('rewards');
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/data/rewards',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.profile()', function () {
-    it('should eventually return a user profile', function () {
-      const profile = blizzard.sc2.profile('profile', { id: 2137104, name: 'skt' });
+  describe('#ladder()', () => {
+    test('should request a ladder by id', () => {
+      blizzard.sc2.ladder({ id: 194163 });
 
-      return chai.assert.eventually.deepProperty(profile, 'data.id');
-    });
-
-    it('should eventually return ladder placements', function () {
-      const profile = blizzard.sc2.profile('ladders', { id: 2137104, name: 'skt' });
-
-      return chai.assert.eventually.deepProperty(profile, 'data.currentSeason');
-    });
-
-    it('should eventually return match history', function () {
-      const profile = blizzard.sc2.profile('matches', { id: 2137104, name: 'skt' });
-
-      return chai.assert.eventually.deepProperty(profile, 'data.matches');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/ladder/194163',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.data()', function () {
-    it('should eventually return a list of achievements', function () {
-      const data = blizzard.sc2.data('achievements');
+  describe('#profile()', () => {
+    test('should request a players profile', () => {
+      blizzard.sc2.profile('profile', { id: 2137104, name: 'skt' });
 
-      return chai.assert.eventually.deepProperty(data, 'data.achievements');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/profile/2137104/1/skt/',
+        expect.any(Object)
+      );
     });
 
-    it('should eventually return a list of rewards', function () {
-      const data = blizzard.sc2.data('rewards');
+    test('should request a players ladder placements', () => {
+      blizzard.sc2.profile('ladders', { id: 2137104, name: 'skt' });
 
-      return chai.assert.eventually.deepProperty(data, 'data.portraits');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/profile/2137104/1/skt/ladders',
+        expect.any(Object)
+      );
     });
-  });
 
-  context('.ladder()', function () {
-    it('should eventually return a ladder', function () {
-      const ladder = blizzard.sc2.ladder({ id: 194163 });
+    test('should request a players match history', () => {
+      blizzard.sc2.profile('matches', { id: 2137104, name: 'skt' });
 
-      return chai.assert.eventually.deepProperty(ladder, 'data.ladderMembers');
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/sc2/profile/2137104/1/skt/matches',
+        expect.any(Object)
+      );
     });
   });
 

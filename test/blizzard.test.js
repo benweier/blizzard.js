@@ -1,85 +1,94 @@
-/* global describe, context, it */
-'use strict';
-
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
-
 const blizzard = require('./initialize');
+const Account = require('../lib/account');
+const Diablo3 = require('../lib/d3');
+const Starcraft2 = require('../lib/sc2');
+const WorldOfWarcraft = require('../lib/wow');
 
-chai.use(chaiAsPromised);
+describe('lib/blizzard.js', () => {
 
-describe('lib/blizzard.js', function () {
-  this.timeout(10000);
-
-  context('API objects', function () {
-    const tests = ['account', 'd3', 'sc2', 'wow'];
-
-    tests.forEach(function (test) {
-      it(`should have a property "${test}"`, function (done) {
-        chai.assert.isObject(blizzard[test]);
-        done();
-      });
-    });
+  beforeEach(() => {
+    blizzard.axios.get.mockClear();
   });
 
-  context('.battletag()', function () {
-    it('should return a safe battletag', function (done) {
+  test('should have API properties', () => {
+    expect(blizzard).toEqual(expect.objectContaining({
+      account: expect.any(Account),
+      d3: expect.any(Diablo3),
+      sc2: expect.any(Starcraft2),
+      wow: expect.any(WorldOfWarcraft),
+      battletag: expect.any(Function),
+      params: expect.any(Function),
+      get: expect.any(Function),
+      all: expect.any(Function),
+      fetchToken: expect.any(Function),
+      checkToken: expect.any(Function),
+    }));
+  });
+
+  describe('#battletag()', () => {
+    test('should return a safe battletag', () => {
       const tag = blizzard.battletag('skt#1884');
-      chai.assert.equal(tag, 'skt-1884');
-      done();
+
+      expect(tag).toMatchSnapshot();
     });
   });
 
-  context('.params()', function () {
-    const obj = { one: 1, two: 2, three: 3, four: 4 };
-    const filtered = blizzard.params(['one', 'three'], obj);
+  describe('#params()', () => {
+    const obj = { foo: 'foo', bar: 'bar' };
+    const params = blizzard.params(['foo', 'baz'], obj);
 
-    it('should filter object keys', function (done) {
-      chai.assert.property(filtered, 'one');
-      chai.assert.notProperty(filtered, 'two');
-      chai.assert.property(filtered, 'three');
-      chai.assert.notProperty(filtered, 'four');
-      done();
+    test('should return object keys', () => {
+      expect(params).toMatchSnapshot();
     });
   });
 
-  context('.get()', function () {
-    it('should request the correct URL', function () {
-      const request = blizzard.get('/wow/character/proudmoore/kailee');
+  describe('#get()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.get('/wow/character/proudmoore/kailee');
 
-      return chai.assert.eventually.deepPropertyVal(request, 'config.url', 'https://us.api.battle.net/wow/character/proudmoore/kailee');
-    });
-
-    it('should eventually be fulfilled', function () {
-      const request = blizzard.get('/wow/character/amanthul/charni');
-
-      return chai.assert.isFulfilled(request);
-    });
-
-    it('should eventually be rejected', function () {
-      const request = blizzard.get('/wow/character/amanthul/lolthisdoesnotexist');
-
-      return chai.assert.isRejected(request);
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.battle.net/wow/character/proudmoore/kailee',
+        expect.any(Object)
+      );
     });
   });
 
-  context('.all()', function () {
-    it('should eventually be fulfilled', function () {
+  describe('#all()', () => {
+    test('should be called with the correct parameters', () => {
       const character = blizzard.get('/wow/character/amanthul/charni');
       const guild = blizzard.get('/wow/guild/amanthul/blackwolf');
 
-      const requests = blizzard.all([character, guild]);
+      blizzard.all([character, guild]);
 
-      return chai.assert.isFulfilled(requests);
+      expect(blizzard.axios.all).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.all).toHaveBeenCalledWith(
+        expect.arrayContaining([expect.any(Promise)])
+      );
     });
+  });
 
-    it('should eventually be rejected', function () {
-      const character = blizzard.get('/wow/character/amanthul/lolthisdoesnotexist');
-      const guild = blizzard.get('/wow/guild/amanthul/lolneitherdoesthis');
+  describe('#fetchToken()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.fetchToken('us', {});
 
-      const requests = blizzard.all([character, guild]);
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/oauth/token',
+        expect.any(Object)
+      );
+    });
+  });
 
-      return chai.assert.isRejected(requests);
+  describe('#checkToken()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.checkToken('us', {});
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/oauth/check_token',
+        expect.any(Object)
+      );
     });
   });
 
