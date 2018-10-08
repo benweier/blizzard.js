@@ -54,6 +54,32 @@ describe('lib/blizzard.js', () => {
     });
   });
 
+  describe('#get()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.defaults.origin = 'eu';
+      blizzard.get('/wow/character/proudmoore/kailee', { origin: 'sea' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://sea.api.battle.net/wow/character/proudmoore/kailee',
+        expect.any(Object)
+      );
+    });
+  });
+
+  describe('#get()', () => {
+    test('should be called with the correct parameters', () => {
+      blizzard.defaults.origin = 'eu';
+      blizzard.get('/wow/character/proudmoore/kailee');
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://eu.api.battle.net/wow/character/proudmoore/kailee',
+        expect.any(Object)
+      );
+    });
+  });
+
   describe('#all()', () => {
     test('should be called with the correct parameters', () => {
       const character = blizzard.get('/wow/character/amanthul/charni');
