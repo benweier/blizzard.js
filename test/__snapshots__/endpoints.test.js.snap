@@ -4,6 +4,7 @@ exports[`lib/endpoints.js #getEndpoint() should return the EU es_ES endpoint 1`]
 Object {
   "hostname": "https://eu.api.battle.net",
   "locale": "es_ES",
+  "origin": "eu",
 }
 `;
 
@@ -11,6 +12,7 @@ exports[`lib/endpoints.js #getEndpoint() should return the SEA endpoint 1`] = `
 Object {
   "hostname": "https://sea.api.battle.net",
   "locale": "en_US",
+  "origin": "sea",
 }
 `;
 
@@ -18,6 +20,7 @@ exports[`lib/endpoints.js #getEndpoint() should return the US endpoint 1`] = `
 Object {
   "hostname": "https://us.api.battle.net",
   "locale": "en_US",
+  "origin": "us",
 }
 `;
 
@@ -25,5 +28,6 @@ exports[`lib/endpoints.js #getEndpoint() should return the default endpoint 1`] 
 Object {
   "hostname": "https://us.api.battle.net",
   "locale": "en_US",
+  "origin": "us",
 }
 `;
