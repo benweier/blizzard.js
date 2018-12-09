@@ -29,7 +29,7 @@ describe('lib/blizzard.js', () => {
     test('should return a safe battletag', () => {
       const tag = blizzard.battletag('skt#1884');
 
-      expect(tag).toMatchSnapshot();
+      expect(tag).toEqual('skt-1884');
     });
   });
 
@@ -38,7 +38,9 @@ describe('lib/blizzard.js', () => {
     const params = blizzard.params(['foo', 'baz'], obj);
 
     test('should return object keys', () => {
-      expect(params).toMatchSnapshot();
+      expect(params).toEqual({
+        foo: 'foo',
+      });
     });
   });
 
