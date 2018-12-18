@@ -60,7 +60,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/connected-realm/',
+        'https://us.api.blizzard.com/data/wow/connected-realm/',
         expect.any(Object)
       );
     });
@@ -70,7 +70,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/connected-realm/11',
+        'https://us.api.blizzard.com/data/wow/connected-realm/11',
         expect.any(Object)
       );
     });
@@ -82,7 +82,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/connected-realm/11/mythic-leaderboard/',
+        'https://us.api.blizzard.com/data/wow/connected-realm/11/mythic-leaderboard/',
         expect.any(Object)
       );
     });
@@ -92,7 +92,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/connected-realm/11/mythic-leaderboard/200/period/606',
+        'https://us.api.blizzard.com/data/wow/connected-realm/11/mythic-leaderboard/200/period/606',
         expect.any(Object)
       );
     });
@@ -104,7 +104,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/mythic-challenge-mode/',
+        'https://us.api.blizzard.com/data/wow/mythic-challenge-mode/',
         expect.any(Object)
       );
     });
@@ -116,7 +116,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/realm/',
+        'https://us.api.blizzard.com/data/wow/realm/',
         expect.any(Object)
       );
     });
@@ -126,7 +126,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/realm/11',
+        'https://us.api.blizzard.com/data/wow/realm/11',
         expect.any(Object)
       );
     });
@@ -138,7 +138,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/region/',
+        'https://us.api.blizzard.com/data/wow/region/',
         expect.any(Object)
       );
     });
@@ -148,7 +148,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/region/1',
+        'https://us.api.blizzard.com/data/wow/region/1',
         expect.any(Object)
       );
     });
@@ -160,7 +160,7 @@ describe('lib/data.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/wow/token/',
+        'https://us.api.blizzard.com/data/wow/token/',
         expect.any(Object)
       );
     });

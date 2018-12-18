@@ -20,7 +20,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/data/achievements',
+        'https://us.api.blizzard.com/sc2/data/achievements',
         expect.any(Object)
       );
     });
@@ -30,7 +30,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/data/rewards',
+        'https://us.api.blizzard.com/sc2/data/rewards',
         expect.any(Object)
       );
     });
@@ -42,7 +42,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/ladder/194163',
+        'https://us.api.blizzard.com/sc2/ladder/194163',
         expect.any(Object)
       );
     });
@@ -54,7 +54,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/profile/2137104/1/skt/',
+        'https://us.api.blizzard.com/sc2/profile/2137104/1/skt/',
         expect.any(Object)
       );
     });
@@ -64,7 +64,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/profile/2137104/1/skt/ladders',
+        'https://us.api.blizzard.com/sc2/profile/2137104/1/skt/ladders',
         expect.any(Object)
       );
     });
@@ -74,7 +74,7 @@ describe('lib/sc2.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/profile/2137104/1/skt/matches',
+        'https://us.api.blizzard.com/sc2/profile/2137104/1/skt/matches',
         expect.any(Object)
       );
     });

@@ -20,7 +20,7 @@ describe('lib/account.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/account/user',
+        'https://us.api.blizzard.com/account/user',
         expect.any(Object)
       );
     });
@@ -32,7 +32,7 @@ describe('lib/account.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/wow/user/characters',
+        'https://us.battle.net/wow/user/characters',
         expect.any(Object)
       );
     });
@@ -44,7 +44,7 @@ describe('lib/account.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/profile/user',
+        'https://us.api.blizzard.com/sc2/profile/user',
         expect.any(Object)
       );
     });

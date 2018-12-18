@@ -21,7 +21,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/data/item/1234567890',
+        'https://us.api.blizzard.com/d3/data/item/1234567890',
         expect.any(Object)
       );
     });
@@ -31,7 +31,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/data/follower/templar',
+        'https://us.api.blizzard.com/d3/data/follower/templar',
         expect.any(Object)
       );
     });
@@ -41,7 +41,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/data/artisan/blacksmith',
+        'https://us.api.blizzard.com/d3/data/artisan/blacksmith',
         expect.any(Object)
       );
     });
@@ -53,7 +53,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/era/',
+        'https://us.api.blizzard.com/data/d3/era/',
         expect.any(Object)
       );
     });
@@ -63,7 +63,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/era/5',
+        'https://us.api.blizzard.com/data/d3/era/5',
         expect.any(Object)
       );
     });
@@ -73,7 +73,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/era/7/leaderboard/rift-barbarian',
+        'https://us.api.blizzard.com/data/d3/era/7/leaderboard/rift-barbarian',
         expect.any(Object)
       );
     });
@@ -85,7 +85,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/season/',
+        'https://us.api.blizzard.com/data/d3/season/',
         expect.any(Object)
       );
     });
@@ -95,7 +95,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/season/5',
+        'https://us.api.blizzard.com/data/d3/season/5',
         expect.any(Object)
       );
     });
@@ -105,7 +105,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/data/d3/season/7/leaderboard/rift-barbarian',
+        'https://us.api.blizzard.com/data/d3/season/7/leaderboard/rift-barbarian',
         expect.any(Object)
       );
     });
@@ -117,7 +117,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/profile/skt-1884/',
+        'https://us.api.blizzard.com/d3/profile/skt-1884/',
         expect.any(Object)
       );
     });
@@ -127,7 +127,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801',
+        'https://us.api.blizzard.com/d3/profile/skt-1884/hero/287801',
         expect.any(Object)
       );
     });
@@ -137,7 +137,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801/items',
+        'https://us.api.blizzard.com/d3/profile/skt-1884/hero/287801/items',
         expect.any(Object)
       );
     });
@@ -147,7 +147,7 @@ describe('lib/d3.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/d3/profile/skt-1884/hero/287801/follower-items',
+        'https://us.api.blizzard.com/d3/profile/skt-1884/hero/287801/follower-items',
         expect.any(Object)
       );
     });
