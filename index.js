@@ -24,19 +24,17 @@ const Blizzard = require('./lib/blizzard');
 /**
  * Initialize the Blizzard.js instance.
  *
- * @param  {Object} args                Blizzard.js configuration options
- * @param  {String} args.apikey         The default Blizzard API key
- * @param  {String} [args.access_token] The default user access token
- * @param  {String} [args.origin=US]    The default API region
- * @param  {String} [args.locale=en_US] The default API locale
- * @param  {Object} axios               An [axios](https://github.com/mzabriskie/axios) compatible instance configuration
- * @return {Blizzard}                   An instance of Blizzard.js
+ * @param  {Object} args          Blizzard.js configuration options
+ * @param  {String} [args.origin] The default API region
+ * @param  {String} [args.locale] The default API locale
+ * @param  {String} [args.id]     The default API client ID
+ * @param  {String} [args.secret] The default API client secret
+ * @param  {String} [args.token]  The default API access token
+ * @param  {Object} axios         An [axios](https://github.com/mzabriskie/axios) compatible instance configuration
+ * @return {Blizzard}             An instance of Blizzard.js
  */
-const initialize = function initialize (args, axios) {
-  const config = Object.assign({}, args);
-  const instance = Object.assign({}, axios);
-
-  return new Blizzard(config, instance);
+const initialize = function initialize ({ origin, locale, id, secret, token }, axios = {}) {
+  return new Blizzard({ origin, locale, id, secret, token }, axios);
 };
 
 exports.initialize = initialize;
