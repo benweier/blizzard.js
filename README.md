@@ -45,4 +45,4 @@ Step 4: Profit.
 
 ## Battle.net API Key
 
-Your private Blizzard API key must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://dev.battle.net) to obtain your own Blizzard API key.
+Your private Blizzard API key must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain your own Blizzard API key.
