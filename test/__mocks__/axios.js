@@ -4,6 +4,11 @@ const axios = {
       url => new Promise(_ => _(url))
     ),
     all: jest.fn(),
+    defaults: {
+      headers: {
+        common: {},
+      },
+    },
   })),
 };
 
