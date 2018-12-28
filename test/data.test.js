@@ -128,6 +128,109 @@ describe('lib/data.js', () => {
     });
   });
 
+  describe('#keystoneAffix()', () => {
+    test('should request the keystone affix index', () => {
+      blizzard.data.keystoneAffix();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/keystone-affix/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a keystone affix by ID', () => {
+      blizzard.data.keystoneAffix({ id: 11 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/keystone-affix/11',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  describe('#mythicRaidLeaderboard()', () => {
+    test('should request a mythic raid leaderboard by raid and faction', () => {
+      blizzard.data.mythicRaidLeaderboard({ raid: 'uldir', faction: 'alliance' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/leaderboard/hall-of-fame/uldir/alliance',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  // mythicDungeonKeystone
+  describe('#mythicDungeonKeystone()', () => {
+    test('should request the mythic keystone resource index', () => {
+      blizzard.data.mythicDungeonKeystone();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/mythic-keystone/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request the mythic keystone dungeon index', () => {
+      blizzard.data.mythicDungeonKeystone('dungeon');
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/mythic-keystone/dungeon/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a mythic keystone dungeon by ID', () => {
+      blizzard.data.mythicDungeonKeystone('dungeon', { id: 353 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/mythic-keystone/dungeon/353',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
   describe('#mythicKeystoneLeaderboard()', () => {
     test('should request the mythic keystone leaderboard index by realm', () => {
       blizzard.data.mythicKeystoneLeaderboard({ realm: 11 });
@@ -171,6 +274,162 @@ describe('lib/data.js', () => {
           merge({}, args, {
             params: {
               namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  describe('#playableClass()', () => {
+    test('should request the playable class index', () => {
+      blizzard.data.playableClass();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/playable-class/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a playable class by ID', () => {
+      blizzard.data.playableClass({ id: 7 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/playable-class/7',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  describe('#pvpTalentSlots()', () => {
+    test('should request the PVP talent slots by class ID', () => {
+      blizzard.data.pvpTalentSlots({ id: 7 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/playable-class/7/pvp-talent-slots',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  describe('#playableSpecialization()', () => {
+    test('should request the playable specialization index', () => {
+      blizzard.data.playableSpecialization();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/playable-specialization/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a playable specialization by ID', () => {
+      blizzard.data.playableSpecialization({ id: 262 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/playable-specialization/262',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  // powerType
+  describe('#powerType()', () => {
+    test('should request the power type index', () => {
+      blizzard.data.powerType();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/power-type/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a power type by ID', () => {
+      blizzard.data.powerType({ id: 0 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/power-type/0',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  // playableRace
+  describe('#playableRace()', () => {
+    test('should request the playable race index', () => {
+      blizzard.data.playableRace();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/race/index',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a playable race by ID', () => {
+      blizzard.data.playableRace({ id: 2 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/race/2',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
             },
           }),
         ),
