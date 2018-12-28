@@ -14,7 +14,7 @@ describe('lib/account.js', () => {
     blizzard.axios.get.mockClear();
   });
 
-  test('should have a API methods', () => {
+  test('should have all API methods', () => {
     expect(blizzard.account).toEqual(
       expect.objectContaining({
         user: expect.any(Function),

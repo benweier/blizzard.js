@@ -1,5 +1,7 @@
 const blizzard = require('./initialize');
 const Account = require('../lib/account');
+const Profile = require('../lib/profile');
+const Data = require('../lib/data');
 const Diablo3 = require('../lib/d3');
 const Starcraft2 = require('../lib/sc2');
 const WorldOfWarcraft = require('../lib/wow');
@@ -13,6 +15,8 @@ describe('lib/blizzard.js', () => {
     expect(blizzard).toEqual(
       expect.objectContaining({
         account: expect.any(Account),
+        profile: expect.any(Profile),
+        data: expect.any(Data),
         d3: expect.any(Diablo3),
         sc2: expect.any(Starcraft2),
         wow: expect.any(WorldOfWarcraft),
