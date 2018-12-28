@@ -17,7 +17,14 @@ describe('lib/d3.js', () => {
   test('should have the correct API methods', () => {
     expect(blizzard.d3).toEqual(
       expect.objectContaining({
-        data: expect.any(Function),
+        act: expect.any(Function),
+        artisan: expect.any(Function),
+        recipe: expect.any(Function),
+        follower: expect.any(Function),
+        characterClass: expect.any(Function),
+        characterSkill: expect.any(Function),
+        item: expect.any(Function),
+        itemType: expect.any(Function),
         era: expect.any(Function),
         profile: expect.any(Function),
         season: expect.any(Function),
@@ -25,19 +32,55 @@ describe('lib/d3.js', () => {
     );
   });
 
-  describe('#data()', () => {
-    test('should request an item by ID', () => {
-      blizzard.d3.data('item', { id: 'item/1234567890' });
+  describe('#act()', () => {
+    test('should request the act index', () => {
+      blizzard.d3.act();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/d3/data/item/1234567890',
+        'https://us.api.blizzard.com/d3/data/act',
         expect.objectContaining(args),
       );
     });
 
-    test('should request a follower by ID', () => {
-      blizzard.d3.data('follower', { id: 'templar' });
+    test('should request an act by ID', () => {
+      blizzard.d3.act({ id: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/act/1',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#artisan()', () => {
+    test('should request an artisan by slug', () => {
+      blizzard.d3.artisan({ id: 'blacksmith' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/artisan/blacksmith',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#recipe()', () => {
+    test('should request a recipe by artisan and recipe slugs', () => {
+      blizzard.d3.recipe({ artisan: 'blacksmith', recipe: 'apprentice-flamberge' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/artisan/blacksmith/recipe/apprentice-flamberge',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#follower()', () => {
+    test('should request an artisan by slug', () => {
+      blizzard.d3.follower({ id: 'templar' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
@@ -45,13 +88,61 @@ describe('lib/d3.js', () => {
         expect.objectContaining(args),
       );
     });
+  });
 
-    test('should request an artisan by ID', () => {
-      blizzard.d3.data('artisan', { id: 'blacksmith' });
+  describe('#characterClass()', () => {
+    test('should request a character class by slug', () => {
+      blizzard.d3.characterClass({ id: 'barbarian' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/d3/data/artisan/blacksmith',
+        'https://us.api.blizzard.com/d3/data/hero/barbarian',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#characterSkill()', () => {
+    test('should request a character skill by class and skill slug', () => {
+      blizzard.d3.characterSkill({ class: 'barbarian', skill: 'bash' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/hero/barbarian/skill/bash',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#item()', () => {
+    test('should request an item by slug', () => {
+      blizzard.d3.item({ id: 'corrupted-ashbringer-Unique_Sword_2H_104_x1' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/item/corrupted-ashbringer-Unique_Sword_2H_104_x1',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#itemType()', () => {
+    test('should request the item type index', () => {
+      blizzard.d3.itemType();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/item-type',
+        expect.objectContaining(args),
+      );
+    });
+
+    test('should request an item by slug', () => {
+      blizzard.d3.itemType({ id: 'sword2h' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/d3/data/item-type/sword2h',
         expect.objectContaining(args),
       );
     });
