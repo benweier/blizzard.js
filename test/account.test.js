@@ -1,17 +1,27 @@
 const blizzard = require('./initialize');
 
-describe('lib/account.js', () => {
+const args = {
+  headers: {
+    Authorization: 'Bearer token',
+  },
+  params: {
+    locale: 'en_US',
+  },
+};
 
+describe('lib/account.js', () => {
   beforeEach(() => {
     blizzard.axios.get.mockClear();
   });
 
   test('should have a API methods', () => {
-    expect(blizzard.account).toEqual(expect.objectContaining({
-      user: expect.any(Function),
-      wow: expect.any(Function),
-      sc2: expect.any(Function),
-    }));
+    expect(blizzard.account).toEqual(
+      expect.objectContaining({
+        user: expect.any(Function),
+        wow: expect.any(Function),
+        sc2: expect.any(Function),
+      }),
+    );
   });
 
   describe('#user()', () => {
@@ -21,7 +31,7 @@ describe('lib/account.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/account/user',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -33,7 +43,7 @@ describe('lib/account.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.battle.net/wow/user/characters',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -45,9 +55,8 @@ describe('lib/account.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/sc2/profile/user',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
-
 });

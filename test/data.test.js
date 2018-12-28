@@ -1,4 +1,15 @@
+const merge = require('lodash.merge');
 const blizzard = require('./initialize');
+
+const args = {
+  headers: {
+    Authorization: 'Bearer token',
+  },
+  params: {
+    locale: 'en_US',
+    namespace: 'dynamic-us',
+  },
+};
 
 describe('lib/data.js', () => {
   beforeEach(() => {
@@ -90,7 +101,13 @@ describe('lib/data.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/connected-realm/index',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
 
@@ -100,85 +117,149 @@ describe('lib/data.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/connected-realm/11',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
   });
 
   describe('#mythicKeystoneLeaderboard()', () => {
-    test('should request the mythic leaderboard index', () => {
-      blizzard.data.mythicKeystoneLeaderboard({ realmID: 11, origin: 'us' });
+    test('should request the mythic keystone leaderboard index by realm', () => {
+      blizzard.data.mythicKeystoneLeaderboard({ realm: 11 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/connected-realm/11/mythic-leaderboard/index',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
 
-    test('should request a mythic leaderboard period', () => {
-      blizzard.data.mythicKeystoneLeaderboard({ realmID: 11, dungeonID: 200, periodID: 606, origin: 'us' });
+    test('should request a mythic keystone leaderboard by realm and dungeon', () => {
+      blizzard.data.mythicKeystoneLeaderboard({ realm: 11, dungeon: 200 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/connected-realm/11/mythic-leaderboard/200',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request a mythic keystone leaderboard by realm and dungeon and period', () => {
+      blizzard.data.mythicKeystoneLeaderboard({ realm: 11, dungeon: 200, period: 606 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/connected-realm/11/mythic-leaderboard/200/period/606',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
   });
 
   describe('#realm()', () => {
     test('should request the realm index', () => {
-      blizzard.data.realm({ origin: 'us' });
+      blizzard.data.realm();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/realm/index',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
 
-    test('should request a single realm', () => {
-      blizzard.data.realm({ realm: 'tichondrius', origin: 'us' });
+    test('should request a realm by slug', () => {
+      blizzard.data.realm({ realm: 'tichondrius' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/realm/tichondrius',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
   });
 
   describe('#region()', () => {
     test('should request the region index', () => {
-      blizzard.data.region({ origin: 'us' });
+      blizzard.data.region();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/region/index',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
 
-    test('should request a single region', () => {
-      blizzard.data.region({ regionID: 1, origin: 'us' });
+    test('should request a region by slug', () => {
+      blizzard.data.region({ id: 1 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/region/1',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
   });
 
   describe('#token()', () => {
-    test('should request token data', () => {
-      blizzard.data.token({ origin: 'us' });
+    test('should request game token data', () => {
+      blizzard.data.token();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/data/wow/token/',
-        expect.any(Object),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'dynamic-us',
+            },
+          }),
+        ),
       );
     });
   });

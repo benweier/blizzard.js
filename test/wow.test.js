@@ -1,40 +1,51 @@
+const merge = require('lodash.merge');
 const blizzard = require('./initialize');
 
-describe('lib/wow.js', () => {
+const args = {
+  headers: {
+    Authorization: 'Bearer token',
+  },
+  params: {
+    locale: 'en_US',
+  },
+};
 
+describe('lib/wow.js', () => {
   beforeEach(() => {
     blizzard.axios.get.mockClear();
   });
 
   test('should have the correct API methods', () => {
-    expect(blizzard.wow).toEqual(expect.objectContaining({
-      achievement: expect.any(Function),
-      auction: expect.any(Function),
-      boss: expect.any(Function),
-      challenge: expect.any(Function),
-      character: expect.any(Function),
-      data: expect.any(Function),
-      guild: expect.any(Function),
-      item: expect.any(Function),
-      mount: expect.any(Function),
-      pet: expect.any(Function),
-      pvp: expect.any(Function),
-      quest: expect.any(Function),
-      realms: expect.any(Function),
-      recipe: expect.any(Function),
-      spell: expect.any(Function),
-      zone: expect.any(Function),
-    }));
+    expect(blizzard.wow).toEqual(
+      expect.objectContaining({
+        achievement: expect.any(Function),
+        auction: expect.any(Function),
+        boss: expect.any(Function),
+        challenge: expect.any(Function),
+        character: expect.any(Function),
+        data: expect.any(Function),
+        guild: expect.any(Function),
+        item: expect.any(Function),
+        mount: expect.any(Function),
+        pet: expect.any(Function),
+        pvp: expect.any(Function),
+        quest: expect.any(Function),
+        realms: expect.any(Function),
+        recipe: expect.any(Function),
+        spell: expect.any(Function),
+        zone: expect.any(Function),
+      }),
+    );
   });
 
   describe('#achievement()', () => {
-    test('should request an achievement by id', () => {
+    test('should request an achievement by ID', () => {
       blizzard.wow.achievement({ id: 2144 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/achievement/2144',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -46,7 +57,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/auction/data/medivh',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -58,17 +69,17 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/boss/',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
-    test('should request a single boss by id', () => {
+    test('should request a single boss by ID', () => {
       blizzard.wow.boss({ id: 24664 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/boss/24664',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -80,7 +91,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/challenge/region',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
@@ -90,7 +101,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/challenge/medivh',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -102,25 +113,29 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            fields: 'profile',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              fields: 'profile',
+            },
           }),
-        })
+        ),
       );
     });
 
     test('should request character achievements', () => {
-      blizzard.wow.character(['achievements'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+      blizzard.wow.character('achievements', { origin: 'us', realm: 'amanthul', name: 'charni' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            fields: 'achievements',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              fields: 'achievements',
+            },
           }),
-        })
+        ),
       );
     });
 
@@ -130,11 +145,13 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            fields: 'pets,petSlots',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              fields: 'pets,petSlots',
+            },
           }),
-        })
+        ),
       );
     });
   });
@@ -146,7 +163,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/data/battlegroups/',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
@@ -156,7 +173,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/data/character/achievements',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
@@ -166,7 +183,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/data/guild/achievements',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -178,11 +195,13 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/guild/amanthul/blackwolf',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            fields: 'profile',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              fields: 'profile',
+            },
           }),
-        })
+        ),
       );
     });
 
@@ -192,43 +211,67 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/guild/amanthul/blackwolf',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            fields: 'achievements,members',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              fields: 'achievements,members',
+            },
           }),
-        })
+        ),
       );
     });
   });
 
   describe('#item()', () => {
-    test('should request an item by id', () => {
+    test('should request an item by ID', () => {
       blizzard.wow.item({ id: 18803 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/item/18803',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
-    test('should request an item with bonuses', () => {
+    test('should request an item with a specific bonus', () => {
       blizzard.wow.item({ id: 18803, bonuses: 1 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/item/18803',
-        expect.any(Object)
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              bl: '1',
+            },
+          }),
+        ),
       );
     });
 
-    test('should request an item set by id', () => {
+    test('should request an item with specific bonuses', () => {
+      blizzard.wow.item({ id: 18803, bonuses: [1, 2, 3] });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/item/18803',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              bl: '1,2,3',
+            },
+          }),
+        ),
+      );
+    });
+
+    test('should request an item set by ID', () => {
       blizzard.wow.item({ set: true, id: 1060 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/item/set/1060',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -240,55 +283,57 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/mount/',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
 
   describe('#pet()', () => {
     test('should request the pet index', () => {
-      blizzard.wow.pet('list');
+      blizzard.wow.pet();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/pet/',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
-    test('should request a pet ability by id', () => {
+    test('should request a pet ability by ID', () => {
       blizzard.wow.pet('ability', { id: 640 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/pet/ability/640',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
-    test('should request a pet species by id', () => {
+    test('should request a pet species by ID', () => {
       blizzard.wow.pet('species', { id: 258 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/pet/species/258',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
     test('should request pet stats', () => {
-      blizzard.wow.pet('stats', { id: 258, level: 25, breedId: 4, qualityId: 4 });
+      blizzard.wow.pet('stats', { id: 258, level: 25, breed: 4, quality: 4 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/pet/stats/258',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            breedId: expect.any(Number),
-            level: expect.any(Number),
-            qualityId: expect.any(Number),
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              breedId: 4,
+              level: 25,
+              qualityId: 4,
+            },
           }),
-        })
+        ),
       );
     });
   });
@@ -300,19 +345,19 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/leaderboard/3v3',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
 
   describe('#quest()', () => {
-    test('should request a quest by id', () => {
+    test('should request a quest by ID', () => {
       blizzard.wow.quest({ id: 13146 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/quest/13146',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -324,7 +369,7 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/realm/status',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
@@ -334,35 +379,37 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/realm/status',
-        expect.objectContaining({
-          params: expect.objectContaining({
-            realms: 'blackrock,proudmoore',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              realms: 'blackrock,proudmoore',
+            },
           }),
-        })
+        ),
       );
     });
   });
 
   describe('#recipe()', () => {
-    test('should request a recipe by id', () => {
+    test('should request a recipe by ID', () => {
       blizzard.wow.recipe({ id: 33994 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/recipe/33994',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
 
   describe('#spell()', () => {
-    test('should request a spell by id', () => {
+    test('should request a spell by ID', () => {
       blizzard.wow.spell({ id: 8056 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/spell/8056',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
@@ -374,19 +421,18 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/zone/',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
 
-    test('should request a zone by id', () => {
+    test('should request a zone by ID', () => {
       blizzard.wow.zone({ id: 4131 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/zone/4131',
-        expect.any(Object)
+        expect.objectContaining(args),
       );
     });
   });
-
 });

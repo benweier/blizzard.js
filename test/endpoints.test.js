@@ -1,15 +1,15 @@
 const endpoints = require('../lib/endpoints');
 
 describe('lib/endpoints.js', () => {
-
   test('should export functions', () => {
-    expect(endpoints).toEqual(expect.objectContaining({
-      getEndpoint: expect.any(Function),
-    }));
+    expect(endpoints).toEqual(
+      expect.objectContaining({
+        getEndpoint: expect.any(Function),
+      }),
+    );
   });
 
   describe('getEndpoint()', () => {
-
     test('should return the default endpoint', () => {
       const endpoint = endpoints.getEndpoint();
       expect(endpoint).toEqual({
@@ -72,7 +72,5 @@ describe('lib/endpoints.js', () => {
         origin: 'kr',
       });
     });
-
   });
-
 });
