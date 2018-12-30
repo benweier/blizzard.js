@@ -23,6 +23,7 @@ describe('lib/sc2.js', () => {
         profile: expect.any(Function),
         profileLadder: expect.any(Function),
         player: expect.any(Function),
+        league: expect.any(Function),
         legacy: expect.objectContaining({
           profile: expect.any(Function),
           profileLadders: expect.any(Function),
@@ -122,6 +123,18 @@ describe('lib/sc2.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/sc2/player/2137104',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#league()', () => {
+    test('should request a league by season and queue and team and league', () => {
+      blizzard.sc2.league({ season: 37, queue: 201, team: 0, league: 6 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/sc2/league/37/201/0/6',
         expect.objectContaining(args),
       );
     });
