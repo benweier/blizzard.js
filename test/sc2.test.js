@@ -23,6 +23,14 @@ describe('lib/sc2.js', () => {
         profile: expect.any(Function),
         profileLadder: expect.any(Function),
         player: expect.any(Function),
+        legacy: expect.objectContaining({
+          profile: expect.any(Function),
+          profileLadders: expect.any(Function),
+          profileMatches: expect.any(Function),
+          ladder: expect.any(Function),
+          achievements: expect.any(Function),
+          rewards: expect.any(Function),
+        }),
       }),
     );
   });
@@ -114,6 +122,78 @@ describe('lib/sc2.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/sc2/player/2137104',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.profile()', () => {
+    test('should request a legacy profile by region and realm and profile', () => {
+      blizzard.sc2.legacy.profile({ profile: 2137104, region: 1, realm: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/profile/1/1/2137104',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.profileLadders()', () => {
+    test('should request legacy profile ladders by region and realm and profile', () => {
+      blizzard.sc2.legacy.profileLadders({ profile: 2137104, region: 1, realm: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/profile/1/1/2137104/ladders',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.profileMatches()', () => {
+    test('should request legacy profile matches by region and realm and profile', () => {
+      blizzard.sc2.legacy.profileMatches({ profile: 2137104, region: 1, realm: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/profile/1/1/2137104/matches',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.ladder()', () => {
+    test('should request a legacy ladder by ladder and region', () => {
+      blizzard.sc2.legacy.ladder({ region: 1, ladder: 11 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/ladder/1/11',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.achievements()', () => {
+    test('should request a legacy achievements by region ID', () => {
+      blizzard.sc2.legacy.achievements({ region: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/data/achievements/1',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#legacy.rewards()', () => {
+    test('should request a legacy rewards by region ID', () => {
+      blizzard.sc2.legacy.rewards({ region: 1 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/sc2/legacy/data/rewards/1',
         expect.objectContaining(args),
       );
     });
