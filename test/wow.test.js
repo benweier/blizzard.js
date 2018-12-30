@@ -24,15 +24,29 @@ describe('lib/wow.js', () => {
         challenge: expect.any(Function),
         character: expect.any(Function),
         data: expect.any(Function),
+        battlegroups: expect.any(Function),
+        characterRaces: expect.any(Function),
+        characterClasses: expect.any(Function),
+        characterAchievements: expect.any(Function),
+        guildRewards: expect.any(Function),
+        guildPerks: expect.any(Function),
+        guildAchievements: expect.any(Function),
+        itemClasses: expect.any(Function),
+        talents: expect.any(Function),
+        petTypes: expect.any(Function),
         guild: expect.any(Function),
         item: expect.any(Function),
         mount: expect.any(Function),
         pet: expect.any(Function),
+        petAbility: expect.any(Function),
+        petSpecies: expect.any(Function),
+        petStats: expect.any(Function),
         pvp: expect.any(Function),
         quest: expect.any(Function),
         realms: expect.any(Function),
         recipe: expect.any(Function),
         spell: expect.any(Function),
+        userCharacters: expect.any(Function),
         zone: expect.any(Function),
       }),
     );
@@ -176,13 +190,123 @@ describe('lib/wow.js', () => {
         expect.objectContaining(args),
       );
     });
+  });
 
+  describe('#battlegroups()', () => {
+    test('should request battlegroups', () => {
+      blizzard.wow.battlegroups();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/battlegroups/',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#characterRaces()', () => {
+    test('should request character races', () => {
+      blizzard.wow.characterRaces();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/character/races',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#characterClasses()', () => {
+    test('should request character classes', () => {
+      blizzard.wow.characterClasses();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/character/classes',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#characterAchievements()', () => {
+    test('should request character achievements', () => {
+      blizzard.wow.characterAchievements();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/character/achievements',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#guildRewards()', () => {
+    test('should request guild rewards', () => {
+      blizzard.wow.guildRewards();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/guild/rewards',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#guildPerks()', () => {
+    test('should request guild perks', () => {
+      blizzard.wow.guildPerks();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/guild/perks',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#guildAchievements()', () => {
     test('should request guild achievements', () => {
-      blizzard.wow.data('guild-achievements');
+      blizzard.wow.guildAchievements();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/data/guild/achievements',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#itemClasses()', () => {
+    test('should request item classes', () => {
+      blizzard.wow.itemClasses();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/item/classes',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#talents()', () => {
+    test('should request talents', () => {
+      blizzard.wow.talents();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/talents',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#petTypes()', () => {
+    test('should request pet types', () => {
+      blizzard.wow.petTypes();
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/data/pet/types',
         expect.objectContaining(args),
       );
     });
@@ -338,6 +462,50 @@ describe('lib/wow.js', () => {
     });
   });
 
+  describe('#petAbility()', () => {
+    test('should request a pet ability by ID', () => {
+      blizzard.wow.petAbility({ id: 640 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/pet/ability/640',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#petSpecies()', () => {
+    test('should request a pet species by ID', () => {
+      blizzard.wow.petSpecies({ id: 258 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/pet/species/258',
+        expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#petStats()', () => {
+    test('should request pet stats', () => {
+      blizzard.wow.petStats({ species: 258, level: 25, breed: 4, quality: 4 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/wow/pet/stats/258',
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              breedId: 4,
+              level: 25,
+              qualityId: 4,
+            },
+          }),
+        ),
+      );
+    });
+  });
+
   describe('#pvp()', () => {
     test('should request a pvp leaderboard by bracket', () => {
       blizzard.wow.pvp({ bracket: '3v3' });
@@ -410,6 +578,24 @@ describe('lib/wow.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/spell/8056',
         expect.objectContaining(args),
+      );
+    });
+  });
+
+  describe('#userCharacters()', () => {
+    test('should request user characters', () => {
+      blizzard.wow.userCharacters({ token: 'user' });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.battle.net/wow/user/characters',
+        expect.objectContaining(
+          merge({}, args, {
+            headers: {
+              Authorization: 'Bearer user',
+            },
+          }),
+        ),
       );
     });
   });
