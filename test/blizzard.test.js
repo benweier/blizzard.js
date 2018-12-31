@@ -44,7 +44,9 @@ describe('lib/blizzard.js', () => {
         'https://us.api.blizzard.com/wow/character/proudmoore/kailee',
         expect.objectContaining({
           headers: {
-            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
             Authorization: 'Bearer token',
           },
           params: {
@@ -62,7 +64,9 @@ describe('lib/blizzard.js', () => {
         'https://sea.api.blizzard.com/wow/character/proudmoore/kailee',
         expect.objectContaining({
           headers: {
-            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
             Authorization: 'Bearer token',
           },
           params: {
@@ -80,7 +84,9 @@ describe('lib/blizzard.js', () => {
         'https://eu.api.blizzard.com/wow/character/proudmoore/kailee',
         expect.objectContaining({
           headers: {
-            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
             Authorization: 'Bearer token',
           },
           params: {
@@ -151,7 +157,9 @@ describe('lib/blizzard.js', () => {
         'https://us.battle.net/oauth/check_token',
         expect.objectContaining({
           headers: {
-            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
             Authorization: 'Bearer token',
           },
         }),
@@ -166,7 +174,9 @@ describe('lib/blizzard.js', () => {
         'https://eu.battle.net/oauth/check_token',
         expect.objectContaining({
           headers: {
-            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
             Authorization: 'Bearer nekot',
           },
         }),
