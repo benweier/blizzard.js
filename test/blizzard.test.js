@@ -44,7 +44,15 @@ describe('lib/blizzard.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/wow/character/proudmoore/kailee',
-        expect.any(Object),
+        expect.objectContaining({
+          headers: {
+            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            Authorization: 'Bearer token',
+          },
+          params: {
+            locale: 'en_US',
+          },
+        }),
       );
     });
 
@@ -54,7 +62,15 @@ describe('lib/blizzard.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://sea.api.blizzard.com/wow/character/proudmoore/kailee',
-        expect.any(Object),
+        expect.objectContaining({
+          headers: {
+            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            Authorization: 'Bearer token',
+          },
+          params: {
+            locale: 'en_US',
+          },
+        }),
       );
     });
 
@@ -64,7 +80,15 @@ describe('lib/blizzard.js', () => {
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
         'https://eu.api.blizzard.com/wow/character/proudmoore/kailee',
-        expect.any(Object),
+        expect.objectContaining({
+          headers: {
+            'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
+            Authorization: 'Bearer token',
+          },
+          params: {
+            locale: 'en_GB',
+          },
+        }),
       );
     });
   });

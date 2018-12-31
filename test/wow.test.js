@@ -4,6 +4,7 @@ const blizzard = require('./initialize');
 const args = {
   headers: {
     Authorization: 'Bearer token',
+    'User-Agent': expect.stringMatching(/Node.js\/[0-9].[0-9].[0-9] Blizzard\.js\/[0-9].[0-9].[0-9]/),
   },
   params: {
     locale: 'en_US',
