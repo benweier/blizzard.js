@@ -8,6 +8,7 @@ const WorldOfWarcraft = require('../lib/wow');
 describe('lib/blizzard.js', () => {
   beforeEach(() => {
     blizzard.axios.get.mockClear();
+    blizzard.axios.mockClear();
   });
 
   test('should have API properties', () => {
@@ -140,6 +141,11 @@ describe('lib/blizzard.js', () => {
             username: 'yek',
             password: 'terces',
           },
+          headers: {
+            'User-Agent': expect.stringMatching(
+              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
+            ),
+          },
           params: {
             grant_type: 'client_credentials',
           },
@@ -152,35 +158,31 @@ describe('lib/blizzard.js', () => {
     test('should validate an oauth token with default parameters', () => {
       blizzard.validateApplicationToken();
 
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.battle.net/oauth/check_token',
-        expect.objectContaining({
-          headers: {
-            'User-Agent': expect.stringMatching(
-              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
-            ),
-            Authorization: 'Bearer token',
-          },
-        }),
-      );
+      expect(blizzard.axios).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios).toHaveBeenCalledWith({
+        method: 'post',
+        url: 'https://us.battle.net/oauth/check_token',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': expect.stringMatching(/Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/),
+        },
+        data: `token=${blizzard.defaults.token}`,
+      });
     });
 
     test('should validate an oauth token with overridden parameters', () => {
       blizzard.validateApplicationToken({ token: 'nekot', origin: 'eu' });
 
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://eu.battle.net/oauth/check_token',
-        expect.objectContaining({
-          headers: {
-            'User-Agent': expect.stringMatching(
-              /Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/,
-            ),
-            Authorization: 'Bearer nekot',
-          },
-        }),
-      );
+      expect(blizzard.axios).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios).toHaveBeenCalledWith({
+        method: 'post',
+        url: 'https://eu.battle.net/oauth/check_token',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': expect.stringMatching(/Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/),
+        },
+        data: 'token=nekot',
+      });
     });
   });
 });
