@@ -18,44 +18,18 @@ describe('lib/account.js', () => {
   test('should have all API methods', () => {
     expect(blizzard.account).toEqual(
       expect.objectContaining({
-        user: expect.any(Function),
-        wow: expect.any(Function),
-        sc2: expect.any(Function),
+        userInfo: expect.any(Function),
       }),
     );
   });
 
-  describe('#user()', () => {
+  describe('#userInfo()', () => {
     test('should be called with the correct parameters', () => {
-      blizzard.account.user();
+      blizzard.account.userInfo();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/account/user',
-        expect.objectContaining(args),
-      );
-    });
-  });
-
-  describe('#wow()', () => {
-    test('should be called with the correct parameters', () => {
-      blizzard.account.wow();
-
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.battle.net/wow/user/characters',
-        expect.objectContaining(args),
-      );
-    });
-  });
-
-  describe('#sc2()', () => {
-    test('should be called with the correct parameters', () => {
-      blizzard.account.sc2();
-
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/sc2/profile/user',
+        'https://us.battle.net/oauth/userinfo',
         expect.objectContaining(args),
       );
     });
