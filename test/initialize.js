@@ -1,6 +1,8 @@
 const blizzard = require('../index.js').initialize({
-  apikey: 'apikey',
-  access_token: 'access_token',
+  key: 'key',
+  secret: 'secret',
+  origin: 'us',
+  token: 'token',
 });
 
 module.exports = blizzard;

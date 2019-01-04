@@ -1,53 +1,37 @@
 const blizzard = require('./initialize');
 
-describe('lib/account.js', () => {
+const args = {
+  headers: {
+    Authorization: 'Bearer token',
+    'User-Agent': expect.stringMatching(/Node.js\/\d{1,2}.\d{1,2}.\d{1,2} Blizzard\.js\/\d{1,2}.\d{1,2}.\d{1,2}/),
+  },
+  params: {
+    locale: 'en_US',
+  },
+};
 
+describe('lib/account.js', () => {
   beforeEach(() => {
     blizzard.axios.get.mockClear();
   });
 
-  test('should have a API methods', () => {
-    expect(blizzard.account).toEqual(expect.objectContaining({
-      user: expect.any(Function),
-      wow: expect.any(Function),
-      sc2: expect.any(Function),
-    }));
+  test('should have all API methods', () => {
+    expect(blizzard.account).toEqual(
+      expect.objectContaining({
+        userInfo: expect.any(Function),
+      }),
+    );
   });
 
-  describe('#user()', () => {
+  describe('#userInfo()', () => {
     test('should be called with the correct parameters', () => {
-      blizzard.account.user();
+      blizzard.account.userInfo();
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/account/user',
-        expect.any(Object)
+        'https://us.battle.net/oauth/userinfo',
+        expect.objectContaining(args),
       );
     });
   });
-
-  describe('#wow()', () => {
-    test('should be called with the correct parameters', () => {
-      blizzard.account.wow();
-
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/wow/user/characters',
-        expect.any(Object)
-      );
-    });
-  });
-
-  describe('#sc2()', () => {
-    test('should be called with the correct parameters', () => {
-      blizzard.account.sc2();
-
-      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
-      expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.battle.net/sc2/profile/user',
-        expect.any(Object)
-      );
-    });
-  });
-
 });
