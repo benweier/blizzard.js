@@ -7,27 +7,27 @@
 
 *Blizzard.js* is a promise-based Node.js library for the Blizzard Community Platform API.
 
-- [API](https://github.com/benweier/blizzard.js/blob/master/API.md)
-- [Example App](https://github.com/benweier/blizzard.js/tree/example)
-
 ## Install
 
 Install `blizzard.js` and save to your `package.json` dependencies in one easy step:
 
-With yarn:
-
-    $ yarn add blizzard.js
-
 With npm:
 
     $ npm install blizzard.js --save
+
+With yarn:
+
+    $ yarn add blizzard.js
 
 ## Usage
 
 Step 1: `require()` and `initialize()` *Blizzard.js* within your application:
 
 ```javascript
-const blizzard = require('blizzard.js').initialize({ apikey: BLIZZARD_API_KEY });
+const blizzard = require('blizzard.js').initialize({
+  key: BLIZZARD_CLIENT_ID,
+  secret: BLIZZARD_CLIENT_SECRET,
+});
 ```
 
 Step 2: Call the API methods to request data:
@@ -45,4 +45,4 @@ Step 4: Profit.
 
 ## Battle.net API Key
 
-Your private Blizzard API key must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain your own Blizzard API key.
+Your private Blizzard API Client ID and Secret must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain your own Blizzard API credentials.
