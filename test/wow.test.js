@@ -602,7 +602,7 @@ describe('lib/wow.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.battle.net/wow/user/characters',
+        'https://us.api.blizzard.com/wow/user/characters',
         expect.objectContaining(
           merge({}, args, {
             headers: {
