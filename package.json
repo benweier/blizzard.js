@@ -14,20 +14,20 @@
   },
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "lodash.merge": "^4.6.1",
     "lodash.pick": "^4.4.0"
   },
   "devDependencies": {
-    "codecov": "^3.1.0",
-    "eslint": "^5.11.1",
+    "codecov": "^3.5.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.1.2",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^23.6.0",
-    "prettier": "^1.15.3"
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.0"
   },
   "engines": {
     "node": ">=8.9.0"
