@@ -80,7 +80,7 @@ async function BlizzJS_Example () {
   }
 }
 
-BlizzJS_Example();
+BlizzJS_Example(); //or module.exports = BlizzJS_Example;
 ```
 
 ## Battle.net API Key
