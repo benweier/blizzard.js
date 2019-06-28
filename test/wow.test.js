@@ -1065,14 +1065,14 @@ describe('lib/wow.js', () => {
       );
     });
   });
-  
+
   describe('#itemData()', () => {
     test('should request game item data', () => {
-      blizzard.wow.itemData();
+      blizzard.wow.item({ id: 168185 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/item/168185',
+        'https://us.api.blizzard.com/wow/item/168185',
         expect.objectContaining(
           merge({}, args, {
             params: {
