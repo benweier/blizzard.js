@@ -27,10 +27,21 @@ Step 1: `require()` and `initialize()` *Blizzard.js* within your application:
 const blizzard = require('blizzard.js').initialize({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
+  origin: 'us', //optional
+  locale: 'en_US' //optional
 });
 ```
+Step 2: Initialize the token
 
-Step 2: Call the API methods to request data:
+```javascript
+blizzard.getApplicationToken()
+  .then(response => {
+    console.log(response.data.access_token);
+    blizzard.defaults.token = response.data.access_token
+  });
+```
+
+Step 3: Call the API methods to request data:
 
 ```javascript
 blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'charni' })
@@ -39,10 +50,39 @@ blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'ch
   });
 ```
 
-Step 3: ???
+Step 4: ???
 
-Step 4: Profit.
+Step 5: Profit.
+
+## Full code example with async/await
+
+```javascript
+async function BlizzJS_Example () {
+  try {
+    console.time(`${BlizzJS_Example.name}`);
+    const blizzardKeys = await keys_db.findOne({ tags: "requests" });
+    const blizzard = require('blizzard.js').initialize({
+      key: blizzardKeys._id,
+      secret: blizzardKeys.secret,
+      origin: 'us', //optional
+      locale: 'en_US' //optional
+    });
+    await blizzard.getApplicationToken()
+      .then(response => {
+        console.log(response.data.access_token);
+        blizzard.defaults.token = response.data.access_token
+      });
+    const item = await blizzard.wow.item({ id: 168185});
+    console.log(item.data)
+    console.timeEnd(`${BlizzJS_Example.name}`)
+  } catch (err) {
+    console.error(`${BlizzJS_Example.name},${err}`);
+  }
+}
+
+BlizzJS_Example();
+```
 
 ## Battle.net API Key
 
-Your private Blizzard API Client ID and Secret must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain your own Blizzard API credentials.
+Your private Blizzard API Client ID, Secret & token must be passed to `.initialize()`. Please see the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain your own Blizzard API credentials.
