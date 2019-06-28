@@ -1072,7 +1072,7 @@ describe('lib/wow.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/wow/item/168185',
+        'https://us.api.blizzard.com/data/wow/item/item/168185', 
         expect.objectContaining(
           merge({}, args, {
             params: {
