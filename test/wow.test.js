@@ -1068,7 +1068,7 @@ describe('lib/wow.js', () => {
 
   describe('#itemData()', () => {
     test('should request game item data', () => {
-      blizzard.wow.item({ id: 168185 });
+      blizzard.wow.itemData({ id: 168185 });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
