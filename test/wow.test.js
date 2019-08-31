@@ -62,6 +62,7 @@ describe('lib/wow.js', () => {
         realm: expect.any(Function),
         region: expect.any(Function),
         token: expect.any(Function),
+        itemData: expect.any(Function),
       }),
     );
   });
@@ -1058,6 +1059,24 @@ describe('lib/wow.js', () => {
           merge({}, args, {
             params: {
               namespace: 'dynamic-us',
+            },
+          }),
+        ),
+      );
+    });
+  });
+
+  describe('#itemData()', () => {
+    test('should request game item data', () => {
+      blizzard.wow.itemData({ id: 168185 });
+
+      expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
+      expect(blizzard.axios.get).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/item/168185', 
+        expect.objectContaining(
+          merge({}, args, {
+            params: {
+              namespace: 'static-us',
             },
           }),
         ),
