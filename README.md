@@ -27,16 +27,17 @@ Step 1: `require()` and `initialize()` *Blizzard.js* within your application:
 const blizzard = require('blizzard.js').initialize({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
-  origin: 'us', //optional
-  locale: 'en_US' //optional
+  origin: 'us', // optional
+  locale: 'en_US' // optional
+  token: '' // optional
 });
 ```
-Step 2: Initialize the token
+
+Step 2: Fetch an API token, if one was not provided to `intialize`. You may prefetch a token however you like as documented by [Client Credentials Flow](https://develop.battle.net/documentation/guides/using-oauth/client-credentials-flow)
 
 ```javascript
 blizzard.getApplicationToken()
   .then(response => {
-    console.log(response.data.access_token);
     blizzard.defaults.token = response.data.access_token
   });
 ```
@@ -50,37 +51,30 @@ blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'ch
   });
 ```
 
-Step 4: ???
-
-Step 5: Profit.
-
 ## Full code example with async/await
 
 ```javascript
-async function BlizzJS_Example () {
+const blizzard = require('blizzard.js').initialize({
+  key: process.env.BLIZZARD_CLIENT_ID,
+  secret: process.env.BLIZZARD_CLIENT_SECRET,
+  origin: 'us',
+  locale: 'en_US'
+});
+
+async function example () {
   try {
-    console.time(`${BlizzJS_Example.name}`);
-    const blizzardKeys = await keys_db.findOne({ tags: "requests" });
-    const blizzard = require('blizzard.js').initialize({
-      key: blizzardKeys._id,
-      secret: blizzardKeys.secret,
-      origin: 'us', //optional
-      locale: 'en_US' //optional
-    });
     await blizzard.getApplicationToken()
       .then(response => {
-        console.log(response.data.access_token);
         blizzard.defaults.token = response.data.access_token
       });
-    const item = await blizzard.wow.item({ id: 168185});
-    console.log(item.data)
-    console.timeEnd(`${BlizzJS_Example.name}`)
+    const item = await blizzard.wow.item({ id: 168185 });
+    console.log(item)
   } catch (err) {
-    console.error(`${BlizzJS_Example.name},${err}`);
+    console.error(err);
   }
 }
 
-BlizzJS_Example(); //or module.exports = BlizzJS_Example;
+example();
 ```
 
 ## Battle.net API Key
