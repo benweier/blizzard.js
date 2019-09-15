@@ -3,7 +3,7 @@
  * @description A promise-based Node.js library for the Blizzard Community Platform API
  * @copyright Copyright(c) 2017 Ben Weier <ben.weier@gmail.com>
  * @license MIT
- * @version 3.0.0
+ * @version 3.2.0
  * @module index
  * @requires lib/blizzard
  */
