@@ -85,7 +85,7 @@ describe('lib/wow.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/wow/auction/data/medivh',
+        'https://us.api.blizzard.com/data/wow/connected-realm/medivh/auctions',
         expect.objectContaining(args),
       );
     });
