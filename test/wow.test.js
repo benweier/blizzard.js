@@ -137,18 +137,12 @@ describe('lib/wow.js', () => {
 
   describe('#character()', () => {
     test('should request a character profile', () => {
-      blizzard.wow.character([], { origin: 'us', realm: 'amanthul', name: 'charni' });
+      blizzard.wow.character('index', { origin: 'us', realm: 'amanthul', name: 'charni' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining(
-          merge({}, args, {
-            params: {
-              fields: 'profile',
-            },
-          }),
-        ),
+        'https://us.api.blizzard.com/profile/wow/character/amanthul/charni',
+        expect.objectContaining(args),
       );
     });
 
@@ -157,30 +151,18 @@ describe('lib/wow.js', () => {
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining(
-          merge({}, args, {
-            params: {
-              fields: 'achievements',
-            },
-          }),
-        ),
+        'https://us.api.blizzard.com/profile/wow/character/amanthul/charni/achievements',
+        expect.objectContaining(args),
       );
     });
 
-    test('should request character pets and petSlots', () => {
-      blizzard.wow.character(['pets', 'petSlots'], { origin: 'us', realm: 'amanthul', name: 'charni' });
+    test('should request character collection (pets & mounts)', () => {
+      blizzard.wow.character('collections', { origin: 'us', realm: 'amanthul', name: 'charni' });
 
       expect(blizzard.axios.get).toHaveBeenCalledTimes(1);
       expect(blizzard.axios.get).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/wow/character/amanthul/charni',
-        expect.objectContaining(
-          merge({}, args, {
-            params: {
-              fields: 'pets,petSlots',
-            },
-          }),
-        ),
+        'https://us.api.blizzard.com/profile/wow/character/amanthul/charni',
+        expect.objectContaining(args),
       );
     });
   });
