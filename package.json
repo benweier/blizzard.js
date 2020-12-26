@@ -1,36 +1,25 @@
 {
-  "name": "blizzard.js",
-  "description": "A promise-based Node.js library for the Blizzard Community Platform API",
-  "version": "3.2.0",
-  "author": "Ben Weier <ben.weier@gmail.com> (https://github.com/benweier)",
-  "homepage": "https://github.com/benweier/blizzard.js",
+  "name": "blizzard",
+  "version": "0.0.0",
+  "author": {
+    "name": "Ben Weier",
+    "email": "ben.weier@gmail.com",
+    "url": "https://benweier.dev"
+  },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/benweier/blizzard.js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/benweier/blizzard.js/issues"
-  },
-  "main": "index.js",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "lodash.merge": "^4.6.2",
-    "lodash.pick": "^4.4.0"
-  },
-  "devDependencies": {
-    "codecov": "^3.5.0",
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.9.0",
-    "prettier": "^1.18.2"
-  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "rimraf ./dist && rollup -c",
+    "test": "jest",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [
     "blizzard",
@@ -44,21 +33,97 @@
     "starcraft",
     "sc2",
     "diablo",
-    "d3"
+    "d3",
+    "hs",
+    "hearthstone"
   ],
-  "files": [
-    "lib/",
-    "README.md",
-    "LICENSE",
-    "index.js"
-  ],
-  "scripts": {
-    "lint": "./node_modules/.bin/eslint .",
-    "codecov": "./node_modules/.bin/codecov",
-    "test": "./node_modules/.bin/jest"
+  "dependencies": {
+    "axios": "^0.21.0"
   },
-  "jest": {
-    "collectCoverage": true,
-    "testEnvironment": "node"
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^7.0.9",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "@types/jest": "^26.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "axios-mock-adapter": "^1.19.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-prettier": "^3.3.0",
+    "fetch-mock-jest": "^1.5.1",
+    "husky": "^4.3.5",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.35.1",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "semantic-release": "^17.3.0",
+    "ts-jest": "^26.4.4",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "tarballDir": "release"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": "release/*.tgz"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "package-lock.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
   }
 }
