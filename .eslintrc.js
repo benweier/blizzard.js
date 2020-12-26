@@ -1,19 +1,46 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:jest/recommended', 'plugin:import/errors', 'airbnb-base', 'prettier'],
   env: {
-    es6: true,
     browser: false,
-    jest: true,
+    commonjs: true,
     node: true,
+    'jest/globals': true,
   },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:jest/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      impliedStrict: true,
-    },
+    ecmaVersion: 2020,
   },
-  plugins: ['jest', 'import', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'import', 'jest'],
   rules: {
     'prettier/prettier': 'error',
-    'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }],
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal'],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'external',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+        'newlines-between': 'never',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
+    ],
   },
-};
+}
