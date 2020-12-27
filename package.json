@@ -19,7 +19,8 @@
   "scripts": {
     "build": "rimraf ./dist && rollup -c",
     "test": "jest",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "prepare": "rollup -c"
   },
   "keywords": [
     "blizzard",
