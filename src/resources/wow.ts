@@ -1,4 +1,4 @@
-import { Resource } from '..'
+import { Resource } from '.'
 
 /*
  * PROFILE DATA
