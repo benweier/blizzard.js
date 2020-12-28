@@ -43,7 +43,6 @@ export abstract class Blizzard {
     }
 
     this.axios.defaults.headers.common['User-Agent'] = this.ua
-    this.axios.defaults.headers.common.Authorization = `Basic ${this.defaults.token?.access_token}`
   }
 
   protected axios = axios.create({
@@ -52,7 +51,6 @@ export abstract class Blizzard {
     },
   })
 
-  protected get<T extends unknown>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
   protected createClientResourceRequest<T = any>(
     fn: ResourceInterface<T>,
   ): (args: ResourceOptions<T>) => [string, AxiosRequestConfig] {
@@ -82,10 +80,11 @@ export abstract class Blizzard {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
+  protected get<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.get(url, config)
   }
 
-  protected post<T extends unknown>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  protected post<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.post(url, config)
   }
 
@@ -93,7 +92,17 @@ export abstract class Blizzard {
     this.defaults.token = token
   }
 
-  public getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<AxiosResponse> {
+  public getApplicationToken(args?: {
+    origin?: string
+    key?: string
+    secret?: string
+  }): Promise<
+    AxiosResponse<{
+      access_token: string
+      token_type: 'bearer'
+      expires_in: number
+    }>
+  > {
     const { origin, key, secret } = { ...this.defaults, ...args }
     const auth = Buffer.from(`${key}:${secret}`).toString('base64')
 
