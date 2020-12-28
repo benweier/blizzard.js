@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getEndpoint, Origins } from '../endpoints'
+import { Resource, ResourceInterface, ResourceOptions } from '../resources'
 
 export type ClientOptions = {
   key: string
@@ -52,6 +53,35 @@ export abstract class Blizzard {
   })
 
   protected get<T extends unknown>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  protected createClientResourceRequest<T = any>(
+    fn: ResourceInterface<T>,
+  ): (args: ResourceOptions<T>) => [string, AxiosRequestConfig] {
+    return (args) => {
+      const resource = fn(args)
+      return this.prepareResourceRequest(resource, args)
+    }
+  }
+
+  protected prepareResourceRequest(
+    resource: Resource<{ [key: string]: string | number | boolean }>,
+    args?: Partial<ClientOptions>,
+  ): [string, AxiosRequestConfig] {
+    const config = { ...this.defaults, ...args }
+    const endpoint = getEndpoint(config.origin, config.locale)
+    const request: AxiosRequestConfig = {
+      headers: {
+        authorization: `${config.token?.token_type} ${config.token?.access_token}`,
+      },
+      params: {
+        ...resource.params,
+        locale: endpoint.locale,
+        namespace: `${resource.namespace}-${endpoint.origin}`,
+      },
+    }
+
+    return [`${endpoint.hostname}/${resource.path}`, request]
+  }
+
     return this.axios.get(url, config)
   }
 
