@@ -15,7 +15,7 @@ export const createClient = <T extends Blizzard>(Client: { new (args: ClientOpti
   if (token) {
     const validateTokenRequest = await client.validateApplicationToken()
 
-    if (new Date(validateTokenRequest.data.exp * 1000) > new Date()) {
+    if (validateTokenRequest.data.exp * 1000 > Date.now() - 60000) {
       return client
     }
   }
