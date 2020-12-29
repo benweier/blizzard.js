@@ -14,6 +14,7 @@ export type AccessTokenResponse = {
   access_token: string
   token_type: string
   expires_in: number
+  scope?: string
 }
 
 export abstract class Blizzard {
@@ -98,19 +99,16 @@ export abstract class Blizzard {
       access_token: string
       token_type: 'bearer'
       expires_in: number
+      scope?: string
     }>
   > {
     const { origin, key, secret } = { ...this.defaults, ...args }
-    const auth = Buffer.from(`${key}:${secret}`).toString('base64')
 
-    return this.post<{
-      access_token: string
-      token_type: 'bearer'
-      expires_in: number
-    }>(`https://${origin}.battle.net/oauth/token`, {
+    return this.get(`https://${origin}.battle.net/oauth/token`, {
       params: { grant_type: 'client_credentials' },
-      headers: {
-        Authorization: `Basic ${auth}`,
+      auth: {
+        username: key,
+        password: secret,
       },
     })
   }
@@ -120,7 +118,7 @@ export abstract class Blizzard {
     token?: AccessTokenResponse
   }): Promise<
     AxiosResponse<{
-      scope: Array<string>
+      scope?: Array<string>
       exp: number
       authorities: Array<{
         authority: string
