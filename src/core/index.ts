@@ -45,9 +45,7 @@ export abstract class Blizzard {
 
   protected axios = axios.create()
 
-  protected createClientResourceRequest<T = any>(
-    fn: ResourceInterface<T>,
-  ): (args: ResourceOptions<T>) => [string, AxiosRequestConfig] {
+  protected createClientResourceRequest<T = any>(fn: ResourceInterface<T>): (args: T) => [string, AxiosRequestConfig] {
     return (args) => {
       const resource = fn(args)
       return this.prepareResourceRequest(resource, args)
