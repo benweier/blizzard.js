@@ -17,9 +17,9 @@ export type AccessTokenResponse = {
 }
 
 export abstract class Blizzard {
-  protected ua: string
+  readonly version = 'next'
 
-  readonly version: string
+  protected ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
 
   readonly defaults: {
     key: string
@@ -30,24 +30,21 @@ export abstract class Blizzard {
   }
 
   constructor(args: ClientOptions) {
-    const endpoint = getEndpoint(args.origin, args.locale)
+    const { origin, locale } = getEndpoint(args.origin, args.locale)
 
-    this.version = 'next'
-    this.ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
     this.defaults = {
       key: args.key,
       secret: args.secret,
       token: args.token,
-      origin: endpoint.origin,
-      locale: endpoint.locale,
+      origin,
+      locale,
     }
-
-    this.axios.defaults.headers.common['User-Agent'] = this.ua
   }
 
   protected axios = axios.create({
     headers: {
-      'Content-Type': 'application/json',
+      'user-agent': this.ua,
+      'content-type': 'application/json',
     },
   })
 
@@ -68,12 +65,12 @@ export abstract class Blizzard {
     const endpoint = getEndpoint(config.origin, config.locale)
     const request: AxiosRequestConfig = {
       headers: {
+        'battlenet-namespace': `${resource.namespace}-${endpoint.origin}`,
         authorization: `${config.token?.token_type} ${config.token?.access_token}`,
       },
       params: {
         ...resource.params,
         locale: endpoint.locale,
-        namespace: `${resource.namespace}-${endpoint.origin}`,
       },
     }
 
@@ -139,7 +136,7 @@ export abstract class Blizzard {
 
     return this.post(`https://${origin}.battle.net/oauth/check_token`, {
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'content-type': 'application/x-www-form-urlencoded',
       },
       data: `token=${token?.access_token}`,
     })
