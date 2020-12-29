@@ -5,6 +5,7 @@ const token = {
   access_token: 'token',
   token_type: 'type',
   expires_in: 9999999999,
+  scope: '',
 }
 
 class Client extends Blizzard {}
