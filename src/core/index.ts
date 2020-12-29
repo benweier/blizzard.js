@@ -1,3 +1,4 @@
+import qs from 'querystring'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getEndpoint, Origins } from '../endpoints'
 import { Resource, ResourceInterface, ResourceOptions } from '../resources'
@@ -42,12 +43,7 @@ export abstract class Blizzard {
     }
   }
 
-  protected axios = axios.create({
-    headers: {
-      'user-agent': this.ua,
-      'content-type': 'application/json',
-    },
-  })
+  protected axios = axios.create()
 
   protected createClientResourceRequest<T = any>(
     fn: ResourceInterface<T>,
@@ -66,6 +62,8 @@ export abstract class Blizzard {
     const endpoint = getEndpoint(config.origin, config.locale)
     const request: AxiosRequestConfig = {
       headers: {
+        'user-agent': this.ua,
+        'content-type': 'application/json',
         'battlenet-namespace': `${resource.namespace}-${endpoint.origin}`,
         authorization: `${config.token?.token_type} ${config.token?.access_token}`,
       },
@@ -104,11 +102,15 @@ export abstract class Blizzard {
   > {
     const { origin, key, secret } = { ...this.defaults, ...args }
 
-    return this.get(`https://${origin}.battle.net/oauth/token`, {
+    return this.axios.get(`https://${origin}.battle.net/oauth/token`, {
       params: { grant_type: 'client_credentials' },
       auth: {
         username: key,
         password: secret,
+      },
+      headers: {
+        'user-agent': this.ua,
+        'content-type': 'application/json',
       },
     })
   }
@@ -132,11 +134,12 @@ export abstract class Blizzard {
       throw new Error('`validateApplicationToken` missing required `token` parameter')
     }
 
-    return this.post(`https://${origin}.battle.net/oauth/check_token`, {
+    return this.axios.post(`https://${origin}.battle.net/oauth/check_token`, {
       headers: {
+        'user-agent': this.ua,
         'content-type': 'application/x-www-form-urlencoded',
       },
-      data: `token=${token?.access_token}`,
+      data: qs.stringify({ token: token?.access_token }),
     })
   }
 
