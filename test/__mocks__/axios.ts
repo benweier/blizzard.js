@@ -6,7 +6,7 @@ jest.unmock('axios')
 
 const mockAxios = new MockAdapter(axios)
 
-mockAxios.onPost('https://us.battle.net/oauth/token').reply(200, {
+mockAxios.onGet('https://us.battle.net/oauth/token').reply(200, {
   access_token: 'test_token',
   token_type: 'bearer',
   expires_in: 9999999999,
@@ -23,6 +23,6 @@ mockAxios.onPost('https://us.battle.net/oauth/check_token').reply(200, {
   client_id: 'test_id',
 })
 
-mockAxios.onAny().reply(404)
+mockAxios.onAny().reply(200)
 
 export default { ...axios, ...mockAxios }
