@@ -19,11 +19,11 @@ export type AccessTokenResponse = {
 }
 
 export abstract class Blizzard {
-  readonly version = 'next'
+  protected version = 'next'
 
   protected ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
 
-  readonly defaults: {
+  protected defaults: {
     key: string
     secret: string
     token?: AccessTokenResponse
