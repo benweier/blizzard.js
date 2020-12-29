@@ -1,17 +1,17 @@
 import qs from 'querystring'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getEndpoint, Origins } from '../endpoints'
-import { Resource, ResourceInterface, ResourceOptions } from '../resources'
+import { Resource, ResourceInterface } from '../resources'
 
 export type ClientOptions = {
   key: string
   secret: string
-  token?: AccessTokenResponse
+  token?: AccessToken
   origin?: Origins
   locale?: string
 }
 
-export type AccessTokenResponse = {
+export type AccessToken = {
   access_token: string
   token_type: string
   expires_in: number
@@ -26,7 +26,7 @@ export abstract class Blizzard {
   protected defaults: {
     key: string
     secret: string
-    token?: AccessTokenResponse
+    token?: AccessToken
     origin: Origins
     locale: string
   }
@@ -82,7 +82,7 @@ export abstract class Blizzard {
     return this.axios.post(url, config)
   }
 
-  public setApplicationToken(token: AccessTokenResponse): void {
+  public setApplicationToken(token: AccessToken): void {
     this.defaults.token = token
   }
 
@@ -115,7 +115,7 @@ export abstract class Blizzard {
 
   public validateApplicationToken(args?: {
     origin?: string
-    token?: AccessTokenResponse
+    token?: AccessToken
   }): Promise<
     AxiosResponse<{
       scope?: Array<string>
