@@ -15,11 +15,11 @@ export const accountProfile = (): Resource => {
   }
 }
 
-export type AccountCharacterProfileOptions = { realmId: number; characterId: number }
+export type AccountCharacterProfileOptions = { realm: number; character: number }
 
-export const accountCharacterProfile = ({ realmId, characterId }: AccountCharacterProfileOptions): Resource => {
+export const accountCharacterProfile = ({ realm, character }: AccountCharacterProfileOptions): Resource => {
   return {
-    path: `/profile/user/wow/protected-character/${realmId}-${characterId}`,
+    path: `/profile/user/wow/protected-character/${realm}-${character}`,
     namespace: 'profile',
   }
 }
@@ -108,13 +108,13 @@ export const characterMedia = ({ realm, name }: CharacterMediaOptions): Resource
   }
 }
 
-export type CharacterMythicKeystoneOptions = CharacterOptions & { seasonId?: number }
+export type CharacterMythicKeystoneOptions = CharacterOptions & { season?: number }
 
-export const characterMythicKeystone = ({ realm, name, seasonId }: CharacterMythicKeystoneOptions): Resource => {
+export const characterMythicKeystone = ({ realm, name, season }: CharacterMythicKeystoneOptions): Resource => {
   return {
     path:
-      seasonId !== undefined
-        ? `profile/wow/character/${realm}/${name}/mythic-keystone-profile/season/${seasonId}`
+      season !== undefined
+        ? `profile/wow/character/${realm}/${name}/mythic-keystone-profile/season/${season}`
         : `profile/wow/character/${realm}/${name}/mythic-keystone-profile`,
     namespace: 'profile',
   }
