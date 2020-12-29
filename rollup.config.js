@@ -1,6 +1,6 @@
-import ts from '@rollup/plugin-typescript';
-import typescript from 'typescript'
 import resolve from '@rollup/plugin-node-resolve'
+import ts from '@rollup/plugin-typescript'
+import typescript from 'typescript'
 
 export default [
   {
@@ -16,7 +16,7 @@ export default [
       format: 'cjs',
       preserveModules: true,
     },
-    external: ['axios'],
+    external: ['querystring', 'axios'],
     plugins: [
       resolve(),
       ts({
@@ -24,4 +24,4 @@ export default [
       }),
     ],
   },
-];
+]
