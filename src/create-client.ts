@@ -1,6 +1,6 @@
-import { Blizzard, ClientOptions } from './core'
+import { BlizzardClient, ClientOptions } from './core'
 
-export const createClient = <T extends Blizzard>(Client: { new (args: ClientOptions): T }) => async ({
+export const createClient = <T extends BlizzardClient>(Client: { new (args: ClientOptions): T }) => async ({
   key,
   secret,
   token,
@@ -22,7 +22,7 @@ export const createClient = <T extends Blizzard>(Client: { new (args: ClientOpti
 
   const getTokenRequest = await client.getApplicationToken()
 
-  client.setApplicationToken(getTokenRequest.data)
+  client.setApplicationToken(getTokenRequest.data.access_token)
 
   return client
 }

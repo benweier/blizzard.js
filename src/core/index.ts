@@ -1,32 +1,54 @@
 import qs from 'querystring'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getEndpoint, Origins } from '../endpoints'
-import { Resource, ResourceInterface } from '../resources'
+import { Resource, ResourceInterface, ResourceResponse } from '../resources'
 
 export type ClientOptions = {
   key: string
   secret: string
-  token?: AccessToken
+  token?: string
   origin?: Origins
   locale?: string
 }
 
 export type AccessToken = {
   access_token: string
-  token_type: string
+  token_type: 'bearer'
   expires_in: number
   scope?: string
 }
 
-export abstract class Blizzard {
-  protected version = 'next'
+export interface BlizzardClient {
+  setApplicationToken(token: string): void
 
-  protected ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
+  getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<AxiosResponse<AccessToken>>
 
-  protected defaults: {
+  validateApplicationToken(args?: {
+    origin?: string
+    token?: string
+  }): Promise<
+    AxiosResponse<{
+      scope?: Array<string>
+      exp: number
+      authorities: Array<{
+        authority: string
+      }>
+      client_id: string
+    }>
+  >
+
+  battletag(tag: string): string
+}
+
+export abstract class Blizzard implements BlizzardClient {
+  public version = 'next'
+
+  public ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
+
+  public defaults: {
     key: string
     secret: string
-    token?: AccessToken
+    token?: string
     origin: Origins
     locale: string
   }
@@ -43,16 +65,18 @@ export abstract class Blizzard {
     }
   }
 
-  protected axios = axios.create()
+  public axios = axios.create()
 
-  protected createClientResourceRequest<T = any>(fn: ResourceInterface<T>): (args: T) => [string, AxiosRequestConfig] {
+  public createClientResourceRequest<T = any>(fn: ResourceInterface<T>): (args: T) => ResourceResponse {
     return (args) => {
       const resource = fn(args)
-      return this.prepareResourceRequest(resource, args)
+      const [url, config] = this.prepareResourceRequest(resource, args)
+
+      return this.get(url, config)
     }
   }
 
-  protected prepareResourceRequest(
+  public prepareResourceRequest(
     resource: Resource<{ [key: string]: string | number | boolean }>,
     args?: Partial<ClientOptions>,
   ): [string, AxiosRequestConfig] {
@@ -63,7 +87,7 @@ export abstract class Blizzard {
         'user-agent': this.ua,
         'content-type': 'application/json',
         'battlenet-namespace': `${resource.namespace}-${endpoint.origin}`,
-        authorization: `${config.token?.token_type} ${config.token?.access_token}`,
+        authorization: `bearer ${config.token}`,
       },
       params: {
         ...resource.params,
@@ -74,15 +98,15 @@ export abstract class Blizzard {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
-  protected get<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public get<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.get(url, config)
   }
 
-  protected post<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public post<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.post(url, config)
   }
 
-  public setApplicationToken(token: AccessToken): void {
+  public setApplicationToken(token: string): void {
     this.defaults.token = token
   }
 
@@ -90,14 +114,7 @@ export abstract class Blizzard {
     origin?: string
     key?: string
     secret?: string
-  }): Promise<
-    AxiosResponse<{
-      access_token: string
-      token_type: 'bearer'
-      expires_in: number
-      scope?: string
-    }>
-  > {
+  }): Promise<AxiosResponse<AccessToken>> {
     const { origin, key, secret } = { ...this.defaults, ...args }
 
     return this.axios.get(`https://${origin}.battle.net/oauth/token`, {
@@ -115,7 +132,7 @@ export abstract class Blizzard {
 
   public validateApplicationToken(args?: {
     origin?: string
-    token?: AccessToken
+    token?: string
   }): Promise<
     AxiosResponse<{
       scope?: Array<string>
@@ -137,7 +154,7 @@ export abstract class Blizzard {
         'user-agent': this.ua,
         'content-type': 'application/x-www-form-urlencoded',
       },
-      data: qs.stringify({ token: token?.access_token }),
+      data: qs.stringify({ token }),
     })
   }
 
