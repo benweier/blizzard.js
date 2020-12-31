@@ -6,7 +6,7 @@ import { Resource } from '.'
 
 type CharacterOptions = { realm: string; name: string }
 
-export type AccountProfileOptions = Record<string, never>
+export type AccountProfileOptions = Record<string, unknown>
 
 export const accountProfile = (): Resource => {
   return {
@@ -219,233 +219,533 @@ export const guild = ({ realm, name, resource }: GuildOptions): Resource => {
  * GAME DATA
  */
 
-// export const achievment = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+export type AchievementOptions = { id: number; media?: boolean }
 
-// export const auctionHouse = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'dynamic',
-//   }
-// }
+export const achievement = (args?: AchievementOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/achievement/index',
+      namespace: 'static',
+    }
+  }
 
-// export const azeriteEssence = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+  const { id, media = false } = args
 
-// export const connectedRealm = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'dynamic',
-//   }
-// }
+  return media
+    ? {
+        path: `data/wow/media/achievement/${id}`,
+        namespace: 'static',
+      }
+    : {
+        path: `data/wow/achievement/${id}`,
+        namespace: 'static',
+      }
+}
 
-// export const convenant = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+export type AchievementCategoryOptions = { id: number }
 
-// export const creature = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+export const achievementCategory = (args?: AchievementCategoryOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/achievement-category/index',
+      namespace: 'static',
+    }
+  }
 
-// export const guildCrest = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+  return {
+    path: `data/wow/achievement-category/${args.id}`,
+    namespace: 'static',
+  }
+}
 
-// export const item = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+export type AuctionHouseOptions = { id: number }
 
-// export const journal = (): Resource => {
-//   return {
-//     path: '',
-//     namespace: 'static',
-//   }
-// }
+export const auctionHouse = ({ id }: AuctionHouseOptions): Resource => {
+  return {
+    path: `data/wow/connected-realm/${id}/auctions`,
+    namespace: 'dynamic',
+  }
+}
+
+export type AzeriteEssenceOptions = { id: number; media?: boolean }
+
+export const azeriteEssence = (args: AzeriteEssenceOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/azerite-essence/index',
+      namespace: 'static',
+    }
+  }
+
+  const { id, media = false } = args
+
+  return media
+    ? {
+        path: `data/wow/media/azerite-essence/${id}`,
+        namespace: 'static',
+      }
+    : {
+        path: `data/wow/azerite-essence/${id}`,
+        namespace: 'static',
+      }
+}
+
+export type AzeriteEssenceSearchOptions = { id?: number; orderby?: string | string[]; page?: number }
+
+export const azeriteEssenceSearch = ({
+  id,
+  orderby,
+  page,
+}: AzeriteEssenceSearchOptions): Resource<{
+  'allowed_specializations.id'?: number
+  orderby?: string
+  _page?: number
+}> => {
+  return {
+    path: 'data/wow/search/azerite-essence',
+    namespace: 'static',
+    params: {
+      'allowed_specializations.id': id,
+      orderby: Array.isArray(orderby) ? orderby.join(',') : orderby,
+      _page: page,
+    },
+  }
+}
+
+export type ConnectedRealmOptions = { id: number }
+
+export const connectedRealm = (args?: ConnectedRealmOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/connected-realm/index',
+      namespace: 'dynamic',
+    }
+  }
+
+  return {
+    path: `data/wow/connected-realm/${args.id}`,
+    namespace: 'dynamic',
+  }
+}
+
+export type ConnectedRealmSearchOptions = {
+  status?: 'UP' | 'DOWN'
+  timezone?: string
+  orderby?: string | string[]
+  page?: number
+}
+
+export const connectedRealmSearch = ({
+  status,
+  timezone,
+  orderby,
+  page,
+}: ConnectedRealmSearchOptions): Resource<{
+  'status.type'?: string
+  'realms.timezone'?: string
+  orderby?: string
+  _page?: number
+}> => {
+  return {
+    path: `data/wow/search/connected-realm`,
+    namespace: 'dynamic',
+    params: {
+      'status.type': status,
+      'realms.timezone': timezone,
+      orderby: Array.isArray(orderby) ? orderby.join(',') : orderby,
+      _page: page,
+    },
+  }
+}
+
+export type CovenantOptions = { id: number; media?: boolean }
+
+export const covenant = (args?: CovenantOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/covenant/index',
+      namespace: 'static',
+    }
+  }
+
+  const { id, media = false } = args
+
+  return media
+    ? {
+        path: `data/wow/media/covenant/${id}`,
+        namespace: 'static',
+      }
+    : {
+        path: `data/wow/covenant/${id}`,
+        namespace: 'static',
+      }
+}
+
+export type SoulbindOptions = { id: number }
+
+export const soulbind = (args?: SoulbindOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/soulbind/index',
+      namespace: 'static',
+    }
+  }
+  return {
+    path: `data/wow/soulbind/${args.id}`,
+    namespace: 'static',
+  }
+}
+
+export type ConduitOptions = { id: number }
+
+export const conduit = (args?: ConduitOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/conduit/index',
+      namespace: 'static',
+    }
+  }
+  return {
+    path: `data/wow/conduit/${args.id}`,
+    namespace: 'static',
+  }
+}
+
+export type CreatureOptions = { id: number; media?: boolean }
+
+export const creature = ({ id, media = false }: CreatureOptions): Resource => {
+  return media
+    ? {
+        path: `data/wow/media/creature-display/${id}`,
+        namespace: 'static',
+      }
+    : {
+        path: `data/wow/creature/${id}`,
+        namespace: 'static',
+      }
+}
+
+export type CreatureFamilyOptions = { id: number; media?: boolean }
+
+export const creatureFamily = (args?: CreatureFamilyOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/creature-family/index',
+      namespace: 'static',
+    }
+  }
+
+  const { id, media = false } = args
+
+  return media
+    ? {
+        path: `data/wow/media/creature-family/${id}`,
+        namespace: 'static',
+      }
+    : {
+        path: `data/wow/creature-family/${id}`,
+        namespace: 'static',
+      }
+}
+
+export type CreatureTypeOptions = { id: number }
+
+export const creatureType = (args?: CreatureTypeOptions): Resource => {
+  if (args === undefined) {
+    return {
+      path: 'data/wow/creature-type/index',
+      namespace: 'static',
+    }
+  }
+  return {
+    path: `data/wow/creature-type/${args.id}`,
+    namespace: 'static',
+  }
+}
+
+export type CreatureSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+
+export const creatureSearch = ({
+  name,
+  orderby,
+  page,
+}: CreatureSearchOptions): Resource<{
+  'name.en_US'?: string
+  orderby?: string
+  _page?: number
+}> => {
+  return {
+    path: 'data/wow/search/creature',
+    namespace: 'static',
+    params: {
+      'name.en_US': name,
+      orderby: Array.isArray(orderby) ? orderby.join(',') : orderby,
+      _page: page,
+    },
+  }
+}
+
+export type GuildCrestOptions = Record<string, never> | { resource: 'border' | 'emblem'; id: number }
+
+export const guildCrest = ({ resource, id }: GuildCrestOptions = {}): Resource => {
+  return {
+    path: resource === undefined ? `data/wow/guild-crest/index` : `data/wow/media/guild-crest/${resource}/${id}`,
+    namespace: 'static',
+  }
+}
+
+export type ItemOptions =
+  | { resource: 'item'; id: number; media?: boolean }
+  | { resource: 'class'; id?: number; sub?: number }
+  | { resource: 'set'; id?: number }
+
+export const item = (args: ItemOptions): Resource => {
+  if (args.resource === 'set') {
+    return {
+      path: args.id === undefined ? 'data/wow/item-set/index' : `data/wow/item-set/${args.id}`,
+      namespace: 'static',
+    }
+  }
+
+  if (args.resource === 'class') {
+    if (args.id === undefined) {
+      return {
+        path: 'data/wow/item-class/index',
+        namespace: 'static',
+      }
+    }
+
+    return {
+      path:
+        args.sub === undefined
+          ? `data/wow/item-class/${args.id}`
+          : `data/wow/item-class/${args.id}/item-subclass/${args.sub}`,
+      namespace: 'static',
+    }
+  }
+
+  const { media = false } = args
+
+  return {
+    path: media ? `data/wow/media/item/${args.id}` : `data/wow/item/${args.id}`,
+    namespace: 'static',
+  }
+}
+
+export type ItemSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+
+export const itemSearch = ({
+  name,
+  orderby,
+  page,
+}: ItemSearchOptions): Resource<{ 'name.en_US'?: string; orderby?: string; _page?: number }> => {
+  return {
+    path: 'data/wow/search/item',
+    namespace: 'static',
+    params: { 'name.en_US': name, orderby: Array.isArray(orderby) ? orderby.join(',') : orderby, _page: page },
+  }
+}
+
+export type JournalOptions =
+  | { resource: 'index' }
+  | { resource: 'instance'; id: number; media?: boolean }
+  | { resource: 'encounter'; id?: number }
+  | { resource: 'expansion'; id?: number }
+
+export const journal = (args: JournalOptions): Resource => {
+  if (args.resource === 'encounter') {
+    return {
+      path: args.id === undefined ? 'data/wow/journal-encounter/index' : `data/wow/journal-encounter/${args.id}`,
+      namespace: 'static',
+    }
+  }
+
+  if (args.resource === 'expansion') {
+    return {
+      path: args.id === undefined ? 'data/wow/journal-expansion/index' : `data/wow/journal-expansion/${args.id}`,
+      namespace: 'static',
+    }
+  }
+
+  if (args.resource === 'instance') {
+    const { media = false } = args
+
+    return {
+      path: media ? `data/wow/media/journal-instance/${args.id}` : `data/wow/journal-instance/${args.id}`,
+      namespace: 'static',
+    }
+  }
+
+  return {
+    path: 'data/wow/journal-instance/index',
+    namespace: 'static',
+  }
+}
 
 // export const mediaSearch = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const modifiedCrafting = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const mount = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const mythicKeystoneAffix = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const mythicKeystoneDungeon = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const mythicKeystoneLeaderboard = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const mythicRaidLeaderboard = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const pet = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const playableClass = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const playableRace = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const playableSpecialization = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const powerType = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const profession = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const pvpSeason = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const pvpTier = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const quest = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const realm = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const region = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
 
 // export const reputation = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const spell = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const talent = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const techTalent = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const title = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'static',
 //   }
 // }
 
 // export const token = (): Resource => {
 //   return {
-//     path: '',
+//     path: ``,
 //     namespace: 'dynamic',
 //   }
 // }
