@@ -1,6 +1,7 @@
 import { createClient } from '../create-client'
-import { WoW } from './client'
-
-export const createInstance = createClient<WoW>(WoW)
-export { WoW }
+import { WoW, WoWClient } from './client'
 export * as classic from './classic'
+
+export const createInstance = createClient<WoWClient>(WoW)
+export { WoW }
+export type { WoWClient }
