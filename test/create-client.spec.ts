@@ -1,13 +1,6 @@
 import { Blizzard } from '../src/core'
 import { createClient } from '../src/create-client'
 
-const token = {
-  access_token: 'token',
-  token_type: 'type',
-  expires_in: 9999999999,
-  scope: '',
-}
-
 class Client extends Blizzard {}
 
 describe('Create Client', () => {
@@ -33,7 +26,7 @@ describe('Create Client', () => {
   })
 
   test('should validate an application token', async () => {
-    await createClient(Client)({ key: 'key', secret: 'secret', token })
+    await createClient(Client)({ key: 'key', secret: 'secret', token: 'token' })
 
     expect(Blizzard.prototype.validateApplicationToken).toHaveBeenCalled()
     expect(Blizzard.prototype.getApplicationToken).not.toHaveBeenCalled()
