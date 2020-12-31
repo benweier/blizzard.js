@@ -1,12 +1,11 @@
 import { Blizzard } from '../src/core'
-import { createInstance, WoW } from '../src/wow'
+import { createInstance, WoW, WoWClient } from '../src/wow'
 
 describe('World of Warcraft', () => {
-  const blizzard = Blizzard.prototype as any
-  let wow: WoW
+  let wow: WoWClient
 
   beforeAll(async () => {
-    jest.spyOn(blizzard, 'get')
+    jest.spyOn(Blizzard.prototype, 'get')
 
     wow = await createInstance({
       key: 'key',
@@ -20,14 +19,14 @@ describe('World of Warcraft', () => {
   })
 
   test('should request an account profile', async () => {
-    await wow.accountProfile()
+    await wow.accountProfile({ token: 'token' })
 
-    expect(blizzard.get).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', {
+    expect(Blizzard.prototype.get).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', {
       headers: {
         'user-agent': expect.any(String),
         'content-type': 'application/json',
         'battlenet-namespace': 'profile-us',
-        authorization: 'bearer test_token',
+        authorization: 'bearer token',
       },
       params: { locale: 'en_US' },
     })
