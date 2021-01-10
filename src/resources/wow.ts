@@ -1,10 +1,16 @@
 import { Resource } from '.'
+import { Locales } from '../endpoints'
 
 /*
  * PROFILE DATA
  */
 
 type CharacterOptions = { realm: string; name: string }
+type SearchOptions = { orderby?: string | string[]; page?: number }
+type SearchParams = {
+  orderby?: string
+  _page?: number
+}
 
 export type AccountProfileOptions = Record<string, unknown>
 
@@ -298,11 +304,11 @@ export const azeriteEssence = (args?: AzeriteEssenceOptions): Resource => {
   }
 }
 
-export type AzeriteEssenceSearchOptions = { id?: number; orderby?: string | string[]; page?: number }
+export type AzeriteEssenceSearchOptions = SearchOptions & { id: number }
 
 export const azeriteEssenceSearch = (
   args: AzeriteEssenceSearchOptions,
-): Resource<{ 'allowed_specializations.id'?: number; orderby?: string; _page?: number }> => {
+): Resource<SearchParams & { 'allowed_specializations.id': number }> => {
   return {
     path: 'data/wow/search/azerite-essence',
     namespace: 'static',
@@ -330,21 +336,11 @@ export const connectedRealm = (args?: ConnectedRealmOptions): Resource => {
   }
 }
 
-export type ConnectedRealmSearchOptions = {
-  status?: 'UP' | 'DOWN'
-  timezone?: string
-  orderby?: string | string[]
-  page?: number
-}
+export type ConnectedRealmSearchOptions = SearchOptions & { status: 'UP' | 'DOWN'; timezone?: string }
 
 export const connectedRealmSearch = (
   args: ConnectedRealmSearchOptions,
-): Resource<{
-  'status.type'?: string
-  'realms.timezone'?: string
-  orderby?: string
-  _page?: number
-}> => {
+): Resource<SearchParams & { 'status.type': string; 'realms.timezone'?: string }> => {
   return {
     path: `data/wow/search/connected-realm`,
     namespace: 'dynamic',
@@ -452,23 +448,19 @@ export const creatureType = (args?: CreatureTypeOptions): Resource => {
   }
 }
 
-export type CreatureSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+export type CreatureSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
-export const creatureSearch = (
-  args: CreatureSearchOptions,
-): Resource<{
-  'name.en_US'?: string
-  orderby?: string
-  _page?: number
-}> => {
+export const creatureSearch = <T extends string, P extends Locales>(
+  args: CreatureSearchOptions<T, P>,
+): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/creature',
     namespace: 'static',
     params: {
-      'name.en_US': args.name,
+      [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
       _page: args.page,
-    },
+    } as SearchParams & Record<`name.${P}`, T>,
   }
 }
 
@@ -522,17 +514,19 @@ export const item = (args: ItemOptions): Resource => {
   }
 }
 
-export type ItemSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+export type ItemSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
-export const itemSearch = (
-  args: ItemSearchOptions,
-): Resource<{ 'name.en_US'?: string; orderby?: string; _page?: number }> => {
-  const { name, orderby, page } = args
-
+export const itemSearch = <T extends string, P extends Locales>(
+  args: ItemSearchOptions<T, P>,
+): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/item',
     namespace: 'static',
-    params: { 'name.en_US': name, orderby: Array.isArray(orderby) ? orderby.join(',') : orderby, _page: page },
+    params: {
+      [`name.${args.locale}`]: args.name,
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    } as SearchParams & Record<`name.${P}`, T>,
   }
 }
 
@@ -557,9 +551,9 @@ export const journal = (args: JournalOptions): Resource => {
   }
 }
 
-export type MediaSearchOptions = { tag: string; orderby?: string | string[]; page?: number }
+export type MediaSearchOptions = SearchOptions & { tag: string }
 
-export const mediaSearch = (args: MediaSearchOptions): Resource<{ _tag: string; orderby?: string; _page?: number }> => {
+export const mediaSearch = (args: MediaSearchOptions): Resource<SearchParams & { _tag: string }> => {
   return {
     path: 'data/wow/search/media',
     namespace: 'static',
@@ -616,23 +610,19 @@ export const mount = (args?: MountOptions): Resource => {
   }
 }
 
-export type MountSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+export type MountSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
-export const mountSearch = (
-  args: MountSearchOptions,
-): Resource<{
-  'name.en_US'?: string
-  orderby?: string
-  _page?: number
-}> => {
+export const mountSearch = <T extends string, P extends Locales>(
+  args: MountSearchOptions<T, P>,
+): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/mount',
     namespace: 'static',
     params: {
-      'name.en_US': args.name,
+      [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
       _page: args.page,
-    },
+    } as SearchParams & Record<`name.${P}`, T>,
   }
 }
 
@@ -929,15 +919,9 @@ export const realm = (args?: RealmOptions): Resource => {
   }
 }
 
-export type RealmSearchOptions = { timezone?: string; orderby?: string | string[]; page?: number }
+export type RealmSearchOptions = SearchOptions & { timezone?: string }
 
-export const realmSearch = (
-  args: RealmSearchOptions,
-): Resource<{
-  timezone?: string
-  orderby?: string
-  _page?: number
-}> => {
+export const realmSearch = (args: RealmSearchOptions): Resource<SearchParams & { timezone?: string }> => {
   return {
     path: 'data/wow/search/realm',
     namespace: 'dynamic',
@@ -981,23 +965,19 @@ export const spell = (args: SpellOptions): Resource => {
   }
 }
 
-export type SpellSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+export type SpellSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
-export const spellSearch = (
-  args: SpellSearchOptions,
-): Resource<{
-  'name.en_US'?: string
-  orderby?: string
-  _page?: number
-}> => {
+export const spellSearch = <T extends string, P extends Locales>(
+  args: SpellSearchOptions<T, P>,
+): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: `data/wow/search/spell`,
     namespace: 'static',
     params: {
-      'name.en_US': args.name,
+      [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
       _page: args.page,
-    },
+    } as SearchParams & Record<`name.${P}`, T>,
   }
 }
 
