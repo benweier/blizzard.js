@@ -64,8 +64,20 @@ export interface WoWClient extends BlizzardClient {
   powerType<T = any>(args?: ResourceOptions<wow.PowerTypeOptions>): ResourceResponse<T>
   profession<T = any>(args?: ResourceOptions<wow.ProfessionOptions>): ResourceResponse<T>
   pvpSeason<T = any>(args?: ResourceOptions<wow.PVPSeasonOptions>): ResourceResponse<T>
+  pvpTier<T = any>(args?: ResourceOptions<wow.PVPTierOptions>): ResourceResponse<T>
+  quest<T = any>(args?: ResourceOptions<wow.QuestOptions>): ResourceResponse<T>
+  realm<T = any>(args?: ResourceOptions<wow.RealmOptions>): ResourceResponse<T>
+  realmSearch<T = any>(args: ResourceOptions<wow.RealmSearchOptions>): ResourceResponse<T>
   recipe<T = any>(args: ResourceOptions<wow.RecipeOptions>): ResourceResponse<T>
+  region<T = any>(args?: ResourceOptions<wow.RegionOptions>): ResourceResponse<T>
+  reputation<T = any>(args: ResourceOptions<wow.ReputationOptions>): ResourceResponse<T>
   soulbind<T = any>(args?: ResourceOptions<wow.SoulbindOptions>): ResourceResponse<T>
+  spell<T = any>(args: ResourceOptions<wow.SpellOptions>): ResourceResponse<T>
+  spellSearch<T = any>(args: ResourceOptions<wow.SpellSearchOptions>): ResourceResponse<T>
+  talent<T = any>(args?: ResourceOptions<wow.TalentOptions>): ResourceResponse<T>
+  techTalent<T = any>(args?: ResourceOptions<wow.TechTalentOptions>): ResourceResponse<T>
+  title<T = any>(args?: ResourceOptions<wow.TitleOptions>): ResourceResponse<T>
+  token<T = any>(args?: ResourceOptions<wow.TokenOptions>): ResourceResponse<T>
 }
 
 export class WoW extends Blizzard implements WoWClient {
@@ -122,16 +134,18 @@ export class WoW extends Blizzard implements WoWClient {
   powerType = this.createClientResourceRequest(wow.powerType)
   profession = this.createClientResourceRequest(wow.profession)
   pvpSeason = this.createClientResourceRequest(wow.pvpSeason)
-  // pvpTier = this.createClientResourceRequest(wow.pvpTier)
-  // quest = this.createClientResourceRequest(wow.quest)
-  // realm = this.createClientResourceRequest(wow.realm)
+  pvpTier = this.createClientResourceRequest(wow.pvpTier)
+  quest = this.createClientResourceRequest(wow.quest)
+  realm = this.createClientResourceRequest(wow.realm)
+  realmSearch = this.createClientResourceRequest(wow.realmSearch)
   recipe = this.createClientResourceRequest(wow.recipe)
-  // region = this.createClientResourceRequest(wow.region)
-  // reputation = this.createClientResourceRequest(wow.reputation)
+  region = this.createClientResourceRequest(wow.region)
+  reputation = this.createClientResourceRequest(wow.reputation)
   soulbind = this.createClientResourceRequest(wow.soulbind)
-  // spell = this.createClientResourceRequest(wow.spell)
-  // talent = this.createClientResourceRequest(wow.talent)
-  // techTalent = this.createClientResourceRequest(wow.techTalent)
-  // title = this.createClientResourceRequest(wow.title)
-  // token = this.createClientResourceRequest(wow.token)
+  spell = this.createClientResourceRequest(wow.spell)
+  spellSearch = this.createClientResourceRequest(wow.spellSearch)
+  talent = this.createClientResourceRequest(wow.talent)
+  techTalent = this.createClientResourceRequest(wow.techTalent)
+  title = this.createClientResourceRequest(wow.title)
+  token = this.createClientResourceRequest(wow.token)
 }

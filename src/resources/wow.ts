@@ -857,91 +857,210 @@ export const pvpSeason = (args?: PVPSeasonOptions): Resource => {
     return {
       path:
         args.bracket === undefined
-          ? `data/wow/pvp-season/${args.id}/pvp-leaderboard/index`
-          : `data/wow/pvp-season/${args.id}/pvp-leaderboard/${args.bracket}`,
+          ? `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-leaderboard/index`
+          : `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-leaderboard/${encodeURIComponent(args.bracket)}`,
       namespace: 'dynamic',
     }
   }
 
   if (args.resource === 'reward') {
     return {
-      path: `data/wow/pvp-season/${args.id}/pvp-reward/index`,
+      path: `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-reward/index`,
       namespace: 'dynamic',
     }
   }
 
   return {
-    path: `data/wow/pvp-season/${args.id}`,
+    path: `data/wow/pvp-season/${encodeURIComponent(args.id)}`,
     namespace: 'dynamic',
   }
 }
 
-// export const pvpTier = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+export type PVPTierOptions = { id?: number; media?: boolean }
 
-// export const quest = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+export const pvpTier = (args?: PVPTierOptions): Resource => {
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/pvp-tier/index',
+      namespace: 'static',
+    }
+  }
 
-// export const realm = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'dynamic',
-//   }
-// }
+  return {
+    path: args.media
+      ? `data/wow/media/pvp-tier/${encodeURIComponent(args.id)}`
+      : `data/wow/pvp-tier/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
 
-// export const region = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'dynamic',
-//   }
-// }
+export type QuestOptions = { id?: number; resource?: 'category' | 'area' | 'type' }
 
-// export const reputation = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+export const quest = (args?: QuestOptions): Resource => {
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/quest/index',
+      namespace: 'static',
+    }
+  }
 
-// export const spell = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+  if (args.resource === 'category' || args.resource === 'area' || args.resource === 'type') {
+    return {
+      path:
+        args.id === undefined
+          ? `data/wow/quest/${encodeURIComponent(args.resource)}/index`
+          : `data/wow/quest/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
+      namespace: 'static',
+    }
+  }
 
-// export const talent = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+  return {
+    path: `data/wow/quest/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
 
-// export const techTalent = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+export type RealmOptions = { slug?: string }
 
-// export const title = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'static',
-//   }
-// }
+export const realm = (args?: RealmOptions): Resource => {
+  return {
+    path: args?.slug === undefined ? 'data/wow/realm/index' : `data/wow/realm/${encodeURIComponent(args.slug)}`,
+    namespace: 'dynamic',
+  }
+}
 
-// export const token = (): Resource => {
-//   return {
-//     path: ``,
-//     namespace: 'dynamic',
-//   }
-// }
+export type RealmSearchOptions = { timezone?: string; orderby?: string | string[]; page?: number }
+
+export const realmSearch = (
+  args: RealmSearchOptions,
+): Resource<{
+  timezone?: string
+  orderby?: string
+  _page?: number
+}> => {
+  return {
+    path: 'data/wow/search/realm',
+    namespace: 'dynamic',
+    params: {
+      timezone: args?.timezone,
+      orderby: Array.isArray(args?.orderby) ? args.orderby.join(',') : args?.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type RegionOptions = { id?: number }
+
+export const region = (args?: RegionOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/region/index' : `data/wow/region/${encodeURIComponent(args.id)}`,
+    namespace: 'dynamic',
+  }
+}
+
+export type ReputationOptions = { resource: 'faction' | 'tier'; id?: number }
+
+export const reputation = (args: ReputationOptions): Resource => {
+  return {
+    path:
+      args.id === undefined
+        ? `data/wow/reputation-${encodeURIComponent(args.resource)}/index`
+        : `data/wow/reputation-${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
+
+export type SpellOptions = { id: number; media?: boolean }
+
+export const spell = (args: SpellOptions): Resource => {
+  return {
+    path: args.media
+      ? `data/wow/media/spell/${encodeURIComponent(args.id)}`
+      : `data/wow/spell/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
+
+export type SpellSearchOptions = { name?: string; orderby?: string | string[]; page?: number }
+
+export const spellSearch = (
+  args: SpellSearchOptions,
+): Resource<{
+  'name.en_US'?: string
+  orderby?: string
+  _page?: number
+}> => {
+  return {
+    path: `data/wow/search/spell`,
+    namespace: 'static',
+    params: {
+      'name.en_US': args.name,
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type TalentOptions = { id?: number; pvp?: boolean }
+
+export const talent = (args?: TalentOptions): Resource => {
+  if (args?.pvp) {
+    return {
+      path: args.id === undefined ? 'data/wow/pvp-talent/index' : `data/wow/pvp-talent/${encodeURIComponent(args.id)}`,
+      namespace: 'static',
+    }
+  }
+
+  return {
+    path: args?.id === undefined ? 'data/wow/talent/index' : `data/wow/talent/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
+
+export type TechTalentOptions =
+  | { id?: number; tree?: never; media?: boolean }
+  | { id?: number; tree?: boolean; media?: never }
+
+export const techTalent = (args?: TechTalentOptions): Resource => {
+  if (args?.tree) {
+    return {
+      path:
+        args.id === undefined
+          ? 'data/wow/tech-talent-tree/index'
+          : `data/wow/tech-talent-tree/${encodeURIComponent(args.id)}`,
+      namespace: 'static',
+    }
+  }
+
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/tech-talent/index',
+      namespace: 'static',
+    }
+  }
+
+  return {
+    path: args.media
+      ? `data/wow/media/tech-talent/${encodeURIComponent(args.id)}`
+      : `data/wow/tech-talent/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
+
+export type TitleOptions = { id?: number }
+
+export const title = (args?: TitleOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/title/index' : `data/wow/title/${encodeURIComponent(args.id)}`,
+    namespace: 'static',
+  }
+}
+
+export type TokenOptions = Record<string, unknown>
+
+export const token = (): Resource => {
+  return {
+    path: 'data/wow/token/index',
+    namespace: 'dynamic',
+  }
+}
