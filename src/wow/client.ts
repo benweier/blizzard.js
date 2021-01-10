@@ -7,6 +7,7 @@ export interface WoWClient extends BlizzardClient {
     args: ProtectedResourceOptions<wow.AccountCharacterProfileOptions>,
   ): ResourceResponse<T>
   accountCollections<T = any>(args?: ProtectedResourceOptions<wow.AccountCollectionsOptions>): ResourceResponse<T>
+  accountProfile<T = any>(args: ProtectedResourceOptions<wow.AccountProfileOptions>): ResourceResponse<T>
   achievement<T = any>(args?: ResourceOptions<wow.AchievementOptions>): ResourceResponse<T>
   achievementCategory<T = any>(args?: ResourceOptions<wow.AchievementCategoryOptions>): ResourceResponse<T>
   auctionHouse<T = any>(args: ResourceOptions<wow.AuctionHouseOptions>): ResourceResponse<T>
