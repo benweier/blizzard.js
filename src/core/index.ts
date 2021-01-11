@@ -82,12 +82,13 @@ export abstract class Blizzard implements BlizzardClient {
   ): [string, AxiosRequestConfig] {
     const config = { ...this.defaults, ...args }
     const endpoint = getEndpoint(config.origin, config.locale)
+    const namespace = resource.namespace ? { 'Battlenet-Namespace': `${resource.namespace}-${endpoint.origin}` } : {}
     const request: AxiosRequestConfig = {
       headers: {
-        'user-agent': this.ua,
-        'content-type': 'application/json',
-        'battlenet-namespace': `${resource.namespace}-${endpoint.origin}`,
-        authorization: `bearer ${config.token}`,
+        'User-Agent': this.ua,
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${config.token}`,
+        ...namespace,
       },
       params: {
         ...resource.params,
