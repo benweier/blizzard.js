@@ -12,11 +12,12 @@ export type Locales =
   | 'it_IT'
   | 'ko_KR'
   | 'zh_TW'
+  | 'multi'
 
 export type Endpoint = {
   hostname: string
-  defaultLocale: string
-  locales: string[]
+  defaultLocale: Locales
+  locales: Locales[]
 }
 
 export type Endpoints = {
@@ -58,7 +59,7 @@ const endpoints: Endpoints = {
 export function getEndpoint(
   origin: Origins = 'us',
   locale?: string,
-): { origin: Origins; locale: string; hostname: string } {
+): { origin: Origins; locale: Locales; hostname: string } {
   const endpoint = endpoints[origin]
 
   return {

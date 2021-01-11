@@ -1,6 +1,6 @@
 import qs from 'querystring'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { getEndpoint, Origins } from '../endpoints'
+import { getEndpoint, Locales, Origins } from '../endpoints'
 import { Resource, ResourceInterface, ResourceResponse } from '../resources'
 
 export type ClientOptions = {
@@ -8,7 +8,7 @@ export type ClientOptions = {
   secret: string
   token?: string
   origin?: Origins
-  locale?: string
+  locale?: Locales
 }
 
 export type AccessToken = {
@@ -50,7 +50,7 @@ export abstract class Blizzard implements BlizzardClient {
     secret: string
     token?: string
     origin: Origins
-    locale: string
+    locale: Locales
   }
 
   constructor(args: ClientOptions) {
