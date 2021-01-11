@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { ClientOptions } from '../core'
 export * as wow from './wow'
+export * as hs from './hs'
 
 export type ResourceResponse<T = any> = Promise<AxiosResponse<T>>
 
