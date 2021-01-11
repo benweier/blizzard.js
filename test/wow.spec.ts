@@ -1,6 +1,16 @@
 import { Blizzard } from '../src/core'
 import { createInstance, WoW, WoWClient } from '../src/wow'
 
+const headers = {
+  headers: {
+    'User-Agent': expect.any(String),
+    'Content-Type': 'application/json',
+    'Battlenet-Namespace': expect.stringMatching(/(profile|static|dynamic)-(us|eu|sea|kr|tw)/),
+    Authorization: 'bearer token',
+  },
+  params: { locale: expect.any(String) },
+}
+
 describe('World of Warcraft', () => {
   let wow: WoWClient
 
@@ -21,14 +31,6 @@ describe('World of Warcraft', () => {
   test('should request an account profile', async () => {
     await wow.accountProfile({ token: 'token' })
 
-    expect(Blizzard.prototype.get).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', {
-      headers: {
-        'user-agent': expect.any(String),
-        'content-type': 'application/json',
-        'battlenet-namespace': 'profile-us',
-        authorization: 'bearer token',
-      },
-      params: { locale: 'en_US' },
-    })
+    expect(Blizzard.prototype.get).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', headers)
   })
 })
