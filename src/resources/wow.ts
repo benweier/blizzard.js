@@ -21,11 +21,13 @@ export const accountProfile = (): Resource => {
   }
 }
 
-export type AccountCharacterProfileOptions = { realm: number; name: number }
+export type AccountCharacterProfileOptions = { realm: number; character: number }
 
 export const accountCharacterProfile = (args: AccountCharacterProfileOptions): Resource => {
   return {
-    path: `/profile/user/wow/protected-character/${encodeURIComponent(args.realm)}-${encodeURIComponent(args.name)}`,
+    path: `/profile/user/wow/protected-character/${encodeURIComponent(args.realm)}-${encodeURIComponent(
+      args.character,
+    )}`,
     namespace: 'profile',
   }
 }
