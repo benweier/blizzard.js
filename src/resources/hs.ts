@@ -69,7 +69,7 @@ export type CardOptions = { id: number | string }
 
 export const card = (args: CardOptions): Resource => {
   return {
-    path: `hearthstone/cards/${args.id}`,
+    path: `hearthstone/cards/${encodeURIComponent(args.id)}`,
   }
 }
 
@@ -91,7 +91,7 @@ export const cardBacks = (
 }> => {
   if (args?.id !== undefined) {
     return {
-      path: `hearthstone/cardbacks/${args.id}`,
+      path: `hearthstone/cardbacks/${encodeURIComponent(args.id)}`,
     }
   }
   return {
@@ -124,6 +124,6 @@ export type MetaDataOptions = {
 
 export const metadata = (args?: MetaDataOptions): Resource => {
   return {
-    path: args?.type === undefined ? 'hearthstone/metadata' : `hearthstone/metadata/${args.type}`,
+    path: args?.type === undefined ? 'hearthstone/metadata' : `hearthstone/metadata/${encodeURIComponent(args.type)}`,
   }
 }
