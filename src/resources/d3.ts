@@ -4,7 +4,7 @@ export type ActOptions = { id?: number }
 
 export const act = (args?: ActOptions): Resource => {
   return {
-    path: args?.id === undefined ? `d3/data/act` : `d3/data/act/${args.id}`,
+    path: args?.id === undefined ? 'd3/data/act' : `d3/data/act/${args.id}`,
   }
 }
 
