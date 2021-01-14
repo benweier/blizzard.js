@@ -13,29 +13,23 @@ export interface WoWClient extends BlizzardClient {
   auctionHouse<T = any>(args: ResourceOptions<wow.AuctionHouseOptions>): ResourceResponse<T>
   azeriteEssence<T = any>(args?: ResourceOptions<wow.AzeriteEssenceOptions>): ResourceResponse<T>
   azeriteEssenceSearch<T = any>(args: ResourceOptions<wow.AzeriteEssenceSearchOptions>): ResourceResponse<T>
-  characterAchievements<T = any>(
-    args: ProtectedResourceOptions<wow.AccountCharacterAchievementsOptions>,
-  ): ResourceResponse<T>
-  characterAppearance<T = any>(args: ProtectedResourceOptions<wow.CharacterAppearanceOptions>): ResourceResponse<T>
-  characterCollections<T = any>(args: ProtectedResourceOptions<wow.CharacterCollectionsOptions>): ResourceResponse<T>
-  characterEncounters<T = any>(args: ProtectedResourceOptions<wow.CharacterEncountersOptions>): ResourceResponse<T>
-  characterEquipment<T = any>(args: ProtectedResourceOptions<wow.CharacterEquipmentOptions>): ResourceResponse<T>
-  characterHunterPets<T = any>(args: ProtectedResourceOptions<wow.CharacterHunterPetsOptions>): ResourceResponse<T>
-  characterMedia<T = any>(args: ProtectedResourceOptions<wow.CharacterMediaOptions>): ResourceResponse<T>
-  characterMythicKeystone<T = any>(
-    args: ProtectedResourceOptions<wow.CharacterMythicKeystoneOptions>,
-  ): ResourceResponse<T>
-  characterProfessions<T = any>(args: ProtectedResourceOptions<wow.CharacterProfessionsOptions>): ResourceResponse<T>
-  characterProfile<T = any>(args: ProtectedResourceOptions<wow.CharacterProfileOptions>): ResourceResponse<T>
-  characterPVP<T = any>(args: ProtectedResourceOptions<wow.CharacterPVPOptions>): ResourceResponse<T>
-  characterQuests<T = any>(args: ProtectedResourceOptions<wow.CharacterQuestsOptions>): ResourceResponse<T>
-  characterReputations<T = any>(args: ProtectedResourceOptions<wow.CharacterReputationsOptions>): ResourceResponse<T>
-  characterSoulbinds<T = any>(args: ProtectedResourceOptions<wow.CharacterSoulbindsOptions>): ResourceResponse<T>
-  characterSpecializations<T = any>(
-    args: ProtectedResourceOptions<wow.CharacterSpecializationsOptions>,
-  ): ResourceResponse<T>
-  characterStatistics<T = any>(args: ProtectedResourceOptions<wow.CharacterStatisticsOptions>): ResourceResponse<T>
-  characterTitles<T = any>(args: ProtectedResourceOptions<wow.CharacterTitlesOptions>): ResourceResponse<T>
+  characterAchievements<T = any>(args: ResourceOptions<wow.AccountCharacterAchievementsOptions>): ResourceResponse<T>
+  characterAppearance<T = any>(args: ResourceOptions<wow.CharacterAppearanceOptions>): ResourceResponse<T>
+  characterCollections<T = any>(args: ResourceOptions<wow.CharacterCollectionsOptions>): ResourceResponse<T>
+  characterEncounters<T = any>(args: ResourceOptions<wow.CharacterEncountersOptions>): ResourceResponse<T>
+  characterEquipment<T = any>(args: ResourceOptions<wow.CharacterEquipmentOptions>): ResourceResponse<T>
+  characterHunterPets<T = any>(args: ResourceOptions<wow.CharacterHunterPetsOptions>): ResourceResponse<T>
+  characterMedia<T = any>(args: ResourceOptions<wow.CharacterMediaOptions>): ResourceResponse<T>
+  characterMythicKeystone<T = any>(args: ResourceOptions<wow.CharacterMythicKeystoneOptions>): ResourceResponse<T>
+  characterProfessions<T = any>(args: ResourceOptions<wow.CharacterProfessionsOptions>): ResourceResponse<T>
+  characterProfile<T = any>(args: ResourceOptions<wow.CharacterProfileOptions>): ResourceResponse<T>
+  characterPVP<T = any>(args: ResourceOptions<wow.CharacterPVPOptions>): ResourceResponse<T>
+  characterQuests<T = any>(args: ResourceOptions<wow.CharacterQuestsOptions>): ResourceResponse<T>
+  characterReputations<T = any>(args: ResourceOptions<wow.CharacterReputationsOptions>): ResourceResponse<T>
+  characterSoulbinds<T = any>(args: ResourceOptions<wow.CharacterSoulbindsOptions>): ResourceResponse<T>
+  characterSpecializations<T = any>(args: ResourceOptions<wow.CharacterSpecializationsOptions>): ResourceResponse<T>
+  characterStatistics<T = any>(args: ResourceOptions<wow.CharacterStatisticsOptions>): ResourceResponse<T>
+  characterTitles<T = any>(args: ResourceOptions<wow.CharacterTitlesOptions>): ResourceResponse<T>
   conduit<T = any>(args?: ResourceOptions<wow.ConduitOptions>): ResourceResponse<T>
   connectedRealm<T = any>(args?: ResourceOptions<wow.ConnectedRealmOptions>): ResourceResponse<T>
   connectedRealmSearch<T = any>(args: ResourceOptions<wow.ConnectedRealmSearchOptions>): ResourceResponse<T>
