@@ -23,6 +23,12 @@ export interface BlizzardClient {
 
   getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<AxiosResponse<AccessToken>>
 
+  refreshApplicationToken(args?: {
+    origin?: string
+    key?: string
+    secret?: string
+  }): Promise<AxiosResponse<AccessToken>>
+
   validateApplicationToken(args?: {
     origin?: string
     token?: string
@@ -36,8 +42,6 @@ export interface BlizzardClient {
       client_id: string
     }>
   >
-
-  battletag(tag: string): string
 }
 
 export abstract class Blizzard implements BlizzardClient {
@@ -158,7 +162,15 @@ export abstract class Blizzard implements BlizzardClient {
     })
   }
 
-  public battletag(tag: string): string {
-    return tag.replace('#', '-')
+  public async refreshApplicationToken(args?: {
+    origin?: string
+    key?: string
+    secret?: string
+  }): Promise<AxiosResponse<AccessToken>> {
+    const getTokenRequest = await this.getApplicationToken(args)
+
+    this.defaults.token = getTokenRequest.data.access_token
+
+    return getTokenRequest
   }
 }
