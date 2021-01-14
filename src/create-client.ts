@@ -1,28 +1,46 @@
-import { BlizzardClient, ClientOptions } from './core'
+import { BlizzardClient, ClientOptions, AccessToken } from './core'
 
-export const createClient = <T extends BlizzardClient>(Client: { new (args: ClientOptions): T }) => async ({
-  key,
-  secret,
-  token,
-  origin,
-  locale,
-}: ClientOptions): Promise<T> => {
+const tokenExpiryInMilliseconds = (exp: number) => exp * 1000 - 60000
+
+export const createClient = <T extends BlizzardClient>(Client: { new (args: ClientOptions): T }) => async (
+  { key, secret, token, origin, locale }: ClientOptions,
+  onTokenRefresh: boolean | ((token: AccessToken) => void) = true,
+): Promise<T> => {
   if (!key) throw new Error(`Client missing 'key' parameter`)
   if (!secret) throw new Error(`Client missing 'secret' parameter`)
 
   const client = new Client({ key, secret, token, origin, locale })
 
-  if (token) {
-    const validateTokenRequest = await client.validateApplicationToken()
+  const refreshApplicationToken = async () => {
+    const getTokenRequest = await client.getApplicationToken()
 
-    if (validateTokenRequest.data.exp * 1000 > Date.now() - 60000) {
-      return client
+    client.setApplicationToken(getTokenRequest.data.access_token)
+
+    if (typeof onTokenRefresh === 'function') {
+      onTokenRefresh(getTokenRequest.data)
     }
+
+    const timeout = setTimeout(refreshApplicationToken, tokenExpiryInMilliseconds(getTokenRequest.data.expires_in))
+    timeout.unref()
   }
 
-  const getTokenRequest = await client.getApplicationToken()
+  if (onTokenRefresh) {
+    if (!token) {
+      await refreshApplicationToken()
+    } else {
+      const validateTokenRequest = await client.validateApplicationToken({ token })
 
-  client.setApplicationToken(getTokenRequest.data.access_token)
+      if (tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now() < 60000) {
+        await refreshApplicationToken()
+      } else {
+        const timeout = setTimeout(
+          refreshApplicationToken,
+          tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now(),
+        )
+        timeout.unref()
+      }
+    }
+  }
 
   return client
 }
