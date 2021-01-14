@@ -150,12 +150,11 @@ export abstract class Blizzard implements BlizzardClient {
       throw new Error('`validateApplicationToken` missing required `token` parameter')
     }
 
-    return this.axios.post(`https://${origin}.battle.net/oauth/check_token`, {
+    return this.axios.post(`https://${origin}.battle.net/oauth/check_token`, qs.stringify({ token }), {
       headers: {
-        'user-agent': this.ua,
-        'content-type': 'application/x-www-form-urlencoded',
+        'User-Agent': this.ua,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      data: qs.stringify({ token }),
     })
   }
 
