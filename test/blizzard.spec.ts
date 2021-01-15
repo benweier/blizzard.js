@@ -9,6 +9,5 @@ describe('Blizzard', () => {
     expect(Blizzard.prototype).toHaveProperty('getApplicationToken', expect.any(Function))
     expect(Blizzard.prototype).toHaveProperty('setApplicationToken', expect.any(Function))
     expect(Blizzard.prototype).toHaveProperty('validateApplicationToken', expect.any(Function))
-    expect(Blizzard.prototype).toHaveProperty('battletag', expect.any(Function))
   })
 })
