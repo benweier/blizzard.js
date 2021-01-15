@@ -9,7 +9,7 @@ const mockAxios = new MockAdapter(axios)
 mockAxios.onGet('https://us.battle.net/oauth/token').reply(200, {
   access_token: 'test_token',
   token_type: 'bearer',
-  expires_in: 9999999999,
+  expires_in: 99999,
 })
 
 mockAxios.onPost('https://us.battle.net/oauth/check_token').reply(200, {
