@@ -25,7 +25,7 @@ export type AccountCharacterProfileOptions = { realm: number; character: number 
 
 export const accountCharacterProfile = (args: AccountCharacterProfileOptions): Resource => {
   return {
-    path: `/profile/user/wow/protected-character/${encodeURIComponent(args.realm)}-${encodeURIComponent(
+    path: `profile/user/wow/protected-character/${encodeURIComponent(args.realm)}-${encodeURIComponent(
       args.character,
     )}`,
     namespace: 'profile',
@@ -39,7 +39,7 @@ export const accountCollections = (args?: AccountCollectionsOptions): Resource =
     path:
       args?.resource === undefined
         ? 'profile/user/wow/collections'
-        : `profile/user/wow/collections${encodeURIComponent(args.resource)}`,
+        : `profile/user/wow/collections/${encodeURIComponent(args.resource)}`,
     namespace: 'profile',
   }
 }
