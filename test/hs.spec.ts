@@ -1,15 +1,12 @@
-import { AxiosRequestConfig } from 'axios'
 import { Blizzard } from '../src/core'
 import { createInstance, HS, HSClient } from '../src/hs'
 
-const args = {
-  headers: {
-    'User-Agent': expect.any(String),
-    'Content-Type': 'application/json',
-    Authorization: expect.any(String),
-  },
-  params: { locale: expect.any(String) },
+const headers = {
+  'User-Agent': expect.any(String),
+  'Content-Type': 'application/json',
+  Authorization: expect.any(String),
 }
+const params = { locale: expect.any(String) }
 
 describe('Hearthstone', () => {
   let hs: HSClient
@@ -37,7 +34,10 @@ describe('Hearthstone', () => {
 
     expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
       'https://us.api.blizzard.com/hearthstone/cards/52119-arch-villain-rafaam',
-      args,
+      {
+        headers,
+        params,
+      },
     )
   })
 
@@ -57,9 +57,9 @@ describe('Hearthstone', () => {
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/hearthstone/cards',
         {
-          headers: args.headers,
+          headers,
           params: {
-            ...args.params,
+            ...params,
             attack: 1,
             class: 'shaman',
             collectible: '0,1',
@@ -101,9 +101,9 @@ describe('Hearthstone', () => {
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/hearthstone/cards',
         {
-          headers: args.headers,
+          headers,
           params: {
-            ...args.params,
+            ...params,
             attack: '1,2,3',
             class: 'druid',
             collectible: 1,
@@ -134,9 +134,9 @@ describe('Hearthstone', () => {
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/hearthstone/cardbacks',
         {
-          headers: args.headers,
+          headers,
           params: {
-            ...args.params,
+            ...params,
             cardBackCategory: 'fireside',
             order: 'desc',
             sort: 'id',
@@ -149,10 +149,9 @@ describe('Hearthstone', () => {
     test('id', async () => {
       await hs.cardBacks({ id: '155-pizza-stone' })
 
-      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/hearthstone/cardbacks/155-pizza-stone',
-        args,
-      )
+      expect(
+        Blizzard.prototype.getClientResource,
+      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/cardbacks/155-pizza-stone', { headers, params })
     })
   })
 
@@ -163,9 +162,9 @@ describe('Hearthstone', () => {
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/hearthstone/deck',
         {
-          headers: args.headers,
+          headers,
           params: {
-            ...args.params,
+            ...params,
             code: 'AAECAQcG+wyd8AKS+AKggAOblAPanQMMS6IE/web8wLR9QKD+wKe+wKz/AL1gAOXlAOalAOSnwMA',
             hero: undefined,
             ids: undefined,
@@ -183,14 +182,14 @@ describe('Hearthstone', () => {
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/hearthstone/deck',
         {
-          headers: args.headers,
+          headers,
           params: {
-            ...args.params,
+            ...params,
             code: undefined,
             hero: 10,
             ids: '906,1099,1363,1367',
           },
-        } as AxiosRequestConfig,
+        },
       )
     })
   })
@@ -199,19 +198,17 @@ describe('Hearthstone', () => {
     test('default', async () => {
       await hs.metadata()
 
-      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/hearthstone/metadata',
-        args,
-      )
+      expect(
+        Blizzard.prototype.getClientResource,
+      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/metadata', { headers, params })
     })
 
     test('type', async () => {
       await hs.metadata({ type: 'classes' })
 
-      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/hearthstone/metadata/classes',
-        args,
-      )
+      expect(
+        Blizzard.prototype.getClientResource,
+      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/metadata/classes', { headers, params })
     })
   })
 })
