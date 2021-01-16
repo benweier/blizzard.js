@@ -6,7 +6,7 @@ const headers = {
     'User-Agent': expect.any(String),
     'Content-Type': 'application/json',
     'Battlenet-Namespace': expect.stringMatching(/(profile|static|dynamic)-(us|eu|sea|kr|tw)/),
-    Authorization: 'bearer token',
+    Authorization: expect.any(String),
   },
   params: { locale: expect.any(String) },
 }
@@ -15,7 +15,7 @@ describe('World of Warcraft', () => {
   let wow: WoWClient
 
   beforeAll(async () => {
-    jest.spyOn(Blizzard.prototype, 'get')
+    jest.spyOn(Blizzard.prototype, 'getClientResource')
 
     wow = await createInstance({
       key: 'key',
@@ -23,14 +23,23 @@ describe('World of Warcraft', () => {
     })
   })
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   test('should return a WoW instance of Blizzard', async () => {
     expect(wow).toBeInstanceOf(Blizzard)
     expect(wow).toBeInstanceOf(WoW)
   })
 
-  test('should request an account profile', async () => {
-    await wow.accountProfile({ token: 'token' })
+  describe('accountProfile', () => {
+    test('default', async () => {
+      await wow.accountProfile({ token: 'token' })
 
-    expect(Blizzard.prototype.get).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', headers)
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/user/wow',
+        headers,
+      )
+    })
   })
 })
