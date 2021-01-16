@@ -38,7 +38,7 @@ export interface WoWClient extends BlizzardClient {
   creatureFamily<T = any>(args?: ResourceOptions<wow.CreatureFamilyOptions>): ResourceResponse<T>
   creatureSearch<T = any>(args: ResourceOptions<wow.CreatureSearchOptions>): ResourceResponse<T>
   creatureType<T = any>(args?: ResourceOptions<wow.CreatureTypeOptions>): ResourceResponse<T>
-  guild<T = any>(args: ProtectedResourceOptions<wow.GuildOptions>): ResourceResponse<T>
+  guild<T = any>(args: ResourceOptions<wow.GuildOptions>): ResourceResponse<T>
   guildCrest<T = any>(args?: ResourceOptions<wow.GuildCrestOptions>): ResourceResponse<T>
   item<T = any>(args: ResourceOptions<wow.ItemOptions>): ResourceResponse<T>
   itemSearch<T = any>(args: ResourceOptions<wow.ItemSearchOptions>): ResourceResponse<T>
