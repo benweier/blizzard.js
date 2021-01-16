@@ -76,7 +76,7 @@ export abstract class Blizzard implements BlizzardClient {
       const resource = fn(args)
       const [url, config] = this.prepareResourceRequest(resource, args)
 
-      return this.get(url, config)
+      return this.getClientResource(url, config)
     }
   }
 
@@ -103,12 +103,8 @@ export abstract class Blizzard implements BlizzardClient {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
-  public get<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public getClientResource<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.get(url, config)
-  }
-
-  public post<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axios.post(url, config)
   }
 
   public setApplicationToken(token: string): void {
