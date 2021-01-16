@@ -32,11 +32,32 @@ describe('Create Client', () => {
     expect(Blizzard.prototype.getApplicationToken).not.toHaveBeenCalled()
   })
 
+  test('should get an application token if expiring token provided', async () => {
+    await createClient(Client)({ key: 'key', secret: 'secret', token: 'expiring' })
+
+    expect(Blizzard.prototype.validateApplicationToken).toHaveBeenCalled()
+    expect(Blizzard.prototype.getApplicationToken).toHaveBeenCalled()
+  })
+
+  test('should get an application token if expired token provided', async () => {
+    await createClient(Client)({ key: 'key', secret: 'secret', token: 'expired' })
+
+    expect(Blizzard.prototype.validateApplicationToken).toHaveBeenCalled()
+    expect(Blizzard.prototype.getApplicationToken).toHaveBeenCalled()
+  })
+
   test('should get an application token if not provided', async () => {
     await createClient(Client)({ key: 'key', secret: 'secret' })
 
     expect(Blizzard.prototype.validateApplicationToken).not.toHaveBeenCalled()
     expect(Blizzard.prototype.getApplicationToken).toHaveBeenCalled()
+  })
+
+  test('should not validate or refresh an application token if callback disabled', async () => {
+    await createClient(Client)({ key: 'key', secret: 'secret' }, false)
+
+    expect(Blizzard.prototype.validateApplicationToken).not.toHaveBeenCalled()
+    expect(Blizzard.prototype.getApplicationToken).not.toHaveBeenCalled()
   })
 
   test('should return an application token if callback provided', async () => {
