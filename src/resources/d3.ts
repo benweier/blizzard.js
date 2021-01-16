@@ -8,7 +8,7 @@ export const act = (args?: ActOptions): Resource => {
   }
 }
 
-export type ArtisanOptions = { id: string }
+export type ArtisanOptions = { id: 'blacksmith' | 'jeweler' | 'mystic' }
 
 export const artisan = (args: ArtisanOptions): Resource => {
   return {
@@ -24,7 +24,7 @@ export const recipe = (args: RecipeOptions): Resource => {
   }
 }
 
-export type FollowerOptions = { id: string }
+export type FollowerOptions = { id: 'templar' | 'scoundrel' | 'enchantress' }
 
 export const follower = (args: FollowerOptions): Resource => {
   return {
@@ -32,7 +32,9 @@ export const follower = (args: FollowerOptions): Resource => {
   }
 }
 
-export type CharacterClassOptions = { id: string }
+export type CharacterClassOptions = {
+  id: 'barbarian' | 'crusader' | 'demon-hunter' | 'monk' | 'necromancer' | 'witch-doctor' | 'wizard'
+}
 
 export const characterClass = (args: CharacterClassOptions): Resource => {
   return {
@@ -40,7 +42,10 @@ export const characterClass = (args: CharacterClassOptions): Resource => {
   }
 }
 
-export type CharacterSkillOptions = { class: string; skill: string }
+export type CharacterSkillOptions = {
+  class: 'barbarian' | 'crusader' | 'demon-hunter' | 'monk' | 'necromancer' | 'witch-doctor' | 'wizard'
+  skill: string
+}
 
 export const characterSkill = (args: CharacterSkillOptions): Resource => {
   return {
