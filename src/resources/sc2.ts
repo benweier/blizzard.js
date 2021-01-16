@@ -7,7 +7,9 @@ export const profile = (args: ProfileOptions): Resource => {
     path:
       args.realm === undefined || args.profile === undefined
         ? `sc2/static/profile/${encodeURIComponent(args.region)}`
-        : `sc2/static/profile/${encodeURIComponent(args.region)}`,
+        : `sc2/static/profile/${encodeURIComponent(args.region)}/${encodeURIComponent(args.realm)}/${encodeURIComponent(
+            args.profile,
+          )}`,
   }
 }
 
@@ -44,7 +46,7 @@ export const ladder = (args: LadderOptions): Resource => {
   }
 }
 
-export type AccountOptions = { id: string }
+export type AccountOptions = { id: number }
 
 export const account = (args: AccountOptions): Resource => {
   return {
