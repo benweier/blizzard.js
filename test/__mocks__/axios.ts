@@ -9,12 +9,12 @@ const mockAxios = new MockAdapter(axios)
 mockAxios.onGet('https://us.battle.net/oauth/token').reply(200, {
   access_token: 'test_token',
   token_type: 'bearer',
-  expires_in: 99999,
+  expires_in: 86400, // 1 day in seconds
 })
 
 mockAxios.onPost('https://us.battle.net/oauth/check_token').reply(200, {
   scope: [],
-  exp: 9999999999,
+  exp: (Date.now() + 43200000) / 1000, // +12hrs in seconds
   authorities: [
     {
       authority: 'test_authority',
