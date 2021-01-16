@@ -25,17 +25,28 @@ describe('Create Client', () => {
     await expect(createInstance()).rejects.toThrow(new Error(`Client missing 'secret' parameter`))
   })
 
-  test('should validate an application token', async () => {
+  test('should validate an application token if provided', async () => {
     await createClient(Client)({ key: 'key', secret: 'secret', token: 'token' })
 
     expect(Blizzard.prototype.validateApplicationToken).toHaveBeenCalled()
     expect(Blizzard.prototype.getApplicationToken).not.toHaveBeenCalled()
   })
 
-  test('should get an application token', async () => {
+  test('should get an application token if not provided', async () => {
     await createClient(Client)({ key: 'key', secret: 'secret' })
 
     expect(Blizzard.prototype.validateApplicationToken).not.toHaveBeenCalled()
     expect(Blizzard.prototype.getApplicationToken).toHaveBeenCalled()
+  })
+
+  test('should return an application token if callback provided', async () => {
+    const callback = jest.fn()
+    await createClient(Client)({ key: 'key', secret: 'secret' }, callback)
+
+    expect(callback).toHaveBeenCalledWith({
+      access_token: expect.any(String),
+      expires_in: expect.any(Number),
+      token_type: expect.any(String),
+    })
   })
 })
