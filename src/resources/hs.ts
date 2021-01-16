@@ -2,47 +2,69 @@ import { Resource } from '.'
 
 export type CardSearchOptions = {
   attack?: number | number[]
-  class?: string
+  class?:
+    | 'demonhunter'
+    | 'druid'
+    | 'hunter'
+    | 'mage'
+    | 'paladin'
+    | 'priest'
+    | 'rogue'
+    | 'shaman'
+    | 'warlock'
+    | 'warrior'
+    | 'neutral'
   collectible?: 0 | 1
-  gameMode?: 'constructed' | 'battlegrounds'
+  gameMode?: 'constructed' | 'battlegrounds' | 'arena' | 'duels'
   health?: number | number[]
   keyword?: string
   manaCost?: number | number[]
-  minionType?: string
+  minionType?: 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
   order?: 'asc' | 'desc'
   page?: number
   pageSize?: number
-  rarity?: string
+  rarity?: 'free' | 'common' | 'rare' | 'epic' | 'legendary'
   set?: string
   sort?: 'manaCost' | 'attack' | 'health' | 'name'
   textFilter?: string
   tier?: 1 | 2 | 3 | 4 | 5 | 6 | 'hero' | Array<1 | 2 | 3 | 4 | 5 | 6 | 'hero'>
-  type?: string
+  type?: 'hero' | 'minion' | 'spell' | 'weapon'
 }
 
 export const cardSearch = (
   args: CardSearchOptions,
 ): Resource<{
   attack?: number | string
-  class?: string
+  class?:
+    | 'demonhunter'
+    | 'druid'
+    | 'hunter'
+    | 'mage'
+    | 'paladin'
+    | 'priest'
+    | 'rogue'
+    | 'shaman'
+    | 'warlock'
+    | 'warrior'
+    | 'neutral'
   collectible?: 0 | 1 | '0,1'
-  gameMode?: 'constructed' | 'battlegrounds'
+  gameMode?: 'constructed' | 'battlegrounds' | 'arena' | 'duels'
   health?: number | string
   keyword?: string
   manaCost?: number | string
-  minionType?: string
+  minionType?: 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
   order?: 'asc' | 'desc'
   page?: number
   pageSize?: number
-  rarity?: string
+  rarity?: 'free' | 'common' | 'rare' | 'epic' | 'legendary'
   set?: string
   sort?: 'manaCost' | 'attack' | 'health' | 'name'
   textFilter?: string
   tier?: number | 'hero' | string
-  type?: string
+  type?: 'hero' | 'minion' | 'spell' | 'weapon'
 }> => {
   return {
-    path: 'hearthstone/cards ',
+    path: 'hearthstone/cards',
     params: {
       attack: Array.isArray(args.attack) ? args.attack.join(',') : args.attack,
       class: args.class,
@@ -75,7 +97,20 @@ export const card = (args: CardOptions): Resource => {
 
 export type CardBacksOptions = {
   id?: number | string
-  category?: string
+  category?:
+    | 'base'
+    | 'fireside'
+    | 'achieve'
+    | 'heroes'
+    | 'season'
+    | 'legend'
+    | 'esports'
+    | 'game_license'
+    | 'promotion'
+    | 'pre_purchase'
+    | 'blizzard'
+    | 'golden'
+    | 'events'
   order?: string
   sort?: string
   textFilter?: string
@@ -84,7 +119,20 @@ export type CardBacksOptions = {
 export const cardBacks = (
   args?: CardBacksOptions,
 ): Resource<{
-  cardBackCategory?: string
+  cardBackCategory?:
+    | 'base'
+    | 'fireside'
+    | 'achieve'
+    | 'heroes'
+    | 'season'
+    | 'legend'
+    | 'esports'
+    | 'game_license'
+    | 'promotion'
+    | 'pre_purchase'
+    | 'blizzard'
+    | 'golden'
+    | 'events'
   order?: string
   sort?: string
   textFilter?: string
@@ -94,6 +142,7 @@ export const cardBacks = (
       path: `hearthstone/cardbacks/${encodeURIComponent(args.id)}`,
     }
   }
+
   return {
     path: 'hearthstone/cardbacks',
     params: {
