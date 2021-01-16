@@ -105,7 +105,7 @@ describe('Hearthstone', () => {
           params: {
             ...args.params,
             attack: '1,2,3',
-            class: 'shaman',
+            class: 'druid',
             collectible: 1,
             gameMode: 'battlegrounds',
             health: '3,4,5',
