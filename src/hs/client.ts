@@ -5,8 +5,8 @@ import * as hs from '../resources/hs'
 export interface HSClient extends BlizzardClient {
   cardSearch<T = any>(args: ResourceOptions<hs.CardSearchOptions>): ResourceResponse<T>
   card<T = any>(args: ResourceOptions<hs.CardOptions>): ResourceResponse<T>
-  cardBacks<T = any>(args?: ResourceOptions<hs.CardBacksOptions>): ResourceResponse<T>
-  deck<T = any>(args?: ResourceOptions<hs.DeckOptions>): ResourceResponse<T>
+  cardBacks<T = any>(args: ResourceOptions<hs.CardBacksOptions>): ResourceResponse<T>
+  deck<T = any>(args: ResourceOptions<hs.DeckOptions>): ResourceResponse<T>
   metadata<T = any>(args?: ResourceOptions<hs.MetaDataOptions>): ResourceResponse<T>
 }
 

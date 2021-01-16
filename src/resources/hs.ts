@@ -111,13 +111,13 @@ export type CardBacksOptions = {
     | 'blizzard'
     | 'golden'
     | 'events'
-  order?: string
+  order?: 'asc' | 'desc'
   sort?: string
   textFilter?: string
 }
 
 export const cardBacks = (
-  args?: CardBacksOptions,
+  args: CardBacksOptions,
 ): Resource<{
   cardBackCategory?:
     | 'base'
@@ -133,11 +133,11 @@ export const cardBacks = (
     | 'blizzard'
     | 'golden'
     | 'events'
-  order?: string
+  order?: 'asc' | 'desc'
   sort?: string
   textFilter?: string
 }> => {
-  if (args?.id !== undefined) {
+  if (args.id !== undefined) {
     return {
       path: `hearthstone/cardbacks/${encodeURIComponent(args.id)}`,
     }
@@ -146,23 +146,23 @@ export const cardBacks = (
   return {
     path: 'hearthstone/cardbacks',
     params: {
-      cardBackCategory: args?.category,
-      order: args?.order,
-      sort: args?.sort,
-      textFilter: args?.textFilter,
+      cardBackCategory: args.category,
+      order: args.order,
+      sort: args.sort,
+      textFilter: args.textFilter,
     },
   }
 }
 
 export type DeckOptions = { code?: string; ids?: number | number[]; hero?: number }
 
-export const deck = (args?: DeckOptions): Resource<{ code?: string; ids?: number | string; hero?: number }> => {
+export const deck = (args: DeckOptions): Resource<{ code?: string; ids?: number | string; hero?: number }> => {
   return {
     path: 'hearthstone/deck',
     params: {
-      code: args?.code,
-      ids: Array.isArray(args?.ids) ? args?.ids.join(',') : args?.ids,
-      hero: args?.hero,
+      code: args.code,
+      ids: Array.isArray(args.ids) ? args.ids.join(',') : args.ids,
+      hero: args.hero,
     },
   }
 }
