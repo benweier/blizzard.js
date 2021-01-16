@@ -28,16 +28,20 @@ export const createClient = <T extends BlizzardClient>(Client: { new (args: Clie
     if (!token) {
       await refreshApplicationToken()
     } else {
-      const validateTokenRequest = await client.validateApplicationToken({ token })
+      try {
+        const validateTokenRequest = await client.validateApplicationToken({ token })
 
-      if (tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now() < 60000) {
+        if (tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now() < 60000) {
+          await refreshApplicationToken()
+        } else {
+          const timeout = setTimeout(
+            refreshApplicationToken,
+            tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now(),
+          )
+          timeout.unref()
+        }
+      } catch (err) {
         await refreshApplicationToken()
-      } else {
-        const timeout = setTimeout(
-          refreshApplicationToken,
-          tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now(),
-        )
-        timeout.unref()
       }
     }
   }
