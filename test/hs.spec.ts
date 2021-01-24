@@ -24,7 +24,7 @@ describe('Hearthstone', () => {
     jest.clearAllMocks()
   })
 
-  test('should return a HS instance of Blizzard', async () => {
+  test('instance', async () => {
     expect(hs).toBeInstanceOf(Blizzard)
     expect(hs).toBeInstanceOf(HS)
   })

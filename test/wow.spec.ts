@@ -25,7 +25,7 @@ describe('World of Warcraft', () => {
     jest.clearAllMocks()
   })
 
-  test('should return a WoW instance of Blizzard', async () => {
+  test('instance', async () => {
     expect(wow).toBeInstanceOf(Blizzard)
     expect(wow).toBeInstanceOf(WoW)
   })

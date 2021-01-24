@@ -24,7 +24,7 @@ describe('Diablo 3', () => {
     jest.clearAllMocks()
   })
 
-  test('should return a D3 instance of Blizzard', async () => {
+  test('instance', async () => {
     expect(d3).toBeInstanceOf(Blizzard)
     expect(d3).toBeInstanceOf(D3)
   })
