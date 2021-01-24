@@ -641,7 +641,7 @@ export const mythicKeystone = (args?: MythicKeystoneOptions): Resource => {
   return {
     path:
       args.id === undefined
-        ? `data/wow/mythic-keystone/${encodeURIComponent(args.resource)}`
+        ? `data/wow/mythic-keystone/${encodeURIComponent(args.resource)}/index`
         : `data/wow/mythic-keystone/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
     namespace: 'dynamic',
   }
@@ -889,19 +889,19 @@ export const pvpTier = (args?: PVPTierOptions): Resource => {
 export type QuestOptions = { id?: number; resource?: 'category' | 'area' | 'type' }
 
 export const quest = (args?: QuestOptions): Resource => {
-  if (args?.id === undefined) {
-    return {
-      path: 'data/wow/quest/index',
-      namespace: 'static',
-    }
-  }
-
-  if (args.resource === 'category' || args.resource === 'area' || args.resource === 'type') {
+  if (args?.resource === 'category' || args?.resource === 'area' || args?.resource === 'type') {
     return {
       path:
         args.id === undefined
           ? `data/wow/quest/${encodeURIComponent(args.resource)}/index`
           : `data/wow/quest/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
+      namespace: 'static',
+    }
+  }
+
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/quest/index',
       namespace: 'static',
     }
   }
