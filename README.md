@@ -62,6 +62,16 @@ const wow = await blizzard.wow.createInstance({
 
 All API methods can accept the same `key`, `secret`, `token`, `origin`, `locale` parameters as `createInstance`, for cases where you need to use different values to the default.
 
+Method parameters are encoded with `encodeURIComponent` for URL safety. Sanitizing your inputs is still important, but just be aware in case certain requests fail for this reason.
+
+Refer to the resource references for the available methods and parameters:
+
+- [Diablo 3](https://github.com/benweier/blizzard.js/wiki/Diablo-3)
+- [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthston)
+- [Starcraft 2](https://github.com/benweier/blizzard.js/wiki/Starcraft-2)
+- [World of Warcraft (Retail)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Retail)>)
+- [World of Warcraft (Classic)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Classic)>)
+
 #### _User_ Tokens
 
 **Certain protected profile requests for World of Warcraft require a _user_ `token`** provisioned by the OAuth 2.0 [Authorization Code Flow](https://develop.battle.net/documentation/guides/using-oauth/authorization-code-flow). This is _outside the scope of `blizzard.js`_ and a OAuth library like [passport](https://github.com/jaredhanson/passport) is highly recommended.
