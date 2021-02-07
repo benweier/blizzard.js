@@ -37,9 +37,9 @@ const blizzard = require('blizzard.js').initialize({
 #### `v4` 👍
 
 ```js
-import { createInstance } from 'blizzard.js/wow'
+import { wow } from 'blizzard.js'
 
-const wow = await createInstance({
+const wowClient = await wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
@@ -51,7 +51,7 @@ const wow = await createInstance({
 ```js
 const blizzard = require('blizzard.js')
 
-const wow = await blizzard.wow.createInstance({
+const wowClient = await blizzard.wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
@@ -73,7 +73,7 @@ The return value of methods is still a Promise that resolves to an `AxiosRespons
 With `async`/`await`
 
 ```js
-const character = await wow.characterProfile({ realm: '...', name: '...' })
+const character = await wowClient.characterProfile({ realm: '...', name: '...' })
 
 console.log(character.data)
 ```
@@ -81,7 +81,7 @@ console.log(character.data)
 With `then`/`catch`
 
 ```js
-wow.characterProfile({ realm: '...', name: '...' }).then((response) => {
+wowClient.characterProfile({ realm: '...', name: '...' }).then((response) => {
   console.log(response.data)
 })
 ```

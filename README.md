@@ -22,20 +22,20 @@ Please refer to the documentation at the [Blizzard Developer Portal](https://dev
 
 #### Game Clients
 
-All game clients are available via their own import.
+All game clients are available via their named export.
 
-- **Diablo 3**: `blizzard.js/d3`
-- **Hearthstone**: `blizzard.js/hs`
-- **Starcraft 2**: `blizzard.js/sc2`
-- **World of Warcraft (Retail)**: `blizzard.js/wow`
-- **World of Warcraft (Classic)**: `blizzard.js/wow/classic`
+- **Diablo 3**: `d3`
+- **Hearthstone**: `hs`
+- **Starcraft 2**: `sc2`
+- **World of Warcraft (Retail)**: `wow`
+- **World of Warcraft (Classic)**: `wow.classic`
 
 _With TypeScript & ES modules_
 
 ```js
-import { createInstance } from 'blizzard.js/wow'
+import { wow } from 'blizzard.js'
 
-const wow = await createInstance({
+const wowClient = await wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
@@ -49,7 +49,7 @@ _With CommonJS_
 ```js
 const blizzard = require('blizzard.js')
 
-const wow = await blizzard.wow.createInstance({
+const wowClient = await blizzard.wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
