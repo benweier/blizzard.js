@@ -45,7 +45,7 @@ export interface BlizzardClient {
 }
 
 export abstract class Blizzard implements BlizzardClient {
-  public version = '4.0.0'
+  public version = '4.0.1'
 
   public ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
 
