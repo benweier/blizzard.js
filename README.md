@@ -67,7 +67,7 @@ Method parameters are encoded with `encodeURIComponent` for URL safety. Sanitizi
 Refer to the resource references for the available methods and parameters:
 
 - [Diablo 3](https://github.com/benweier/blizzard.js/wiki/Diablo-3)
-- [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthston)
+- [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthstone)
 - [Starcraft 2](https://github.com/benweier/blizzard.js/wiki/Starcraft-2)
 - [World of Warcraft (Retail)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Retail)>)
 - [World of Warcraft (Classic)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Classic)>)

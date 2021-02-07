@@ -9,7 +9,7 @@ For methods that still work, I highly encourage the use of TypeScript or some fo
 For a list of all methods, or to find an equivalent method from `v3` to `v4`, please refer to the method parameters documented in the resource references:
 
 - [Diablo 3](https://github.com/benweier/blizzard.js/wiki/Diablo-3)
-- [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthston)
+- [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthstone)
 - [Starcraft 2](https://github.com/benweier/blizzard.js/wiki/Starcraft-2)
 - [World of Warcraft (Retail)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Retail)>)
 - [World of Warcraft (Classic)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Classic)>)
