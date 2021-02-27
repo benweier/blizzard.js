@@ -40,7 +40,7 @@ const wowClient = await wow.createInstance({
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
   locale: 'en_US' // optional
-  token: {} // optional
+  token: '' // optional
 })
 ```
 
@@ -54,7 +54,7 @@ const wowClient = await blizzard.wow.createInstance({
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
   locale: 'en_US' // optional
-  token: {} // optional
+  token: '' // optional
 });
 ```
 
