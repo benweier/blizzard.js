@@ -118,7 +118,7 @@ export abstract class Blizzard implements BlizzardClient {
   }): Promise<AxiosResponse<AccessToken>> {
     const { origin, key, secret } = { ...this.defaults, ...args }
 
-    return this.axios.get(`https://${origin}.battle.net/oauth/token`, {
+    return this.axios.post(`https://${origin}.battle.net/oauth/token`, null, {
       params: { grant_type: 'client_credentials' },
       auth: {
         username: key,
