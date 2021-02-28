@@ -70,7 +70,6 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.38.5",
-    "rollup-plugin-typescript2": "^0.29.0",
     "semantic-release": "^17.3.7",
     "ts-jest": "^26.5.0",
     "tslib": "^2.1.0",
