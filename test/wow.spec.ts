@@ -4,7 +4,7 @@ import { createInstance, WoW, WoWClient } from '../src/wow'
 const headers = {
   'User-Agent': expect.any(String),
   'Content-Type': 'application/json',
-  'Battlenet-Namespace': expect.stringMatching(/(profile|static|dynamic)-(us|eu|sea|kr|tw)/),
+  'Battlenet-Namespace': expect.stringMatching(/^(profile|static|dynamic)-(us|eu|sea|kr|tw)$/),
   Authorization: expect.any(String),
 }
 const params = { locale: expect.any(String) }
