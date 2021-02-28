@@ -6,6 +6,9 @@ export interface WoWClassicClient extends BlizzardClient {
   connectedRealm<T = any>(args?: ResourceOptions<wow.ConnectedRealmOptions>): ResourceResponse<T>
   connectedRealmSearch<T = any>(args: ResourceOptions<wow.ConnectedRealmSearchOptions>): ResourceResponse<T>
   creature<T = any>(args: ResourceOptions<wow.CreatureOptions>): ResourceResponse<T>
+  creatureFamily<T = any>(args?: ResourceOptions<wow.CreatureFamilyOptions>): ResourceResponse<T>
+  creatureSearch<T = any>(args: ResourceOptions<wow.CreatureSearchOptions>): ResourceResponse<T>
+  creatureType<T = any>(args?: ResourceOptions<wow.CreatureTypeOptions>): ResourceResponse<T>
   guildCrest<T = any>(args?: ResourceOptions<wow.GuildCrestOptions>): ResourceResponse<T>
   item<T = any>(args: ResourceOptions<wow.ItemOptions>): ResourceResponse<T>
   itemSearch<T = any>(args: ResourceOptions<wow.ItemSearchOptions>): ResourceResponse<T>
@@ -20,21 +23,21 @@ export interface WoWClassicClient extends BlizzardClient {
 }
 
 export class WoWClassic extends Blizzard implements WoWClassicClient {
-  connectedRealm = this.createClientResourceRequest(wow.connectedRealm)
-  connectedRealmSearch = this.createClientResourceRequest(wow.connectedRealmSearch)
-  creature = this.createClientResourceRequest(wow.creature)
-  creatureFamily = this.createClientResourceRequest(wow.creatureFamily)
-  creatureSearch = this.createClientResourceRequest(wow.creatureSearch)
-  creatureType = this.createClientResourceRequest(wow.creatureType)
-  guildCrest = this.createClientResourceRequest(wow.guildCrest)
-  item = this.createClientResourceRequest(wow.item)
-  itemSearch = this.createClientResourceRequest(wow.itemSearch)
-  mediaSearch = this.createClientResourceRequest(wow.mediaSearch)
-  playableClass = this.createClientResourceRequest(wow.playableClass)
-  playableRace = this.createClientResourceRequest(wow.playableRace)
-  powerType = this.createClientResourceRequest(wow.powerType)
-  realm = this.createClientResourceRequest(wow.realm)
-  realmSearch = this.createClientResourceRequest(wow.realmSearch)
-  region = this.createClientResourceRequest(wow.region)
-  token = this.createClientResourceRequest(wow.token)
+  connectedRealm = this.createClientResourceRequest(wow.connectedRealm.bind(this, 'dynamic-classic'))
+  connectedRealmSearch = this.createClientResourceRequest(wow.connectedRealmSearch.bind(this, 'dynamic-classic'))
+  creature = this.createClientResourceRequest(wow.creature.bind(this, 'static-classic'))
+  creatureFamily = this.createClientResourceRequest(wow.creatureFamily.bind(this, 'static-classic'))
+  creatureSearch = this.createClientResourceRequest(wow.creatureSearch.bind(this, 'static-classic'))
+  creatureType = this.createClientResourceRequest(wow.creatureType.bind(this, 'static-classic'))
+  guildCrest = this.createClientResourceRequest(wow.guildCrest.bind(this, 'static-classic'))
+  item = this.createClientResourceRequest(wow.item.bind(this, 'static-classic'))
+  itemSearch = this.createClientResourceRequest(wow.itemSearch.bind(this, 'static-classic'))
+  mediaSearch = this.createClientResourceRequest(wow.mediaSearch.bind(this, 'static-classic'))
+  playableClass = this.createClientResourceRequest(wow.playableClass.bind(this, 'static-classic'))
+  playableRace = this.createClientResourceRequest(wow.playableRace.bind(this, 'static-classic'))
+  powerType = this.createClientResourceRequest(wow.powerType.bind(this, 'static-classic'))
+  realm = this.createClientResourceRequest(wow.realm.bind(this, 'dynamic-classic'))
+  realmSearch = this.createClientResourceRequest(wow.realmSearch.bind(this, 'dynamic-classic'))
+  region = this.createClientResourceRequest(wow.region.bind(this, 'dynamic-classic'))
+  token = this.createClientResourceRequest(wow.token.bind(this, 'dynamic-classic'))
 }
