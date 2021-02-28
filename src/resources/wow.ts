@@ -5,6 +5,7 @@ import { Locales } from '../endpoints'
  * PROFILE DATA
  */
 
+type NamespaceOptions = 'profile' | 'static' | 'dynamic' | 'static-classic' | 'dynamic-classic'
 type CharacterOptions = { realm: string; name: string }
 type SearchOptions = { orderby?: string | string[]; page?: number }
 type SearchParams = {
@@ -14,61 +15,76 @@ type SearchParams = {
 
 export type AccountProfileOptions = Record<string, unknown>
 
-export const accountProfile = (): Resource => {
+export const accountProfile = (namespace: Extract<NamespaceOptions, 'profile'>): Resource => {
   return {
     path: 'profile/user/wow',
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type AccountCharacterProfileOptions = { realm: number; character: number }
 
-export const accountCharacterProfile = (args: AccountCharacterProfileOptions): Resource => {
+export const accountCharacterProfile = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: AccountCharacterProfileOptions,
+): Resource => {
   return {
     path: `profile/user/wow/protected-character/${encodeURIComponent(args.realm)}-${encodeURIComponent(
       args.character,
     )}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type AccountCollectionsOptions = { resource?: 'mounts' | 'pets' }
 
-export const accountCollections = (args?: AccountCollectionsOptions): Resource => {
+export const accountCollections = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args?: AccountCollectionsOptions,
+): Resource => {
   return {
     path:
       args?.resource === undefined
         ? 'profile/user/wow/collections'
         : `profile/user/wow/collections/${encodeURIComponent(args.resource)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type AccountCharacterAchievementsOptions = CharacterOptions & { stats?: boolean }
 
-export const characterAchievements = (args: AccountCharacterAchievementsOptions): Resource => {
+export const characterAchievements = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: AccountCharacterAchievementsOptions,
+): Resource => {
   return {
     path: args.stats
       ? `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
           args.name,
         )}/achievements/statistics`
       : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/achievements`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterAppearanceOptions = CharacterOptions
 
-export const characterAppearance = (args: CharacterAppearanceOptions): Resource => {
+export const characterAppearance = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterAppearanceOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/appearance`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterCollectionsOptions = CharacterOptions & { resource?: 'mounts' | 'pets' }
 
-export const characterCollections = (args: CharacterCollectionsOptions): Resource => {
+export const characterCollections = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterCollectionsOptions,
+): Resource => {
   return {
     path:
       args.resource === undefined
@@ -76,13 +92,16 @@ export const characterCollections = (args: CharacterCollectionsOptions): Resourc
         : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
             args.name,
           )}/collections/${encodeURIComponent(args.resource)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterEncountersOptions = CharacterOptions & { resource?: 'dungeons' | 'raids' }
 
-export const characterEncounters = (args: CharacterEncountersOptions): Resource => {
+export const characterEncounters = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterEncountersOptions,
+): Resource => {
   return {
     path:
       args.resource === undefined
@@ -90,40 +109,52 @@ export const characterEncounters = (args: CharacterEncountersOptions): Resource 
         : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
             args.name,
           )}/encounters/${encodeURIComponent(args.resource)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterEquipmentOptions = CharacterOptions
 
-export const characterEquipment = (args: CharacterEquipmentOptions): Resource => {
+export const characterEquipment = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterEquipmentOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/equipment`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterHunterPetsOptions = CharacterOptions
 
-export const characterHunterPets = (args: CharacterHunterPetsOptions): Resource => {
+export const characterHunterPets = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterHunterPetsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/hunter-pets`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterMediaOptions = CharacterOptions
 
-export const characterMedia = (args: CharacterMediaOptions): Resource => {
+export const characterMedia = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterMediaOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/character-media`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterMythicKeystoneOptions = CharacterOptions & { season?: number }
 
-export const characterMythicKeystone = (args: CharacterMythicKeystoneOptions): Resource => {
+export const characterMythicKeystone = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterMythicKeystoneOptions,
+): Resource => {
   return {
     path:
       args.season === undefined
@@ -133,33 +164,39 @@ export const characterMythicKeystone = (args: CharacterMythicKeystoneOptions): R
         : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
             args.name,
           )}/mythic-keystone-profile/season/${encodeURIComponent(args.season)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterProfessionsOptions = CharacterOptions
 
-export const characterProfessions = (args: CharacterProfessionsOptions): Resource => {
+export const characterProfessions = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterProfessionsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/professions`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterProfileOptions = CharacterOptions & { status?: boolean }
 
-export const characterProfile = (args: CharacterProfileOptions): Resource => {
+export const characterProfile = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterProfileOptions,
+): Resource => {
   return {
     path: args.status
       ? `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/status`
       : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterPVPOptions = CharacterOptions & { bracket?: string }
 
-export const characterPVP = (args: CharacterPVPOptions): Resource => {
+export const characterPVP = (namespace: Extract<NamespaceOptions, 'profile'>, args: CharacterPVPOptions): Resource => {
   return {
     path:
       args.bracket === undefined
@@ -167,69 +204,87 @@ export const characterPVP = (args: CharacterPVPOptions): Resource => {
         : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
             args.name,
           )}/pvp-bracket/${encodeURIComponent(args.bracket)}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterQuestsOptions = CharacterOptions & { completed?: boolean }
 
-export const characterQuests = (args: CharacterQuestsOptions): Resource => {
+export const characterQuests = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterQuestsOptions,
+): Resource => {
   return {
     path: args.completed
       ? `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/quests/completed`
       : `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/quests`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterReputationsOptions = CharacterOptions
 
-export const characterReputations = (args: CharacterReputationsOptions): Resource => {
+export const characterReputations = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterReputationsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/reputations`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterSoulbindsOptions = CharacterOptions
 
-export const characterSoulbinds = (args: CharacterSoulbindsOptions): Resource => {
+export const characterSoulbinds = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterSoulbindsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/soulbinds`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterSpecializationsOptions = CharacterOptions
 
-export const characterSpecializations = (args: CharacterSpecializationsOptions): Resource => {
+export const characterSpecializations = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterSpecializationsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/specializations`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterStatisticsOptions = CharacterOptions
 
-export const characterStatistics = (args: CharacterStatisticsOptions): Resource => {
+export const characterStatistics = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterStatisticsOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/statistics`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type CharacterTitlesOptions = CharacterOptions
 
-export const characterTitles = (args: CharacterTitlesOptions): Resource => {
+export const characterTitles = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterTitlesOptions,
+): Resource => {
   return {
     path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/titles`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
 export type GuildOptions = { realm: string; name: string; resource?: 'activity' | 'achievements' | 'roster' }
 
-export const guild = (args: GuildOptions): Resource => {
+export const guild = (namespace: Extract<NamespaceOptions, 'profile'>, args: GuildOptions): Resource => {
   return {
     path:
       args.resource !== 'activity' && args.resource !== 'achievements' && args.resource !== 'roster'
@@ -237,7 +292,7 @@ export const guild = (args: GuildOptions): Resource => {
         : `data/wow/guild/${encodeURIComponent(args.realm)}/${encodeURIComponent(args.name)}/${encodeURIComponent(
             args.resource,
           )}`,
-    namespace: 'profile',
+    namespace,
   }
 }
 
@@ -247,11 +302,11 @@ export const guild = (args: GuildOptions): Resource => {
 
 export type AchievementOptions = { id?: number; media?: boolean }
 
-export const achievement = (args?: AchievementOptions): Resource => {
+export const achievement = (namespace: Extract<NamespaceOptions, 'static'>, args?: AchievementOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/achievement/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -259,42 +314,48 @@ export const achievement = (args?: AchievementOptions): Resource => {
     path: args.media
       ? `data/wow/media/achievement/${encodeURIComponent(args.id)}`
       : `data/wow/achievement/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type AchievementCategoryOptions = { id?: number }
 
-export const achievementCategory = (args?: AchievementCategoryOptions): Resource => {
+export const achievementCategory = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: AchievementCategoryOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/achievement-category/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/achievement-category/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type AuctionHouseOptions = { id: number }
 
-export const auctionHouse = (args: AuctionHouseOptions): Resource => {
+export const auctionHouse = (namespace: Extract<NamespaceOptions, 'dynamic'>, args: AuctionHouseOptions): Resource => {
   return {
     path: `data/wow/connected-realm/${encodeURIComponent(args.id)}/auctions`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type AzeriteEssenceOptions = { id?: number; media?: boolean }
 
-export const azeriteEssence = (args?: AzeriteEssenceOptions): Resource => {
+export const azeriteEssence = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: AzeriteEssenceOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/azerite-essence/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -302,18 +363,19 @@ export const azeriteEssence = (args?: AzeriteEssenceOptions): Resource => {
     path: args.media
       ? `data/wow/media/azerite-essence/${encodeURIComponent(args.id)}`
       : `data/wow/azerite-essence/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type AzeriteEssenceSearchOptions = SearchOptions & { id: number }
 
 export const azeriteEssenceSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
   args: AzeriteEssenceSearchOptions,
 ): Resource<SearchParams & { 'allowed_specializations.id': number }> => {
   return {
     path: 'data/wow/search/azerite-essence',
-    namespace: 'static',
+    namespace,
     params: {
       'allowed_specializations.id': args.id,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -324,28 +386,32 @@ export const azeriteEssenceSearch = (
 
 export type ConnectedRealmOptions = { id?: number }
 
-export const connectedRealm = (args?: ConnectedRealmOptions): Resource => {
+export const connectedRealm = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  args?: ConnectedRealmOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/connected-realm/index',
-      namespace: 'dynamic',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/connected-realm/${encodeURIComponent(args.id)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type ConnectedRealmSearchOptions = SearchOptions & { status: 'UP' | 'DOWN'; timezone?: string }
 
 export const connectedRealmSearch = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
   args: ConnectedRealmSearchOptions,
 ): Resource<SearchParams & { 'status.type': string; 'realms.timezone'?: string }> => {
   return {
     path: `data/wow/search/connected-realm`,
-    namespace: 'dynamic',
+    namespace,
     params: {
       'status.type': args.status,
       'realms.timezone': args.timezone,
@@ -357,11 +423,11 @@ export const connectedRealmSearch = (
 
 export type CovenantOptions = { id: number; media?: boolean }
 
-export const covenant = (args?: CovenantOptions): Resource => {
+export const covenant = (namespace: Extract<NamespaceOptions, 'static'>, args?: CovenantOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/covenant/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -369,60 +435,66 @@ export const covenant = (args?: CovenantOptions): Resource => {
     path: args.media
       ? `data/wow/media/covenant/${encodeURIComponent(args.id)}`
       : `data/wow/covenant/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type SoulbindOptions = { id?: number }
 
-export const soulbind = (args?: SoulbindOptions): Resource => {
+export const soulbind = (namespace: Extract<NamespaceOptions, 'static'>, args?: SoulbindOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/soulbind/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/soulbind/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type ConduitOptions = { id?: number }
 
-export const conduit = (args?: ConduitOptions): Resource => {
+export const conduit = (namespace: Extract<NamespaceOptions, 'static'>, args?: ConduitOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/conduit/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/conduit/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type CreatureOptions = { id: number; media?: boolean }
 
-export const creature = (args: CreatureOptions): Resource => {
+export const creature = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args: CreatureOptions,
+): Resource => {
   return {
     path: args.media
       ? `data/wow/media/creature-display/${encodeURIComponent(args.id)}`
       : `data/wow/creature/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type CreatureFamilyOptions = { id?: number; media?: boolean }
 
-export const creatureFamily = (args?: CreatureFamilyOptions): Resource => {
+export const creatureFamily = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: CreatureFamilyOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/creature-family/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -430,34 +502,38 @@ export const creatureFamily = (args?: CreatureFamilyOptions): Resource => {
     path: args.media
       ? `data/wow/media/creature-family/${encodeURIComponent(args.id)}`
       : `data/wow/creature-family/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type CreatureTypeOptions = { id?: number }
 
-export const creatureType = (args?: CreatureTypeOptions): Resource => {
+export const creatureType = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: CreatureTypeOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/creature-type/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/creature-type/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type CreatureSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const creatureSearch = <T extends string, P extends Locales>(
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
   args: CreatureSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/creature',
-    namespace: 'static',
+    namespace,
     params: {
       [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -468,13 +544,16 @@ export const creatureSearch = <T extends string, P extends Locales>(
 
 export type GuildCrestOptions = { resource: 'border' | 'emblem'; id: number }
 
-export const guildCrest = (args?: GuildCrestOptions): Resource => {
+export const guildCrest = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: GuildCrestOptions,
+): Resource => {
   return {
     path:
       args?.resource === undefined && args?.id == undefined
         ? `data/wow/guild-crest/index`
         : `data/wow/media/guild-crest/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
@@ -483,11 +562,14 @@ export type ItemOptions =
   | { resource: 'class'; id?: number; sub?: number; media?: never }
   | { resource: 'set'; id?: number; sub?: never; media?: never }
 
-export const item = (args: ItemOptions): Resource => {
+export const item = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args: ItemOptions,
+): Resource => {
   if (args.resource === 'set') {
     return {
       path: args.id === undefined ? 'data/wow/item-set/index' : `data/wow/item-set/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -495,7 +577,7 @@ export const item = (args: ItemOptions): Resource => {
     if (args.id === undefined) {
       return {
         path: 'data/wow/item-class/index',
-        namespace: 'static',
+        namespace,
       }
     }
 
@@ -504,7 +586,7 @@ export const item = (args: ItemOptions): Resource => {
         args.sub === undefined
           ? `data/wow/item-class/${encodeURIComponent(args.id)}`
           : `data/wow/item-class/${encodeURIComponent(args.id)}/item-subclass/${encodeURIComponent(args.sub)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -512,18 +594,19 @@ export const item = (args: ItemOptions): Resource => {
     path: args.media
       ? `data/wow/media/item/${encodeURIComponent(args.id)}`
       : `data/wow/item/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type ItemSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const itemSearch = <T extends string, P extends Locales>(
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
   args: ItemSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/item',
-    namespace: 'static',
+    namespace,
     params: {
       [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -536,11 +619,11 @@ export type JournalOptions =
   | { resource: 'instance'; id?: number; media?: boolean }
   | { resource: 'encounter' | 'expansion'; id?: number; media?: never }
 
-export const journal = (args: JournalOptions): Resource => {
+export const journal = (namespace: Extract<NamespaceOptions, 'static'>, args: JournalOptions): Resource => {
   if (args.id === undefined) {
     return {
       path: `data/wow/journal-${encodeURIComponent(args.resource)}/index`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -549,16 +632,19 @@ export const journal = (args: JournalOptions): Resource => {
       args.resource === 'instance' && args.media
         ? `data/wow/media/journal-${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`
         : `data/wow/journal-${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type MediaSearchOptions = SearchOptions & { tag: string }
 
-export const mediaSearch = (args: MediaSearchOptions): Resource<SearchParams & { _tag: string }> => {
+export const mediaSearch = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args: MediaSearchOptions,
+): Resource<SearchParams & { _tag: string }> => {
   return {
     path: 'data/wow/search/media',
-    namespace: 'static',
+    namespace,
     params: {
       _tag: args.tag,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -569,14 +655,17 @@ export const mediaSearch = (args: MediaSearchOptions): Resource<SearchParams & {
 
 export type ModifiedCraftingOptions = { resource?: 'category' | 'reagent'; id?: number }
 
-export const modifiedCrafting = (args?: ModifiedCraftingOptions): Resource => {
+export const modifiedCrafting = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: ModifiedCraftingOptions,
+): Resource => {
   if (args?.resource === 'category') {
     return {
       path:
         args?.id === undefined
           ? 'data/wow/modified-crafting/category/index'
           : `data/wow/modified-crafting/category/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -586,40 +675,41 @@ export const modifiedCrafting = (args?: ModifiedCraftingOptions): Resource => {
         args?.id === undefined
           ? 'data/wow/modified-crafting/reagent-slot-type/index'
           : `data/wow/modified-crafting/reagent-slot-type/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: 'data/wow/modified-crafting/index',
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type MountOptions = { id?: number }
 
-export const mount = (args?: MountOptions): Resource => {
+export const mount = (namespace: Extract<NamespaceOptions, 'static'>, args?: MountOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/mount/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/mount/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type MountSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const mountSearch = <T extends string, P extends Locales>(
+  namespace: Extract<NamespaceOptions, 'static'>,
   args: MountSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: 'data/wow/search/mount',
-    namespace: 'static',
+    namespace,
     params: {
       [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -630,11 +720,14 @@ export const mountSearch = <T extends string, P extends Locales>(
 
 export type MythicKeystoneOptions = { resource?: 'dungeon' | 'period' | 'season'; id?: number }
 
-export const mythicKeystone = (args?: MythicKeystoneOptions): Resource => {
+export const mythicKeystone = (
+  namespace: Extract<NamespaceOptions, 'dynamic'>,
+  args?: MythicKeystoneOptions,
+): Resource => {
   if (args?.resource !== 'dungeon' && args?.resource !== 'period' && args?.resource !== 'season') {
     return {
       path: 'data/wow/mythic-keystone/index',
-      namespace: 'dynamic',
+      namespace,
     }
   }
 
@@ -643,17 +736,20 @@ export const mythicKeystone = (args?: MythicKeystoneOptions): Resource => {
       args.id === undefined
         ? `data/wow/mythic-keystone/${encodeURIComponent(args.resource)}/index`
         : `data/wow/mythic-keystone/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type MythicKeystoneAffixOptions = { id?: number; media?: boolean }
 
-export const mythicKeystoneAffix = (args?: MythicKeystoneAffixOptions): Resource => {
+export const mythicKeystoneAffix = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: MythicKeystoneAffixOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/keystone-affix/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -661,13 +757,16 @@ export const mythicKeystoneAffix = (args?: MythicKeystoneAffixOptions): Resource
     path: args.media
       ? `data/wow/media/keystone-affix/${encodeURIComponent(args.id)}`
       : `data/wow/keystone-affix/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type MythicKeystoneLeaderboardOptions = { realm: number; dungeon?: number; period?: number }
 
-export const mythicKeystoneLeaderboard = (args: MythicKeystoneLeaderboardOptions): Resource => {
+export const mythicKeystoneLeaderboard = (
+  namespace: Extract<NamespaceOptions, 'dynamic'>,
+  args: MythicKeystoneLeaderboardOptions,
+): Resource => {
   return {
     path:
       args.dungeon === undefined || args.period === undefined
@@ -675,27 +774,30 @@ export const mythicKeystoneLeaderboard = (args: MythicKeystoneLeaderboardOptions
         : `data/wow/connected-realm/${encodeURIComponent(args.realm)}/mythic-leaderboard/${encodeURIComponent(
             args.dungeon,
           )}/period/${encodeURIComponent(args.period)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type MythicRaidLeaderboardOptions = { raid: string; faction: 'alliance' | 'horde' }
 
-export const mythicRaidLeaderboard = (args: MythicRaidLeaderboardOptions): Resource => {
+export const mythicRaidLeaderboard = (
+  namespace: Extract<NamespaceOptions, 'dynamic'>,
+  args: MythicRaidLeaderboardOptions,
+): Resource => {
   return {
     path: `data/wow/leaderboard/hall-of-fame/${encodeURIComponent(args.raid)}/${encodeURIComponent(args.faction)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type PetOptions = { id?: number; resource?: 'ability'; media?: boolean }
 
-export const pet = (args?: PetOptions): Resource => {
+export const pet = (namespace: Extract<NamespaceOptions, 'static'>, args?: PetOptions): Resource => {
   if (args?.resource === 'ability') {
     if (args?.id === undefined) {
       return {
         path: 'data/wow/pet-ability/index',
-        namespace: 'static',
+        namespace,
       }
     }
 
@@ -703,14 +805,14 @@ export const pet = (args?: PetOptions): Resource => {
       path: args?.media
         ? `data/wow/media/pet-ability/${encodeURIComponent(args.id)}`
         : `data/wow/pet-ability/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   if (args?.id === undefined) {
     return {
       path: 'data/wow/pet/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -718,24 +820,27 @@ export const pet = (args?: PetOptions): Resource => {
     path: args?.media
       ? `data/wow/media/pet/${encodeURIComponent(args.id)}`
       : `data/wow/pet/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type PlayableClassOptions = { id?: number; media?: boolean; pvpTalents?: boolean }
 
-export const playableClass = (args?: PlayableClassOptions): Resource => {
+export const playableClass = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: PlayableClassOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: `data/wow/playable-class/index`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   if (args.pvpTalents) {
     return {
       path: `data/wow/playable-class/${encodeURIComponent(args.id)}/pvp-talent-slots`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -743,27 +848,33 @@ export const playableClass = (args?: PlayableClassOptions): Resource => {
     path: args.media
       ? `data/wow/media/playable-class/${encodeURIComponent(args.id)}`
       : `data/wow/playable-class/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type PlayableRaceOptions = { id?: number }
 
-export const playableRace = (args?: PlayableRaceOptions): Resource => {
+export const playableRace = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: PlayableRaceOptions,
+): Resource => {
   return {
     path:
       args?.id === undefined ? 'data/wow/playable-race/index' : `data/wow/playable-race/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type PlayableSpecializationOptions = { id?: number; media?: boolean }
 
-export const playableSpecialization = (args?: PlayableSpecializationOptions): Resource => {
+export const playableSpecialization = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: PlayableSpecializationOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/playable-specialization/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -771,33 +882,36 @@ export const playableSpecialization = (args?: PlayableSpecializationOptions): Re
     path: args.media
       ? `data/wow/media/playable-specialization/${encodeURIComponent(args.id)}`
       : `data/wow/playable-specialization/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type PowerTypeOptions = { id?: number }
 
-export const powerType = (args?: PowerTypeOptions): Resource => {
+export const powerType = (
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  args?: PowerTypeOptions,
+): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/power-type/index' : `data/wow/power-type/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type ProfessionOptions = { id?: number; media?: boolean; skillTier?: number }
 
-export const profession = (args?: ProfessionOptions): Resource => {
+export const profession = (namespace: Extract<NamespaceOptions, 'static'>, args?: ProfessionOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/profession/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   if (args.skillTier !== undefined) {
     return {
       path: `data/wow/profession/${encodeURIComponent(args.id)}/skill-tier/${encodeURIComponent(args.skillTier)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -805,18 +919,18 @@ export const profession = (args?: ProfessionOptions): Resource => {
     path: args.media
       ? `data/wow/media/profession/${encodeURIComponent(args.id)}`
       : `data/wow/profession/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type RecipeOptions = { id: number; media?: boolean }
 
-export const recipe = (args: RecipeOptions): Resource => {
+export const recipe = (namespace: Extract<NamespaceOptions, 'static'>, args: RecipeOptions): Resource => {
   return {
     path: args.media
       ? `data/wow/media/recipe/${encodeURIComponent(args.id)}`
       : `data/wow/recipe/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
@@ -837,11 +951,11 @@ export type PVPSeasonOptions =
       bracket?: never
     }
 
-export const pvpSeason = (args?: PVPSeasonOptions): Resource => {
+export const pvpSeason = (namespace: Extract<NamespaceOptions, 'dynamic'>, args?: PVPSeasonOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/pvp-season/index',
-      namespace: 'dynamic',
+      namespace,
     }
   }
 
@@ -851,30 +965,30 @@ export const pvpSeason = (args?: PVPSeasonOptions): Resource => {
         args.bracket === undefined
           ? `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-leaderboard/index`
           : `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-leaderboard/${encodeURIComponent(args.bracket)}`,
-      namespace: 'dynamic',
+      namespace,
     }
   }
 
   if (args.resource === 'reward') {
     return {
       path: `data/wow/pvp-season/${encodeURIComponent(args.id)}/pvp-reward/index`,
-      namespace: 'dynamic',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/pvp-season/${encodeURIComponent(args.id)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type PVPTierOptions = { id?: number; media?: boolean }
 
-export const pvpTier = (args?: PVPTierOptions): Resource => {
+export const pvpTier = (namespace: Extract<NamespaceOptions, 'static'>, args?: PVPTierOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/pvp-tier/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -882,51 +996,57 @@ export const pvpTier = (args?: PVPTierOptions): Resource => {
     path: args.media
       ? `data/wow/media/pvp-tier/${encodeURIComponent(args.id)}`
       : `data/wow/pvp-tier/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type QuestOptions = { id?: number; resource?: 'category' | 'area' | 'type' }
 
-export const quest = (args?: QuestOptions): Resource => {
+export const quest = (namespace: Extract<NamespaceOptions, 'static'>, args?: QuestOptions): Resource => {
   if (args?.resource === 'category' || args?.resource === 'area' || args?.resource === 'type') {
     return {
       path:
         args.id === undefined
           ? `data/wow/quest/${encodeURIComponent(args.resource)}/index`
           : `data/wow/quest/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   if (args?.id === undefined) {
     return {
       path: 'data/wow/quest/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: `data/wow/quest/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type RealmOptions = { slug?: string }
 
-export const realm = (args?: RealmOptions): Resource => {
+export const realm = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  args?: RealmOptions,
+): Resource => {
   return {
     path: args?.slug === undefined ? 'data/wow/realm/index' : `data/wow/realm/${encodeURIComponent(args.slug)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type RealmSearchOptions = SearchOptions & { timezone?: string }
 
-export const realmSearch = (args: RealmSearchOptions): Resource<SearchParams & { timezone?: string }> => {
+export const realmSearch = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  args: RealmSearchOptions,
+): Resource<SearchParams & { timezone?: string }> => {
   return {
     path: 'data/wow/search/realm',
-    namespace: 'dynamic',
+    namespace,
     params: {
       timezone: args?.timezone,
       orderby: Array.isArray(args?.orderby) ? args.orderby.join(',') : args?.orderby,
@@ -937,44 +1057,48 @@ export const realmSearch = (args: RealmSearchOptions): Resource<SearchParams & {
 
 export type RegionOptions = { id?: number }
 
-export const region = (args?: RegionOptions): Resource => {
+export const region = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  args?: RegionOptions,
+): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/region/index' : `data/wow/region/${encodeURIComponent(args.id)}`,
-    namespace: 'dynamic',
+    namespace,
   }
 }
 
 export type ReputationOptions = { resource: 'faction' | 'tier'; id?: number }
 
-export const reputation = (args: ReputationOptions): Resource => {
+export const reputation = (namespace: Extract<NamespaceOptions, 'static'>, args: ReputationOptions): Resource => {
   return {
     path:
       args.id === undefined
         ? `data/wow/reputation-${encodeURIComponent(args.resource)}/index`
         : `data/wow/reputation-${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type SpellOptions = { id: number; media?: boolean }
 
-export const spell = (args: SpellOptions): Resource => {
+export const spell = (namespace: Extract<NamespaceOptions, 'static'>, args: SpellOptions): Resource => {
   return {
     path: args.media
       ? `data/wow/media/spell/${encodeURIComponent(args.id)}`
       : `data/wow/spell/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type SpellSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const spellSearch = <T extends string, P extends Locales>(
+  namespace: Extract<NamespaceOptions, 'static'>,
   args: SpellSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
     path: `data/wow/search/spell`,
-    namespace: 'static',
+    namespace,
     params: {
       [`name.${args.locale}`]: args.name,
       orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
@@ -985,17 +1109,17 @@ export const spellSearch = <T extends string, P extends Locales>(
 
 export type TalentOptions = { id?: number; pvp?: boolean }
 
-export const talent = (args?: TalentOptions): Resource => {
+export const talent = (namespace: Extract<NamespaceOptions, 'static'>, args?: TalentOptions): Resource => {
   if (args?.pvp) {
     return {
       path: args.id === undefined ? 'data/wow/pvp-talent/index' : `data/wow/pvp-talent/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   return {
     path: args?.id === undefined ? 'data/wow/talent/index' : `data/wow/talent/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
@@ -1003,21 +1127,21 @@ export type TechTalentOptions =
   | { id?: number; tree?: never; media?: boolean }
   | { id?: number; tree?: boolean; media?: never }
 
-export const techTalent = (args?: TechTalentOptions): Resource => {
+export const techTalent = (namespace: Extract<NamespaceOptions, 'static'>, args?: TechTalentOptions): Resource => {
   if (args?.tree) {
     return {
       path:
         args.id === undefined
           ? 'data/wow/tech-talent-tree/index'
           : `data/wow/tech-talent-tree/${encodeURIComponent(args.id)}`,
-      namespace: 'static',
+      namespace,
     }
   }
 
   if (args?.id === undefined) {
     return {
       path: 'data/wow/tech-talent/index',
-      namespace: 'static',
+      namespace,
     }
   }
 
@@ -1025,24 +1149,24 @@ export const techTalent = (args?: TechTalentOptions): Resource => {
     path: args.media
       ? `data/wow/media/tech-talent/${encodeURIComponent(args.id)}`
       : `data/wow/tech-talent/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type TitleOptions = { id?: number }
 
-export const title = (args?: TitleOptions): Resource => {
+export const title = (namespace: Extract<NamespaceOptions, 'static'>, args?: TitleOptions): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/title/index' : `data/wow/title/${encodeURIComponent(args.id)}`,
-    namespace: 'static',
+    namespace,
   }
 }
 
 export type TokenOptions = Record<string, unknown>
 
-export const token = (): Resource => {
+export const token = (namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>): Resource => {
   return {
     path: 'data/wow/token/index',
-    namespace: 'dynamic',
+    namespace,
   }
 }
