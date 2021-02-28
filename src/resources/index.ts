@@ -18,7 +18,7 @@ export interface ProtectedResourceInterface<T = any, P = any> {
 
 export type Resource<T = never> = {
   path: string
-  namespace?: 'profile' | 'static' | 'dynamic'
+  namespace?: 'profile' | 'static' | 'dynamic' | 'static-classic' | 'dynamic-classic'
   params?: T
 }
 
