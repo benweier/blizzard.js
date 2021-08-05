@@ -638,7 +638,7 @@ describe('World of Warcraft', () => {
       await wow.conduit()
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/conduit/index',
+        'https://us.api.blizzard.com/data/wow/covenant/conduit/index',
         {
           headers,
           params,
@@ -650,7 +650,7 @@ describe('World of Warcraft', () => {
       await wow.conduit({ id: 3 })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/conduit/3',
+        'https://us.api.blizzard.com/data/wow/covenant/conduit/3',
         {
           headers,
           params,

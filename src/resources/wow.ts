@@ -460,13 +460,13 @@ export type ConduitOptions = { id?: number }
 export const conduit = (namespace: Extract<NamespaceOptions, 'static'>, args?: ConduitOptions): Resource => {
   if (args?.id === undefined) {
     return {
-      path: 'data/wow/conduit/index',
+      path: 'data/wow/covenant/conduit/index',
       namespace,
     }
   }
 
   return {
-    path: `data/wow/conduit/${encodeURIComponent(args.id)}`,
+    path: `data/wow/covenant/conduit/${encodeURIComponent(args.id)}`,
     namespace,
   }
 }
