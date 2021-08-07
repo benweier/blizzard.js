@@ -29,9 +29,9 @@ const blizzard = require('blizzard.js').initialize({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
-  locale: 'en_US' // optional
-  token: '' // optional
-});
+  locale: 'en_US', // optional
+  token: '', // optional
+})
 ```
 
 #### `v4` 👍
@@ -43,8 +43,8 @@ const wowClient = await wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
-  locale: 'en_US' // optional
-  token: '' // optional
+  locale: 'en_US', // optional
+  token: '', // optional
 })
 ```
 
@@ -55,8 +55,8 @@ const wowClient = await blizzard.wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
   origin: 'us', // optional
-  locale: 'en_US' // optional
-  token: '' // optional
+  locale: 'en_US', // optional
+  token: '', // optional
 })
 ```
 
