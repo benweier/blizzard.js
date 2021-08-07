@@ -29,10 +29,7 @@ export interface BlizzardClient {
     secret?: string
   }): Promise<AxiosResponse<AccessToken>>
 
-  validateApplicationToken(args?: {
-    origin?: string
-    token?: string
-  }): Promise<
+  validateApplicationToken(args?: { origin?: string; token?: string }): Promise<
     AxiosResponse<{
       scope?: Array<string>
       exp: number
@@ -131,10 +128,7 @@ export abstract class Blizzard implements BlizzardClient {
     })
   }
 
-  public validateApplicationToken(args?: {
-    origin?: string
-    token?: string
-  }): Promise<
+  public validateApplicationToken(args?: { origin?: string; token?: string }): Promise<
     AxiosResponse<{
       scope?: Array<string>
       exp: number

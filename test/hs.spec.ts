@@ -149,9 +149,10 @@ describe('Hearthstone', () => {
     test('id', async () => {
       await hs.cardBacks({ id: '155-pizza-stone' })
 
-      expect(
-        Blizzard.prototype.getClientResource,
-      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/cardbacks/155-pizza-stone', { headers, params })
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/hearthstone/cardbacks/155-pizza-stone',
+        { headers, params },
+      )
     })
   })
 
@@ -198,17 +199,19 @@ describe('Hearthstone', () => {
     test('default', async () => {
       await hs.metadata()
 
-      expect(
-        Blizzard.prototype.getClientResource,
-      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/metadata', { headers, params })
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/hearthstone/metadata',
+        { headers, params },
+      )
     })
 
     test('type', async () => {
       await hs.metadata({ type: 'classes' })
 
-      expect(
-        Blizzard.prototype.getClientResource,
-      ).toHaveBeenCalledWith('https://us.api.blizzard.com/hearthstone/metadata/classes', { headers, params })
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/hearthstone/metadata/classes',
+        { headers, params },
+      )
     })
   })
 })
