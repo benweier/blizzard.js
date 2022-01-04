@@ -1,13 +1,13 @@
-import { Blizzard, BlizzardClient } from '../core'
+import { Blizzard, BlizzardClient, Headers } from '../core'
 import { ResourceResponse, ResourceOptions } from '../resources'
 import * as hs from '../resources/hs'
 
 export interface HSClient extends BlizzardClient {
-  cardSearch<T = any>(args: ResourceOptions<hs.CardSearchOptions>): ResourceResponse<T>
-  card<T = any>(args: ResourceOptions<hs.CardOptions>): ResourceResponse<T>
-  cardBacks<T = any>(args: ResourceOptions<hs.CardBacksOptions>): ResourceResponse<T>
-  deck<T = any>(args: ResourceOptions<hs.DeckOptions>): ResourceResponse<T>
-  metadata<T = any>(args?: ResourceOptions<hs.MetaDataOptions>): ResourceResponse<T>
+  cardSearch<T = any>(args: ResourceOptions<hs.CardSearchOptions>, headers?: Headers): ResourceResponse<T>
+  card<T = any>(args: ResourceOptions<hs.CardOptions>, headers?: Headers): ResourceResponse<T>
+  cardBacks<T = any>(args: ResourceOptions<hs.CardBacksOptions>, headers?: Headers): ResourceResponse<T>
+  deck<T = any>(args: ResourceOptions<hs.DeckOptions>, headers?: Headers): ResourceResponse<T>
+  metadata<T = any>(args?: ResourceOptions<hs.MetaDataOptions>, headers?: Headers): ResourceResponse<T>
 }
 
 export class HS extends Blizzard implements HSClient {

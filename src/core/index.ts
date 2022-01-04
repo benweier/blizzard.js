@@ -18,6 +18,10 @@ export type AccessToken = {
   scope?: string
 }
 
+export type Headers = {
+  [key: string]: string
+}
+
 export interface BlizzardClient {
   setApplicationToken(token: string): void
 
@@ -68,10 +72,12 @@ export abstract class Blizzard implements BlizzardClient {
 
   public axios = axios.create()
 
-  public createClientResourceRequest<T = any>(fn: ResourceInterface<T>): (args: T) => ResourceResponse {
-    return (args) => {
+  public createClientResourceRequest<T = any>(
+    fn: ResourceInterface<T>,
+  ): (args: T, headers?: Headers) => ResourceResponse {
+    return (args, headers) => {
       const resource = fn(args)
-      const [url, config] = this.prepareResourceRequest(resource, args)
+      const [url, config] = this.prepareResourceRequest(resource, args, headers)
 
       return this.getClientResource(url, config)
     }
@@ -80,15 +86,19 @@ export abstract class Blizzard implements BlizzardClient {
   public prepareResourceRequest(
     resource: Resource<{ [key: string]: string | number | boolean }>,
     args?: Partial<ClientOptions>,
+    headers?: Headers,
   ): [string, AxiosRequestConfig] {
     const config = { ...this.defaults, ...args }
     const endpoint = getEndpoint(config.origin, config.locale)
-    const namespace = resource.namespace ? { 'Battlenet-Namespace': `${resource.namespace}-${endpoint.origin}` } : {}
+    const namespace = resource.namespace
+      ? { 'Battlenet-Namespace': `${resource.namespace}-${endpoint.origin}` }
+      : undefined
     const request: AxiosRequestConfig = {
       headers: {
+        ...headers,
         'User-Agent': this.ua,
         'Content-Type': 'application/json',
-        Authorization: `bearer ${config.token}`,
+        Authorization: `Bearer ${config.token}`,
         ...namespace,
       },
       params: {
@@ -122,8 +132,8 @@ export abstract class Blizzard implements BlizzardClient {
         password: secret,
       },
       headers: {
-        'user-agent': this.ua,
-        'content-type': 'application/json',
+        'User-Agent': this.ua,
+        'Content-Type': 'application/json',
       },
     })
   }
