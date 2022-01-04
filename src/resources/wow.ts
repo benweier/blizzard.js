@@ -40,7 +40,7 @@ export type AccountCollectionsOptions = { resource?: 'mounts' | 'pets' }
 
 export const accountCollections = (
   namespace: Extract<NamespaceOptions, 'profile'>,
-  args?: AccountCollectionsOptions,
+  args?: null | AccountCollectionsOptions,
 ): Resource => {
   return {
     path:
@@ -302,7 +302,10 @@ export const guild = (namespace: Extract<NamespaceOptions, 'profile'>, args: Gui
 
 export type AchievementOptions = { id?: number; media?: boolean }
 
-export const achievement = (namespace: Extract<NamespaceOptions, 'static'>, args?: AchievementOptions): Resource => {
+export const achievement = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: null | AchievementOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/achievement/index',
@@ -322,7 +325,7 @@ export type AchievementCategoryOptions = { id?: number }
 
 export const achievementCategory = (
   namespace: Extract<NamespaceOptions, 'static'>,
-  args?: AchievementCategoryOptions,
+  args?: null | AchievementCategoryOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -350,7 +353,7 @@ export type AzeriteEssenceOptions = { id?: number; media?: boolean }
 
 export const azeriteEssence = (
   namespace: Extract<NamespaceOptions, 'static'>,
-  args?: AzeriteEssenceOptions,
+  args?: null | AzeriteEssenceOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -388,7 +391,7 @@ export type ConnectedRealmOptions = { id?: number }
 
 export const connectedRealm = (
   namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
-  args?: ConnectedRealmOptions,
+  args?: null | ConnectedRealmOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -423,7 +426,7 @@ export const connectedRealmSearch = (
 
 export type CovenantOptions = { id: number; media?: boolean }
 
-export const covenant = (namespace: Extract<NamespaceOptions, 'static'>, args?: CovenantOptions): Resource => {
+export const covenant = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | CovenantOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/covenant/index',
@@ -441,7 +444,7 @@ export const covenant = (namespace: Extract<NamespaceOptions, 'static'>, args?: 
 
 export type SoulbindOptions = { id?: number }
 
-export const soulbind = (namespace: Extract<NamespaceOptions, 'static'>, args?: SoulbindOptions): Resource => {
+export const soulbind = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | SoulbindOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/soulbind/index',
@@ -457,7 +460,7 @@ export const soulbind = (namespace: Extract<NamespaceOptions, 'static'>, args?: 
 
 export type ConduitOptions = { id?: number }
 
-export const conduit = (namespace: Extract<NamespaceOptions, 'static'>, args?: ConduitOptions): Resource => {
+export const conduit = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | ConduitOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/covenant/conduit/index',
@@ -489,7 +492,7 @@ export type CreatureFamilyOptions = { id?: number; media?: boolean }
 
 export const creatureFamily = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: CreatureFamilyOptions,
+  args?: null | CreatureFamilyOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -510,7 +513,7 @@ export type CreatureTypeOptions = { id?: number }
 
 export const creatureType = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: CreatureTypeOptions,
+  args?: null | CreatureTypeOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -546,7 +549,7 @@ export type GuildCrestOptions = { resource: 'border' | 'emblem'; id: number }
 
 export const guildCrest = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: GuildCrestOptions,
+  args?: null | GuildCrestOptions,
 ): Resource => {
   return {
     path:
@@ -657,7 +660,7 @@ export type ModifiedCraftingOptions = { resource?: 'category' | 'reagent'; id?: 
 
 export const modifiedCrafting = (
   namespace: Extract<NamespaceOptions, 'static'>,
-  args?: ModifiedCraftingOptions,
+  args?: null | ModifiedCraftingOptions,
 ): Resource => {
   if (args?.resource === 'category') {
     return {
@@ -687,7 +690,7 @@ export const modifiedCrafting = (
 
 export type MountOptions = { id?: number }
 
-export const mount = (namespace: Extract<NamespaceOptions, 'static'>, args?: MountOptions): Resource => {
+export const mount = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | MountOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/mount/index',
@@ -722,7 +725,7 @@ export type MythicKeystoneOptions = { resource?: 'dungeon' | 'period' | 'season'
 
 export const mythicKeystone = (
   namespace: Extract<NamespaceOptions, 'dynamic'>,
-  args?: MythicKeystoneOptions,
+  args?: null | MythicKeystoneOptions,
 ): Resource => {
   if (args?.resource !== 'dungeon' && args?.resource !== 'period' && args?.resource !== 'season') {
     return {
@@ -744,7 +747,7 @@ export type MythicKeystoneAffixOptions = { id?: number; media?: boolean }
 
 export const mythicKeystoneAffix = (
   namespace: Extract<NamespaceOptions, 'static'>,
-  args?: MythicKeystoneAffixOptions,
+  args?: null | MythicKeystoneAffixOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -792,7 +795,7 @@ export const mythicRaidLeaderboard = (
 
 export type PetOptions = { id?: number; resource?: 'ability'; media?: boolean }
 
-export const pet = (namespace: Extract<NamespaceOptions, 'static'>, args?: PetOptions): Resource => {
+export const pet = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | PetOptions): Resource => {
   if (args?.resource === 'ability') {
     if (args?.id === undefined) {
       return {
@@ -828,7 +831,7 @@ export type PlayableClassOptions = { id?: number; media?: boolean; pvpTalents?: 
 
 export const playableClass = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: PlayableClassOptions,
+  args?: null | PlayableClassOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -856,7 +859,7 @@ export type PlayableRaceOptions = { id?: number }
 
 export const playableRace = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: PlayableRaceOptions,
+  args?: null | PlayableRaceOptions,
 ): Resource => {
   return {
     path:
@@ -869,7 +872,7 @@ export type PlayableSpecializationOptions = { id?: number; media?: boolean }
 
 export const playableSpecialization = (
   namespace: Extract<NamespaceOptions, 'static'>,
-  args?: PlayableSpecializationOptions,
+  args?: null | PlayableSpecializationOptions,
 ): Resource => {
   if (args?.id === undefined) {
     return {
@@ -890,7 +893,7 @@ export type PowerTypeOptions = { id?: number }
 
 export const powerType = (
   namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
-  args?: PowerTypeOptions,
+  args?: null | PowerTypeOptions,
 ): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/power-type/index' : `data/wow/power-type/${encodeURIComponent(args.id)}`,
@@ -900,7 +903,10 @@ export const powerType = (
 
 export type ProfessionOptions = { id?: number; media?: boolean; skillTier?: number }
 
-export const profession = (namespace: Extract<NamespaceOptions, 'static'>, args?: ProfessionOptions): Resource => {
+export const profession = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: null | ProfessionOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/profession/index',
@@ -951,7 +957,10 @@ export type PVPSeasonOptions =
       bracket?: never
     }
 
-export const pvpSeason = (namespace: Extract<NamespaceOptions, 'dynamic'>, args?: PVPSeasonOptions): Resource => {
+export const pvpSeason = (
+  namespace: Extract<NamespaceOptions, 'dynamic'>,
+  args?: null | PVPSeasonOptions,
+): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/pvp-season/index',
@@ -984,7 +993,7 @@ export const pvpSeason = (namespace: Extract<NamespaceOptions, 'dynamic'>, args?
 
 export type PVPTierOptions = { id?: number; media?: boolean }
 
-export const pvpTier = (namespace: Extract<NamespaceOptions, 'static'>, args?: PVPTierOptions): Resource => {
+export const pvpTier = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | PVPTierOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/wow/pvp-tier/index',
@@ -1002,7 +1011,7 @@ export const pvpTier = (namespace: Extract<NamespaceOptions, 'static'>, args?: P
 
 export type QuestOptions = { id?: number; resource?: 'category' | 'area' | 'type' }
 
-export const quest = (namespace: Extract<NamespaceOptions, 'static'>, args?: QuestOptions): Resource => {
+export const quest = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | QuestOptions): Resource => {
   if (args?.resource === 'category' || args?.resource === 'area' || args?.resource === 'type') {
     return {
       path:
@@ -1030,7 +1039,7 @@ export type RealmOptions = { slug?: string }
 
 export const realm = (
   namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
-  args?: RealmOptions,
+  args?: null | RealmOptions,
 ): Resource => {
   return {
     path: args?.slug === undefined ? 'data/wow/realm/index' : `data/wow/realm/${encodeURIComponent(args.slug)}`,
@@ -1059,7 +1068,7 @@ export type RegionOptions = { id?: number }
 
 export const region = (
   namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
-  args?: RegionOptions,
+  args?: null | RegionOptions,
 ): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/region/index' : `data/wow/region/${encodeURIComponent(args.id)}`,
@@ -1109,7 +1118,7 @@ export const spellSearch = <T extends string, P extends Locales>(
 
 export type TalentOptions = { id?: number; pvp?: boolean }
 
-export const talent = (namespace: Extract<NamespaceOptions, 'static'>, args?: TalentOptions): Resource => {
+export const talent = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | TalentOptions): Resource => {
   if (args?.pvp) {
     return {
       path: args.id === undefined ? 'data/wow/pvp-talent/index' : `data/wow/pvp-talent/${encodeURIComponent(args.id)}`,
@@ -1127,7 +1136,10 @@ export type TechTalentOptions =
   | { id?: number; tree?: never; media?: boolean }
   | { id?: number; tree?: boolean; media?: never }
 
-export const techTalent = (namespace: Extract<NamespaceOptions, 'static'>, args?: TechTalentOptions): Resource => {
+export const techTalent = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: null | TechTalentOptions,
+): Resource => {
   if (args?.tree) {
     return {
       path:
@@ -1155,7 +1167,7 @@ export const techTalent = (namespace: Extract<NamespaceOptions, 'static'>, args?
 
 export type TitleOptions = { id?: number }
 
-export const title = (namespace: Extract<NamespaceOptions, 'static'>, args?: TitleOptions): Resource => {
+export const title = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | TitleOptions): Resource => {
   return {
     path: args?.id === undefined ? 'data/wow/title/index' : `data/wow/title/${encodeURIComponent(args.id)}`,
     namespace,

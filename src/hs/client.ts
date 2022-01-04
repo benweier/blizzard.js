@@ -7,7 +7,7 @@ export interface HSClient extends BlizzardClient {
   card<T = any>(args: ResourceOptions<hs.CardOptions>, headers?: Headers): ResourceResponse<T>
   cardBacks<T = any>(args: ResourceOptions<hs.CardBacksOptions>, headers?: Headers): ResourceResponse<T>
   deck<T = any>(args: ResourceOptions<hs.DeckOptions>, headers?: Headers): ResourceResponse<T>
-  metadata<T = any>(args?: ResourceOptions<hs.MetaDataOptions>, headers?: Headers): ResourceResponse<T>
+  metadata<T = any>(args?: null | ResourceOptions<hs.MetaDataOptions>, headers?: Headers): ResourceResponse<T>
 }
 
 export class HS extends Blizzard implements HSClient {

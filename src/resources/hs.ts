@@ -174,7 +174,7 @@ export type MetaDataOptions = {
   type: CardMetaDataType
 }
 
-export const metadata = (args?: MetaDataOptions): Resource => {
+export const metadata = (args?: null | MetaDataOptions): Resource => {
   return {
     path: args?.type === undefined ? 'hearthstone/metadata' : `hearthstone/metadata/${encodeURIComponent(args.type)}`,
   }

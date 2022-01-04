@@ -3,17 +3,17 @@ import { ResourceResponse, ResourceOptions } from '../resources'
 import * as d3 from '../resources/d3'
 
 export interface D3Client extends BlizzardClient {
-  act<T = any>(args?: ResourceOptions<d3.ActOptions>, headers?: Headers): ResourceResponse<T>
+  act<T = any>(args?: null | ResourceOptions<d3.ActOptions>, headers?: Headers): ResourceResponse<T>
   artisan<T = any>(args: ResourceOptions<d3.ArtisanOptions>, headers?: Headers): ResourceResponse<T>
   recipe<T = any>(args: ResourceOptions<d3.RecipeOptions>, headers?: Headers): ResourceResponse<T>
   follower<T = any>(args: ResourceOptions<d3.FollowerOptions>, headers?: Headers): ResourceResponse<T>
   characterClass<T = any>(args: ResourceOptions<d3.CharacterClassOptions>, headers?: Headers): ResourceResponse<T>
   characterSkill<T = any>(args: ResourceOptions<d3.CharacterSkillOptions>, headers?: Headers): ResourceResponse<T>
   item<T = any>(args: ResourceOptions<d3.ItemOptions>, headers?: Headers): ResourceResponse<T>
-  itemType<T = any>(args?: ResourceOptions<d3.ItemTypeOptions>, headers?: Headers): ResourceResponse<T>
+  itemType<T = any>(args?: null | ResourceOptions<d3.ItemTypeOptions>, headers?: Headers): ResourceResponse<T>
   accountProfile<T = any>(args: ResourceOptions<d3.AccountProfile>, headers?: Headers): ResourceResponse<T>
-  season<T = any>(args?: ResourceOptions<d3.SeasonOptions>, headers?: Headers): ResourceResponse<T>
-  era<T = any>(args?: ResourceOptions<d3.EraOptions>, headers?: Headers): ResourceResponse<T>
+  season<T = any>(args?: null | ResourceOptions<d3.SeasonOptions>, headers?: Headers): ResourceResponse<T>
+  era<T = any>(args?: null | ResourceOptions<d3.EraOptions>, headers?: Headers): ResourceResponse<T>
 }
 
 export class D3 extends Blizzard implements D3Client {

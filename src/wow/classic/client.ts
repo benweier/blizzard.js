@@ -3,26 +3,35 @@ import { ResourceResponse, ResourceOptions } from '../../resources'
 import * as wow from '../../resources/wow'
 
 export interface WoWClassicClient extends BlizzardClient {
-  connectedRealm<T = any>(args?: ResourceOptions<wow.ConnectedRealmOptions>, headers?: Headers): ResourceResponse<T>
+  connectedRealm<T = any>(
+    args?: null | ResourceOptions<wow.ConnectedRealmOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   connectedRealmSearch<T = any>(
     args: ResourceOptions<wow.ConnectedRealmSearchOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
   creature<T = any>(args: ResourceOptions<wow.CreatureOptions>, headers?: Headers): ResourceResponse<T>
-  creatureFamily<T = any>(args?: ResourceOptions<wow.CreatureFamilyOptions>, headers?: Headers): ResourceResponse<T>
+  creatureFamily<T = any>(
+    args?: null | ResourceOptions<wow.CreatureFamilyOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   creatureSearch<T = any>(args: ResourceOptions<wow.CreatureSearchOptions>, headers?: Headers): ResourceResponse<T>
-  creatureType<T = any>(args?: ResourceOptions<wow.CreatureTypeOptions>, headers?: Headers): ResourceResponse<T>
-  guildCrest<T = any>(args?: ResourceOptions<wow.GuildCrestOptions>, headers?: Headers): ResourceResponse<T>
+  creatureType<T = any>(args?: null | ResourceOptions<wow.CreatureTypeOptions>, headers?: Headers): ResourceResponse<T>
+  guildCrest<T = any>(args?: null | ResourceOptions<wow.GuildCrestOptions>, headers?: Headers): ResourceResponse<T>
   item<T = any>(args: ResourceOptions<wow.ItemOptions>, headers?: Headers): ResourceResponse<T>
   itemSearch<T = any>(args: ResourceOptions<wow.ItemSearchOptions>, headers?: Headers): ResourceResponse<T>
   mediaSearch<T = any>(args: ResourceOptions<wow.MediaSearchOptions>, headers?: Headers): ResourceResponse<T>
-  playableClass<T = any>(args?: ResourceOptions<wow.PlayableClassOptions>, headers?: Headers): ResourceResponse<T>
-  playableRace<T = any>(args?: ResourceOptions<wow.PlayableRaceOptions>, headers?: Headers): ResourceResponse<T>
-  powerType<T = any>(args?: ResourceOptions<wow.PowerTypeOptions>, headers?: Headers): ResourceResponse<T>
-  realm<T = any>(args?: ResourceOptions<wow.RealmOptions>, headers?: Headers): ResourceResponse<T>
+  playableClass<T = any>(
+    args?: null | ResourceOptions<wow.PlayableClassOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
+  playableRace<T = any>(args?: null | ResourceOptions<wow.PlayableRaceOptions>, headers?: Headers): ResourceResponse<T>
+  powerType<T = any>(args?: null | ResourceOptions<wow.PowerTypeOptions>, headers?: Headers): ResourceResponse<T>
+  realm<T = any>(args?: null | ResourceOptions<wow.RealmOptions>, headers?: Headers): ResourceResponse<T>
   realmSearch<T = any>(args: ResourceOptions<wow.RealmSearchOptions>, headers?: Headers): ResourceResponse<T>
-  region<T = any>(args?: ResourceOptions<wow.RegionOptions>, headers?: Headers): ResourceResponse<T>
-  token<T = any>(args?: ResourceOptions<wow.TokenOptions>, headers?: Headers): ResourceResponse<T>
+  region<T = any>(args?: null | ResourceOptions<wow.RegionOptions>, headers?: Headers): ResourceResponse<T>
+  token<T = any>(args?: null | ResourceOptions<wow.TokenOptions>, headers?: Headers): ResourceResponse<T>
 }
 
 export class WoWClassic extends Blizzard implements WoWClassicClient {

@@ -2,7 +2,7 @@ import { Resource } from '.'
 
 export type ActOptions = { id?: number }
 
-export const act = (args?: ActOptions): Resource => {
+export const act = (args?: null | ActOptions): Resource => {
   return {
     path: args?.id === undefined ? 'd3/data/act' : `d3/data/act/${encodeURIComponent(args.id)}`,
   }
@@ -63,7 +63,7 @@ export const item = (args: ItemOptions): Resource => {
 
 export type ItemTypeOptions = { id?: string }
 
-export const itemType = (args?: ItemTypeOptions): Resource => {
+export const itemType = (args?: null | ItemTypeOptions): Resource => {
   return {
     path: args?.id === undefined ? 'd3/data/item-type' : `d3/data/item-type/${encodeURIComponent(args.id)}`,
   }
@@ -90,7 +90,7 @@ export const accountProfile = (args: AccountProfile): Resource => {
 
 export type SeasonOptions = { id?: number; leaderboard?: number }
 
-export const season = (args?: SeasonOptions): Resource => {
+export const season = (args?: null | SeasonOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/d3/season/',
@@ -107,7 +107,7 @@ export const season = (args?: SeasonOptions): Resource => {
 
 export type EraOptions = { id?: number; leaderboard?: number }
 
-export const era = (args?: EraOptions): Resource => {
+export const era = (args?: null | EraOptions): Resource => {
   if (args?.id === undefined) {
     return {
       path: 'data/d3/era/',

@@ -8,20 +8,23 @@ export interface WoWClient extends BlizzardClient {
     headers?: Headers,
   ): ResourceResponse<T>
   accountCollections<T = any>(
-    args?: ProtectedResourceOptions<wow.AccountCollectionsOptions>,
+    args?: null | ProtectedResourceOptions<wow.AccountCollectionsOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
   accountProfile<T = any>(
     args: ProtectedResourceOptions<wow.AccountProfileOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
-  achievement<T = any>(args?: ResourceOptions<wow.AchievementOptions>, headers?: Headers): ResourceResponse<T>
+  achievement<T = any>(args?: null | ResourceOptions<wow.AchievementOptions>, headers?: Headers): ResourceResponse<T>
   achievementCategory<T = any>(
-    args?: ResourceOptions<wow.AchievementCategoryOptions>,
+    args?: null | ResourceOptions<wow.AchievementCategoryOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
   auctionHouse<T = any>(args: ResourceOptions<wow.AuctionHouseOptions>, headers?: Headers): ResourceResponse<T>
-  azeriteEssence<T = any>(args?: ResourceOptions<wow.AzeriteEssenceOptions>, headers?: Headers): ResourceResponse<T>
+  azeriteEssence<T = any>(
+    args?: null | ResourceOptions<wow.AzeriteEssenceOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   azeriteEssenceSearch<T = any>(
     args: ResourceOptions<wow.AzeriteEssenceSearchOptions>,
     headers?: Headers,
@@ -79,29 +82,41 @@ export interface WoWClient extends BlizzardClient {
     headers?: Headers,
   ): ResourceResponse<T>
   characterTitles<T = any>(args: ResourceOptions<wow.CharacterTitlesOptions>, headers?: Headers): ResourceResponse<T>
-  conduit<T = any>(args?: ResourceOptions<wow.ConduitOptions>, headers?: Headers): ResourceResponse<T>
-  connectedRealm<T = any>(args?: ResourceOptions<wow.ConnectedRealmOptions>, headers?: Headers): ResourceResponse<T>
+  conduit<T = any>(args?: null | ResourceOptions<wow.ConduitOptions>, headers?: Headers): ResourceResponse<T>
+  connectedRealm<T = any>(
+    args?: null | ResourceOptions<wow.ConnectedRealmOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   connectedRealmSearch<T = any>(
     args: ResourceOptions<wow.ConnectedRealmSearchOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
-  covenant<T = any>(args?: ResourceOptions<wow.CovenantOptions>, headers?: Headers): ResourceResponse<T>
+  covenant<T = any>(args?: null | ResourceOptions<wow.CovenantOptions>, headers?: Headers): ResourceResponse<T>
   creature<T = any>(args: ResourceOptions<wow.CreatureOptions>, headers?: Headers): ResourceResponse<T>
-  creatureFamily<T = any>(args?: ResourceOptions<wow.CreatureFamilyOptions>, headers?: Headers): ResourceResponse<T>
+  creatureFamily<T = any>(
+    args?: null | ResourceOptions<wow.CreatureFamilyOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   creatureSearch<T = any>(args: ResourceOptions<wow.CreatureSearchOptions>, headers?: Headers): ResourceResponse<T>
-  creatureType<T = any>(args?: ResourceOptions<wow.CreatureTypeOptions>, headers?: Headers): ResourceResponse<T>
+  creatureType<T = any>(args?: null | ResourceOptions<wow.CreatureTypeOptions>, headers?: Headers): ResourceResponse<T>
   guild<T = any>(args: ResourceOptions<wow.GuildOptions>, headers?: Headers): ResourceResponse<T>
-  guildCrest<T = any>(args?: ResourceOptions<wow.GuildCrestOptions>, headers?: Headers): ResourceResponse<T>
+  guildCrest<T = any>(args?: null | ResourceOptions<wow.GuildCrestOptions>, headers?: Headers): ResourceResponse<T>
   item<T = any>(args: ResourceOptions<wow.ItemOptions>, headers?: Headers): ResourceResponse<T>
   itemSearch<T = any>(args: ResourceOptions<wow.ItemSearchOptions>, headers?: Headers): ResourceResponse<T>
   journal<T = any>(args: ResourceOptions<wow.JournalOptions>, headers?: Headers): ResourceResponse<T>
   mediaSearch<T = any>(args: ResourceOptions<wow.MediaSearchOptions>, headers?: Headers): ResourceResponse<T>
-  modifiedCrafting<T = any>(args?: ResourceOptions<wow.ModifiedCraftingOptions>, headers?: Headers): ResourceResponse<T>
-  mount<T = any>(args?: ResourceOptions<wow.MountOptions>, headers?: Headers): ResourceResponse<T>
+  modifiedCrafting<T = any>(
+    args?: null | ResourceOptions<wow.ModifiedCraftingOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
+  mount<T = any>(args?: null | ResourceOptions<wow.MountOptions>, headers?: Headers): ResourceResponse<T>
   mountSearch<T = any>(args: ResourceOptions<wow.MountSearchOptions>, headers?: Headers): ResourceResponse<T>
-  mythicKeystone<T = any>(args?: ResourceOptions<wow.MythicKeystoneOptions>, headers?: Headers): ResourceResponse<T>
+  mythicKeystone<T = any>(
+    args?: null | ResourceOptions<wow.MythicKeystoneOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
   mythicKeystoneAffix<T = any>(
-    args?: ResourceOptions<wow.MythicKeystoneAffixOptions>,
+    args?: null | ResourceOptions<wow.MythicKeystoneAffixOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
   mythicKeystoneLeaderboard<T = any>(
@@ -112,30 +127,33 @@ export interface WoWClient extends BlizzardClient {
     args: ResourceOptions<wow.MythicRaidLeaderboardOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
-  pet<T = any>(args?: ResourceOptions<wow.PetOptions>, headers?: Headers): ResourceResponse<T>
-  playableClass<T = any>(args?: ResourceOptions<wow.PlayableClassOptions>, headers?: Headers): ResourceResponse<T>
-  playableRace<T = any>(args?: ResourceOptions<wow.PlayableRaceOptions>, headers?: Headers): ResourceResponse<T>
-  playableSpecialization<T = any>(
-    args?: ResourceOptions<wow.PlayableSpecializationOptions>,
+  pet<T = any>(args?: null | ResourceOptions<wow.PetOptions>, headers?: Headers): ResourceResponse<T>
+  playableClass<T = any>(
+    args?: null | ResourceOptions<wow.PlayableClassOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
-  powerType<T = any>(args?: ResourceOptions<wow.PowerTypeOptions>, headers?: Headers): ResourceResponse<T>
-  profession<T = any>(args?: ResourceOptions<wow.ProfessionOptions>, headers?: Headers): ResourceResponse<T>
-  pvpSeason<T = any>(args?: ResourceOptions<wow.PVPSeasonOptions>, headers?: Headers): ResourceResponse<T>
-  pvpTier<T = any>(args?: ResourceOptions<wow.PVPTierOptions>, headers?: Headers): ResourceResponse<T>
-  quest<T = any>(args?: ResourceOptions<wow.QuestOptions>, headers?: Headers): ResourceResponse<T>
-  realm<T = any>(args?: ResourceOptions<wow.RealmOptions>, headers?: Headers): ResourceResponse<T>
+  playableRace<T = any>(args?: null | ResourceOptions<wow.PlayableRaceOptions>, headers?: Headers): ResourceResponse<T>
+  playableSpecialization<T = any>(
+    args?: null | ResourceOptions<wow.PlayableSpecializationOptions>,
+    headers?: Headers,
+  ): ResourceResponse<T>
+  powerType<T = any>(args?: null | ResourceOptions<wow.PowerTypeOptions>, headers?: Headers): ResourceResponse<T>
+  profession<T = any>(args?: null | ResourceOptions<wow.ProfessionOptions>, headers?: Headers): ResourceResponse<T>
+  pvpSeason<T = any>(args?: null | ResourceOptions<wow.PVPSeasonOptions>, headers?: Headers): ResourceResponse<T>
+  pvpTier<T = any>(args?: null | ResourceOptions<wow.PVPTierOptions>, headers?: Headers): ResourceResponse<T>
+  quest<T = any>(args?: null | ResourceOptions<wow.QuestOptions>, headers?: Headers): ResourceResponse<T>
+  realm<T = any>(args?: null | ResourceOptions<wow.RealmOptions>, headers?: Headers): ResourceResponse<T>
   realmSearch<T = any>(args: ResourceOptions<wow.RealmSearchOptions>, headers?: Headers): ResourceResponse<T>
   recipe<T = any>(args: ResourceOptions<wow.RecipeOptions>, headers?: Headers): ResourceResponse<T>
-  region<T = any>(args?: ResourceOptions<wow.RegionOptions>, headers?: Headers): ResourceResponse<T>
+  region<T = any>(args?: null | ResourceOptions<wow.RegionOptions>, headers?: Headers): ResourceResponse<T>
   reputation<T = any>(args: ResourceOptions<wow.ReputationOptions>, headers?: Headers): ResourceResponse<T>
-  soulbind<T = any>(args?: ResourceOptions<wow.SoulbindOptions>, headers?: Headers): ResourceResponse<T>
+  soulbind<T = any>(args?: null | ResourceOptions<wow.SoulbindOptions>, headers?: Headers): ResourceResponse<T>
   spell<T = any>(args: ResourceOptions<wow.SpellOptions>, headers?: Headers): ResourceResponse<T>
   spellSearch<T = any>(args: ResourceOptions<wow.SpellSearchOptions>, headers?: Headers): ResourceResponse<T>
-  talent<T = any>(args?: ResourceOptions<wow.TalentOptions>, headers?: Headers): ResourceResponse<T>
-  techTalent<T = any>(args?: ResourceOptions<wow.TechTalentOptions>, headers?: Headers): ResourceResponse<T>
-  title<T = any>(args?: ResourceOptions<wow.TitleOptions>, headers?: Headers): ResourceResponse<T>
-  token<T = any>(args?: ResourceOptions<wow.TokenOptions>, headers?: Headers): ResourceResponse<T>
+  talent<T = any>(args?: null | ResourceOptions<wow.TalentOptions>, headers?: Headers): ResourceResponse<T>
+  techTalent<T = any>(args?: null | ResourceOptions<wow.TechTalentOptions>, headers?: Headers): ResourceResponse<T>
+  title<T = any>(args?: null | ResourceOptions<wow.TitleOptions>, headers?: Headers): ResourceResponse<T>
+  token<T = any>(args?: null | ResourceOptions<wow.TokenOptions>, headers?: Headers): ResourceResponse<T>
 }
 
 export class WoW extends Blizzard implements WoWClient {
