@@ -110,7 +110,7 @@ export abstract class Blizzard implements BlizzardClient {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
-  public getClientResource<T extends any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public getClientResource<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axios.get(url, config)
   }
 
