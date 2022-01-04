@@ -1,67 +1,89 @@
 import { Resource } from '.'
 
+export type CardClass =
+  | 'demonhunter'
+  | 'druid'
+  | 'hunter'
+  | 'mage'
+  | 'paladin'
+  | 'priest'
+  | 'rogue'
+  | 'shaman'
+  | 'warlock'
+  | 'warrior'
+  | 'neutral'
+
+export type CardGameMode = 'constructed' | 'battlegrounds' | 'arena' | 'duels'
+
+export type CardMinionType = 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
+
+export type CardSortOrder = 'asc' | 'desc'
+
+export type CardRarity = 'free' | 'common' | 'rare' | 'epic' | 'legendary'
+
+export type CardSortOption = 'manaCost' | 'attack' | 'health' | 'name' | 'dataAdded' | 'groupByClass'
+
+export type CardTier = 1 | 2 | 3 | 4 | 5 | 6 | 'hero' | Array<1 | 2 | 3 | 4 | 5 | 6 | 'hero'>
+
+export type CardType = 'hero' | 'minion' | 'spell' | 'weapon'
+
+export type CardBackCategory =
+  | 'base'
+  | 'fireside'
+  | 'achieve'
+  | 'heroes'
+  | 'season'
+  | 'legend'
+  | 'esports'
+  | 'game_license'
+  | 'promotion'
+  | 'pre_purchase'
+  | 'blizzard'
+  | 'golden'
+  | 'events'
+
+export type CardMetaDataType = 'sets' | 'setGroups' | 'types' | 'rarities' | 'classes' | 'minionTypes' | 'keywords'
+
 export type CardSearchOptions = {
   attack?: number | number[]
-  class?:
-    | 'demonhunter'
-    | 'druid'
-    | 'hunter'
-    | 'mage'
-    | 'paladin'
-    | 'priest'
-    | 'rogue'
-    | 'shaman'
-    | 'warlock'
-    | 'warrior'
-    | 'neutral'
+  class?: CardClass
   collectible?: 0 | 1
-  gameMode?: 'constructed' | 'battlegrounds' | 'arena' | 'duels'
+  gameMode?: CardGameMode
   health?: number | number[]
   keyword?: string
   manaCost?: number | number[]
-  minionType?: 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
-  order?: 'asc' | 'desc'
+  minionType?: CardMinionType
+  order?: CardSortOrder
   page?: number
   pageSize?: number
-  rarity?: 'free' | 'common' | 'rare' | 'epic' | 'legendary'
+  rarity?: CardRarity
   set?: string
-  sort?: 'manaCost' | 'attack' | 'health' | 'name'
+  sort?: CardSortOption | `${CardSortOption}:${CardSortOrder}` | Array<`${CardSortOption}:${CardSortOrder}`>
   textFilter?: string
-  tier?: 1 | 2 | 3 | 4 | 5 | 6 | 'hero' | Array<1 | 2 | 3 | 4 | 5 | 6 | 'hero'>
-  type?: 'hero' | 'minion' | 'spell' | 'weapon'
+  tier?: CardTier
+  type?: CardType
 }
 
 export const cardSearch = (
   args: CardSearchOptions,
 ): Resource<{
   attack?: number | string
-  class?:
-    | 'demonhunter'
-    | 'druid'
-    | 'hunter'
-    | 'mage'
-    | 'paladin'
-    | 'priest'
-    | 'rogue'
-    | 'shaman'
-    | 'warlock'
-    | 'warrior'
-    | 'neutral'
+  class?: CardClass
   collectible?: 0 | 1 | '0,1'
-  gameMode?: 'constructed' | 'battlegrounds' | 'arena' | 'duels'
+  gameMode?: CardGameMode
   health?: number | string
   keyword?: string
   manaCost?: number | string
-  minionType?: 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
-  order?: 'asc' | 'desc'
+  minionType?: CardMinionType
+  order?: CardSortOrder
   page?: number
   pageSize?: number
-  rarity?: 'free' | 'common' | 'rare' | 'epic' | 'legendary'
+  rarity?: CardRarity
   set?: string
-  sort?: 'manaCost' | 'attack' | 'health' | 'name'
+  sort?: string
   textFilter?: string
   tier?: number | 'hero' | string
-  type?: 'hero' | 'minion' | 'spell' | 'weapon'
+  type?: CardType
 }> => {
   return {
     path: 'hearthstone/cards',
@@ -79,7 +101,7 @@ export const cardSearch = (
       pageSize: args.pageSize,
       rarity: args.rarity,
       set: args.set,
-      sort: args.sort,
+      sort: Array.isArray(args.sort) ? args.sort.join(',') : args.sort,
       textFilter: args.textFilter,
       tier: Array.isArray(args.tier) ? args.tier.join(',') : args.tier,
       type: args.type,
@@ -87,31 +109,25 @@ export const cardSearch = (
   }
 }
 
-export type CardOptions = { id: number | string }
+export type CardOptions = { id: number | string; gameMode?: CardGameMode }
 
-export const card = (args: CardOptions): Resource => {
+export const card = (
+  args: CardOptions,
+): Resource<{
+  gameMode?: CardGameMode
+}> => {
   return {
     path: `hearthstone/cards/${encodeURIComponent(args.id)}`,
+    params: {
+      gameMode: args.gameMode,
+    },
   }
 }
 
 export type CardBacksOptions = {
   id?: number | string
-  category?:
-    | 'base'
-    | 'fireside'
-    | 'achieve'
-    | 'heroes'
-    | 'season'
-    | 'legend'
-    | 'esports'
-    | 'game_license'
-    | 'promotion'
-    | 'pre_purchase'
-    | 'blizzard'
-    | 'golden'
-    | 'events'
-  order?: 'asc' | 'desc'
+  category?: CardBackCategory
+  order?: CardSortOrder
   sort?: string
   textFilter?: string
 }
@@ -119,21 +135,8 @@ export type CardBacksOptions = {
 export const cardBacks = (
   args: CardBacksOptions,
 ): Resource<{
-  cardBackCategory?:
-    | 'base'
-    | 'fireside'
-    | 'achieve'
-    | 'heroes'
-    | 'season'
-    | 'legend'
-    | 'esports'
-    | 'game_license'
-    | 'promotion'
-    | 'pre_purchase'
-    | 'blizzard'
-    | 'golden'
-    | 'events'
-  order?: 'asc' | 'desc'
+  cardBackCategory?: CardBackCategory
+  order?: CardSortOrder
   sort?: string
   textFilter?: string
 }> => {
@@ -168,7 +171,7 @@ export const deck = (args: DeckOptions): Resource<{ code?: string; ids?: number 
 }
 
 export type MetaDataOptions = {
-  type: 'sets' | 'setGroups' | 'types' | 'rarities' | 'classes' | 'minionTypes' | 'keywords'
+  type: CardMetaDataType
 }
 
 export const metadata = (args?: MetaDataOptions): Resource => {
