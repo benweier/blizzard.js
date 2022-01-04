@@ -30,13 +30,16 @@ describe('Hearthstone', () => {
   })
 
   test('card', async () => {
-    await hs.card({ id: '52119-arch-villain-rafaam' })
+    await hs.card({ id: '52119-arch-villain-rafaam', gameMode: 'constructed' })
 
     expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
       'https://us.api.blizzard.com/hearthstone/cards/52119-arch-villain-rafaam',
       {
         headers,
-        params,
+        params: {
+          ...params,
+          gameMode: 'constructed',
+        },
       },
     )
   })
