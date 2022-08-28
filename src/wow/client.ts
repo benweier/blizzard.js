@@ -91,6 +91,7 @@ export interface WoWClient extends BlizzardClient {
     args: ResourceOptions<wow.ConnectedRealmSearchOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
+  commodities<T = any>(args?: null | ResourceOptions<wow.CommoditiesOptions>, headers?: Headers): ResourceResponse<T>
   covenant<T = any>(args?: null | ResourceOptions<wow.CovenantOptions>, headers?: Headers): ResourceResponse<T>
   creature<T = any>(args: ResourceOptions<wow.CreatureOptions>, headers?: Headers): ResourceResponse<T>
   creatureFamily<T = any>(
@@ -183,6 +184,7 @@ export class WoW extends Blizzard implements WoWClient {
   characterStatistics = this.createClientResourceRequest(wow.characterStatistics.bind(this, 'profile'))
   characterTitles = this.createClientResourceRequest(wow.characterTitles.bind(this, 'profile'))
   conduit = this.createClientResourceRequest(wow.conduit.bind(this, 'static'))
+  commodities = this.createClientResourceRequest(wow.commodities.bind(this, 'dynamic'))
   connectedRealm = this.createClientResourceRequest(wow.connectedRealm.bind(this, 'dynamic'))
   connectedRealmSearch = this.createClientResourceRequest(wow.connectedRealmSearch.bind(this, 'dynamic'))
   covenant = this.createClientResourceRequest(wow.covenant.bind(this, 'static'))

@@ -531,6 +531,18 @@ describe('World of Warcraft', () => {
     )
   })
 
+  test('commodities', async () => {
+    await wow.commodities()
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/data/wow/auctions/commodities',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
   describe('connectedRealm', () => {
     test('index', async () => {
       await wow.connectedRealm()

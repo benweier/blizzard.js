@@ -387,6 +387,15 @@ export const azeriteEssenceSearch = (
   }
 }
 
+export type CommoditiesOptions = Record<string, unknown>
+
+export const commodities = (namespace: Extract<NamespaceOptions, 'dynamic'>): Resource => {
+  return {
+    path: `data/wow/auctions/commodities`,
+    namespace,
+  }
+}
+
 export type ConnectedRealmOptions = { id?: number }
 
 export const connectedRealm = (
