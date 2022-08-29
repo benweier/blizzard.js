@@ -74,7 +74,7 @@ export abstract class Blizzard implements BlizzardClient {
 
   public createClientResourceRequest<T = any>(
     fn: ResourceInterface<T>,
-  ): (args: T, headers?: Headers) => ResourceResponse {
+  ): (args: Partial<ClientOptions> & T, headers?: Headers) => ResourceResponse {
     return (args, headers) => {
       const resource = fn(args)
       const [url, config] = this.prepareResourceRequest(resource, args, headers)
