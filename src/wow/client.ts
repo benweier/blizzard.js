@@ -8,7 +8,7 @@ export interface WoWClient extends BlizzardClient {
     headers?: Headers,
   ): ResourceResponse<T>
   accountCollections<T = any>(
-    args?: null | ProtectedResourceOptions<wow.AccountCollectionsOptions>,
+    args: ProtectedResourceOptions<wow.AccountCollectionsOptions>,
     headers?: Headers,
   ): ResourceResponse<T>
   accountProfile<T = any>(
