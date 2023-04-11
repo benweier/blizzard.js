@@ -51,7 +51,7 @@
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.53.0",
-    "axios-mock-adapter": "^1.21.2",
+    "axios-mock-adapter": "^1.21.4",
     "commitizen": "^4.2.5",
     "cz-conventional-changelog": "^3.0.1",
     "eslint": "^8.23.0",
