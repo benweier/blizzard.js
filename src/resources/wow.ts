@@ -1,5 +1,5 @@
-import { Resource } from '.'
 import { Locales } from '../endpoints'
+import { Resource } from '.'
 
 /*
  * PROFILE DATA
