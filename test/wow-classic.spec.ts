@@ -30,6 +30,32 @@ describe('World of Warcraft', () => {
     expect(wow).toBeInstanceOf(WoWClassic)
   })
 
+  describe('auctionHouse', () => {
+    test('index', async () => {
+      await wow.auctionHouse({ realm: 4372 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/connected-realm/4372/auctions/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('auctionHouse', async () => {
+      await wow.auctionHouse({ realm: 4372, auctionHouse: 2 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/connected-realm/4372/auctions/2',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
   describe('connectedRealm', () => {
     test('index', async () => {
       await wow.connectedRealm()

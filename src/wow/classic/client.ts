@@ -1,8 +1,10 @@
 import { Blizzard, BlizzardClient, Headers } from '../../core'
 import { ResourceResponse, ResourceOptions } from '../../resources'
+import * as classic from '../../resources/classic'
 import * as wow from '../../resources/wow'
 
 export interface WoWClassicClient extends BlizzardClient {
+  auctionHouse<T = any>(args: ResourceOptions<classic.AuctionHouseOptions>, headers?: Headers): ResourceResponse<T>
   connectedRealm<T = any>(
     args?: null | ResourceOptions<wow.ConnectedRealmOptions>,
     headers?: Headers,
@@ -35,6 +37,7 @@ export interface WoWClassicClient extends BlizzardClient {
 }
 
 export class WoWClassic extends Blizzard implements WoWClassicClient {
+  auctionHouse = this.createClientResourceRequest(classic.auctionHouse.bind(this, 'dynamic-classic'))
   connectedRealm = this.createClientResourceRequest(wow.connectedRealm.bind(this, 'dynamic-classic'))
   connectedRealmSearch = this.createClientResourceRequest(wow.connectedRealmSearch.bind(this, 'dynamic-classic'))
   creature = this.createClientResourceRequest(wow.creature.bind(this, 'static-classic'))
