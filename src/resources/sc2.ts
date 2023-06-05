@@ -1,4 +1,4 @@
-import { Resource } from '.'
+import { Resource } from './types'
 
 export type ProfileOptions = { region: 1 | 2 | 3; realm?: 1 | 2; profile?: number }
 

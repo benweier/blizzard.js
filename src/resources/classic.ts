@@ -1,4 +1,4 @@
-import { Resource } from './index'
+import { Resource } from './types'
 
 type NamespaceOptions = 'dynamic-classic' | 'static-classic'
 
