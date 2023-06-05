@@ -8,7 +8,7 @@ export const summary = (): Resource => {
   }
 }
 
-export type PlayersOptions = { id: string }
+export type PlayersOptions = { id: number | string }
 
 export const players = (args: PlayersOptions): Resource => {
   return {
@@ -16,7 +16,7 @@ export const players = (args: PlayersOptions): Resource => {
   }
 }
 
-export type MatchesOptions = { id: string }
+export type MatchesOptions = { id: number | string }
 
 export const matches = (args: MatchesOptions): Resource => {
   return {
@@ -24,7 +24,7 @@ export const matches = (args: MatchesOptions): Resource => {
   }
 }
 
-export type SegmentsOptions = { id: string }
+export type SegmentsOptions = { id: number | string }
 
 export const segments = (args: SegmentsOptions): Resource => {
   return {
@@ -32,7 +32,7 @@ export const segments = (args: SegmentsOptions): Resource => {
   }
 }
 
-export type TeamsOptions = { id: string }
+export type TeamsOptions = { id: number | string }
 
 export const teams = (args: TeamsOptions): Resource => {
   return {
