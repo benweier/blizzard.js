@@ -26,6 +26,7 @@ All game clients are available via their named export.
 
 - **Diablo 3**: `d3`
 - **Hearthstone**: `hs`
+- **Overwatch**: `ow`
 - **Starcraft 2**: `sc2`
 - **World of Warcraft (Retail)**: `wow`
 - **World of Warcraft (Classic)**: `wow.classic`
@@ -68,6 +69,7 @@ Refer to the resource references for the available methods and parameters:
 
 - [Diablo 3](https://github.com/benweier/blizzard.js/wiki/Diablo-3)
 - [Hearthstone](https://github.com/benweier/blizzard.js/wiki/Hearthstone)
+- [Overwatch](https://github.com/benweier/blizzard.js/wiki/Overwatch)
 - [Starcraft 2](https://github.com/benweier/blizzard.js/wiki/Starcraft-2)
 - [World of Warcraft (Retail)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Retail)>)
 - [World of Warcraft (Classic)](<https://github.com/benweier/blizzard.js/wiki/World-of-Warcraft-(Classic)>)
