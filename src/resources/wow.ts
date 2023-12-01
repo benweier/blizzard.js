@@ -5,7 +5,14 @@ import { Resource } from './types'
  * PROFILE DATA
  */
 
-type NamespaceOptions = 'profile' | 'static' | 'dynamic' | 'static-classic' | 'dynamic-classic'
+type NamespaceOptions =
+  | 'profile'
+  | 'static'
+  | 'dynamic'
+  | 'static-classic'
+  | 'dynamic-classic'
+  | 'static-classic1x'
+  | 'dynamic-classic1x'
 type CharacterOptions = { realm: string; name: string }
 type SearchOptions = { orderby?: string | string[]; page?: number }
 type SearchParams = {
@@ -399,7 +406,7 @@ export const commodities = (namespace: Extract<NamespaceOptions, 'dynamic'>): Re
 export type ConnectedRealmOptions = { id?: number }
 
 export const connectedRealm = (
-  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
   args?: null | ConnectedRealmOptions,
 ): Resource => {
   if (args?.id === undefined) {
@@ -418,7 +425,7 @@ export const connectedRealm = (
 export type ConnectedRealmSearchOptions = SearchOptions & { status: 'UP' | 'DOWN'; timezone?: string }
 
 export const connectedRealmSearch = (
-  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
   args: ConnectedRealmSearchOptions,
 ): Resource<SearchParams & { 'status.type': string; 'realms.timezone'?: string }> => {
   return {
@@ -486,7 +493,7 @@ export const conduit = (namespace: Extract<NamespaceOptions, 'static'>, args?: n
 export type CreatureOptions = { id: number; media?: boolean }
 
 export const creature = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args: CreatureOptions,
 ): Resource => {
   return {
@@ -500,7 +507,7 @@ export const creature = (
 export type CreatureFamilyOptions = { id?: number; media?: boolean }
 
 export const creatureFamily = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | CreatureFamilyOptions,
 ): Resource => {
   if (args?.id === undefined) {
@@ -521,7 +528,7 @@ export const creatureFamily = (
 export type CreatureTypeOptions = { id?: number }
 
 export const creatureType = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | CreatureTypeOptions,
 ): Resource => {
   if (args?.id === undefined) {
@@ -540,7 +547,7 @@ export const creatureType = (
 export type CreatureSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const creatureSearch = <T extends string, P extends Locales>(
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args: CreatureSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
@@ -557,7 +564,7 @@ export const creatureSearch = <T extends string, P extends Locales>(
 export type GuildCrestOptions = { resource: 'border' | 'emblem'; id: number }
 
 export const guildCrest = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | GuildCrestOptions,
 ): Resource => {
   return {
@@ -575,7 +582,7 @@ export type ItemOptions =
   | { resource: 'set'; id?: number; sub?: never; media?: never }
 
 export const item = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args: ItemOptions,
 ): Resource => {
   if (args.resource === 'set') {
@@ -613,7 +620,7 @@ export const item = (
 export type ItemSearchOptions<T = string, P = Locales> = SearchOptions & { name: T; locale: P }
 
 export const itemSearch = <T extends string, P extends Locales>(
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args: ItemSearchOptions<T, P>,
 ): Resource<SearchParams & Record<`name.${P}`, T>> => {
   return {
@@ -651,7 +658,7 @@ export const journal = (namespace: Extract<NamespaceOptions, 'static'>, args: Jo
 export type MediaSearchOptions = SearchOptions & { tag: string }
 
 export const mediaSearch = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args: MediaSearchOptions,
 ): Resource<SearchParams & { _tag: string }> => {
   return {
@@ -839,7 +846,7 @@ export const pet = (namespace: Extract<NamespaceOptions, 'static'>, args?: null 
 export type PlayableClassOptions = { id?: number; media?: boolean; pvpTalents?: boolean }
 
 export const playableClass = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | PlayableClassOptions,
 ): Resource => {
   if (args?.id === undefined) {
@@ -867,7 +874,7 @@ export const playableClass = (
 export type PlayableRaceOptions = { id?: number }
 
 export const playableRace = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | PlayableRaceOptions,
 ): Resource => {
   return {
@@ -901,7 +908,7 @@ export const playableSpecialization = (
 export type PowerTypeOptions = { id?: number }
 
 export const powerType = (
-  namespace: Extract<NamespaceOptions, 'static' | 'static-classic'>,
+  namespace: Extract<NamespaceOptions, 'static' | 'static-classic' | 'static-classic1x'>,
   args?: null | PowerTypeOptions,
 ): Resource => {
   return {
@@ -1047,7 +1054,7 @@ export const quest = (namespace: Extract<NamespaceOptions, 'static'>, args?: nul
 export type RealmOptions = { slug?: string }
 
 export const realm = (
-  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
   args?: null | RealmOptions,
 ): Resource => {
   return {
@@ -1059,7 +1066,7 @@ export const realm = (
 export type RealmSearchOptions = SearchOptions & { timezone?: string }
 
 export const realmSearch = (
-  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
   args: RealmSearchOptions,
 ): Resource<SearchParams & { timezone?: string }> => {
   return {
@@ -1076,7 +1083,7 @@ export const realmSearch = (
 export type RegionOptions = { id?: number }
 
 export const region = (
-  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>,
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
   args?: null | RegionOptions,
 ): Resource => {
   return {
@@ -1185,7 +1192,9 @@ export const title = (namespace: Extract<NamespaceOptions, 'static'>, args?: nul
 
 export type TokenOptions = Record<string, unknown>
 
-export const token = (namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic'>): Resource => {
+export const token = (
+  namespace: Extract<NamespaceOptions, 'dynamic' | 'dynamic-classic' | 'dynamic-classic1x'>,
+): Resource => {
   return {
     path: 'data/wow/token/index',
     namespace,
