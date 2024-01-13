@@ -56,3 +56,24 @@ export class WoWClassic extends Blizzard implements WoWClassicClient {
   region = this.createClientResourceRequest(wow.region.bind(this, 'dynamic-classic'))
   token = this.createClientResourceRequest(wow.token.bind(this, 'dynamic-classic'))
 }
+
+export class WoWClassicEra extends Blizzard implements WoWClassicClient {
+  auctionHouse = this.createClientResourceRequest(classic.auctionHouse.bind(this, 'dynamic-classic1x'))
+  connectedRealm = this.createClientResourceRequest(wow.connectedRealm.bind(this, 'dynamic-classic1x'))
+  connectedRealmSearch = this.createClientResourceRequest(wow.connectedRealmSearch.bind(this, 'dynamic-classic1x'))
+  creature = this.createClientResourceRequest(wow.creature.bind(this, 'static-classic1x'))
+  creatureFamily = this.createClientResourceRequest(wow.creatureFamily.bind(this, 'static-classic1x'))
+  creatureSearch = this.createClientResourceRequest(wow.creatureSearch.bind(this, 'static-classic1x'))
+  creatureType = this.createClientResourceRequest(wow.creatureType.bind(this, 'static-classic1x'))
+  guildCrest = this.createClientResourceRequest(wow.guildCrest.bind(this, 'static-classic1x'))
+  item = this.createClientResourceRequest(wow.item.bind(this, 'static-classic1x'))
+  itemSearch = this.createClientResourceRequest(wow.itemSearch.bind(this, 'static-classic1x'))
+  mediaSearch = this.createClientResourceRequest(wow.mediaSearch.bind(this, 'static-classic1x'))
+  playableClass = this.createClientResourceRequest(wow.playableClass.bind(this, 'static-classic1x'))
+  playableRace = this.createClientResourceRequest(wow.playableRace.bind(this, 'static-classic1x'))
+  powerType = this.createClientResourceRequest(wow.powerType.bind(this, 'static-classic1x'))
+  realm = this.createClientResourceRequest(wow.realm.bind(this, 'dynamic-classic1x'))
+  realmSearch = this.createClientResourceRequest(wow.realmSearch.bind(this, 'dynamic-classic1x'))
+  region = this.createClientResourceRequest(wow.region.bind(this, 'dynamic-classic1x'))
+  token = this.createClientResourceRequest(wow.token.bind(this, 'dynamic-classic1x'))
+}

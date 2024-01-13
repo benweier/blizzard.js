@@ -13,7 +13,14 @@ export interface ProtectedResourceInterface<T = any, P = any> {
 
 export type Resource<T = never> = {
   path: string
-  namespace?: 'profile' | 'static' | 'dynamic' | 'static-classic' | 'dynamic-classic'
+  namespace?:
+    | 'profile'
+    | 'static'
+    | 'dynamic'
+    | 'static-classic'
+    | 'dynamic-classic'
+    | 'static-classic1x'
+    | 'dynamic-classic1x'
   params?: T
 }
 

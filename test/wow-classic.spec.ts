@@ -4,7 +4,9 @@ import { createInstance, WoWClassic, WoWClassicClient } from '../src/wow/classic
 const headers = {
   'User-Agent': expect.any(String),
   'Content-Type': 'application/json',
-  'Battlenet-Namespace': expect.stringMatching(/^(static-classic|dynamic-classic)-(us|eu|sea|kr|tw)$/),
+  'Battlenet-Namespace': expect.stringMatching(
+    /^(static-classic|dynamic-classic|static-classic1x|dynamic-classic1x)-(us|eu|sea|kr|tw)$/,
+  ),
   Authorization: expect.any(String),
 }
 const params = { locale: expect.any(String) }
