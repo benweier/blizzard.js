@@ -43,7 +43,7 @@
     "overwatch"
   ],
   "dependencies": {
-    "axios": "^1.4.0"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
