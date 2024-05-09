@@ -157,15 +157,18 @@ export const cardBacks = (
   }
 }
 
-export type DeckOptions = { code?: string; ids?: number | number[]; hero?: number }
+export type DeckOptions = { code?: string; ids?: number | number[]; hero?: number; sideboardCards?: string | string[] }
 
-export const deck = (args: DeckOptions): Resource<{ code?: string; ids?: number | string; hero?: number }> => {
+export const deck = (
+  args: DeckOptions,
+): Resource<{ code?: string; ids?: number | string; hero?: number; sideboardCards?: string }> => {
   return {
     path: 'hearthstone/deck',
     params: {
       code: args.code,
       ids: Array.isArray(args.ids) ? args.ids.join(',') : args.ids,
       hero: args.hero,
+      sideboardCards: Array.isArray(args.sideboardCards) ? args.sideboardCards.join(',') : args.sideboardCards,
     },
   }
 }
