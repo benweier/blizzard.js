@@ -162,11 +162,11 @@ export type DeckOptions = {
   ids?: number | number[]
   hero?: number
   /**
-   * This unlisted parameter is used to add sideboard cards for Zilliax Deluxe 3000 and E.T.C., Band Manager.
+   * This parameter is used to add sideboard cards for Zilliax Deluxe 3000 and E.T.C., Band Manager.
    * The accepted format is `sideboardCardId:primaryCardId`.
    * Repeat this format for each sideboard card to be added.
    */
-  sideboardCards?: `${number}:${number}` | `${number}:${number}`[]
+  sideboardCards?: string | string[]
 }
 
 export const deck = (
