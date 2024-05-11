@@ -13,9 +13,34 @@ export type CardClass =
   | 'warrior'
   | 'neutral'
 
-export type CardGameMode = 'constructed' | 'battlegrounds' | 'arena' | 'duels'
+export type CardGameMode = 'constructed' | 'battlegrounds' | 'arena' | 'mercenaries'
 
-export type CardMinionType = 'murloc' | 'demon' | 'mech' | 'elemental' | 'beast' | 'totem' | 'pirate' | 'dragon' | 'all'
+export type CardMinionType =
+  | 'bloodelf'
+  | 'draenei'
+  | 'dwarf'
+  | 'gnome'
+  | 'human'
+  | 'nightelf'
+  | 'orc'
+  | 'tauren'
+  | 'troll'
+  | 'undead'
+  | 'murloc'
+  | 'demon'
+  | 'mech'
+  | 'elemental'
+  | 'beast'
+  | 'totem'
+  | 'pirate'
+  | 'dragon'
+  | 'all'
+  | 'quilboar'
+  | 'halforc'
+  | 'naga'
+  | 'oldgod'
+  | 'pandaren'
+  | 'gronn'
 
 export type CardSortOrder = 'asc' | 'desc'
 
@@ -25,7 +50,7 @@ export type CardSortOption = 'manaCost' | 'attack' | 'health' | 'name' | 'dataAd
 
 export type CardTier = 1 | 2 | 3 | 4 | 5 | 6 | 'hero' | Array<1 | 2 | 3 | 4 | 5 | 6 | 'hero'>
 
-export type CardType = 'hero' | 'minion' | 'spell' | 'weapon'
+export type CardType = 'hero' | 'minion' | 'spell' | 'weapon' | 'hero power' | 'location' | 'baconquestreward'
 
 export type CardBackCategory =
   | 'base'
@@ -44,6 +69,8 @@ export type CardBackCategory =
 
 export type CardMetaDataType = 'sets' | 'setGroups' | 'types' | 'rarities' | 'classes' | 'minionTypes' | 'keywords'
 
+export type CardSpellSchools = 'arcane' | 'fire' | 'frost' | 'nature' | 'holy' | 'shadow' | 'fel'
+
 export type CardSearchOptions = {
   attack?: number | number[]
   class?: CardClass
@@ -53,12 +80,16 @@ export type CardSearchOptions = {
   keyword?: string
   manaCost?: number | number[]
   minionType?: CardMinionType
+  /**
+   * @deprecated use sort option instead
+   */
   order?: CardSortOrder
   page?: number
   pageSize?: number
   rarity?: CardRarity
   set?: string
   sort?: CardSortOption | `${CardSortOption}:${CardSortOrder}` | Array<`${CardSortOption}:${CardSortOrder}`>
+  spellSchool?: CardSpellSchools
   textFilter?: string
   tier?: CardTier
   type?: CardType
@@ -75,12 +106,12 @@ export const cardSearch = (
   keyword?: string
   manaCost?: number | string
   minionType?: CardMinionType
-  order?: CardSortOrder
   page?: number
   pageSize?: number
   rarity?: CardRarity
   set?: string
   sort?: string
+  spellSchool?: CardSpellSchools
   textFilter?: string
   tier?: number | 'hero' | string
   type?: CardType
@@ -96,12 +127,12 @@ export const cardSearch = (
       keyword: args.keyword,
       manaCost: Array.isArray(args.manaCost) ? args.manaCost.join(',') : args.manaCost,
       minionType: args.minionType,
-      order: args.order,
       page: args.page,
       pageSize: args.pageSize,
       rarity: args.rarity,
       set: args.set,
       sort: Array.isArray(args.sort) ? args.sort.join(',') : args.sort,
+      spellSchool: args.spellSchool,
       textFilter: args.textFilter,
       tier: Array.isArray(args.tier) ? args.tier.join(',') : args.tier,
       type: args.type,
