@@ -5,7 +5,7 @@ const headers = {
   'User-Agent': expect.any(String),
   'Content-Type': 'application/json',
   'Battlenet-Namespace': expect.stringMatching(
-    /^(static-classic|dynamic-classic|static-classic1x|dynamic-classic1x)-(us|eu|sea|kr|tw)$/,
+    /^(static-classic|dynamic-classic|static-classic1x|dynamic-classic1x|profile-classic|profile-classic1x)-(us|eu|sea|kr|tw)$/,
   ),
   Authorization: expect.any(String),
 }
@@ -32,6 +32,27 @@ describe('World of Warcraft', () => {
     expect(wow).toBeInstanceOf(WoWClassic)
   })
 
+  test('accountProfile', async () => {
+    await wow.accountProfile({ token: 'token' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith('https://us.api.blizzard.com/profile/user/wow', {
+      headers,
+      params,
+    })
+  })
+
+  test('accountCharacterProfile', async () => {
+    await wow.accountCharacterProfile({ realm: 69, character: 420, token: 'token' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/user/wow/protected-character/69-420',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
   describe('auctionHouse', () => {
     test('index', async () => {
       await wow.auctionHouse({ realm: 4372 })
@@ -56,6 +77,144 @@ describe('World of Warcraft', () => {
         },
       )
     })
+  })
+
+  describe('characterAchievements', () => {
+    test('index', async () => {
+      await wow.characterAchievements({ realm: 'proudmoore', name: 'name' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/achievements',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('statistics', async () => {
+      await wow.characterAchievements({ realm: 'proudmoore', name: 'name', stats: true })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/achievements/statistics',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  test('characterAppearance', async () => {
+    await wow.characterAppearance({ realm: 'proudmoore', name: 'name' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/appearance',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
+  test('characterEquipment', async () => {
+    await wow.characterEquipment({ realm: 'proudmoore', name: 'name' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/equipment',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
+  test('characterHunterPets', async () => {
+    await wow.characterHunterPets({ realm: 'proudmoore', name: 'name' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/hunter-pets',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
+  test('characterMedia', async () => {
+    await wow.characterMedia({ realm: 'proudmoore', name: 'name' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/character-media',
+      {
+        headers,
+        params,
+      },
+    )
+  })
+
+  describe('characterProfile', () => {
+    test('index', async () => {
+      await wow.characterProfile({ realm: 'proudmoore', name: 'name' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('status', async () => {
+      await wow.characterProfile({ realm: 'proudmoore', name: 'name', status: true })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/status',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('characterPVP', () => {
+    test('index', async () => {
+      await wow.characterPVP({ realm: 'proudmoore', name: 'name' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/pvp-summary',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('bracket', async () => {
+      await wow.characterPVP({ realm: 'proudmoore', name: 'name', bracket: '2v2' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/pvp-bracket/2v2',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  test('characterStatistics', async () => {
+    await wow.characterStatistics({ realm: 'proudmoore', name: 'name' })
+
+    expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+      'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/statistics',
+      {
+        headers,
+        params,
+      },
+    )
   })
 
   describe('connectedRealm', () => {
@@ -201,6 +360,32 @@ describe('World of Warcraft', () => {
         },
       },
     )
+  })
+
+  describe('guild', () => {
+    test('index', async () => {
+      await wow.guild({ realm: 'proudmoore', name: 'name' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/guild/proudmoore/name',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('resource', async () => {
+      await wow.guild({ realm: 'proudmoore', name: 'name', resource: 'activity' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/guild/proudmoore/name/activity',
+        {
+          headers,
+          params,
+        },
+      )
+    })
   })
 
   describe('guildCrest', () => {
