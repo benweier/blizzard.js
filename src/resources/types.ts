@@ -21,6 +21,8 @@ export type Resource<T = never> = {
     | 'dynamic-classic'
     | 'static-classic1x'
     | 'dynamic-classic1x'
+    | 'profile-classic'
+    | 'profile-classic1x'
   params?: T
 }
 

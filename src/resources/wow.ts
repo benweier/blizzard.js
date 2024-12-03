@@ -13,6 +13,8 @@ type NamespaceOptions =
   | 'dynamic-classic'
   | 'static-classic1x'
   | 'dynamic-classic1x'
+  | 'profile-classic'
+  | 'profile-classic1x'
 type CharacterOptions = { realm: string; name: string }
 type SearchOptions = { orderby?: string | string[]; page?: number }
 type SearchParams = {
