@@ -24,7 +24,9 @@ type SearchParams = {
 
 export type AccountProfileOptions = Record<string, unknown>
 
-export const accountProfile = (namespace: Extract<NamespaceOptions, 'profile'>): Resource => {
+export const accountProfile = (
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
+): Resource => {
   return {
     path: 'profile/user/wow',
     namespace,
@@ -34,7 +36,7 @@ export const accountProfile = (namespace: Extract<NamespaceOptions, 'profile'>):
 export type AccountCharacterProfileOptions = { realm: number; character: number }
 
 export const accountCharacterProfile = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: AccountCharacterProfileOptions,
 ): Resource => {
   return {
@@ -63,7 +65,7 @@ export const accountCollections = (
 export type AccountCharacterAchievementsOptions = CharacterOptions & { stats?: boolean }
 
 export const characterAchievements = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: AccountCharacterAchievementsOptions,
 ): Resource => {
   return {
@@ -79,7 +81,7 @@ export const characterAchievements = (
 export type CharacterAppearanceOptions = CharacterOptions
 
 export const characterAppearance = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterAppearanceOptions,
 ): Resource => {
   return {
@@ -125,7 +127,7 @@ export const characterEncounters = (
 export type CharacterEquipmentOptions = CharacterOptions
 
 export const characterEquipment = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterEquipmentOptions,
 ): Resource => {
   return {
@@ -137,7 +139,7 @@ export const characterEquipment = (
 export type CharacterHunterPetsOptions = CharacterOptions
 
 export const characterHunterPets = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterHunterPetsOptions,
 ): Resource => {
   return {
@@ -149,7 +151,7 @@ export const characterHunterPets = (
 export type CharacterMediaOptions = CharacterOptions
 
 export const characterMedia = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterMediaOptions,
 ): Resource => {
   return {
@@ -192,7 +194,7 @@ export const characterProfessions = (
 export type CharacterProfileOptions = CharacterOptions & { status?: boolean }
 
 export const characterProfile = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterProfileOptions,
 ): Resource => {
   return {
@@ -205,7 +207,10 @@ export const characterProfile = (
 
 export type CharacterPVPOptions = CharacterOptions & { bracket?: string }
 
-export const characterPVP = (namespace: Extract<NamespaceOptions, 'profile'>, args: CharacterPVPOptions): Resource => {
+export const characterPVP = (
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
+  args: CharacterPVPOptions,
+): Resource => {
   return {
     path:
       args.bracket === undefined
@@ -258,7 +263,7 @@ export const characterSoulbinds = (
 export type CharacterSpecializationsOptions = CharacterOptions
 
 export const characterSpecializations = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterSpecializationsOptions,
 ): Resource => {
   return {
@@ -270,7 +275,7 @@ export const characterSpecializations = (
 export type CharacterStatisticsOptions = CharacterOptions
 
 export const characterStatistics = (
-  namespace: Extract<NamespaceOptions, 'profile'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: CharacterStatisticsOptions,
 ): Resource => {
   return {
@@ -293,7 +298,10 @@ export const characterTitles = (
 
 export type GuildOptions = { realm: string; name: string; resource?: 'activity' | 'achievements' | 'roster' }
 
-export const guild = (namespace: Extract<NamespaceOptions, 'profile'>, args: GuildOptions): Resource => {
+export const guild = (
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x' | 'profile-classic1x'>,
+  args: GuildOptions,
+): Resource => {
   return {
     path:
       args.resource !== 'activity' && args.resource !== 'achievements' && args.resource !== 'roster'
