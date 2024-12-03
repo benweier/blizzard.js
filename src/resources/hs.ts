@@ -157,15 +157,28 @@ export const cardBacks = (
   }
 }
 
-export type DeckOptions = { code?: string; ids?: number | number[]; hero?: number }
+export type DeckOptions = {
+  code?: string
+  ids?: number | number[]
+  hero?: number
+  /**
+   * This unlisted parameter is used to add sideboard cards for Zilliax Deluxe 3000 and E.T.C., Band Manager.
+   * The accepted format is `sideboardCardId:primaryCardId`.
+   * Repeat this format for each sideboard card to be added.
+   */
+  sideboardCards?: `${number}:${number}` | `${number}:${number}`[]
+}
 
-export const deck = (args: DeckOptions): Resource<{ code?: string; ids?: number | string; hero?: number }> => {
+export const deck = (
+  args: DeckOptions,
+): Resource<{ code?: string; ids?: number | string; hero?: number; sideboardCards?: string }> => {
   return {
     path: 'hearthstone/deck',
     params: {
       code: args.code,
       ids: Array.isArray(args.ids) ? args.ids.join(',') : args.ids,
       hero: args.hero,
+      sideboardCards: Array.isArray(args.sideboardCards) ? args.sideboardCards.join(',') : args.sideboardCards,
     },
   }
 }
