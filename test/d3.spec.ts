@@ -49,7 +49,11 @@ describe('Diablo 3', () => {
     })
 
     test('hero items', async () => {
-      await d3.accountProfile({ account: 'account', hero: 'hero', resource: 'items' })
+      await d3.accountProfile({
+        account: 'account',
+        hero: 'hero',
+        resource: 'items',
+      })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/d3/profile/account/hero/hero/items',
@@ -58,7 +62,11 @@ describe('Diablo 3', () => {
     })
 
     test('hero follower-items', async () => {
-      await d3.accountProfile({ account: 'account', hero: 'hero', resource: 'follower-items' })
+      await d3.accountProfile({
+        account: 'account',
+        hero: 'hero',
+        resource: 'follower-items',
+      })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
         'https://us.api.blizzard.com/d3/profile/account/hero/hero/follower-items',
@@ -187,10 +195,10 @@ describe('Diablo 3', () => {
     })
 
     test('leaderboard', async () => {
-      await d3.season({ id: 3, leaderboard: 7 })
+      await d3.season({ id: 3, leaderboard: 'rift-barbarian' })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/d3/season/3/leaderboard/7',
+        'https://us.api.blizzard.com/data/d3/season/3/leaderboard/rift-barbarian',
         { headers, params },
       )
     })

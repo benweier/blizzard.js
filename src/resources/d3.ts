@@ -69,7 +69,11 @@ export const itemType = (args?: null | ItemTypeOptions): Resource => {
   }
 }
 
-export type AccountProfile = { account: string; hero?: string; resource?: 'items' | 'follower-items' }
+export type AccountProfile = {
+  account: string
+  hero?: string
+  resource?: 'items' | 'follower-items'
+}
 
 export const accountProfile = (args: AccountProfile): Resource => {
   if (args.hero === undefined) {
@@ -88,7 +92,7 @@ export const accountProfile = (args: AccountProfile): Resource => {
   }
 }
 
-export type SeasonOptions = { id?: number; leaderboard?: number }
+export type SeasonOptions = { id?: number; leaderboard?: string }
 
 export const season = (args?: null | SeasonOptions): Resource => {
   if (args?.id === undefined) {
