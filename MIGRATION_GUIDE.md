@@ -1,5 +1,25 @@
 # Migration Guide
 
+## `v4` to `v5`
+
+`v5` removes `axios` in favour of the native `fetch` API, drops CommonJS-only packaging for dual ESM + CJS, and requires Node.js `>=20.19.0`.
+
+Most code migrates without changes — client creation, all API methods, and the `data`/`status`/`headers` response properties work exactly as before:
+
+```js
+const { data } = await wow.characterProfile({ realm: 'proudmoore', name: 'name' })
+```
+
+Breaking changes:
+
+- **Node.js `>=20.19.0` is required.** The library uses the global `fetch` API.
+- **Responses are no longer `AxiosResponse` objects.** Methods now resolve to a plain `{ data, status, statusText, headers }` object (`ClientResponse<T>`). If you only ever read `data`, `status`, or `headers`, nothing changes. Axios-specific properties (`config`, `request`) are gone, and `headers` is a plain lowercase-keyed object.
+- **Failed requests throw `ResponseError` instead of `AxiosError`.** The thrown error still exposes the response at `error.response` (with `data`, `status`, `statusText`, `headers`).
+- **The `axios` instance is no longer exposed.** Per-client axios interceptors/defaults are not available; pass custom headers per request instead.
+- **Packaging.** The package is now published as ESM with a CJS fallback via the `exports` field. `import`/`require` of the package root both work; deep imports into `dist/` internals do not.
+
+## `v3` to `v4`
+
 Upgrading from `v3` to `v4` should be pretty staightforward because `v3` likely doesn't work now and virtually no-one should be using it with a great degree of success.
 
 For you who still manage to use `v3`: I'm sorry. If you are upgrading there are so many changes to the API methods that I can't even begin documenting the differences (probably should have been writing down the differences as I was working on `v4`...)
