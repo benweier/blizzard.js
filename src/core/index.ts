@@ -75,8 +75,10 @@ export interface BlizzardClient {
   validateApplicationToken(args?: { token?: string }): Promise<ClientResponse<TokenValidation>>
 }
 
+declare const __VERSION__: string
+
 export abstract class Blizzard implements BlizzardClient {
-  public version = '5.0.0'
+  public version = __VERSION__
 
   public ua = `${typeof process === 'undefined' ? '' : `Node.js/${process.versions.node} `}Blizzard.js/${this.version}`
 

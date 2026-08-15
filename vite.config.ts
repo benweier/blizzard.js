@@ -1,10 +1,17 @@
 import { defineConfig } from 'vite-plus'
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
+  define: {
+    __VERSION__: JSON.stringify(pkg.version),
+  },
   pack: {
     entry: ['src/index.ts'],
     format: ['esm', 'cjs'],
     dts: true,
+    define: {
+      __VERSION__: JSON.stringify(pkg.version),
+    },
   },
   test: {
     setupFiles: ['./test/setup.ts'],
