@@ -63,13 +63,6 @@
     "vite-plus": "^0.2.9",
     "vitest": "^4.1.10"
   },
-  "devEngines": {
-    "packageManager": {
-      "name": "npm",
-      "version": "12.0.2",
-      "onFail": "download"
-    }
-  },
   "engines": {
     "node": ">=20.19.0"
   }
