@@ -10,7 +10,7 @@ export default defineConfig({
     setupFiles: ['./test/setup.ts'],
   },
   lint: {
-    ignorePatterns: ['dist/**', 'docs/**'],
+    ignorePatterns: ['dist/**'],
     options: {
       typeAware: true,
       typeCheck: true,
@@ -26,7 +26,6 @@ export default defineConfig({
     ],
   },
   fmt: {
-    ignorePatterns: ['docs/**'],
     printWidth: 120,
     semi: false,
     singleQuote: true,

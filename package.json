@@ -46,7 +46,6 @@
   },
   "scripts": {
     "build": "vp pack",
-    "docs": "typedoc",
     "test": "vp test run",
     "lint": "vp lint",
     "prepack": "npm run build",
@@ -58,7 +57,6 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@types/node": "^26.2.0",
     "husky": "^8.0.3",
-    "typedoc": "^0.28.20",
     "typescript": "^5.9.3",
     "vite-plus": "^0.2.9",
     "vitest": "^4.1.10"
