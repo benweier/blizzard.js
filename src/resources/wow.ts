@@ -1213,3 +1213,268 @@ export const token = (
     namespace,
   }
 }
+
+/*
+ * HEIRLOOM API
+ */
+
+export type HeirloomOptions = { id?: number }
+
+export const heirloom = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | HeirloomOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/heirloom/index' : `data/wow/heirloom/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+/*
+ * TOY API
+ */
+
+export type ToyOptions = { id?: number }
+
+export const toy = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | ToyOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/toy/index' : `data/wow/toy/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+/*
+ * TALENT TREE API
+ */
+
+export type TalentTreeOptions = { id?: never; spec?: never } | { id: number; spec?: number }
+
+export const talentTree = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: null | TalentTreeOptions,
+): Resource => {
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/talent-tree/index',
+      namespace,
+    }
+  }
+
+  return {
+    path:
+      args.spec === undefined
+        ? `data/wow/talent-tree/${encodeURIComponent(args.id)}`
+        : `data/wow/talent-tree/${encodeURIComponent(args.id)}/playable-specialization/${encodeURIComponent(
+            args.spec,
+          )}`,
+    namespace,
+  }
+}
+
+/*
+ * ITEM APPEARANCE API
+ */
+
+export type ItemAppearanceOptions =
+  | { resource?: never; id: number }
+  | { resource: 'set'; id?: number }
+  | { resource: 'slot'; id?: string }
+
+export const itemAppearance = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: ItemAppearanceOptions,
+): Resource => {
+  if (args.resource === undefined) {
+    return {
+      path: `data/wow/item-appearance/${encodeURIComponent(args.id)}`,
+      namespace,
+    }
+  }
+
+  return {
+    path:
+      args.id === undefined
+        ? `data/wow/item-appearance/${encodeURIComponent(args.resource)}/index`
+        : `data/wow/item-appearance/${encodeURIComponent(args.resource)}/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+export type ItemAppearanceSearchOptions = SearchOptions
+
+export const itemAppearanceSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: ItemAppearanceSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/item-appearance',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+/*
+ * JOURNAL ENCOUNTER SEARCH
+ */
+
+export type JournalEncounterSearchOptions = SearchOptions
+
+export const journalEncounterSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: JournalEncounterSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/journal-encounter',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+/*
+ * HOUSING APIS
+ */
+
+export type DecorOptions = { id?: number }
+
+export const decor = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | DecorOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/decor/index' : `data/wow/decor/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+export type DecorSearchOptions = SearchOptions
+
+export const decorSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: DecorSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/decor',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type FixtureOptions = { id?: number }
+
+export const fixture = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | FixtureOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/fixture/index' : `data/wow/fixture/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+export type FixtureSearchOptions = SearchOptions
+
+export const fixtureSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: FixtureSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/fixture',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type FixtureHookOptions = { id?: number }
+
+export const fixtureHook = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args?: null | FixtureHookOptions,
+): Resource => {
+  return {
+    path:
+      args?.id === undefined ? 'data/wow/fixture-hook/index' : `data/wow/fixture-hook/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+export type FixtureHookSearchOptions = SearchOptions
+
+export const fixtureHookSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: FixtureHookSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/fixture-hook',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type RoomOptions = { id?: number }
+
+export const room = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | RoomOptions): Resource => {
+  return {
+    path: args?.id === undefined ? 'data/wow/room/index' : `data/wow/room/${encodeURIComponent(args.id)}`,
+    namespace,
+  }
+}
+
+export type RoomSearchOptions = SearchOptions
+
+export const roomSearch = (
+  namespace: Extract<NamespaceOptions, 'static'>,
+  args: RoomSearchOptions,
+): Resource<SearchParams> => {
+  return {
+    path: 'data/wow/search/room',
+    namespace,
+    params: {
+      orderby: Array.isArray(args.orderby) ? args.orderby.join(',') : args.orderby,
+      _page: args.page,
+    },
+  }
+}
+
+export type NeighborhoodMapOptions = { id?: never; neighborhood?: never } | { id: number; neighborhood?: number }
+
+export const neighborhoodMap = (
+  namespace: Extract<NamespaceOptions, 'dynamic'>,
+  args?: null | NeighborhoodMapOptions,
+): Resource => {
+  if (args?.id === undefined) {
+    return {
+      path: 'data/wow/neighborhood-map/index',
+      namespace,
+    }
+  }
+
+  return {
+    path:
+      args.neighborhood === undefined
+        ? `data/wow/neighborhood-map/${encodeURIComponent(args.id)}`
+        : `data/wow/neighborhood-map/${encodeURIComponent(args.id)}/neighborhood/${encodeURIComponent(
+            args.neighborhood,
+          )}`,
+    namespace,
+  }
+}
+
+export type CharacterHouseOptions = CharacterOptions & { house: number }
+
+export const characterHouse = (
+  namespace: Extract<NamespaceOptions, 'profile'>,
+  args: CharacterHouseOptions,
+): Resource => {
+  return {
+    path: `profile/wow/character/${encodeURIComponent(args.realm)}/${encodeURIComponent(
+      args.name,
+    )}/house/house-${encodeURIComponent(args.house)}`,
+    namespace,
+  }
+}

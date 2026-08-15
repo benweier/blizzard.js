@@ -1897,4 +1897,368 @@ describe('World of Warcraft', () => {
       },
     )
   })
+
+  describe('heirloom', () => {
+    test('index', async () => {
+      await wow.heirloom()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/heirloom/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.heirloom({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/heirloom/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('toy', () => {
+    test('index', async () => {
+      await wow.toy()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/toy/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.toy({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith('https://us.api.blizzard.com/data/wow/toy/1', {
+        headers,
+        params,
+      })
+    })
+  })
+
+  describe('talentTree', () => {
+    test('index', async () => {
+      await wow.talentTree()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/talent-tree/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('nodes', async () => {
+      await wow.talentTree({ id: 786 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/talent-tree/786',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('specialization', async () => {
+      await wow.talentTree({ id: 786, spec: 262 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/talent-tree/786/playable-specialization/262',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('itemAppearance', () => {
+    test('id', async () => {
+      await wow.itemAppearance({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/item-appearance/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('set index', async () => {
+      await wow.itemAppearance({ resource: 'set' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/item-appearance/set/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('set id', async () => {
+      await wow.itemAppearance({ resource: 'set', id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/item-appearance/set/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('slot type', async () => {
+      await wow.itemAppearance({ resource: 'slot', id: 'HEAD' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/item-appearance/slot/HEAD',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('search', () => {
+    test('itemAppearanceSearch', async () => {
+      await wow.itemAppearanceSearch({ orderby: 'id', page: 2 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/item-appearance',
+        {
+          headers,
+          params: { orderby: 'id', _page: 2, ...params },
+        },
+      )
+    })
+
+    test('journalEncounterSearch', async () => {
+      await wow.journalEncounterSearch({ orderby: ['id', 'name'], page: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/journal-encounter',
+        {
+          headers,
+          params: { orderby: 'id,name', _page: 1, ...params },
+        },
+      )
+    })
+
+    test('decorSearch', async () => {
+      await wow.decorSearch({ orderby: 'id', page: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/decor',
+        {
+          headers,
+          params: { orderby: 'id', _page: 1, ...params },
+        },
+      )
+    })
+
+    test('fixtureSearch', async () => {
+      await wow.fixtureSearch({ orderby: 'id', page: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/fixture',
+        {
+          headers,
+          params: { orderby: 'id', _page: 1, ...params },
+        },
+      )
+    })
+
+    test('fixtureHookSearch', async () => {
+      await wow.fixtureHookSearch({ orderby: 'id', page: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/fixture-hook',
+        {
+          headers,
+          params: { orderby: 'id', _page: 1, ...params },
+        },
+      )
+    })
+
+    test('roomSearch', async () => {
+      await wow.roomSearch({ orderby: 'id', page: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/search/room',
+        {
+          headers,
+          params: { orderby: 'id', _page: 1, ...params },
+        },
+      )
+    })
+  })
+
+  describe('decor', () => {
+    test('index', async () => {
+      await wow.decor()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/decor/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.decor({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/decor/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('fixture', () => {
+    test('index', async () => {
+      await wow.fixture()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/fixture/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.fixture({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/fixture/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('fixtureHook', () => {
+    test('index', async () => {
+      await wow.fixtureHook()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/fixture-hook/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.fixtureHook({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/fixture-hook/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('room', () => {
+    test('index', async () => {
+      await wow.room()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/room/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.room({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith('https://us.api.blizzard.com/data/wow/room/1', {
+        headers,
+        params,
+      })
+    })
+  })
+
+  describe('neighborhoodMap', () => {
+    test('index', async () => {
+      await wow.neighborhoodMap()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/neighborhood-map/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('id', async () => {
+      await wow.neighborhoodMap({ id: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/neighborhood-map/1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('neighborhood', async () => {
+      await wow.neighborhoodMap({ id: 1, neighborhood: 2 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/neighborhood-map/1/neighborhood/2',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
+
+  describe('characterHouse', () => {
+    test('house', async () => {
+      await wow.characterHouse({ realm: 'proudmoore', name: 'name', house: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/profile/wow/character/proudmoore/name/house/house-1',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
 })
