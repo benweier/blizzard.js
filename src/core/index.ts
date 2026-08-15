@@ -67,15 +67,11 @@ export interface BlizzardClient {
 
   cancelTokenRefresh(): void
 
-  getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<ClientResponse<AccessToken>>
+  getApplicationToken(args?: { key?: string; secret?: string }): Promise<ClientResponse<AccessToken>>
 
-  refreshApplicationToken(args?: {
-    origin?: string
-    key?: string
-    secret?: string
-  }): Promise<ClientResponse<AccessToken>>
+  refreshApplicationToken(args?: { key?: string; secret?: string }): Promise<ClientResponse<AccessToken>>
 
-  validateApplicationToken(args?: { origin?: string; token?: string }): Promise<ClientResponse<TokenValidation>>
+  validateApplicationToken(args?: { token?: string }): Promise<ClientResponse<TokenValidation>>
 }
 
 export abstract class Blizzard implements BlizzardClient {
@@ -191,14 +187,10 @@ export abstract class Blizzard implements BlizzardClient {
     }
   }
 
-  public getApplicationToken(args?: {
-    origin?: string
-    key?: string
-    secret?: string
-  }): Promise<ClientResponse<AccessToken>> {
-    const { origin, key, secret } = { ...this.defaults, ...args }
+  public getApplicationToken(args?: { key?: string; secret?: string }): Promise<ClientResponse<AccessToken>> {
+    const { key, secret } = { ...this.defaults, ...args }
 
-    return this.request<AccessToken>(`https://${origin}.battle.net/oauth/token?grant_type=client_credentials`, {
+    return this.request<AccessToken>('https://oauth.battle.net/token?grant_type=client_credentials', {
       method: 'POST',
       headers: {
         'User-Agent': this.ua,
@@ -208,17 +200,14 @@ export abstract class Blizzard implements BlizzardClient {
     })
   }
 
-  public validateApplicationToken(args?: {
-    origin?: string
-    token?: string
-  }): Promise<ClientResponse<TokenValidation>> {
-    const { origin, token } = { ...this.defaults, ...args }
+  public validateApplicationToken(args?: { token?: string }): Promise<ClientResponse<TokenValidation>> {
+    const { token } = { ...this.defaults, ...args }
 
     if (!token) {
       throw new Error('`validateApplicationToken` missing required `token` parameter')
     }
 
-    return this.request<TokenValidation>(`https://${origin}.battle.net/oauth/check_token`, {
+    return this.request<TokenValidation>('https://oauth.battle.net/check_token', {
       method: 'POST',
       headers: {
         'User-Agent': this.ua,
@@ -228,11 +217,7 @@ export abstract class Blizzard implements BlizzardClient {
     })
   }
 
-  public async refreshApplicationToken(args?: {
-    origin?: string
-    key?: string
-    secret?: string
-  }): Promise<ClientResponse<AccessToken>> {
+  public async refreshApplicationToken(args?: { key?: string; secret?: string }): Promise<ClientResponse<AccessToken>> {
     const getTokenRequest = await this.getApplicationToken(args)
 
     this.defaults.token = getTokenRequest.data.access_token

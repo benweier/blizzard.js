@@ -8,7 +8,7 @@ vi.stubGlobal(
   vi.fn(async (input: string | URL, init?: RequestInit) => {
     const url = String(input)
 
-    if (url.startsWith('https://us.battle.net/oauth/token')) {
+    if (url.startsWith('https://oauth.battle.net/token')) {
       return json({
         access_token: 'test_token',
         token_type: 'bearer',
@@ -16,7 +16,7 @@ vi.stubGlobal(
       })
     }
 
-    if (url.startsWith('https://us.battle.net/oauth/check_token')) {
+    if (url.startsWith('https://oauth.battle.net/check_token')) {
       const body = String(init?.body)
 
       if (body.includes('token=expired')) {

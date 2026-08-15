@@ -112,7 +112,7 @@ describe('Blizzard', () => {
 
     await blizzard.getApplicationToken()
 
-    expect(fetch).toHaveBeenCalledWith('https://us.battle.net/oauth/token?grant_type=client_credentials', {
+    expect(fetch).toHaveBeenCalledWith('https://oauth.battle.net/token?grant_type=client_credentials', {
       method: 'POST',
       headers: {
         Authorization: `Basic ${Buffer.from('key:secret').toString('base64')}`,
@@ -133,7 +133,7 @@ describe('Blizzard', () => {
 
     const [url, init] = vi.mocked(fetch).mock.calls.at(-1) as [string, { method: string; body: URLSearchParams }]
 
-    expect(url).toBe('https://us.battle.net/oauth/check_token')
+    expect(url).toBe('https://oauth.battle.net/check_token')
     expect(init.method).toBe('POST')
     expect(String(init.body)).toBe('token=token')
   })
@@ -164,7 +164,7 @@ describe('Blizzard', () => {
     await blizzard.refreshApplicationToken()
 
     expect(fetch).toHaveBeenCalledWith(
-      'https://us.battle.net/oauth/token?grant_type=client_credentials',
+      'https://oauth.battle.net/token?grant_type=client_credentials',
       expect.objectContaining({ method: 'POST' }),
     )
     expect(blizzard.defaults.token).toBe('test_token')
