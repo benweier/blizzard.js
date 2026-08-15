@@ -2,14 +2,6 @@ import type { ClientOptions, ClientResponse } from '../core'
 
 export type ResourceResponse<T = any> = Promise<ClientResponse<T>>
 
-export interface ResourceInterface<T = any, P = any> {
-  (args: ResourceOptions<T>): Resource<P>
-}
-
-export interface ProtectedResourceInterface<T = any, P = any> {
-  (args: ProtectedResourceOptions<T>): Resource<P>
-}
-
 export type Resource<T = never> = {
   path: string
   namespace?:

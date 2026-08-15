@@ -4,11 +4,4 @@ export * as sc2 from './sc2'
 export * as wow from './wow'
 export * as ow from './ow'
 
-export type {
-  ProtectedResourceInterface,
-  ProtectedResourceOptions,
-  Resource,
-  ResourceInterface,
-  ResourceOptions,
-  ResourceResponse,
-} from './types'
+export type { ProtectedResourceOptions, Resource, ResourceOptions, ResourceResponse } from './types'

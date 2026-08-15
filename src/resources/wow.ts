@@ -22,10 +22,11 @@ type SearchParams = {
   _page?: number
 }
 
-export type AccountProfileOptions = Record<string, unknown>
+export type AccountProfileOptions = { token: string }
 
 export const accountProfile = (
   namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
+  _args: AccountProfileOptions,
 ): Resource => {
   return {
     path: 'profile/user/wow',
@@ -33,7 +34,7 @@ export const accountProfile = (
   }
 }
 
-export type AccountCharacterProfileOptions = { realm: number; character: number }
+export type AccountCharacterProfileOptions = { realm: number; character: number; token: string }
 
 export const accountCharacterProfile = (
   namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
@@ -47,15 +48,15 @@ export const accountCharacterProfile = (
   }
 }
 
-export type AccountCollectionsOptions = { resource?: 'mounts' | 'pets' }
+export type AccountCollectionsOptions = { resource?: 'mounts' | 'pets'; token: string }
 
 export const accountCollections = (
   namespace: Extract<NamespaceOptions, 'profile'>,
-  args?: null | AccountCollectionsOptions,
+  args: AccountCollectionsOptions,
 ): Resource => {
   return {
     path:
-      args?.resource === undefined
+      args.resource === undefined
         ? 'profile/user/wow/collections'
         : `profile/user/wow/collections/${encodeURIComponent(args.resource)}`,
     namespace,

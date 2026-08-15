@@ -1,5 +1,5 @@
 import { getEndpoint, Locales, Origins } from '../endpoints'
-import type { Resource, ResourceInterface, ResourceResponse } from '../resources'
+import type { Resource, ResourceResponse } from '../resources'
 
 export type ClientOptions = {
   key: string
@@ -40,6 +40,15 @@ export type ClientResponse<T = any> = {
   statusText: string
   headers: Headers
 }
+
+type FirstParameter<F> = F extends (args: infer A, ...rest: never[]) => unknown ? A : never
+
+export type ResourceCall<F extends (args: never) => Resource<unknown>> = undefined extends FirstParameter<F>
+  ? <T = any>(
+      args?: null | (Partial<ClientOptions> & NonNullable<FirstParameter<F>>),
+      headers?: Headers,
+    ) => ResourceResponse<T>
+  : <T = any>(args: Partial<ClientOptions> & FirstParameter<F>, headers?: Headers) => ResourceResponse<T>
 
 export class ResponseError extends Error {
   public response: ClientResponse
@@ -90,15 +99,13 @@ export abstract class Blizzard implements BlizzardClient {
     }
   }
 
-  public createClientResourceRequest<T = any>(
-    fn: ResourceInterface<T>,
-  ): (args: Partial<ClientOptions> & T, headers?: Headers) => ResourceResponse {
-    return (args, headers) => {
+  public createClientResourceRequest<F extends (args: any) => Resource<any>>(fn: F): ResourceCall<F> {
+    return ((args?: null | Partial<ClientOptions>, headers?: Headers) => {
       const resource = fn(args)
-      const [url, config] = this.prepareResourceRequest(resource, args, headers)
+      const [url, config] = this.prepareResourceRequest(resource, args ?? undefined, headers)
 
       return this.getClientResource(url, config)
-    }
+    }) as ResourceCall<F>
   }
 
   public prepareResourceRequest(
