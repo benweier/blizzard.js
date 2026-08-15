@@ -27,7 +27,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: npm
+
+      - name: Use npm from devEngines
+        shell: bash
+        run: |
+          version="$(node -p "require('./package.json').devEngines.packageManager.version")"
+          cd "$RUNNER_TEMP" && npm install -g "npm@$version"
 
       - name: Install
         run: npm ci
