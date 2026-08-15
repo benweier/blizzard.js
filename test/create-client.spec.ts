@@ -12,6 +12,7 @@ describe('Create Client', () => {
 
   afterEach(() => {
     vi.clearAllMocks()
+    vi.useRealTimers()
   })
 
   test('should throw if missing `key`', async () => {
@@ -70,5 +71,38 @@ describe('Create Client', () => {
       expires_in: expect.any(Number),
       token_type: expect.any(String),
     })
+  })
+
+  test('should cancel a scheduled token refresh', async () => {
+    vi.useFakeTimers()
+
+    const callback = vi.fn()
+    const client = await createClient(Client)({ key: 'key', secret: 'secret' }, callback)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+
+    client.cancelTokenRefresh()
+    await vi.advanceTimersByTimeAsync(86400 * 1000 * 2)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+  })
+
+  test('should retry a failed scheduled token refresh', async () => {
+    vi.useFakeTimers()
+
+    const onTokenRefreshError = vi.fn()
+    const client = await createClient(Client)({ key: 'key', secret: 'secret' }, true, onTokenRefreshError)
+
+    vi.spyOn(client, 'getApplicationToken').mockRejectedValueOnce(new Error('boom'))
+    client.setApplicationToken('stale')
+
+    await vi.advanceTimersByTimeAsync(86400 * 1000 - 60000)
+
+    expect(onTokenRefreshError).toHaveBeenCalledWith(new Error('boom'))
+    expect(client.defaults.token).toBe('stale')
+
+    await vi.advanceTimersByTimeAsync(60000)
+
+    expect(client.defaults.token).toBe('test_token')
   })
 })

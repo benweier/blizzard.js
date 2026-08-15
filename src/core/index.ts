@@ -63,6 +63,10 @@ export class ResponseError extends Error {
 export interface BlizzardClient {
   setApplicationToken(token: string): void
 
+  scheduleTokenRefresh(fn: () => void, ms: number): void
+
+  cancelTokenRefresh(): void
+
   getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<ClientResponse<AccessToken>>
 
   refreshApplicationToken(args?: {
@@ -170,6 +174,21 @@ export abstract class Blizzard implements BlizzardClient {
 
   public setApplicationToken(token: string): void {
     this.defaults.token = token
+  }
+
+  private refreshTimeout?: ReturnType<typeof setTimeout>
+
+  public scheduleTokenRefresh(fn: () => void, ms: number): void {
+    this.cancelTokenRefresh()
+    this.refreshTimeout = setTimeout(fn, ms)
+    this.refreshTimeout.unref()
+  }
+
+  public cancelTokenRefresh(): void {
+    if (this.refreshTimeout) {
+      clearTimeout(this.refreshTimeout)
+      this.refreshTimeout = undefined
+    }
   }
 
   public getApplicationToken(args?: {

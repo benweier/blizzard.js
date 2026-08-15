@@ -1,12 +1,15 @@
 import { BlizzardClient, ClientOptions, AccessToken } from './core'
 
 const tokenExpiryInMilliseconds = (exp: number) => exp * 1000 - 60000
+// ponytail: fixed 60s retry, add backoff if Blizzard outages ever matter
+const tokenRefreshRetryInMilliseconds = 60000
 
 export const createClient =
   <T extends BlizzardClient>(Client: { new (args: ClientOptions): T }) =>
   async (
     { key, secret, token, origin, locale }: ClientOptions,
     onTokenRefresh: boolean | ((token: AccessToken) => void) = true,
+    onTokenRefreshError?: (error: unknown) => void,
   ): Promise<T> => {
     if (!key) throw new Error(`Client missing 'key' parameter`)
     if (!secret) throw new Error(`Client missing 'secret' parameter`)
@@ -22,8 +25,14 @@ export const createClient =
         onTokenRefresh(getTokenRequest.data)
       }
 
-      const timeout = setTimeout(refreshApplicationToken, tokenExpiryInMilliseconds(getTokenRequest.data.expires_in))
-      timeout.unref()
+      client.scheduleTokenRefresh(scheduledTokenRefresh, tokenExpiryInMilliseconds(getTokenRequest.data.expires_in))
+    }
+
+    const scheduledTokenRefresh = () => {
+      refreshApplicationToken().catch((error) => {
+        onTokenRefreshError?.(error)
+        client.scheduleTokenRefresh(scheduledTokenRefresh, tokenRefreshRetryInMilliseconds)
+      })
     }
 
     if (onTokenRefresh) {
@@ -36,11 +45,10 @@ export const createClient =
           if (tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now() < 60000) {
             await refreshApplicationToken()
           } else {
-            const timeout = setTimeout(
-              refreshApplicationToken,
+            client.scheduleTokenRefresh(
+              scheduledTokenRefresh,
               tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now(),
             )
-            timeout.unref()
           }
         } catch (err) {
           await refreshApplicationToken()
