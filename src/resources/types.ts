@@ -1,6 +1,6 @@
 import type { ClientOptions, ClientResponse } from '../core'
 
-export type ResourceResponse<T = any> = Promise<ClientResponse<T>>
+export type ResourceResponse<T = unknown> = Promise<ClientResponse<T>>
 
 export type Resource<T = never> = {
   path: string

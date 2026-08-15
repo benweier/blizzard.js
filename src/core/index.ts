@@ -34,7 +34,7 @@ export type RequestConfig = {
   params: { [key: string]: string | number | boolean | undefined }
 }
 
-export type ClientResponse<T = any> = {
+export type ClientResponse<T = unknown> = {
   data: T
   status: number
   statusText: string
@@ -44,11 +44,11 @@ export type ClientResponse<T = any> = {
 type FirstParameter<F> = F extends (args: infer A, ...rest: never[]) => unknown ? A : never
 
 export type ResourceCall<F extends (args: never) => Resource<unknown>> = undefined extends FirstParameter<F>
-  ? <T = any>(
+  ? <T = unknown>(
       args?: null | (Partial<ClientOptions> & NonNullable<FirstParameter<F>>),
       headers?: Headers,
     ) => ResourceResponse<T>
-  : <T = any>(args: Partial<ClientOptions> & FirstParameter<F>, headers?: Headers) => ResourceResponse<T>
+  : <T = unknown>(args: Partial<ClientOptions> & FirstParameter<F>, headers?: Headers) => ResourceResponse<T>
 
 export class ResponseError extends Error {
   public response: ClientResponse
@@ -135,7 +135,7 @@ export abstract class Blizzard implements BlizzardClient {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
-  public getClientResource<T = any>(url: string, config: RequestConfig): Promise<ClientResponse<T>> {
+  public getClientResource<T = unknown>(url: string, config: RequestConfig): Promise<ClientResponse<T>> {
     const target = new URL(url)
 
     for (const [key, value] of Object.entries(config.params)) {
@@ -147,7 +147,7 @@ export abstract class Blizzard implements BlizzardClient {
     return this.request(target.toString(), { method: 'GET', headers: config.headers })
   }
 
-  private async request<T = any>(
+  private async request<T = unknown>(
     url: string,
     init: { method: string; headers: Headers; body?: URLSearchParams },
   ): Promise<ClientResponse<T>> {
