@@ -1,3 +1,4 @@
+import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest'
 import { Blizzard } from '../src/core'
 import { createInstance, HS, HSClient } from '../src/hs'
 
@@ -12,7 +13,7 @@ describe('Hearthstone', () => {
   let hs: HSClient
 
   beforeAll(async () => {
-    jest.spyOn(Blizzard.prototype, 'getClientResource')
+    vi.spyOn(Blizzard.prototype, 'getClientResource')
 
     hs = await createInstance({
       key: 'key',
@@ -21,7 +22,7 @@ describe('Hearthstone', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('instance', async () => {

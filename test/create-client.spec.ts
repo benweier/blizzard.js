@@ -1,3 +1,4 @@
+import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest'
 import { Blizzard } from '../src/core'
 import { createClient } from '../src/create-client'
 
@@ -5,12 +6,12 @@ class Client extends Blizzard {}
 
 describe('Create Client', () => {
   beforeAll(() => {
-    jest.spyOn(Blizzard.prototype, 'getApplicationToken')
-    jest.spyOn(Blizzard.prototype, 'validateApplicationToken')
+    vi.spyOn(Blizzard.prototype, 'getApplicationToken')
+    vi.spyOn(Blizzard.prototype, 'validateApplicationToken')
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('should throw if missing `key`', async () => {
@@ -61,7 +62,7 @@ describe('Create Client', () => {
   })
 
   test('should return an application token if callback provided', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     await createClient(Client)({ key: 'key', secret: 'secret' }, callback)
 
     expect(callback).toHaveBeenCalledWith({

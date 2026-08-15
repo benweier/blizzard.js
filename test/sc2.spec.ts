@@ -1,3 +1,4 @@
+import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest'
 import { Blizzard } from '../src/core'
 import { createInstance, SC2, SC2Client } from '../src/sc2'
 
@@ -12,7 +13,7 @@ describe('Diablo 3', () => {
   let sc2: SC2Client
 
   beforeAll(async () => {
-    jest.spyOn(Blizzard.prototype, 'getClientResource')
+    vi.spyOn(Blizzard.prototype, 'getClientResource')
 
     sc2 = await createInstance({
       key: 'key',
@@ -21,7 +22,7 @@ describe('Diablo 3', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   test('instance', async () => {

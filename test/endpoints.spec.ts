@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest'
 import { getEndpoint } from '../src/endpoints'
 
 describe('Endpoints', () => {
