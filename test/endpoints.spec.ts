@@ -22,13 +22,13 @@ describe('Endpoints', () => {
     })
   })
 
-  test('returns SEA endpoint with default locale', () => {
-    const endpoint = getEndpoint('sea')
+  test('returns KR endpoint with default locale', () => {
+    const endpoint = getEndpoint('kr')
 
     expect(endpoint).toEqual({
-      origin: 'sea',
-      hostname: 'https://sea.api.blizzard.com',
-      locale: 'en_US',
+      origin: 'kr',
+      hostname: 'https://kr.api.blizzard.com',
+      locale: 'ko_KR',
     })
   })
 })

@@ -6,7 +6,7 @@ const headers = {
   'User-Agent': expect.any(String),
   'Content-Type': 'application/json',
   'Battlenet-Namespace': expect.stringMatching(
-    /^(static-classic|dynamic-classic|static-classic1x|dynamic-classic1x|profile-classic|profile-classic1x)-(us|eu|sea|kr|tw)$/,
+    /^(static-classic|dynamic-classic|static-classic1x|dynamic-classic1x|profile-classic|profile-classic1x)-(us|eu|kr|tw)$/,
   ),
   Authorization: expect.any(String),
 }

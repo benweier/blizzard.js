@@ -1,4 +1,4 @@
-export type Origins = 'us' | 'eu' | 'sea' | 'kr' | 'tw'
+export type Origins = 'us' | 'eu' | 'kr' | 'tw'
 export type Locales =
   | 'en_US'
   | 'es_MX'
@@ -23,7 +23,6 @@ export type Endpoint = {
 export type Endpoints = {
   us: Endpoint
   eu: Endpoint
-  sea: Endpoint
   kr: Endpoint
   tw: Endpoint
 }
@@ -38,11 +37,6 @@ const endpoints: Endpoints = {
     hostname: 'https://eu.api.blizzard.com',
     defaultLocale: 'en_GB',
     locales: ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT', 'multi'],
-  },
-  sea: {
-    hostname: 'https://sea.api.blizzard.com',
-    defaultLocale: 'en_US',
-    locales: ['en_US', 'multi'],
   },
   kr: {
     hostname: 'https://kr.api.blizzard.com',
