@@ -27,6 +27,10 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
+          # the automatic npm cache lookup runs the runner's npm inside the
+          # workspace, which fails the devEngines check before our pinned npm
+          # is installed
+          package-manager-cache: false
 
       - name: Use npm from devEngines
         shell: bash
