@@ -1,22 +1,20 @@
 # Blizzard.js
 
-_Blizzard.js_ is a promise-based Node.js library for the Blizzard Community Platform API written with TypeScript.
+_Blizzard.js_ is a promise-based library for the Blizzard Battle.net Community Platform API, written in TypeScript with zero runtime dependencies.
+
+Requires Node.js `>=20.19` (uses the global `fetch` API). The client also runs on edge runtimes and browsers.
+
+Upgrading from v4? See the [migration guide](MIGRATION_GUIDE.md).
 
 ## Install
 
-Install `blizzard.js` and save to your `package.json` dependencies in one easy step:
-
-With npm:
-
-    $ npm install blizzard.js
-
-With yarn:
-
-    $ yarn add blizzard.js
+```sh
+npm install blizzard.js
+```
 
 ## Battle.net API Key
 
-Please refer to the documentation at the [Blizzard Developer Portal](https://develop.battle.net/) to obtain Blizzard API credentials.
+Please refer to the [Battle.net Developer Portal](https://community.developer.battle.net/) documentation to obtain Blizzard API credentials.
 
 ## Usage
 
@@ -38,7 +36,7 @@ import { wow } from 'blizzard.js'
 const wowClient = await wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
-  origin: 'us', // optional
+  origin: 'us', // optional: 'us' | 'eu' | 'kr' | 'tw'
   locale: 'en_US', // optional
   token: '', // optional
 })
@@ -52,7 +50,7 @@ const blizzard = require('blizzard.js')
 const wowClient = await blizzard.wow.createInstance({
   key: BLIZZARD_CLIENT_ID,
   secret: BLIZZARD_CLIENT_SECRET,
-  origin: 'us', // optional
+  origin: 'us', // optional: 'us' | 'eu' | 'kr' | 'tw'
   locale: 'en_US', // optional
   token: '', // optional
 })
@@ -61,6 +59,12 @@ const wowClient = await blizzard.wow.createInstance({
 #### API Methods
 
 All API methods can accept the same `key`, `secret`, `token`, `origin`, `locale` parameters as `createInstance`, for cases where you need to use different values to the default.
+
+Methods resolve to a `{ data, status, statusText, headers }` response object. Failed requests throw a `ResponseError` with the same response object attached at `error.response`. Response `data` is typed `unknown` by default — pass a response type per call when you want typed access:
+
+```ts
+const { data } = await wowClient.item<ItemResponse>({ id: 19019 })
+```
 
 Method parameters are encoded with `encodeURIComponent` for URL safety. Sanitizing your inputs is still important, but just be aware in case certain requests fail for this reason.
 
@@ -74,13 +78,13 @@ Refer to the resource references for the available methods and parameters:
 
 #### _User_ Tokens
 
-**Certain protected profile requests for World of Warcraft require a _user_ `token`** provisioned by the OAuth 2.0 [Authorization Code Flow](https://develop.battle.net/documentation/guides/using-oauth/authorization-code-flow). This is _outside the scope of `blizzard.js`_ and a OAuth library like [passport](https://github.com/jaredhanson/passport) is highly recommended.
+**Certain protected profile requests for World of Warcraft require a _user_ `token`** provisioned by the OAuth 2.0 [Authorization Code Flow](https://community.developer.battle.net/documentation/guides/using-oauth/authorization-code-flow). This is _outside the scope of `blizzard.js`_ and an OAuth library like [passport](https://github.com/jaredhanson/passport) is highly recommended.
 
 #### _Application_ Tokens
 
 In most cases you shouldn't need to handle the application token yourself. Instantiating a game client with `createInstance` will fetch a token if the initial value is undefined, and refresh the token when it expires (typically valid for 24hrs).
 
-If a token value is provided, the client will simply validate and only refresh if it's expired/invalid. Passing an optional callback funtion as the 2nd argument to `createInstance` will return the token object when it is refreshed, allowing you to listen for changes if you are managing the token state manually.
+If a token value is provided, the client will simply validate and only refresh if it's expired/invalid. Passing an optional callback function as the 2nd argument to `createInstance` will return the token object when it is refreshed, allowing you to listen for changes if you are managing the token state manually.
 
 ```js
 const wow = await createInstance(
@@ -97,6 +101,16 @@ const wow = await createInstance(
   },
 )
 ```
+
+A failed scheduled refresh does not crash your process — it is retried after 60 seconds. Pass an optional error callback as the 3rd argument to observe failures:
+
+```js
+const wow = await createInstance({ key, secret }, true, (error) => {
+  // called when a scheduled token refresh fails; the refresh retries in 60s
+})
+```
+
+Call `wow.cancelTokenRefresh()` to dispose the automatic refresh timer, for example during a graceful shutdown.
 
 To completely disable validating/refreshing the application token, pass `false` to the 2nd argument.
 
