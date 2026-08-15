@@ -1,7 +1,6 @@
-import { AxiosResponse } from 'axios'
-import { ClientOptions } from '../core'
+import type { ClientOptions, ClientResponse } from '../core'
 
-export type ResourceResponse<T = any> = Promise<AxiosResponse<T>>
+export type ResourceResponse<T = any> = Promise<ClientResponse<T>>
 
 export interface ResourceInterface<T = any, P = any> {
   (args: ResourceOptions<T>): Resource<P>

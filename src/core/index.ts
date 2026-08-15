@@ -1,7 +1,5 @@
-import qs from 'querystring'
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { getEndpoint, Locales, Origins } from '../endpoints'
-import { Resource, ResourceInterface, ResourceResponse } from '../resources'
+import type { Resource, ResourceInterface, ResourceResponse } from '../resources'
 
 export type ClientOptions = {
   key: string
@@ -18,35 +16,57 @@ export type AccessToken = {
   scope?: string
 }
 
+export type TokenValidation = {
+  scope?: Array<string>
+  exp: number
+  authorities: Array<{
+    authority: string
+  }>
+  client_id: string
+}
+
 export type Headers = {
   [key: string]: string
+}
+
+export type RequestConfig = {
+  headers: Headers
+  params: { [key: string]: string | number | boolean | undefined }
+}
+
+export type ClientResponse<T = any> = {
+  data: T
+  status: number
+  statusText: string
+  headers: Headers
+}
+
+export class ResponseError extends Error {
+  public response: ClientResponse
+
+  constructor(response: ClientResponse) {
+    super(`Request failed with status code ${response.status}`)
+    this.name = 'ResponseError'
+    this.response = response
+  }
 }
 
 export interface BlizzardClient {
   setApplicationToken(token: string): void
 
-  getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<AxiosResponse<AccessToken>>
+  getApplicationToken(args?: { origin?: string; key?: string; secret?: string }): Promise<ClientResponse<AccessToken>>
 
   refreshApplicationToken(args?: {
     origin?: string
     key?: string
     secret?: string
-  }): Promise<AxiosResponse<AccessToken>>
+  }): Promise<ClientResponse<AccessToken>>
 
-  validateApplicationToken(args?: { origin?: string; token?: string }): Promise<
-    AxiosResponse<{
-      scope?: Array<string>
-      exp: number
-      authorities: Array<{
-        authority: string
-      }>
-      client_id: string
-    }>
-  >
+  validateApplicationToken(args?: { origin?: string; token?: string }): Promise<ClientResponse<TokenValidation>>
 }
 
 export abstract class Blizzard implements BlizzardClient {
-  public version = '4.6.0'
+  public version = '5.0.0'
 
   public ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
 
@@ -70,8 +90,6 @@ export abstract class Blizzard implements BlizzardClient {
     }
   }
 
-  public axios = axios.create()
-
   public createClientResourceRequest<T = any>(
     fn: ResourceInterface<T>,
   ): (args: Partial<ClientOptions> & T, headers?: Headers) => ResourceResponse {
@@ -87,13 +105,13 @@ export abstract class Blizzard implements BlizzardClient {
     resource: Resource<{ [key: string]: string | number | boolean }>,
     args?: Partial<ClientOptions>,
     headers?: Headers,
-  ): [string, AxiosRequestConfig] {
+  ): [string, RequestConfig] {
     const config = { ...this.defaults, ...args }
     const endpoint = getEndpoint(config.origin, config.locale)
     const namespace = resource.namespace
       ? { 'Battlenet-Namespace': `${resource.namespace}-${endpoint.origin}` }
       : undefined
-    const request: AxiosRequestConfig = {
+    const request: RequestConfig = {
       headers: {
         ...headers,
         'User-Agent': this.ua,
@@ -110,8 +128,37 @@ export abstract class Blizzard implements BlizzardClient {
     return [`${endpoint.hostname}/${resource.path}`, request]
   }
 
-  public getClientResource<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axios.get(url, config)
+  public getClientResource<T = any>(url: string, config: RequestConfig): Promise<ClientResponse<T>> {
+    const target = new URL(url)
+
+    for (const [key, value] of Object.entries(config.params)) {
+      if (value !== undefined) {
+        target.searchParams.set(key, String(value))
+      }
+    }
+
+    return this.request(target.toString(), { method: 'GET', headers: config.headers })
+  }
+
+  private async request<T = any>(
+    url: string,
+    init: { method: string; headers: Headers; body?: URLSearchParams },
+  ): Promise<ClientResponse<T>> {
+    const response = await fetch(url, init)
+    const contentType = response.headers.get('content-type')
+    const data = contentType?.includes('application/json') ? await response.json() : await response.text()
+    const result: ClientResponse<T> = {
+      data: data as T,
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries(response.headers),
+    }
+
+    if (!response.ok) {
+      throw new ResponseError(result)
+    }
+
+    return result
   }
 
   public setApplicationToken(token: string): void {
@@ -122,43 +169,36 @@ export abstract class Blizzard implements BlizzardClient {
     origin?: string
     key?: string
     secret?: string
-  }): Promise<AxiosResponse<AccessToken>> {
+  }): Promise<ClientResponse<AccessToken>> {
     const { origin, key, secret } = { ...this.defaults, ...args }
 
-    return this.axios.post(`https://${origin}.battle.net/oauth/token`, null, {
-      params: { grant_type: 'client_credentials' },
-      auth: {
-        username: key,
-        password: secret,
-      },
+    return this.request<AccessToken>(`https://${origin}.battle.net/oauth/token?grant_type=client_credentials`, {
+      method: 'POST',
       headers: {
         'User-Agent': this.ua,
         'Content-Type': 'application/json',
+        Authorization: `Basic ${Buffer.from(`${key}:${secret}`).toString('base64')}`,
       },
     })
   }
 
-  public validateApplicationToken(args?: { origin?: string; token?: string }): Promise<
-    AxiosResponse<{
-      scope?: Array<string>
-      exp: number
-      authorities: Array<{
-        authority: string
-      }>
-      client_id: string
-    }>
-  > {
+  public validateApplicationToken(args?: {
+    origin?: string
+    token?: string
+  }): Promise<ClientResponse<TokenValidation>> {
     const { origin, token } = { ...this.defaults, ...args }
 
     if (!token) {
       throw new Error('`validateApplicationToken` missing required `token` parameter')
     }
 
-    return this.axios.post(`https://${origin}.battle.net/oauth/check_token`, qs.stringify({ token }), {
+    return this.request<TokenValidation>(`https://${origin}.battle.net/oauth/check_token`, {
+      method: 'POST',
       headers: {
         'User-Agent': this.ua,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      body: new URLSearchParams({ token }),
     })
   }
 
@@ -166,7 +206,7 @@ export abstract class Blizzard implements BlizzardClient {
     origin?: string
     key?: string
     secret?: string
-  }): Promise<AxiosResponse<AccessToken>> {
+  }): Promise<ClientResponse<AccessToken>> {
     const getTokenRequest = await this.getApplicationToken(args)
 
     this.defaults.token = getTokenRequest.data.access_token
