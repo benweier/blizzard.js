@@ -115,7 +115,7 @@ describe('Blizzard', () => {
     expect(fetch).toHaveBeenCalledWith('https://oauth.battle.net/token?grant_type=client_credentials', {
       method: 'POST',
       headers: {
-        Authorization: `Basic ${Buffer.from('key:secret').toString('base64')}`,
+        Authorization: `Basic ${btoa('key:secret')}`,
         'Content-Type': 'application/json',
         'User-Agent': expect.any(String),
       },

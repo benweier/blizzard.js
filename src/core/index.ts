@@ -78,7 +78,7 @@ export interface BlizzardClient {
 export abstract class Blizzard implements BlizzardClient {
   public version = '5.0.0'
 
-  public ua = `Node.js/${process.versions.node} Blizzard.js/${this.version}`
+  public ua = `${typeof process === 'undefined' ? '' : `Node.js/${process.versions.node} `}Blizzard.js/${this.version}`
 
   public defaults: {
     key: string
@@ -183,7 +183,7 @@ export abstract class Blizzard implements BlizzardClient {
   public scheduleTokenRefresh(fn: () => void, ms: number): void {
     this.cancelTokenRefresh()
     this.refreshTimeout = setTimeout(fn, ms)
-    this.refreshTimeout.unref()
+    this.refreshTimeout.unref?.()
   }
 
   public cancelTokenRefresh(): void {
@@ -201,7 +201,7 @@ export abstract class Blizzard implements BlizzardClient {
       headers: {
         'User-Agent': this.ua,
         'Content-Type': 'application/json',
-        Authorization: `Basic ${Buffer.from(`${key}:${secret}`).toString('base64')}`,
+        Authorization: `Basic ${btoa(`${key}:${secret}`)}`,
       },
     })
   }
