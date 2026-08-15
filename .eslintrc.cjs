@@ -3,7 +3,6 @@ module.exports = {
     browser: false,
     commonjs: true,
     node: true,
-    'jest/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -12,14 +11,13 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'plugin:jest/recommended',
     'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
   },
-  plugins: ['@typescript-eslint', 'prettier', 'import', 'jest'],
+  plugins: ['@typescript-eslint', 'prettier', 'import'],
   rules: {
     'prettier/prettier': 'error',
     'import/order': [
