@@ -197,6 +197,28 @@ describe('Hearthstone', () => {
         },
       )
     })
+
+    test('sideboard cards', async () => {
+      await hs.deck({
+        ids: [906, 1099, 1363, 1367],
+        hero: 10,
+        sideboardCards: ['102983:110446', '102983:110447'],
+      })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/hearthstone/deck',
+        {
+          headers,
+          params: {
+            ...params,
+            code: undefined,
+            hero: 10,
+            ids: '906,1099,1363,1367',
+            sideboardCards: '102983:110446,102983:110447',
+          },
+        },
+      )
+    })
   })
 
   describe('metadata', () => {
