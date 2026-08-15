@@ -48,7 +48,9 @@ export const accountCharacterProfile = (
   }
 }
 
-export type AccountCollectionsOptions = { resource?: 'mounts' | 'pets'; token: string }
+export type CollectionsResource = 'decor' | 'heirlooms' | 'mounts' | 'pets' | 'toys' | 'transmogs'
+
+export type AccountCollectionsOptions = { resource?: CollectionsResource; token: string }
 
 export const accountCollections = (
   namespace: Extract<NamespaceOptions, 'profile'>,
@@ -91,7 +93,7 @@ export const characterAppearance = (
   }
 }
 
-export type CharacterCollectionsOptions = CharacterOptions & { resource?: 'mounts' | 'pets' }
+export type CharacterCollectionsOptions = CharacterOptions & { resource?: CollectionsResource }
 
 export const characterCollections = (
   namespace: Extract<NamespaceOptions, 'profile'>,
