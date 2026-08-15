@@ -17,6 +17,7 @@ Breaking changes:
 - **Failed requests throw `ResponseError` instead of `AxiosError`.** The thrown error still exposes the response at `error.response` (with `data`, `status`, `statusText`, `headers`).
 - **The `axios` instance is no longer exposed.** Per-client axios interceptors/defaults are not available; pass custom headers per request instead.
 - **Packaging.** The package is now published as ESM with a CJS fallback via the `exports` field. `import`/`require` of the package root both work; deep imports into `dist/` internals do not.
+- **The `ow` (Overwatch League) client is removed.** Its `owl/v1` endpoints stopped working when the Overwatch League shut down, so the module only pretended to work.
 - **Client types are derived from the client classes.** The hand-written `WoWClient`/`D3Client`/etc. interfaces are gone; the same names are still exported as type aliases of their classes, so type annotations keep working. `ResourceInterface` and `ProtectedResourceInterface` are no longer exported.
 
 New in `v5`:

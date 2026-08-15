@@ -59,9 +59,7 @@
     "diablo",
     "d3",
     "hs",
-    "hearthstone",
-    "ow",
-    "overwatch"
+    "hearthstone"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
