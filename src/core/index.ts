@@ -43,12 +43,13 @@ export type ClientResponse<T = unknown> = {
 
 type FirstParameter<F> = F extends (args: infer A, ...rest: never[]) => unknown ? A : never
 
-export type ResourceCall<F extends (args: never) => Resource<unknown>> = undefined extends FirstParameter<F>
-  ? <T = unknown>(
-      args?: null | (Partial<ClientOptions> & NonNullable<FirstParameter<F>>),
-      headers?: Headers,
-    ) => ResourceResponse<T>
-  : <T = unknown>(args: Partial<ClientOptions> & FirstParameter<F>, headers?: Headers) => ResourceResponse<T>
+export type ResourceCall<F extends (args: never) => Resource<unknown>> =
+  undefined extends FirstParameter<F>
+    ? <T = unknown>(
+        args?: null | (Partial<ClientOptions> & NonNullable<FirstParameter<F>>),
+        headers?: Headers,
+      ) => ResourceResponse<T>
+    : <T = unknown>(args: Partial<ClientOptions> & FirstParameter<F>, headers?: Headers) => ResourceResponse<T>
 
 export class ResponseError extends Error {
   public response: ClientResponse
