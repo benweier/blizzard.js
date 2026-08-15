@@ -17,6 +17,7 @@ Breaking changes:
 - **Failed requests throw `ResponseError` instead of `AxiosError`.** The thrown error still exposes the response at `error.response` (with `data`, `status`, `statusText`, `headers`).
 - **The `axios` instance is no longer exposed.** Per-client axios interceptors/defaults are not available; pass custom headers per request instead.
 - **Packaging.** The package is now published as ESM with a CJS fallback via the `exports` field. `import`/`require` of the package root both work; deep imports into `dist/` internals do not.
+- **Corrected endpoint paths.** `wow.soulbind` now requests `data/wow/covenant/soulbind`, `wow.reputation` with tiers requests `data/wow/reputation-tiers` (the option value is now `'tiers'` instead of `'tier'`), and `sc2.legacyAchievements`/`sc2.legacyRewards` request `sc2/legacy/data/...` — matching the documented API. The previous paths no longer exist upstream.
 - **Response `data` defaults to `unknown` instead of `any`.** Pass a response type per call (`wow.item<ItemResponse>({ id })`) or narrow the value before property access.
 - **OAuth uses the consolidated `oauth.battle.net` host.** Token acquisition and validation no longer go through the per-region `{origin}.battle.net/oauth` endpoints, and the `origin` argument is removed from `getApplicationToken`, `refreshApplicationToken`, and `validateApplicationToken`. The `origin` option still selects the game data API region as before.
 - **The `sea` origin is removed.** `sea.api.blizzard.com` no longer exists (the hostname does not resolve) and Blizzard's regionality documentation lists only `us`, `eu`, `kr`, and `tw`. Use `us` for former SEA data.
@@ -27,6 +28,8 @@ New in `v5`:
 
 - `createClient` accepts an optional third argument, `onTokenRefreshError(error)`. A failed scheduled token refresh no longer crashes the process — it is reported through this callback and retried after 60 seconds.
 - Clients expose `cancelTokenRefresh()` to dispose the automatic refresh timer.
+- New WoW retail methods: `heirloom`, `toy`, `talentTree`, `itemAppearance` (+`itemAppearanceSearch`), `journalEncounterSearch`, the housing APIs (`decor`, `fixture`, `fixtureHook`, `room` with searches, `neighborhoodMap`, `characterHouse`), and expanded collections resources (`decor`, `heirlooms`, `toys`, `transmogs`).
+- New WoW Classic method: `pvpSeason` (PvP regions, seasons, leaderboards, and rewards).
 
 ## `v3` to `v4`
 
