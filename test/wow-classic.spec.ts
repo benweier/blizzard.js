@@ -728,4 +728,78 @@ describe('World of Warcraft', () => {
       },
     )
   })
+
+  describe('pvpSeason', () => {
+    test('region index', async () => {
+      await wow.pvpSeason()
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('season index', async () => {
+      await wow.pvpSeason({ region: 1 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/1/pvp-season/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('season', async () => {
+      await wow.pvpSeason({ region: 1, season: 2 })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/1/pvp-season/2',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('leaderboard index', async () => {
+      await wow.pvpSeason({ region: 1, season: 2, resource: 'leaderboard' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/1/pvp-season/2/pvp-leaderboard/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('leaderboard bracket', async () => {
+      await wow.pvpSeason({ region: 1, season: 2, resource: 'leaderboard', bracket: '3v3' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/1/pvp-season/2/pvp-leaderboard/3v3',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+
+    test('reward index', async () => {
+      await wow.pvpSeason({ region: 1, season: 2, resource: 'reward' })
+
+      expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
+        'https://us.api.blizzard.com/data/wow/pvp-region/1/pvp-season/2/pvp-reward/index',
+        {
+          headers,
+          params,
+        },
+      )
+    })
+  })
 })
