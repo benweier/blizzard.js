@@ -50,14 +50,15 @@
     "lint": "vp lint",
     "prepack": "npm run build",
     "fmt": "vp fmt",
-    "check": "vp check"
+    "check": "vp check",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
     "@types/node": "^26.2.0",
-    "husky": "^8.0.3",
-    "typescript": "^5.9.3",
+    "husky": "^9.1.7",
+    "typescript": "^7.0.2",
     "vite-plus": "^0.2.9",
     "vitest": "^4.1.10"
   },
