@@ -625,7 +625,7 @@ describe('World of Warcraft', () => {
       await wow.soulbind()
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/soulbind/index',
+        'https://us.api.blizzard.com/data/wow/covenant/soulbind/index',
         {
           headers,
           params,
@@ -637,7 +637,7 @@ describe('World of Warcraft', () => {
       await wow.soulbind({ id: 3 })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/soulbind/3',
+        'https://us.api.blizzard.com/data/wow/covenant/soulbind/3',
         {
           headers,
           params,
@@ -1693,10 +1693,10 @@ describe('World of Warcraft', () => {
     })
 
     test('id', async () => {
-      await wow.reputation({ resource: 'tier', id: 1 })
+      await wow.reputation({ resource: 'tiers', id: 1 })
 
       expect(Blizzard.prototype.getClientResource).toHaveBeenCalledWith(
-        'https://us.api.blizzard.com/data/wow/reputation-tier/1',
+        'https://us.api.blizzard.com/data/wow/reputation-tiers/1',
         {
           headers,
           params,

@@ -474,13 +474,13 @@ export type SoulbindOptions = { id?: number }
 export const soulbind = (namespace: Extract<NamespaceOptions, 'static'>, args?: null | SoulbindOptions): Resource => {
   if (args?.id === undefined) {
     return {
-      path: 'data/wow/soulbind/index',
+      path: 'data/wow/covenant/soulbind/index',
       namespace,
     }
   }
 
   return {
-    path: `data/wow/soulbind/${encodeURIComponent(args.id)}`,
+    path: `data/wow/covenant/soulbind/${encodeURIComponent(args.id)}`,
     namespace,
   }
 }
@@ -1103,7 +1103,7 @@ export const region = (
   }
 }
 
-export type ReputationOptions = { resource: 'faction' | 'tier'; id?: number }
+export type ReputationOptions = { resource: 'faction' | 'tiers'; id?: number }
 
 export const reputation = (namespace: Extract<NamespaceOptions, 'static'>, args: ReputationOptions): Resource => {
   return {

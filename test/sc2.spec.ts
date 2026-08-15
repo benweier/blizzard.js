@@ -150,7 +150,7 @@ describe('Diablo 3', () => {
     await sc2.legacyAchievements({ region: 1 })
 
     expect(Blizzard.prototype.getClientResource).toHaveBeenLastCalledWith(
-      'https://us.api.blizzard.com/sc2/legacy/achievements/1',
+      'https://us.api.blizzard.com/sc2/legacy/data/achievements/1',
       { headers, params },
     )
   })
@@ -159,7 +159,7 @@ describe('Diablo 3', () => {
     await sc2.legacyRewards({ region: 1 })
 
     expect(Blizzard.prototype.getClientResource).toHaveBeenLastCalledWith(
-      'https://us.api.blizzard.com/sc2/legacy/rewards/1',
+      'https://us.api.blizzard.com/sc2/legacy/data/rewards/1',
       { headers, params },
     )
   })

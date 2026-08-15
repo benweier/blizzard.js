@@ -86,7 +86,7 @@ export type LegacyAchievementsOptions = { region: 1 | 2 | 3 }
 
 export const legacyAchievements = (args: LegacyAchievementsOptions): Resource => {
   return {
-    path: `sc2/legacy/achievements/${encodeURIComponent(args.region)}`,
+    path: `sc2/legacy/data/achievements/${encodeURIComponent(args.region)}`,
   }
 }
 
@@ -94,7 +94,7 @@ export type LegacyRewardsOptions = { region: 1 | 2 | 3 }
 
 export const legacyRewards = (args: LegacyRewardsOptions): Resource => {
   return {
-    path: `sc2/legacy/rewards/${encodeURIComponent(args.region)}`,
+    path: `sc2/legacy/data/rewards/${encodeURIComponent(args.region)}`,
   }
 }
 
