@@ -99,13 +99,18 @@ export abstract class Blizzard implements BlizzardClient {
     }
   }
 
-  public createClientResourceRequest<F extends (args: any) => Resource<any>>(fn: F): ResourceCall<F> {
-    return ((args?: null | Partial<ClientOptions>, headers?: Headers) => {
-      const resource = fn(args)
+  public createClientResourceRequest<F extends (args: never) => Resource<unknown>>(fn: F): ResourceCall<F>
+  public createClientResourceRequest<N, A extends unknown[]>(
+    fn: (namespace: N, ...args: A) => Resource<unknown>,
+    namespace: N,
+  ): ResourceCall<(args: A[0]) => Resource<unknown>>
+  public createClientResourceRequest(fn: (...args: any[]) => Resource<any>, namespace?: unknown): any {
+    return (args?: null | Partial<ClientOptions>, headers?: Headers) => {
+      const resource = namespace === undefined ? fn(args) : fn(namespace, args)
       const [url, config] = this.prepareResourceRequest(resource, args ?? undefined, headers)
 
       return this.getClientResource(url, config)
-    }) as ResourceCall<F>
+    }
   }
 
   public prepareResourceRequest(
