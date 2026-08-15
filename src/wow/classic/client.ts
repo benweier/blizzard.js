@@ -1,74 +1,8 @@
-import { Blizzard, BlizzardClient, Headers } from '../../core'
-import { ResourceResponse, ResourceOptions, ProtectedResourceOptions } from '../../resources'
+import { Blizzard } from '../../core'
 import * as classic from '../../resources/classic'
 import * as wow from '../../resources/wow'
 
-export interface WoWClassicClient extends BlizzardClient {
-  accountCharacterProfile<T = any>(
-    args: ProtectedResourceOptions<wow.AccountCharacterProfileOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  accountProfile<T = any>(
-    args: ProtectedResourceOptions<wow.AccountProfileOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  auctionHouse<T = any>(args: ResourceOptions<classic.AuctionHouseOptions>, headers?: Headers): ResourceResponse<T>
-  characterAchievements<T = any>(
-    args: ResourceOptions<wow.AccountCharacterAchievementsOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  characterAppearance<T = any>(
-    args: ResourceOptions<wow.CharacterAppearanceOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  characterEquipment<T = any>(
-    args: ResourceOptions<wow.CharacterEquipmentOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  characterHunterPets<T = any>(
-    args: ResourceOptions<wow.CharacterHunterPetsOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  characterMedia<T = any>(args: ResourceOptions<wow.CharacterMediaOptions>, headers?: Headers): ResourceResponse<T>
-  characterProfile<T = any>(args: ResourceOptions<wow.CharacterProfileOptions>, headers?: Headers): ResourceResponse<T>
-  characterPVP<T = any>(args: ResourceOptions<wow.CharacterPVPOptions>, headers?: Headers): ResourceResponse<T>
-  characterStatistics<T = any>(
-    args: ResourceOptions<wow.CharacterStatisticsOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  connectedRealm<T = any>(
-    args?: null | ResourceOptions<wow.ConnectedRealmOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  connectedRealmSearch<T = any>(
-    args: ResourceOptions<wow.ConnectedRealmSearchOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  creature<T = any>(args: ResourceOptions<wow.CreatureOptions>, headers?: Headers): ResourceResponse<T>
-  creatureFamily<T = any>(
-    args?: null | ResourceOptions<wow.CreatureFamilyOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  creatureSearch<T = any>(args: ResourceOptions<wow.CreatureSearchOptions>, headers?: Headers): ResourceResponse<T>
-  creatureType<T = any>(args?: null | ResourceOptions<wow.CreatureTypeOptions>, headers?: Headers): ResourceResponse<T>
-  guild<T = any>(args: ResourceOptions<wow.GuildOptions>, headers?: Headers): ResourceResponse<T>
-  guildCrest<T = any>(args?: null | ResourceOptions<wow.GuildCrestOptions>, headers?: Headers): ResourceResponse<T>
-  item<T = any>(args: ResourceOptions<wow.ItemOptions>, headers?: Headers): ResourceResponse<T>
-  itemSearch<T = any>(args: ResourceOptions<wow.ItemSearchOptions>, headers?: Headers): ResourceResponse<T>
-  mediaSearch<T = any>(args: ResourceOptions<wow.MediaSearchOptions>, headers?: Headers): ResourceResponse<T>
-  playableClass<T = any>(
-    args?: null | ResourceOptions<wow.PlayableClassOptions>,
-    headers?: Headers,
-  ): ResourceResponse<T>
-  playableRace<T = any>(args?: null | ResourceOptions<wow.PlayableRaceOptions>, headers?: Headers): ResourceResponse<T>
-  powerType<T = any>(args?: null | ResourceOptions<wow.PowerTypeOptions>, headers?: Headers): ResourceResponse<T>
-  realm<T = any>(args?: null | ResourceOptions<wow.RealmOptions>, headers?: Headers): ResourceResponse<T>
-  realmSearch<T = any>(args: ResourceOptions<wow.RealmSearchOptions>, headers?: Headers): ResourceResponse<T>
-  region<T = any>(args?: null | ResourceOptions<wow.RegionOptions>, headers?: Headers): ResourceResponse<T>
-  token<T = any>(args?: null | ResourceOptions<wow.TokenOptions>, headers?: Headers): ResourceResponse<T>
-}
-
-export class WoWClassic extends Blizzard implements WoWClassicClient {
+export class WoWClassic extends Blizzard {
   accountCharacterProfile = this.createClientResourceRequest(wow.accountCharacterProfile.bind(this, 'profile-classic'))
   accountProfile = this.createClientResourceRequest(wow.accountProfile.bind(this, 'profile-classic'))
   auctionHouse = this.createClientResourceRequest(classic.auctionHouse.bind(this, 'dynamic-classic'))
@@ -100,7 +34,7 @@ export class WoWClassic extends Blizzard implements WoWClassicClient {
   token = this.createClientResourceRequest(wow.token.bind(this, 'dynamic-classic'))
 }
 
-export class WoWClassicEra extends Blizzard implements WoWClassicClient {
+export class WoWClassicEra extends Blizzard {
   accountCharacterProfile = this.createClientResourceRequest(
     wow.accountCharacterProfile.bind(this, 'profile-classic1x'),
   )
@@ -133,3 +67,5 @@ export class WoWClassicEra extends Blizzard implements WoWClassicClient {
   region = this.createClientResourceRequest(wow.region.bind(this, 'dynamic-classic1x'))
   token = this.createClientResourceRequest(wow.token.bind(this, 'dynamic-classic1x'))
 }
+
+export type WoWClassicClient = WoWClassic

@@ -1,6 +1,6 @@
 import { createClient } from '../create-client'
-import { Overwatch, type OverwatchClient } from './client'
+import { Overwatch, OverwatchClient } from './client'
 
-export const createInstance = createClient<OverwatchClient>(Overwatch)
+export const createInstance = createClient(Overwatch)
 export { Overwatch }
 export type { OverwatchClient }
