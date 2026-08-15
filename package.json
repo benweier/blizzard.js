@@ -17,11 +17,19 @@
     "world of warcraft",
     "wow"
   ],
+  "homepage": "https://github.com/benweier/blizzard.js#readme",
+  "bugs": {
+    "url": "https://github.com/benweier/blizzard.js/issues"
+  },
   "license": "MIT",
   "author": {
     "name": "Ben Weier",
     "email": "ben.weier@gmail.com",
     "url": "https://benweier.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benweier/blizzard.js.git"
   },
   "files": [
     "dist",
