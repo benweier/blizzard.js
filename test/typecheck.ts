@@ -30,7 +30,7 @@ export const assertions = async () => {
   // response data defaults to unknown, not any
   const defaultResponse = await wow.item({ id: 1 })
   // @ts-expect-error data is unknown until a response type is provided
-  defaultResponse.data.id
+  const unknownId: number = defaultResponse.data.id
 
-  return id
+  return id + unknownId
 }

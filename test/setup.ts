@@ -17,7 +17,7 @@ vi.stubGlobal(
     }
 
     if (url.startsWith('https://oauth.battle.net/check_token')) {
-      const body = String(init?.body)
+      const body = init?.body instanceof URLSearchParams ? init.body.toString() : ''
 
       if (body.includes('token=expired')) {
         return json({ error: 'invalid_token', error_description: 'Token was not recognised' }, 400)

@@ -300,7 +300,7 @@ export const characterTitles = (
 export type GuildOptions = { realm: string; name: string; resource?: 'activity' | 'achievements' | 'roster' }
 
 export const guild = (
-  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x' | 'profile-classic1x'>,
+  namespace: Extract<NamespaceOptions, 'profile' | 'profile-classic' | 'profile-classic1x'>,
   args: GuildOptions,
 ): Resource => {
   return {

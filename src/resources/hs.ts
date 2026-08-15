@@ -82,7 +82,7 @@ export const cardSearch = (
   set?: string
   sort?: string
   textFilter?: string
-  tier?: number | 'hero' | string
+  tier?: number | string
   type?: CardType
 }> => {
   return {

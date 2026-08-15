@@ -50,7 +50,7 @@ export const createClient =
               tokenExpiryInMilliseconds(validateTokenRequest.data.exp) - Date.now(),
             )
           }
-        } catch (err) {
+        } catch {
           await refreshApplicationToken()
         }
       }

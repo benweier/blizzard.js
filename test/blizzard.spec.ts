@@ -50,7 +50,7 @@ describe('Blizzard', () => {
 
     const requestResource = blizzard.createClientResourceRequest(createResource)
 
-    requestResource({ path: 'test', params: { key: 'value' } }, { 'X-Test-Key': 'X-Test-Value' })
+    await requestResource({ path: 'test', params: { key: 'value' } }, { 'X-Test-Key': 'X-Test-Value' })
 
     expect(createResource).toHaveBeenCalledWith({ params: { key: 'value' }, path: 'test' })
     expect(getClientResource).toHaveBeenCalledWith('https://us.api.blizzard.com/test', {
