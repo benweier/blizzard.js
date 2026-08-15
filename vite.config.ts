@@ -9,4 +9,26 @@ export default defineConfig({
   test: {
     setupFiles: ['./test/setup.ts'],
   },
+  lint: {
+    ignorePatterns: ['dist/**', 'docs/**'],
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
+    overrides: [
+      {
+        // asserting on spied prototype methods trips unbound-method in every spec
+        files: ['test/**'],
+        rules: {
+          'typescript/unbound-method': 'off',
+        },
+      },
+    ],
+  },
+  fmt: {
+    ignorePatterns: ['docs/**'],
+    printWidth: 120,
+    semi: false,
+    singleQuote: true,
+  },
 })
