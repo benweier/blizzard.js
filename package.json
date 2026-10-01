@@ -64,7 +64,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.6.3",
     "husky": "^9.1.7",
     "typescript": "^7.0.2",
     "vite-plus": "^0.2.9",
